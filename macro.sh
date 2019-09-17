@@ -35,11 +35,10 @@ $(w3m -o user_agent="$UA" "$URL/clan/$CLD/quest/end/3") 2&>-
 $(w3m -o user_agent="$UA" "$URL/clan/$CLD/quest/end/4") 2&>-
 }
 while true; do
-_cv
-MP=`w3m "$URL/lab/wizard/potion" | grep 'mp ' | cut -d" " -f 5`
-while [ "$MP" -gt 50 ]; do
+MPE=`w3m "$URL/arena" | grep 'mp ' | cut -d" " -f 5`
+while [ $MPE -gt 50 ]; do
 _ar
-MP="`w3m "$URL/lab/wizard/potion" | grep 'mp ' | cut -d" " -f 5`"
+MPE=`w3m "$URL/arena" | grep 'mp ' | cut -d" " -f 5`
 done
 #sll
 $(w3m -o user_agent="$UA" "$URL/inv/bag/sellAll/1/") 2&>-
