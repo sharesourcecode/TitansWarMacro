@@ -43,8 +43,8 @@ while true; do
 _cv
 _mp
 while [[ $MPE -ge 50 && $HPE -gt 1500 ]]; do
-_mp
 _ar
+_mp
 done
 _td
 #sll
