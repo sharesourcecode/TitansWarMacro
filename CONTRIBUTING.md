@@ -192,7 +192,7 @@ done
 echo -e "campaign (✔)\n"
 }
 
-- Carrer
+- Career
 
 #career- - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #/career/attack/?r=8781779
