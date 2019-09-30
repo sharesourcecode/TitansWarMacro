@@ -1,3 +1,4 @@
+- Stop function
 
 #kill - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _stop () {
@@ -6,6 +7,9 @@ read -t10
 [[ $? = 0 ]] && kill -9 $$
 reset
 }
+
+- Server Menu
+
 SERVERS=("English, Global: Titan's War online" "Русский: Битва Титанов онлайн" "Polski: Wojna Tytanów online" "Deutsch: Krieg der Titanen online" "Español: Guerra de Titanes online" "Brazil, Português: Furia de Titãs online" "Italiano: Guerra di Titani online" "Français: Combat des Titans online" "Română: Războiul Titanilor online" "Srpski: Rat Titana online" "中文, Chinese: 泰坦之战" "Indonesian: Titan's War Indonesia" "India, English: Titan's War India" "Cancel")
 PS3="Select number Server: "
 
@@ -56,6 +60,9 @@ break ;;
     esac
 done
 clear
+
+- Directory Preparation, Termux on Android, and User Agents
+
 echo -e "Starting..."
 mkdir -p $HOME/.tmp
 cd $HOME/.tmp
@@ -284,10 +291,12 @@ echo ""
 w3m -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"| head -n14 | tail -n9 | sed "/\[user\]/d;/\[arrow\]/d;/\[arrow\]/d;/\]\ \[/d" | grep "\["
 echo "$PAGE (✔)"
 }
+
+- Loop to perform too many activities
+
 #play - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _play () {
-
-- Loop to perform too many activitieswhile [[ -z $TM0 && $TM3 -gt 310000 && $TM3 -lt 395459 || $TIME -gt 224000 && $TIME -lt 235959 || $TIME -gt 101000 && $TIME -lt 102300 || $TIME -gt 104000 && $TIME -lt 105300 || $TIME -gt 111000 && $TIME -lt 122300 || $TIME -gt 124000 && $TIME -lt 135300 || $TIME -gt 141000 && $TIME -lt 145300 || $TIME -gt 151000 && $TIME -lt 155300 || $TIME -gt 161000 && $TIME -lt 162300 || $TIME -gt 164000 && $TIME -lt 185300 || $TIME -gt 191000 && $TIME -lt 205300 || $TIME -gt 211000 && $TIME -lt 215300 || $TIME -gt 221000 && $TIME -lt 222300 ]]; do
+while [[ -z $TM0 && $TM3 -gt 310000 && $TM3 -lt 395459 || $TIME -gt 224000 && $TIME -lt 235959 || $TIME -gt 101000 && $TIME -lt 102300 || $TIME -gt 104000 && $TIME -lt 105300 || $TIME -gt 111000 && $TIME -lt 122300 || $TIME -gt 124000 && $TIME -lt 135300 || $TIME -gt 141000 && $TIME -lt 145300 || $TIME -gt 151000 && $TIME -lt 155300 || $TIME -gt 161000 && $TIME -lt 162300 || $TIME -gt 164000 && $TIME -lt 185300 || $TIME -gt 191000 && $TIME -lt 205300 || $TIME -gt 211000 && $TIME -lt 215300 || $TIME -gt 221000 && $TIME -lt 222300 ]]; do
 _arena
 _career
 _clandungeon
@@ -303,6 +312,7 @@ sleep 2
 done
 
 - Loop for play battles
+
 while [[ -z $TM0 && $TM3 -gt 395459 && $TM3 -le 395959 || $TIME -gt 155459 && $TIME -lt 160500 || $TIME -gt 215559 && $TIME -lt 220500 ]]; do
 _undying
 #time
@@ -327,6 +337,7 @@ done
 }
 
 - Loop to play all
+
 while true; do
 _play
 sleep 2
