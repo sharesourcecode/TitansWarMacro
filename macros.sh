@@ -309,7 +309,7 @@ echo "$PAGE (✔)"
 }
 #play - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _play () {
-while [[ -z $TM0 && $TM3 -gt 310000 && $TM3 -lt 395459 || $TIME -gt 224000 && $TIME -lt 235959 || $TIME -gt 101000 && $TIME -lt 102300 || $TIME -gt 104000 && $TIME -lt 105300 || $TIME -gt 111000 && $TIME -lt 122300 || $TIME -gt 124000 && $TIME -lt 135300 || $TIME -gt 141000 && $TIME -lt 145300 || $TIME -gt 151000 && $TIME -lt 155300 || $TIME -gt 161000 && $TIME -lt 162300 || $TIME -gt 164000 && $TIME -lt 185300 || $TIME -gt 191000 && $TIME -lt 205300 || $TIME -gt 211000 && $TIME -lt 215300 || $TIME -gt 221000 && $TIME -lt 222300 ]]; do
+#while [[ -z $TM0 && $TM3 -gt 310000 && $TM3 -lt 395459 || $TIME -gt 224000 && $TIME -lt 235959 || $TIME -gt 101000 && $TIME -lt 102300 || $TIME -gt 104000 && $TIME -lt 105300 || $TIME -gt 111000 && $TIME -lt 122300 || $TIME -gt 124000 && $TIME -lt 135300 || $TIME -gt 141000 && $TIME -lt 145300 || $TIME -gt 151000 && $TIME -lt 155300 || $TIME -gt 161000 && $TIME -lt 162300 || $TIME -gt 164000 && $TIME -lt 185300 || $TIME -gt 191000 && $TIME -lt 205300 || $TIME -gt 211000 && $TIME -lt 215300 || $TIME -gt 221000 && $TIME -lt 222300 ]]; do
 _arena
 _career
 _clandungeon
@@ -322,15 +322,15 @@ TIME=$(echo $SRC | sed "s/\-->/\n/g" | grep --color '| <a c' | sed "s/|/\n/g" | 
 TM0=`echo $TIME | cut -d0  -f1`
 TM3=$(echo $SRC | sed "s/\-->/\n/g" | grep --color '| <a c' | sed "s/|/\n/g" | head -n1 | tr -cd '[[:digit:]]' | sed "s/0/3/g")
 sleep 2
-done
-while [[ -z $TM0 && $TM3 -gt 395459 && $TM3 -le 395959 || $TIME -gt 155459 && $TIME -lt 160500 || $TIME -gt 215559 && $TIME -lt 220500 ]]; do
+#done
+#while [[ -z $TM0 && $TM3 -gt 395459 && $TM3 -le 395959 || $TIME -gt 155459 && $TIME -lt 160500 || $TIME -gt 215559 && $TIME -lt 220500 ]]; do
 #_undying
 #time
 TIME=$(echo $SRC | sed "s/\-->/\n/g" | grep --color '| <a c' | sed "s/|/\n/g" | head -n1 | tr -cd '[[:digit:]]')
 TM0=`echo $TIME | cut -d0  -f1`
 TM3=$(echo $SRC | sed "s/\-->/\n/g" | grep --color '| <a c' | sed "s/|/\n/g" | head -n1 | tr -cd '[[:digit:]]' | sed "s/0/3/g")
 sleep 2
-done
+#done
 
 #Valley of the Immortals 100000
 #Clan coliseum 103000
