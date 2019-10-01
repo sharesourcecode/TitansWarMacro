@@ -21,6 +21,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+# //update script and dependences
+echo "Updating..."
+wget https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O macros.sh 2&>-
+apt install w3m -y 2&>-
+echo "Updated"
 # //tmp dir - - - - - - - - - - - - - - - - - - - - - - - - -
 mkdir -p $HOME/.tmp
 cd $HOME/.tmp
