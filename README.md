@@ -6,7 +6,7 @@ How does it work?
 Recommended at level 16, or higher.
 
 
-1.Before downloading to your terminal, or in the Termux app:
+1.Before download to your terminal, or in the Termux app:
 
 wget https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O macros.sh
 
