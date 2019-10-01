@@ -21,14 +21,23 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+# //tmp dir - - - - - - - - - - - - - - - - - - - - - - - - -
+mkdir -p $HOME/.tmp
+cd $HOME/.tmp
 clear
 # //kill - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _stop () {
-	echo -e "\n[Press ENTER for stop or wait to continue...]"
-	read -t10
-		[[ $? = 0 ]] && kill -9 $$
-	reset
+        >process.txt
+        i=10
+        until [[ $i -lt 1 ]]; do
+                grep -q "break" process.txt && break
+		echo -ne "\r $i [Press ENTER for stop or wait to continue...] "
+                sleep 1; i=$[$i-1]
+        done & read -t10 && echo "break" >process.txt
+	grep -q "break" process.txt && kill -9 $$
+	clear
 }
+_stop
 # //servers - - - - - - - - - - - - - - - - - - - - - - - - -
 SERVERS=("English, Global: Titan's War online" "Русский: Битва Титанов онлайн" "Polski: Wojna Tytanów online" "Deutsch: Krieg der Titanen online" "Español: Guerra de Titanes online" "Brazil, Português: Furia de Titãs online" "Italiano: Guerra di Titani online" "Français: Combat des Titans online" "Română: Războiul Titanilor online" "Srpski: Rat Titana online" "中文, Chinese: 泰坦之战" "Indonesian: Titan's War Indonesia" "India, English: Titan's War India" "Cancel")
 PS3="Select number Server: "
@@ -81,9 +90,6 @@ select action in "${SERVERS[@]}"
 done
 clear
 echo -e "Starting..."
-# //tmp dir - - - - - - - - - - - - - - - - - - - - - - - - -
-mkdir -p $HOME/.tmp
-cd $HOME/.tmp
 # //termux on android - - - - - - - - - - - - - - - - - - - -
 termux-wake-lock &> /dev/null
 # //user agents to $HOME/.tmp/.ua - - - - - - - - - - - - - -
@@ -91,13 +97,14 @@ echo -e '"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KH
 # //login/logoff - - - - - - - - - - - - - - - - - - - - - - -
 ACC=`w3m -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level"`
 [[ -n $ACC ]] && echo -e "\nWait to continue logged in as $ACC\n\nor press ENTER to sign in with another account" && \
-	read -t10 && ACC=""
+	read -t5 && ACC=""
 while [[ -z $ACC ]]; do
 	function _login () {
 # //2x
 		$(w3m -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
 		$(w3m -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
 		unset username; unset password
+		echo -e "\nIn case of error will repeat"
 		echo -n 'Username: '
 		read username
 		prompt="Password: "
@@ -109,12 +116,13 @@ while [[ -z $ACC ]]; do
 				prompt='🔒'
 				password+="$char"
 		done
-		echo -e "\nIn case of error will repeat\n ..."
+		echo -e "\n	..."
 		echo -e "login=$username&pass=$password" >$HOME/.tmp/login.txt
 		unset username; unset password
 # //2x
 		$(w3m -debug -post $HOME/.tmp/login.txt -o accept_encoding=='*;q=0' "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
 		$(w3m -debug -post $HOME/.tmp/login.txt -o accept_encoding=='*;q=0' "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
+		rm $HOME/.tmp/login.txt
 	}
 	_login
 	clear
@@ -207,7 +215,6 @@ function _career () {
 	ACCESS=`echo $SRC | sed "s/href='/\n/g" | grep "/career/" | grep "/attack/" | cut -d\' -f1`
 	while [[ -n $ENTER ]]; do
 		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL$ACCESS -o user_agent="$(shuf -n1 .ua)"`
-		echo $ACCESS
 		ENTER=`echo $SRC | sed "s/href='/\n/g" | grep "/career/" | grep "/attack/"`
 		ACCESS=`echo $SRC | sed "s/href='/\n/g" | grep "/career/" | grep "/attack/" | cut -d\' -f1`
 	done
@@ -284,7 +291,7 @@ function _fights (){
 # //heal - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #		if [[ $WDRED == dred && $HP1 -lt $HEAL ]]; then
 		if [[ $HP1 -lt $HEAL ]]; then
-			echo "HP < $HPER%"
+			echo " HP < $HPER%"
 			echo -e " 💕 You: $HP1 - $HP2 :enemy"
 			SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/heal/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
 			ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3`
@@ -330,13 +337,14 @@ function _play () {
 		_clandungeon
 		_trade
 		_campaign
+		_stop
 		_coliseum
 		_stop
 # //game time ALPHA TEST- - - - - - - - - - - - - - - - - - - -
 		TIME=$(echo $SRC | sed "s/\-->/\n/g" | grep --color '| <a c' | sed "s/|/\n/g" | head -n1 | tr -cd '[[:digit:]]')
 		TM0=`echo $TIME | cut -d0  -f1`
 		TM3=$(echo $SRC | sed "s/\-->/\n/g" | grep --color '| <a c' | sed "s/|/\n/g" | head -n1 | tr -cd '[[:digit:]]' | sed "s/0/3/g")
-		sleep 2
+		sleep 1
 	#done
 # //ALPHA TEST
 	#while [[ -z $TM0 && $TM3 -gt 395459 && $TM3 -le 395959 || $TIME -gt 155459 && $TIME -lt 160500 || $TIME -gt 215559 && $TIME -lt 220500 ]]; do
@@ -345,7 +353,7 @@ function _play () {
 		TIME=$(echo $SRC | sed "s/\-->/\n/g" | grep --color '| <a c' | sed "s/|/\n/g" | head -n1 | tr -cd '[[:digit:]]')
 		TM0=`echo $TIME | cut -d0  -f1`
 		TM3=$(echo $SRC | sed "s/\-->/\n/g" | grep --color '| <a c' | sed "s/|/\n/g" | head -n1 | tr -cd '[[:digit:]]' | sed "s/0/3/g")
-		sleep 2
+		sleep 1
 	#done
 
 # //Valley of the Immortals 100000
@@ -363,6 +371,6 @@ function _play () {
 }
 while true; do
 	_play
-	sleep 2
+	sleep 1
 done
 exit
