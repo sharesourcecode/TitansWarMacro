@@ -43,52 +43,52 @@ function _stop () {
 	clear
 }
 # //servers - - - - - - - - - - - - - - - - - - - - - - - - -
-SERVERS=("English, Global: Titan's War online" "Русский: Битва Титанов онлайн" "Polski: Wojna Tytanów online" "Deutsch: Krieg der Titanen online" "Español: Guerra de Titanes online" "Brazil, Português: Furia de Titãs online" "Italiano: Guerra di Titani online" "Français: Combat des Titans online" "Română: Războiul Titanilor online" "Srpski: Rat Titana online" "中文, Chinese: 泰坦之战" "Indonesian: Titan's War Indonesia" "India, English: Titan's War India" "Cancel")
+SERVERS=("🇬🇧 English, Global: Titan's War online" "🇷🇺 Русский: Битва Титанов онлайн" "🇵🇱 Polski: Wojna Tytanów online" "🇩🇪 Deutsch: Krieg der Titanen online" "🇪🇸 Español: Guerra de Titanes online" "🇧🇷 Brazil, 🇵🇹 Português: Furia de Titãs online" "🇮🇹 Italiano: Guerra di Titani online" "🇫🇷 Français: Combat des Titans online" "🇷🇴 Română: Războiul Titanilor online" "🇷🇸 Srpski: Rat Titana online" "🇨🇳 中文, Chinese: 泰坦之战" "🇮🇩 Indonesian: Titan's War Indonesia" "🇮🇳 India, English: Titan's War India" "❌ Cancel")
 PS3="Select number Server: "
 
 select action in "${SERVERS[@]}"
 	do
 		case $action in
-			"English, Global: Titan's War online") URL="http://tiwar.net"
+			"🇬🇧 English, Global: Titan's War online") URL="http://tiwar.net"
 			break ;;
 
-			"Русский: Битва Титанов онлайн") URL='http://tiwar.ru'
+			"🇷🇺 Русский: Битва Титанов онлайн") URL='http://tiwar.ru'
 			break ;;
 
-			"Polski: Wojna Tytanów online") URL='http://tiwar.pl'
+			"🇵🇱 Polski: Wojna Tytanów online") URL='http://tiwar.pl'
 			break ;;
 
-			"Deutsch: Krieg der Titanen online") URL='http://titanen.mobi'
+			"🇩🇪 Deutsch: Krieg der Titanen online") URL='http://titanen.mobi'
 			break ;;
 
-			"Español: Guerra de Titanes online") URL='http://guerradetitanes.net'
+			"🇪🇸 Español: Guerra de Titanes online") URL='http://guerradetitanes.net'
 			break ;;
 
-			"Brazil, Português: Furia de Titãs online") URL='http://furiadetitas.net'
+			"🇧🇷 Brazil, 🇵🇹 Português: Furia de Titãs online") URL='http://furiadetitas.net'
 			break ;;
 
-			"Italiano: Guerra di Titani online") URL='http://guerradititani.net'
+			"🇮🇹 Italiano: Guerra di Titani online") URL='http://guerradititani.net'
 			break ;;
 
-			"Français: Combat des Titans online") URL='http://tiwar.fr'
+			"🇫🇷 Français: Combat des Titans online") URL='http://tiwar.fr'
 			break ;;
 
-			"Română: Războiul Titanilor online") URL='http://tiwar.ro'
+			"🇷🇴 Română: Războiul Titanilor online") URL='http://tiwar.ro'
 			break ;;
 
-			"Srpski: Rat Titana online") URL='http://tiwar.rs'
+			"🇷🇸 Srpski: Rat Titana online") URL='http://tiwar.rs'
 			break ;;
 
-			"中文, Chinese: 泰坦之战") URL='http://cn.tiwar.net'
+			"🇨🇳 中文, Chinese: 泰坦之战") URL='http://cn.tiwar.net'
 			break ;;
 
-			"Indonesian: Titan's War Indonesia") URL="http://bahasa.tiwar.net"
+			"🇮🇩 Indonesian: Titan's War Indonesia") URL="http://bahasa.tiwar.net"
 			break ;;
 
-			"India, English: Titan's War India") URL="http://tiwar.in"
+			"🇮🇳 India, English: Titan's War India") URL="http://tiwar.in"
 			break ;;
 
-		        "Cancel") kill -9 $$
+		        "❌ Cancel") kill -9 $$
 			break ;;
 		    esac
 done
