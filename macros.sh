@@ -37,7 +37,6 @@ function _stop () {
 	grep -q "break" process.txt && kill -9 $$
 	clear
 }
-_stop
 # //servers - - - - - - - - - - - - - - - - - - - - - - - - -
 SERVERS=("English, Global: Titan's War online" "Русский: Битва Титанов онлайн" "Polski: Wojna Tytanów online" "Deutsch: Krieg der Titanen online" "Español: Guerra de Titanes online" "Brazil, Português: Furia de Titãs online" "Italiano: Guerra di Titani online" "Français: Combat des Titans online" "Română: Războiul Titanilor online" "Srpski: Rat Titana online" "中文, Chinese: 泰坦之战" "Indonesian: Titan's War Indonesia" "India, English: Titan's War India" "Cancel")
 PS3="Select number Server: "
