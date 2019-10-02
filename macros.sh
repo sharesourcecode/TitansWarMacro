@@ -24,11 +24,11 @@
 # //termux on android - - - - - - - - - - - - - - - - - - - -
 termux-wake-lock &> /dev/null
 # //update script and dependences - - - - - - - - - - - - - -
-echo "Updating..."
+echo "Looking for updates..."
 wget https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O macros.sh 2&>-
 apt install w3m -y 2&>-
-echo "Updated"
-sleep 3
+echo -e "Successful updates\!"
+sleep 2
 # //tmp dir - - - - - - - - - - - - - - - - - - - - - - - - -
 mkdir -p $HOME/.tmp
 cd $HOME/.tmp
