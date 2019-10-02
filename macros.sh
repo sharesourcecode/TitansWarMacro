@@ -24,12 +24,14 @@
 # //termux on android - - - - - - - - - - - - - - - - - - - -
 termux-wake-lock &> /dev/null
 # //update script and dependences - - - - - - - - - - - - - -
+function _update () {
 echo "Looking for updates..."
 sleep 1
 wget https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O macros.sh 2&>-
 apt install w3m -y 2&>-
 echo -e "Successful updates!"
 sleep 2
+}
 # //tmp dir - - - - - - - - - - - - - - - - - - - - - - - - -
 mkdir -p $HOME/.tmp
 cd $HOME/.tmp
@@ -47,6 +49,7 @@ function _stop () {
                 sleep 1; i=$[$i-1]
         done & read -t$i && echo "break" >process.txt
 	grep -q "break" process.txt && kill -9 $$
+	reset
 	clear
 }
 # //servers - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -401,6 +404,7 @@ function _play () {
 # //King of the Immortals 223000
 }
 while true; do
+	_update
 	_play
 	sleep 1
 done
