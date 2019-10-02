@@ -156,7 +156,7 @@ function _arena () {
 	ACCESS=`echo $SRC | sed "s/arena/\\n/g" | grep "attack" | cut -d\/ -f4 | shuf -n1`
 	HP=$(echo $SRC | sed "s/\<span/\\n/g" | grep "class='white'>" | head -n1 | tr -cd '[[:digit:]]')
 	MP=$(echo $SRC | sed "s/\<span/\\n/g" | grep "alt='mp'/>" | head -n1 | tr -cd '[[:digit:]]')
-	while [[ $MP -ge 50 && $HP -gt 1500 ]]; do
+	while [[ $MP -ge 50 && $HP -gt 1000 ]]; do
 		echo " ⚔ Attacking..."
 		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/arena/attack/1/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
 		ACCESS=`echo $SRC | sed "s/arena/\\n/g" | grep "attack" | cut -d\/ -f4 | shuf -n1`
