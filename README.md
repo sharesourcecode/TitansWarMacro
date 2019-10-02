@@ -10,12 +10,12 @@ Recommended at level 16, or higher.
 
 wget https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O macros.sh
 
-
+- - - - - - - - -
 2.Then execute:
 
 bash macros.sh
 
-
+- - - - - - - - -
 Must have w3m package:
 
 apt install w3m -y
