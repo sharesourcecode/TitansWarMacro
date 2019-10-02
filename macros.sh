@@ -358,7 +358,7 @@ function _play () {
 		_trade
 		_campaign
 		_stop
-#		_coliseum
+		_coliseum
 		_stop
 # //game time ALPHA TEST- - - - - - - - - - - - - - - - - - - -
 		TIME=$(echo $SRC | sed "s/\-->/\n/g" | grep --color '| <a c' | sed "s/|/\n/g" | head -n1 | tr -cd '[[:digit:]]')
