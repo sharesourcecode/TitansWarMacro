@@ -147,6 +147,12 @@ TM0=`echo $TIME | cut -d0  -f1`
 TM3=$(echo $SRC | sed "s/\-->/\n/g" | grep --color '| <a c' | sed "s/|/\n/g" | head -n1 | tr -cd '[[:digit:]]' | sed "s/0/3/g")
 # //arena- - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _arena () {
+	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/arena -o user_agent="$(shuf -n1 .ua)"`
+# //collfight
+	COLL=`echo $SRC | sed "s/href='/\n/g" | grep "/collfight/" | head -n1 | cut -d\' -f1 | cut -d\/ -f3`
+	if [[ -n $COLL ]]; then
+	$(w3m -debug -o accept_encoding=='*;q=0' $URL/collfight/enterFight/ -o user_agent="$(shuf -n1 .ua)") 2&>-
+	fi
 # //take and help - arena clan quests
 	if [[ -n $CLD ]]; then
 		for num in `seq 4 -1 3`; do $(w3m -debug -o accept_encoding=='*;q=0' $URL/clan/$CLD/quest/take/$num -o user_agent="$(shuf -n1 .ua)") 2&>-; done
@@ -155,7 +161,6 @@ function _arena () {
 	clear
 # //arena attack
 	echo "Checking Arena..."
-	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/arena -o user_agent="$(shuf -n1 .ua)"`
 	ACCESS=`echo $SRC | sed "s/arena/\\n/g" | grep "attack" | cut -d\/ -f4 | shuf -n1`
 	LOW=`echo $SRC | sed "s/href='/\n/g" | grep "/lab/" | head -n1 | cut -d\' -f1 | cut -d\/ -f3`
 	while [[ -z $LOW ]]; do
