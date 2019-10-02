@@ -149,9 +149,12 @@ TM3=$(echo $SRC | sed "s/\-->/\n/g" | grep --color '| <a c' | sed "s/|/\n/g" | h
 function _arena () {
 	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/arena -o user_agent="$(shuf -n1 .ua)"`
 # //collfight
-	COLL=`echo $SRC | sed "s/href='/\n/g" | grep "/collfight/" | head -n1 | cut -d\' -f1 | cut -d\/ -f3`
+	COLL=`echo $SRC | sed "s/href='/\n/g" | grep "/collfight/" | head -n1 | cut -d\' -f1 | cut -d\/ -f2`
 	if [[ -n $COLL ]]; then
-	$(w3m -debug -o accept_encoding=='*;q=0' $URL/collfight/enterFight/ -o user_agent="$(shuf -n1 .ua)") 2&>-
+	SRCL=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/collfight/enterFight/ -o user_agent="$(shuf -n1 .ua)"`
+# // /collfight/take/?r=69247346
+	ACCESS=`echo $SRCL | sed "s/href='/\n/g" | grep "/take/" | head -n1 | cut -d\' -f1`
+	$(w3m -debug -o accept_encoding=='*;q=0' $URL$ACCESS -o user_agent="$(shuf -n1 .ua)") 2&>-
 	fi
 # //take and help - arena clan quests
 	if [[ -n $CLD ]]; then
@@ -355,7 +358,7 @@ function _play () {
 		_trade
 		_campaign
 		_stop
-		_coliseum
+#		_coliseum
 		_stop
 # //game time ALPHA TEST- - - - - - - - - - - - - - - - - - - -
 		TIME=$(echo $SRC | sed "s/\-->/\n/g" | grep --color '| <a c' | sed "s/|/\n/g" | head -n1 | tr -cd '[[:digit:]]')
