@@ -365,7 +365,7 @@ function _play () {
 	MIN=`echo $SRC | sed "s/\-->/\n/g" | grep -s '| <a c' | sed "s/|/\n/g" | head -n1 | cut -d\: -f2`
 # //ALPHA TEST
 # //Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
-	if [[ $HOUR = 09 && $MIN > 55 || $HOUR = 15 && $MIN > 55 || $HOUR = 21 && $MIN > 55 ]]; then
+	if [[ $HOUR -eq "09" && $MIN -gt "55" || $HOUR -eq "15" && $MIN -gt "55" || $HOUR -eq "21" && $MIN -gt "55" ]]; then
 	        i=600
         	until [[ $i -lt 1 ]]; do
 			echo -e '\n#_undying time! Waiting for $i...\n
@@ -373,7 +373,7 @@ function _play () {
         	        sleep 1; i=$[$i-1]; clear
 	        done
 # //Clan coliseum 10:30:00 - 15:00:00
-	elif [[ $HOUR = 10 && $MIN > 25 && $MIN < 31 || $HOUR = 14 && $MIN > 55 ]]; then
+	elif [[ $HOUR -eq "10" && $MIN -gt "25" && $MIN -lt "31" || $HOUR -eq "14" && $MIN -gt "55" ]]; then
 	        i=600
         	until [[ $i -lt 1 ]]; do
 			echo -e '\n#_clancoliseum time! Waiting for $i...\n
@@ -381,7 +381,7 @@ function _play () {
         	        sleep 1; i=$[$i-1]; clear
 	        done
 # //Clan tournament 11:00:00 - 19:00:00
-	elif [[ $HOUR = 10 && $MIN > 55 || $HOUR = 18 && $MIN > 55 ]]; then
+	elif [[ $HOUR -eq "10" && $MIN -gt "55" || $HOUR -eq "18" && $MIN -gt "55" ]]; then
 	        i=600
         	until [[ $i -lt 1 ]]; do
 			echo -e '\n#_clanfight time! Waiting for $i...\n
@@ -389,7 +389,7 @@ function _play () {
         	        sleep 1; i=$[$i-1]; clear
 	        done
 # //King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
-	elif [[ $HOUR = 12 && $MIN > 25 && $MIN < 31 || $HOUR = 16 && $MIN > 25 && $MIN < 31 || $HOUR = 22 && $MIN > 25 && $MIN < 31 ]]; then
+	elif [[ $HOUR -eq "12" && $MIN -gt "25" && $MIN -lt "31" || $HOUR -eq "16" && $MIN -gt "25" && $MIN -lt "31" || $HOUR -eq "22" && $MIN -gt "25" && $MIN -lt "31" ]]; then
 	        i=900
         	until [[ $i -lt 1 ]]; do
 			echo -e '\n#_king time! Waiting for $i...\n
@@ -397,7 +397,7 @@ function _play () {
         	        sleep 1; i=$[$i-1]; clear
 	        done
 # //Ancient Altars 14:00:00 - 21:00:00
-	elif [[ $HOUR = 13 && $MIN > 55 || $HOUR = 20 && $MIN > 55 ]]; then
+	elif [[ $HOUR -eq "13" && $MIN -gt "55" || $HOUR -eq "20" && $MIN -gt "55" ]]; then
 	        i=600
         	until [[ $i -lt 1 ]]; do
 			echo -e '\n#_altars time! Waiting for $i...\n
