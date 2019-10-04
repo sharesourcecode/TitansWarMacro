@@ -408,13 +408,13 @@ function _play () {
 		_clandungeon
 		_trade
 		_campaign
-#		_stop
-#		_coliseum
-#		_stop
+		_stop
+		_coliseum
+		_stop
 	fi
 }
 while true; do
-#	_update
+	_update
 	_play
 	sleep 1
 done
