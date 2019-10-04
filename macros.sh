@@ -27,8 +27,8 @@ termux-wake-lock &> /dev/null
 function _update () {
 echo -e "\nLooking for updates..."
 sleep 1
-wget https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O macros.sh 2&>-
-apt install w3m -y 2&>-
+$(wget https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O macros.sh) 2&>-
+$(apt install w3m -y) 2&>-
 echo -e "Successful updates!"
 sleep 2
 }
