@@ -26,12 +26,10 @@ termux-wake-lock &> /dev/null
 # //update script and dependences - - - - - - - - - - - - - -
 function _update () {
 	echo -e "\nLooking for updates..."
-	sleep 1
-	$(wget https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O macros.sh) 2&>-
+	wget https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O macros.sh
 	#apt install w3m -y 2&>-
 	echo -e "Successful updates!"
-	sleep 2
 }
 _update
-echo -e "\nFor the full version, contact me: 369540445100@wmkeeper.com"
+echo -e "\nFor the full version, contact me: 369540445100@wmkeeper.com\n"
 exit
