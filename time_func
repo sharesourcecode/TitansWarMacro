@@ -2,7 +2,7 @@
 function _time () {
 	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL" -o user_agent="$(shuf -n1 .ua)")
 	HOUR=$(echo $SRC | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f1 | tr -cd '[:digit:]')
-	MIN=$(echo $SRC | sed 's/--/\n/g' | grep --color '/online/' | cut -d\: -f2 | tr -cd '[:digit:]')
+	MIN=$(echo $SRC | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f2 | tr -cd '[:digit:]')
 	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
 }
 _time
