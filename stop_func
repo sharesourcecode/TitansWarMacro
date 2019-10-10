@@ -1,0 +1,16 @@
+# //kill - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _stop () {
+	HOUR=$(echo $SRC | sed 's/--/\n/g' | grep --color '/online/' | cut -d\: -f1 | tr -cd '[:digit:]')
+	MIN=$(echo $SRC | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f2 | tr -cd '[:digit:]')
+	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
+        >process.txt
+        i=20
+        until [[ $i -lt 1 ]]; do
+                grep -q "break" process.txt && break
+		echo -ne "\r $i [Press ENTER for stop or wait to continue...] "
+                sleep 1; i=$[$i-1]
+        done & read -t$i && echo "break" >process.txt
+	grep -q "break" process.txt && kill -9 $$
+	reset
+	clear
+}
