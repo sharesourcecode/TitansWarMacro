@@ -1,11 +1,11 @@
 # //login/logoff - - - - - - - - - - - - - - - - - - - - - - -
 ACC=$(w3m -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
-[[ -n $ACC ]] && >process.txt && i=5 && \
+[[ -n $ACC ]] && >process.txt && i=15 && \
         until [[ $i -lt 1 ]]; do
                 grep -q "break" process.txt && break
 		echo -ne "\r $i [Wait to $ACC... - press ENTER to other account] "
                 sleep 1; i=$[$i-1]
-        done & read -t5 && echo "break" >process.txt
+        done & read -t15 && echo "break" >process.txt
 	grep -q "break" process.txt && ACC=""
 while [[ -z $ACC ]]; do
 	function _login () {
