@@ -12,5 +12,4 @@ function _stop () {
         done & read -t$i && echo "break" >process.txt
 	grep -q "break" process.txt && kill -9 $$
 	reset
-	clear
 }
