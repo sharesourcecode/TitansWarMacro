@@ -1,7 +1,7 @@
 # //kill - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _stop () {
         >process.txt
-        i=20
+#        i=20
         until [[ $i -lt 1 ]]; do
                 grep -q "break" process.txt && break
 		echo -ne "\r $i [Press ENTER for stop or wait to continue...] "
