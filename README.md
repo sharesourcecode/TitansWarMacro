@@ -20,6 +20,8 @@ curl https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/mac
 bash macros.sh
 
 - - - - - - - - -
-On Linux must have w3m package:
+*On Windows(Cygwin) must have apt-cyg script and lynx package.
+- - - - - - - - -
+*On Linux must have w3m package:
 
 sudo apt install w3m -y
