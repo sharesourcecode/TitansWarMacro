@@ -29,7 +29,7 @@ mkdir -p $HOME/.tmp
 cd $HOME/.tmp
 # //update script and dependences - - - - - - - - - - - - - -
 echo -e "\nLooking for updates..."
-curl https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O -L
+#curl https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O -L
 apt install w3m -y || apt-cyg install w3m -y
 echo -e "Successful updates!"
 # //user agents to $HOME/.tmp/.ua - - - - - - - - - - - - - -
@@ -171,6 +171,7 @@ function _arena () {
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[0]}" | head -n1 | cut -d\' -f2) #/arena/attack/1/1234567*/
 	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[1]}" | head -n1 | cut -d\' -f2) #/lab/wizard/potion/1234567*/?ref=/arena/
 	while [[ -z $EXIT ]]; do
+		echo "$ACCESS"
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[0]}" | head -n1 | cut -d\' -f2) #/arena/attack/1/1234567*/
 		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[1]}" | head -n1 | cut -d\' -f2) #/lab/wizard/potion/1234567*/?ref=/arena/
@@ -253,16 +254,16 @@ function _coliseum () {
 # //play - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _play () {
 # //game time
-	if [[ $HOUR = 00 || $HOUR = 01 || $HOUR = 02 || $HOUR = 03 || $HOUR = 04 || $HOUR = 05 || $HOUR = 06 || $HOUR = 07 || $HOUR = 08 || $HOUR -eq 23 ]]; then
+	if [[ $HOUR = 00 || $HOUR = 01 || $HOUR = 02 || $HOUR = 03 || $HOUR = 04 || $HOUR = 05 || $HOUR = 06 || $HOUR = 07 || $HOUR = 08 || $HOUR = 09 && $MIN -le "55" || $HOUR -eq 23 ]]; then
 		_arena
 #		_career
 #		_clandungeon
 #		_campaign
 #		_trade
-		_time
-		sleep 1140
 		_coliseum
+		_time
 		_stop
+#		sleep 1140
 # //Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
 	elif [[ $HOUR = "09" && $MIN -gt "55" || $HOUR -eq "15" && $MIN -gt "55" || $HOUR -eq "21" && $MIN -gt "55" ]]; then
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/undying/enterGame -o user_agent="$(shuf -n1 .ua)")
@@ -287,8 +288,8 @@ function _play () {
 #		_clandungeon
 #		_trade
 #		_campaign
-		_time
 		_coliseum
+		_time
 		_stop
 	fi
 }
