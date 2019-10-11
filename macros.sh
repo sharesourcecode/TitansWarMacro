@@ -138,3 +138,41 @@ while [[ -z $ACC ]]; do
 	clear
 	ACC=$(w3m -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[user")
 done
+# //kill - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _stop () {
+	HOUR=$(echo $SRC | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f1 | tr -cd '[:digit:]')
+	MIN=$(echo $SRC | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f2 | tr -cd '[:digit:]')
+	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
+        >process.txt
+        i=20
+        until [[ $i -lt 1 ]]; do
+                grep -q "break" process.txt && break
+		echo -ne "\r $i [Press ENTER for stop or wait to continue...] "
+                sleep 1; i=$[$i-1]
+        done & read -t$i && echo "break" >process.txt
+	grep -q "break" process.txt && kill -9 $$
+	reset
+}
+# //time - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _time () {
+	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL" -o user_agent="$(shuf -n1 .ua)")
+	HOUR=$(echo $SRC | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f1 | tr -cd '[:digit:]')
+	MIN=$(echo $SRC | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f2 | tr -cd '[:digit:]')
+	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
+}
+_time
+# //clan id - - - - - - - - - - - - - - - - - - - - - - - - -
+SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/clan -o user_agent="$(shuf -n1 .ua)")
+CLD=$(echo $SRC | sed "s/\/clan\//\\n/g" | grep 'built\/' | cut -d\/ -f1)
+# //arena - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _arena () {
+	PAC=( 'arena/attack' 'lab/wizard' ) #Page:Action:Condition
+	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/${PAC[0]:0:5}" -o user_agent="$(shuf -n1 .ua)")
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[0]}" | head -n1 | cut -d\' -f2) #/arena/attack/1/1234567*/
+	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[1]}" | head -n1 | cut -d\' -f2) #/lab/wizard/potion/1234567*/?ref=/arena/
+	while [[ -z $EXIT ]]; do
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[0]}" | head -n1 | cut -d\' -f2) #/arena/attack/1/1234567*/
+		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[1]}" | head -n1 | cut -d\' -f2) #/lab/wizard/potion/1234567*/?ref=/arena/
+	done
+}
