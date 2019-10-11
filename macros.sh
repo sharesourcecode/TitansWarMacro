@@ -29,7 +29,8 @@ mkdir -p $HOME/.tmp
 cd $HOME/.tmp
 # //update script and dependences - - - - - - - - - - - - - -
 echo -e "\nLooking for updates..."
-#curl https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O -L
+curl https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O -L
+cat macros.sh >$HOME/macros.sh
 apt install w3m -y || apt-cyg install w3m -y
 echo -e "Successful updates!"
 # //user agents to $HOME/.tmp/.ua - - - - - - - - - - - - - -
@@ -174,6 +175,7 @@ function _arena () {
 		echo "$ACCESS"
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[0]}" | head -n1 | cut -d\' -f2) #/arena/attack/1/1234567*/
+		echo "$ACCESS"
 		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[1]}" | head -n1 | cut -d\' -f2) #/lab/wizard/potion/1234567*/?ref=/arena/
 	done
 }
