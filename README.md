@@ -10,6 +10,10 @@ Recommended at level 16, or higher.
 
 wget https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O macros.sh
 
+or:
+
+curl https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O -L
+
 - - - - - - - - -
 2.Then execute:
 
