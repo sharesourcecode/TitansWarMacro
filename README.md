@@ -20,7 +20,7 @@ curl https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/mac
 bash macros.sh
 
 - - - - - - - - -
-*On Windows(Cygwin) must have apt-cyg script and lynx package.
+*On Windows(Cygwin) must have apt-cyg script and lynx package, or wget package.
 - - - - - - - - -
 *On Linux must have w3m package:
 
