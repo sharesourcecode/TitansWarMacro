@@ -1,0 +1,28 @@
+ // // // // // // // // // // // // // // // // // // // //
+# //coliseum - - - - - - - - - - - - - - - - - - - - - - - -
+function _coliseum () {
+# //enterFight
+	PAGE=coliseum
+	echo "$PAGE"
+	$(w3m -debug -o accept_encoding=='*;q=0' $URL/coliseum/?end_fight=true -o user_agent="$(shuf -n1 .ua)") 2&>-
+#	$(w3m -debug -o accept_encoding=='*;q=0' $URL/?out_gate_confirm=true -o user_agent="$(shuf -n1 .ua)") 2&>-
+	w3m -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="UA" | head -n10 | tail -n6 | sed "/\[2hit/d;/\[str/d;/combat/d"
+	sleep 5
+	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
+	ACTION=atk
+	ACTION2=atkrnd
+	ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep 'enterFight' | cut -d\/ -f3`
+	echo " 👣 Entering..."
+	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/$PAGE/enterFight/$ACCESS/?end_fight=true" -o user_agent="$(shuf -n1 .ua)"`
+# //wait
+	echo " 😴 Waiting..."
+	EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep 'leaveFight' | cut -d\/ -f2`
+	while [[ $EXIST == leaveFight ]]; do
+		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
+		EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep 'leaveFight' | cut -d\/ -f2`
+		echo -e " 💤 	..."
+	done
+	HPER=34 # //heal on 34% - defaut
+	RPER=12 # //random if enemy have +12% hp - default
+	_fights
+}
