@@ -6,7 +6,7 @@ How does it work?
 Recommended at level 16, or higher.
 
 
-1.Execute this to download on your terminal, or in the Termux app on Android:
+1.Execute this to download on your Linux terminal, CygWin(Windows), or Termux app(Android):
 
 wget https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O macros.sh
 
@@ -20,6 +20,6 @@ curl https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/mac
 bash macros.sh
 
 - - - - - - - - -
-Must have w3m package:
+On Linux must have w3m package:
 
-apt install w3m -y
+sudo apt install w3m -y
