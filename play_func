@@ -3,69 +3,44 @@ function _play () {
 # //game time
 	if [[ $HOUR = 00 || $HOUR = 01 || $HOUR = 02 || $HOUR = 03 || $HOUR = 04 || $HOUR = 05 || $HOUR = 06 || $HOUR = 07 || $HOUR = 08 || $HOUR -eq 23 ]]; then
 		_arena
-		_career
+#		_career
 #		_clandungeon
-		_campaign
+#		_campaign
 #		_trade
 		_time
 		sleep 1140
-		_time
 		_coliseum
 		_stop
 # //Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
-	elif [[ $HOUR = "09" && $MIN -gt "55" || $HOUR -eq "15" && $MIN -gt "55" || $HOUR -eq "21" && $MIN -gt "55" ]]; then
+#	elif [[ $HOUR = "09" && $MIN -gt "55" || $HOUR -eq "15" && $MIN -gt "55" || $HOUR -eq "21" && $MIN -gt "55" ]]; then
 #		_undying
-	        i=2
-        	until [[ $i -lt 1 ]]; do
-			echo -e "\n_undying time! Waiting for $i...\nFor the full version, contact me: 369540445100@wmkeeper.com"
-        	        sleep 1; i=$[$i-1]; clear
-	        done
+#	        done
 # //Battle of banners 10:15:00 - 16:15:00
 	elif [[ $HOUR -eq "10" && $MIN -gt "10" && $MIN -lt "16" || $HOUR -eq "16" && $MIN -gt "10" && $MIN -lt "16" ]]; then
-		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URLhttp/flagfight/enterFight -o user_agent="$(shuf -n1 .ua)"`
-	        i=600
-        	until [[ $i -lt 1 ]]; do
-			echo -e "\n_flagfight time! Waiting for $i...\nFor the full version, contact me: 369540445100@wmkeeper.com"
-        	        sleep 1; i=$[$i-1]; clear
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URLhttp/flagfight/enterFight -o user_agent="$(shuf -n1 .ua)")
 	        done
 # //Clan coliseum 10:30:00 - 15:00:00
 	elif [[ $HOUR -eq "10" && $MIN -gt "25" && $MIN -lt "31" || $HOUR -eq "14" && $MIN -gt "55" ]]; then
-		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/clancoliseum/enterFight -o user_agent="$(shuf -n1 .ua)"`
-	        i=600
-        	until [[ $i -lt 1 ]]; do
-			echo -e "\n_clancoliseum time! Waiting for $i...\nFor the full version, contact me: 369540445100@wmkeeper.com"
-        	        sleep 1; i=$[$i-1]; clear
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/clancoliseum/enterFight -o user_agent="$(shuf -n1 .ua)")
 	        done
 # //Clan tournament 11:00:00 - 19:00:00
 	elif [[ $HOUR -eq "10" && $MIN -gt "55" || $HOUR -eq "18" && $MIN -gt "55" ]]; then
-		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/clanfight/enterFight/ -o user_agent="$(shuf -n1 .ua)"`
-	        i=600
-        	until [[ $i -lt 1 ]]; do
-			echo -e "\n_clanfight time! Waiting for $i...\nFor the full version, contact me: 369540445100@wmkeeper.com"
-        	        sleep 1; i=$[$i-1]; clear
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/clanfight/enterFight/ -o user_agent="$(shuf -n1 .ua)")
 	        done
 # //King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
 	elif [[ $HOUR -eq "12" && $MIN -gt "25" && $MIN -lt "31" || $HOUR -eq "16" && $MIN -gt "25" && $MIN -lt "31" || $HOUR -eq "22" && $MIN -gt "25" && $MIN -lt "31" ]]; then
-		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/king/enterGame -o user_agent="$(shuf -n1 .ua)"`
-	        i=900
-        	until [[ $i -lt 1 ]]; do
-			echo -e "\n_king time! Waiting for $i...\nFor the full version, contact me: 369540445100@wmkeeper.com"
-        	        sleep 1; i=$[$i-1]; clear
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/king/enterGame -o user_agent="$(shuf -n1 .ua)")
 	        done
 # //Ancient Altars 14:00:00 - 21:00:00
 	elif [[ $HOUR -eq "13" && $MIN -gt "55" || $HOUR -eq "20" && $MIN -gt "55" ]]; then
-		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/altars/enterFight -o user_agent="$(shuf -n1 .ua)"`
-	        i=600
-        	until [[ $i -lt 1 ]]; do
-			echo -e "\n_altars time! Waiting for $i...\nFor the full version, contact me: 369540445100@wmkeeper.com"
-        	        sleep 1; i=$[$i-1]; clear
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/altars/enterFight -o user_agent="$(shuf -n1 .ua)")
 	        done
 	else
 		_arena
-		_career
+#		_career
 #		_clandungeon
 #		_trade
-		_campaign
+#		_campaign
 		_time
 		_coliseum
 		_stop
