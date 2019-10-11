@@ -118,7 +118,7 @@ while [[ -z $ACC ]]; do
 					prompt=$'\b \b'
 					password="${password%?}"
 				else
-					PROMPT=''
+					prompt=''
 				fi
 			else
 				charcount=$((charcount + 1))
