@@ -264,9 +264,9 @@ function _play () {
 		_coliseum
 		_stop
 # //Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
-#	elif [[ $HOUR = "09" && $MIN -gt "55" || $HOUR -eq "15" && $MIN -gt "55" || $HOUR -eq "21" && $MIN -gt "55" ]]; then
-#		_undying
-#	        done
+	elif [[ $HOUR = "09" && $MIN -gt "55" || $HOUR -eq "15" && $MIN -gt "55" || $HOUR -eq "21" && $MIN -gt "55" ]]; then
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/undying/enterGame -o user_agent="$(shuf -n1 .ua)")
+	        done
 # //Battle of banners 10:15:00 - 16:15:00
 	elif [[ $HOUR -eq "10" && $MIN -gt "10" && $MIN -lt "16" || $HOUR -eq "16" && $MIN -gt "10" && $MIN -lt "16" ]]; then
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URLhttp/flagfight/enterFight -o user_agent="$(shuf -n1 .ua)")
