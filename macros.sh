@@ -29,7 +29,7 @@ mkdir -p $HOME/.tmp
 cd $HOME/.tmp
 # //update script and dependences - - - - - - - - - - - - - -
 echo -e "\nLooking for updates..."
->macro.sh
+>macros.sh
 curl https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O -L
 cat macros.sh >$HOME/macros.sh
 apt install w3m -y 2&>- || apt-cyg install w3m
