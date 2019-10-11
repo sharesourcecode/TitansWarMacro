@@ -10,7 +10,7 @@ Recommended at level 16, or higher.
 
 wget https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O macros.sh
 
-or:
+or(Termux, Gygwin):
 
 curl https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O -L
 
