@@ -176,3 +176,131 @@ function _arena () {
 		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[1]}" | head -n1 | cut -d\' -f2) #/lab/wizard/potion/1234567*/?ref=/arena/
 	done
 }
+ // // // // // // // // // // // // // // // // // // // //
+# //coliseum - - - - - - - - - - - - - - - - - - - - - - - -
+function _coliseum () {
+# //enterFight
+	PAGE=coliseum
+	echo "$PAGE"
+	$(w3m -debug -o accept_encoding=='*;q=0' $URL/coliseum/?end_fight=true -o user_agent="$(shuf -n1 .ua)") 2&>-
+#	$(w3m -debug -o accept_encoding=='*;q=0' $URL/?out_gate_confirm=true -o user_agent="$(shuf -n1 .ua)") 2&>-
+	w3m -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="UA" | head -n10 | tail -n6 | sed "/\[2hit/d;/\[str/d;/combat/d"
+	sleep 5
+	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
+	ACTION=atk
+	ACTION2=atkrnd
+	ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep 'enterFight' | cut -d\/ -f3`
+	echo " 👣 Entering..."
+	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/$PAGE/enterFight/$ACCESS/?end_fight=true" -o user_agent="$(shuf -n1 .ua)"`
+# //wait
+	echo " 😴 Waiting..."
+	EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep 'leaveFight' | cut -d\/ -f2`
+	while [[ $EXIST == leaveFight ]]; do
+		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
+		EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep 'leaveFight' | cut -d\/ -f2`
+		echo -e " 💤 	..."
+	done
+	HPER=34 # //heal on 34% - defaut
+	RPER=12 # //random if enemy have +12% hp - default
+	ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3`
+	EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2`
+	WDRED=`echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4` #white/dred
+	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
+	HEAL=`expr $FULL \* $HPER \/ 100`
+	while [[ $EXIST == $ACTION ]]; do
+		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
+		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
+# //heal - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#		if [[ $WDRED == dred && $HP1 -lt $HEAL ]]; then
+		if [[ $HP1 -lt $HEAL ]]; then
+			echo " HP < $HPER%"
+			echo -e " 💕 You: $HP1 - $HP2 :enemy"
+			SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/heal/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
+			ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3`
+			EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2`
+			WDRED=`echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4` #white
+			HP1=$HPFULL
+			HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
+			sleep 5
+# //random - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		elif [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]]; then
+			HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
+			echo -e " 🎲 You: $HP1 - $HP2 :enemy"
+			SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/$ACTION2/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
+			ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3`
+			EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2`
+			WDRED=`echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4` #white
+			HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
+			HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
+			sleep 4
+# //dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		else
+			echo -e " 💃 You: $HP1 - $HP2 :enemy"
+			SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/dodge/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
+			ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3`
+			EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2`
+			WDRED=`echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4` #white
+			HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
+			HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
+			sleep 4
+		fi
+	done
+# //view - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	echo ""
+	w3m -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"| head -n15 | tail -n10 | sed "/\[user\]/d;/\[arrow\]/d;/\]\ \[/d" | grep "\["
+	echo "$PAGE (✔)"
+}
+# //play - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function _play () {
+# //game time
+	if [[ $HOUR = 00 || $HOUR = 01 || $HOUR = 02 || $HOUR = 03 || $HOUR = 04 || $HOUR = 05 || $HOUR = 06 || $HOUR = 07 || $HOUR = 08 || $HOUR -eq 23 ]]; then
+		_arena
+#		_career
+#		_clandungeon
+#		_campaign
+#		_trade
+		_time
+		sleep 1140
+		_coliseum
+		_stop
+# //Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
+#	elif [[ $HOUR = "09" && $MIN -gt "55" || $HOUR -eq "15" && $MIN -gt "55" || $HOUR -eq "21" && $MIN -gt "55" ]]; then
+#		_undying
+#	        done
+# //Battle of banners 10:15:00 - 16:15:00
+	elif [[ $HOUR -eq "10" && $MIN -gt "10" && $MIN -lt "16" || $HOUR -eq "16" && $MIN -gt "10" && $MIN -lt "16" ]]; then
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URLhttp/flagfight/enterFight -o user_agent="$(shuf -n1 .ua)")
+	        done
+# //Clan coliseum 10:30:00 - 15:00:00
+	elif [[ $HOUR -eq "10" && $MIN -gt "25" && $MIN -lt "31" || $HOUR -eq "14" && $MIN -gt "55" ]]; then
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/clancoliseum/enterFight -o user_agent="$(shuf -n1 .ua)")
+	        done
+# //Clan tournament 11:00:00 - 19:00:00
+	elif [[ $HOUR -eq "10" && $MIN -gt "55" || $HOUR -eq "18" && $MIN -gt "55" ]]; then
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/clanfight/enterFight/ -o user_agent="$(shuf -n1 .ua)")
+	        done
+# //King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
+	elif [[ $HOUR -eq "12" && $MIN -gt "25" && $MIN -lt "31" || $HOUR -eq "16" && $MIN -gt "25" && $MIN -lt "31" || $HOUR -eq "22" && $MIN -gt "25" && $MIN -lt "31" ]]; then
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/king/enterGame -o user_agent="$(shuf -n1 .ua)")
+	        done
+# //Ancient Altars 14:00:00 - 21:00:00
+	elif [[ $HOUR -eq "13" && $MIN -gt "55" || $HOUR -eq "20" && $MIN -gt "55" ]]; then
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/altars/enterFight -o user_agent="$(shuf -n1 .ua)")
+	        done
+	else
+		_arena
+#		_career
+#		_clandungeon
+#		_trade
+#		_campaign
+		_time
+		_coliseum
+		_stop
+	fi
+}
+while true; do
+#	_update
+	_play
+	sleep 1
+done
+exit
