@@ -69,6 +69,6 @@ function _coliseum () {
 	done
 # //view - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	echo ""
-	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"| head -n15 | tail -n10 | sed "/\[user\]/d;/\[arrow\]/d;/\]\ \[/d" | grep "\["
+	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"| head -n15 | tail -n10 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep "\["
 	echo "$PAGE (✔)"
 }
