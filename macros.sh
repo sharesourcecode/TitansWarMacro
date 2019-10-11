@@ -158,7 +158,6 @@ function _time () {
 	MIN=$(echo $SRC | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f2 | tr -cd '[:digit:]')
 	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
 }
-_time
 # //clan id - - - - - - - - - - - - - - - - - - - - - - - - -
 SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clan" -o user_agent="$(shuf -n1 .ua)")
 CLD=$(echo $SRC | sed "s/\/clan\//\\n/g" | grep 'built\/' | cut -d\/ -f1)
@@ -175,6 +174,20 @@ function _arena () {
 		echo "$ACCESS"
 		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[1]}" | head -n1 | cut -d\' -f2) #/lab/wizard/potion/1234567*/?ref=/arena/
 	done
+}
+# //campaign- - - - - - - - - - - - - - - - - - - - - - - - -
+function _campaign () {
+	echo "Checking campaign..."
+	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/campaign" -o user_agent="$(shuf -n1 .ua)")
+	ENTER=$(echo $SRC | sed "s/href='/\n/g" | grep "/campaign/" | head -n1 | cut -d\' -f1 | cut -d\/ -f3)
+	ACCESS=$(echo $SRC | sed "s/href='/\n/g" | grep "/campaign/" | head -n1 | cut -d\' -f1)
+	while [[ -n $ENTER ]]; do
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL$ACCESS -o user_agent="$(shuf -n1 .ua)")
+		ENTER=$(echo $SRC | sed "s/href='/\n/g" | grep "/campaign/" | head -n1 | cut -d\' -f1 | cut -d\/ -f3)
+		ACCESS=$(echo $SRC | sed "s/href='/\n/g" | grep "/campaign/" | head -n1 | cut -d\' -f1)
+		echo " ⚔ $ACCESS"
+	done
+	echo -e "campaign (✔)\n"
 }
 # // // // // // // // // // // // // // // // // // // // //
 # //coliseum - - - - - - - - - - - - - - - - - - - - - - - -
