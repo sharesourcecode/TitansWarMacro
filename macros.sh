@@ -177,7 +177,6 @@ function _arena () {
 }
 # //campaign- - - - - - - - - - - - - - - - - - - - - - - - -
 function _campaign () {
-	echo "Checking campaign..."
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/campaign" -o user_agent="$(shuf -n1 .ua)")
 	ENTER=$(echo $SRC | sed "s/href='/\n/g" | grep "/campaign/" | head -n1 | cut -d\' -f1 | cut -d\/ -f3)
 	ACCESS=$(echo $SRC | sed "s/href='/\n/g" | grep "/campaign/" | head -n1 | cut -d\' -f1)
@@ -185,19 +184,18 @@ function _campaign () {
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL$ACCESS -o user_agent="$(shuf -n1 .ua)")
 		ENTER=$(echo $SRC | sed "s/href='/\n/g" | grep "/campaign/" | head -n1 | cut -d\' -f1 | cut -d\/ -f3)
 		ACCESS=$(echo $SRC | sed "s/href='/\n/g" | grep "/campaign/" | head -n1 | cut -d\' -f1)
-		echo " ⚔ $ACCESS"
+		echo "$ACCESS"
 	done
-	echo -e "campaign (✔)\n"
 }
 # // // // // // // // // // // // // // // // // // // // //
 # //coliseum - - - - - - - - - - - - - - - - - - - - - - - -
 function _coliseum () {
 # //enterFight
 	PAGE=coliseum
-	echo "$PAGE"
+	echo -e "\n$PAGE"
 	$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/coliseum/?end_fight=true -o user_agent="$(shuf -n1 .ua)") 2&>-
 #	$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/?out_gate_confirm=true -o user_agent="$(shuf -n1 .ua)") 2&>-
-	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="UA" | head -n10 | tail -n6 | sed "/\[2hit/d;/\[str/d;/combat/d"
+	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="UA" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
 	sleep 5
 	SRC=`w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
 	ACTION=atk
@@ -271,7 +269,7 @@ function _play () {
 		_arena
 #		_career
 #		_clandungeon
-#		_campaign
+		_campaign
 #		_trade
 		_coliseum
 		_time
@@ -300,7 +298,7 @@ function _play () {
 #		_career
 #		_clandungeon
 #		_trade
-#		_campaign
+		_campaign
 		_coliseum
 		_time
 		i=20
