@@ -6,6 +6,7 @@ cd $HOME/.tmp
 # //update script and dependences - - - - - - - - - - - - - -
 echo -e "\nLooking for updates..."
 curl https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O -L
+cat macros.sh >$HOME/macros.sh
 apt install w3m -y || apt-cyg install w3m -y
 echo -e "Successful updates!"
 # //user agents to $HOME/.tmp/.ua - - - - - - - - - - - - - -
