@@ -3,12 +3,11 @@ termux-wake-lock &> /dev/null
 # //tmp dir - - - - - - - - - - - - - - - - - - - - - - - - -
 mkdir -p $HOME/.tmp
 cd $HOME/.tmp
-#clear
 # //update script and dependences - - - - - - - - - - - - - -
 function _update () {
 echo -e "\nLooking for updates..."
-wget https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/arena.sh -O arena.sh
-apt install w3m -y
+curl https://raw.githubusercontent.com/AlvesUeliton/Titans-War-Macros/master/macros.sh -O -L
+apt install w3m -y || apt-cyg install w3m -y
 echo -e "Successful updates!"
 }
 _update
