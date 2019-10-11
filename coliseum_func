@@ -24,5 +24,51 @@ function _coliseum () {
 	done
 	HPER=34 # //heal on 34% - defaut
 	RPER=12 # //random if enemy have +12% hp - default
-	_fights
+	ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3`
+	EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2`
+	WDRED=`echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4` #white/dred
+	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
+	HEAL=`expr $FULL \* $HPER \/ 100`
+	while [[ $EXIST == $ACTION ]]; do
+		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
+		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
+# //heal - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#		if [[ $WDRED == dred && $HP1 -lt $HEAL ]]; then
+		if [[ $HP1 -lt $HEAL ]]; then
+			echo " HP < $HPER%"
+			echo -e " 💕 You: $HP1 - $HP2 :enemy"
+			SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/heal/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
+			ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3`
+			EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2`
+			WDRED=`echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4` #white
+			HP1=$HPFULL
+			HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
+			sleep 5
+# //random - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		elif [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]]; then
+			HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
+			echo -e " 🎲 You: $HP1 - $HP2 :enemy"
+			SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/$ACTION2/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
+			ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3`
+			EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2`
+			WDRED=`echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4` #white
+			HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
+			HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
+			sleep 4
+# //dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		else
+			echo -e " 💃 You: $HP1 - $HP2 :enemy"
+			SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/dodge/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
+			ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3`
+			EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2`
+			WDRED=`echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4` #white
+			HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
+			HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
+			sleep 4
+		fi
+	done
+# //view - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	echo ""
+	w3m -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"| head -n15 | tail -n10 | sed "/\[user\]/d;/\[arrow\]/d;/\]\ \[/d" | grep "\["
+	echo "$PAGE (✔)"
 }
