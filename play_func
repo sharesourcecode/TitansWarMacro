@@ -9,7 +9,7 @@ function _play () {
 #		_trade
 		_coliseum
 		_time
-		i=1140
+		i=999
 		_stop
 # //Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
 	elif [[ $HOUR = "09" && $MIN -gt "55" || $HOUR -eq "15" && $MIN -gt "55" || $HOUR -eq "21" && $MIN -gt "55" ]]; then
