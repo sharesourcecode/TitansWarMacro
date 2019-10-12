@@ -90,13 +90,12 @@ done
 clear
 # //login/logoff - - - - - - - - - - - - - - - - - - - - - - -
 ACC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
-[[ -n $ACC ]] && >process.txt && i=15 && \
+[[ -n $ACC ]] && i=15 && \
         until [[ $i -lt 1 ]]; do
                 grep -q "break" process.txt && break
 		echo -ne "\r $i [Wait to $ACC... - press ENTER to other account] "
-                sleep 1; i=$[$i-1]
-        done & read -t15 && echo "break" >process.txt
-	grep -q "break" process.txt && ACC=""
+                i=$[$i-1]; read -t1 && ACC="" && break
+	done
 while [[ -z $ACC ]]; do
 	function _login () {
 # //logoff2x
@@ -142,14 +141,11 @@ while [[ -z $ACC ]]; do
 done
 # //kill - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _stop () {
-        >process.txt
 #        i=20
         until [[ $i -lt 1 ]]; do
-                grep -q "break" process.txt && break
 		echo -ne "\r $i [Press ENTER for stop or wait to continue...] "
-                sleep 1; i=$[$i-1]
-        done & read -t$i && echo "break" >process.txt
-	grep -q "break" process.txt && kill -9 $$
+                i=$[$i-1]; read -t1 && kill -9 $$
+        done
 	reset
 }
 # //time - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -273,7 +269,7 @@ function _play () {
 #		_trade
 		_coliseum
 		_time
-		i=999
+		i=1140
 		_stop
 # //Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
 	elif [[ $HOUR = "09" && $MIN -gt "55" || $HOUR -eq "15" && $MIN -gt "55" || $HOUR -eq "21" && $MIN -gt "55" ]]; then
