@@ -1,12 +1,9 @@
 # //kill - - - - - - - - - - - - - - - - - - - - - - - - - - -
 function _stop () {
-        >process.txt
 #        i=20
         until [[ $i -lt 1 ]]; do
-                grep -q "break" process.txt && break
 		echo -ne "\r $i [Press ENTER for stop or wait to continue...] "
-                sleep 1; i=$[$i-1]
-        done & read -t$i && echo "break" >process.txt
-	grep -q "break" process.txt && kill -9 $$
+                i=$[$i-1]; read -t1 && kill -9 $$
+        done
 	reset
 }
