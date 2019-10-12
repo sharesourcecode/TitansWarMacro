@@ -92,7 +92,6 @@ clear
 ACC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
 [[ -n $ACC ]] && i=15 && \
         until [[ $i -lt 1 ]]; do
-                grep -q "break" process.txt && break
 		echo -ne "\r $i [Wait to $ACC... - press ENTER to other account] "
                 i=$[$i-1]; read -t1 && ACC="" && break
 	done
