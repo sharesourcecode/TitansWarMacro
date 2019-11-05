@@ -41,8 +41,3 @@ function _play () {
 		_stop
 	fi
 }
-while true; do
-	_play
-	sleep 1
-done
-exit

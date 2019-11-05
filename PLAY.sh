@@ -24,15 +24,20 @@
 '
 # //sources - - - - - - - - - - - - - - - - - - - -
 cd $HOME/twm
+source stop_func
 source requeriments
 source loginlogoff
+source clanid
 source arena_func
+source coliseum_func
 # //fuctions - - - - - - - - - - - - - - - - - - - -
 while true ; do
-sleep 30m
-_requeriments
-_loginlogoff
-_arena
-clear
+    _requeriments
+    tor_stop
+#    _loginlogoff
+    _arena
+    _coliseum
+    clear
+    sleep 20m
 done
 exit
