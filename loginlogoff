@@ -1,6 +1,6 @@
 function _loginlogoff () {
 # //login/logoff - - - - - - - - - - - - - - - - - - - - - - -
-ACC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
+ACC=$(torsocks -i w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
 [[ -n $ACC ]] && i=15 && \
         until [[ $i -lt 1 ]]; do
 		echo -ne "\r $i [Wait to $ACC... - press ENTER to other account] "
@@ -9,8 +9,8 @@ ACC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="
 while [[ -z $ACC ]]; do
 	function _login () {
 # //logoff2x
-		$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
-		$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
+		$(torsocks -i w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
+		$(torsocks -i w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
 		unset username; unset password
 		echo -e "\nIn case of error will repeat"
 		echo -n 'Username: '
@@ -41,12 +41,12 @@ while [[ -z $ACC ]]; do
 		echo -e "login=$username&pass=$password" >$HOME/.tmp/login.txt
 		unset username; unset password
 # //login2x
-		$(w3m -cookie -debug -post $HOME/.tmp/login.txt -o accept_encoding=='*;q=0' "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
-		$(w3m -cookie -debug -post $HOME/.tmp/login.txt -o accept_encoding=='*;q=0' "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
+		$(torsocks -i w3m -cookie -debug -post $HOME/.tmp/login.txt -o accept_encoding=='*;q=0' "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
+		$(torsocks -i w3m -cookie -debug -post $HOME/.tmp/login.txt -o accept_encoding=='*;q=0' "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
 		rm $HOME/.tmp/login.txt
 	}
 	_login
 	clear
-	ACC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[user")
+	ACC=$(torsocks -i w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[user")
 done
 }
