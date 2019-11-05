@@ -1,3 +1,4 @@
+function _loginlogoff () {
 # //login/logoff - - - - - - - - - - - - - - - - - - - - - - -
 ACC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
 [[ -n $ACC ]] && i=15 && \
@@ -48,3 +49,4 @@ while [[ -z $ACC ]]; do
 	clear
 	ACC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[user")
 done
+}
