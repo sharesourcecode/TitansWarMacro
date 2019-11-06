@@ -31,16 +31,16 @@ cd $PWD
 . arena
 . coliseum
 # //fuctions - - - - - - - - - - - - - - - - - - - -
-i=115
+i=20
 _torstop
 _requeriments
 _loginlogoff
 while true ; do
-    i=15
+    i=20
     _torstop
     _arena
     _coliseum
-    i=1200
+    i=1500
     _torstop
 done
 exit

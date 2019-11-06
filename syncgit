@@ -1,0 +1,12 @@
+#!/bin/bash
+git status
+sleep 5
+git add .
+git status
+sleep 5
+git commit -m "modified"
+git status
+sleep 5
+git push origin master
+git status
+exit
