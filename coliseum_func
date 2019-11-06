@@ -65,6 +65,8 @@ function _coliseum () {
 		HP1=$HPFULL
 		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
 		sleep 2.1
+		_dodge
+		_random
 # //random - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	    elif [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]]; then
 		_random
@@ -72,11 +74,11 @@ function _coliseum () {
 # //dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	    else
 		_dodge
-		_random
 	    fi
 	done
 # //view - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	echo ""
 	torsocks -i w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"| head -n15 | tail -n10 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep "\["
 	echo "$PAGE (✔)"
+	sleep 5
 }

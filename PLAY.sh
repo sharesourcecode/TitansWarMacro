@@ -23,21 +23,25 @@
  SOFTWARE.
 '
 # //sources - - - - - - - - - - - - - - - - - - - -
-cd $HOME/twm
-source stop_func
-source requeriments
-source loginlogoff
-source clanid
-source arena_func
-source coliseum_func
+cd $PWD
+. stop_func
+. requeriments
+. loginlogoff
+. clanid
+. arena_func
+. coliseum_func
 # //fuctions - - - - - - - - - - - - - - - - - - - -
+ALERT="Starting Tor VPN"
+i=15
+tor_stop
+_requeriments
+_loginlogoff
 while true ; do
-    _requeriments
+    i=15
     tor_stop
-#    _loginlogoff
     _arena
     _coliseum
-    clear
-    sleep 20m
+    i=1200
+    tor_stop
 done
 exit
