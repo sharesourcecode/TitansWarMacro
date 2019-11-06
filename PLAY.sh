@@ -31,16 +31,21 @@ cd $PWD
 . arena
 . coliseum
 # //fuctions - - - - - - - - - - - - - - - - - - - -
-#i=20
-#_torstop
+r=0
+i=20
+_torstop
 _requeriments
-#_loginlogoff
+_loginlogoff
 while true ; do
-    i=20
-    _torstop
-#    _arena
-    _coliseum
-    i=1500
-    _torstop
+	r=$[$r+1]
+	sleep 1
+	if [[ $r -ne 1 ]] ; then
+		i=20
+		_torstop
+	fi
+	_arena
+	_coliseum
+	i=1500
+ 	_torstop
 done
 exit
