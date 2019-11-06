@@ -1,74 +1,89 @@
-function _coliseum () {
+_coliseum () {
 # //enterFight
+	PAC=( 'coliseum/atk' 'coliseum/atkrnd' 'coliseum/dodge' 'coliseum/heal' 'coliseum/leaveFight' 'coliseum' ) #Page:Action:Condition
 	PAGE=coliseum
 	echo -e "\n$PAGE"
 	$(torsocks -i w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/coliseum/?end_fight=true -o user_agent="$(shuf -n1 .ua)") 2&>-
 #	$(torsocks -i w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/?out_gate_confirm=true -o user_agent="$(shuf -n1 .ua)") 2&>-
 	torsocks -i w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="UA" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
 	sleep 5
-	SRC=`torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
+	SRC=$(torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)")
 	ACTION=atk
 	ACTION2=atkrnd
-	ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep 'enterFight' | cut -d\/ -f3`
+	ACCESS=$(echo $SRC | sed "s/\/$PAGE/\\n/g" | grep 'enterFight' | cut -d\/ -f3)
 	echo " 👣 Entering..."
-	SRC=`torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/$PAGE/enterFight/$ACCESS/?end_fight=true" -o user_agent="$(shuf -n1 .ua)"`
+	SRC=$(torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/$PAGE/enterFight/$ACCESS/?end_fight=true" -o user_agent="$(shuf -n1 .ua)")
 # //wait
 	echo " 😴 Waiting..."
-	EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep 'leaveFight' | cut -d\/ -f2`
-	while [[ $EXIST == leaveFight ]]; do
-	    SRC=`torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
-	    EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep 'leaveFight' | cut -d\/ -f2`
-	    echo -e " 💤	..."
+	EXIST=$(echo $SRC | sed "s/\/$PAGE/\\n/g" | grep 'leaveFight' | cut -d\/ -f2)
+#	while [[ $EXIST == leaveFight ]] ; do
+	while [[ -n $EXIT ]] ; do
+	    SRC=$(torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)")
+#	    EXIST=$(echo $SRC | sed "s/\/$PAGE/\\n/g" | grep 'leaveFight' | cut -d\/ -f2)
+	    EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[4]}" | head -n1 | cut -d\' -f2)
+	    echo -e " 💤	...\n$ACCESS"
 	done
 	HPER=35 # //heal on 34% - defaut
 	RPER=10 # //random if enemy have +12% hp - default
-	ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3`
-	EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2`
-	WDRED=`echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4` #white/dred
+#	ACCESS=$(echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3)
+#	EXIST=$(echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2)
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[2]}" | head -n1 | cut -d\' -f2)
+	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[0]}" | head -n1 | cut -d\' -f2)
+	WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
-	HEAL=`expr $FULL \* $HPER \/ 100`
-	while [[ $EXIST == $ACTION ]]; do
+	HEAL=$(expr $FULL \* $HPER \/ 100)
+#	while [[ $EXIST == $ACTION ]] ; do
+	while [[ -n $EXIT ]] ; do
 	    HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	    HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
 # //function random - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	    function _random () {
+	    _random () {
 		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
-		echo -e " 🎲 You: $HP1 - $HP2 :enemy"
-		SRC=`torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/$ACTION2/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
-		ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3`
-		EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2`
-		WDRED=`echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4` #white
+		echo -e " 🎲 You: $HP1 - $HP2 :enemy\n$ACCESS"
+#		SRC=$(torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/$ACTION2/$ACCESS -o user_agent="$(shuf -n1 .ua)")
+#		ACCESS=$(echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3)
+#		EXIST=$(echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2)
+		SRC=$(torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[1]}" | head -n1 | cut -d\' -f2)
+		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[0]}" | head -n1 | cut -d\' -f2)
+		WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
 		sleep 2.1
 	    }
 # //function dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	    function _dodge () {
-		echo -e " 💃 You: $HP1 - $HP2 :enemy"
-		SRC=`torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/dodge/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
-		ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3`
-		EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2`
-		WDRED=`echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4` #white
+	    _dodge () {
+		echo -e " 💃 You: $HP1 - $HP2 :enemy\n$ACCESS"
+#		SRC=$(torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/dodge/$ACCESS -o user_agent="$(shuf -n1 .ua)")
+#		ACCESS=$(echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3)
+#		EXIST=$(echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2)
+		SRC=$(torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[2]}" | head -n1 | cut -d\' -f2)
+		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[0]}" | head -n1 | cut -d\' -f2)
+		WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
 		sleep 2.1
 	    }
 # //heal - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #	    if [[ $WDRED == dred && $HP1 -lt $HEAL ]]; then
-	    if [[ $HP1 -lt $HEAL ]]; then
+	    if [[ $HP1 -lt $HEAL ]] ; then
 		echo " HP < $HPER%"
-		echo -e " 💕 You: $HP1 - $HP2 :enemy"
-		SRC=`torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/heal/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
-		ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3`
-		EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2`
-		WDRED=`echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4` #white
+		echo -e " 💕 You: $HP1 - $HP2 :enemy\n$ACCESS"
+#		SRC=$(torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/heal/$ACCESS -o user_agent="$(shuf -n1 .ua)")
+#		ACCESS=$(echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f3)
+#		EXIST=$(echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "$ACTION\/" | cut -d\/ -f2)
+		SRC=$(torsocks -i w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[3]}" | head -n1 | cut -d\' -f2)
+		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[0]}" | head -n1 | cut -d\' -f2)
+		WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 		HP1=$HPFULL
 		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
 		sleep 2.1
 		_dodge
 		_random
 # //random - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	    elif [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]]; then
+	    elif [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
 		_random
 		_dodge
 # //dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -78,7 +93,7 @@ function _coliseum () {
 	done
 # //view - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	echo ""
-	torsocks -i w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"| head -n15 | tail -n10 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep "\["
+	torsocks -i w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n13 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo "$PAGE (✔)"
-	sleep 5
+	sleep 10
 }
