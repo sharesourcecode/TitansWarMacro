@@ -5,7 +5,6 @@ _torstop () {
 		ALERT="Starting Tor VPN, wait to"
 		tor &
 	else
-		pkill -9 tor
 		ALERT="Wait to"
 	fi
         until [[ $i -le 1 ]] ; do

@@ -1,12 +1,18 @@
 #!/bin/bash
 git status
 sleep 5
+echo -e "\n"
 git add .
+echo -e "\n"
 git status
 sleep 5
+echo -e "\n"
 git commit -m "modified"
+echo -e "\n"
 git status
+echo -e "\n"
 sleep 5
 git push origin master
+echo -e "\n"
 git status
 exit
