@@ -24,24 +24,23 @@
 '
 # //sources - - - - - - - - - - - - - - - - - - - -
 cd $PWD
-. stop_func
+. torstop
 . requeriments
 . loginlogoff
 . clanid
-. arena_func
-. coliseum_func
+. arena
+. coliseum
 # //fuctions - - - - - - - - - - - - - - - - - - - -
-ALERT="Starting Tor VPN"
-i=15
-tor_stop
+i=115
+_torstop
 _requeriments
 _loginlogoff
 while true ; do
     i=15
-    tor_stop
+    _torstop
     _arena
     _coliseum
     i=1200
-    tor_stop
+    _torstop
 done
 exit

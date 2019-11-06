@@ -1,11 +1,12 @@
 # //start tor/kill script- - - - - - - - - - - - - - - - - - - - - - - - - - -
-tor_stop () {
+_torstop () {
 	pkill -9 tor
 	if [[ $i -le 30 ]] ; then
 		ALERT="Starting Tor VPN, wait to"
 		tor &
 	else
-		ALERT="Wait to"; pkill -9 tor
+		pkill -9 tor
+		ALERT="Wait to"
 	fi
         until [[ $i -le 1 ]] ; do
 		clear
