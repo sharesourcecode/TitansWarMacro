@@ -24,17 +24,13 @@
 '
 # //sources - - - - - - - - - - - - - - - - - - - -
 cd $PWD
-. torstop
-. requeriments
-. loginlogoff
-. clanid
-. arena
-. coliseum
+. torstop ; . requeriments ; . loginlogoff
+. clanid ; . arena ; . coliseum
 # //fuctions - - - - - - - - - - - - - - - - - - - -
 r=0
 i=20
-_torstop
 _requeriments
+_torstop
 _loginlogoff
 while true ; do
 	r=$[$r+1]
@@ -45,7 +41,7 @@ while true ; do
 	fi
 	_arena
 	_coliseum
-	i=1500
+	i=2400
  	_torstop
 done
 exit
