@@ -24,24 +24,22 @@
 '
 # //sources - - - - - - - - - - - - - - - - - - - -
 cd $PWD
-. torstop ; . requeriments ; . loginlogoff
-. clanid ; . arena ; . coliseum
+. torstop.sh ; . requeriments.sh ; . loginlogoff.sh
+. clanid.sh ; . crono.sh ; . arena.sh ; . coliseum.sh
+. campaign.sh ; . play.sh
 # //fuctions - - - - - - - - - - - - - - - - - - - -
-r=0
-i=20
+rpt=0
 _requeriments
+ts=20
 _torstop
 _loginlogoff
 while true ; do
-	r=$[$r+1]
+	rpt=$[$rpt+1]
 	sleep 1
-	if [[ $r -ne 1 ]] ; then
-		i=20
+	if [[ $rpt -ne 1 ]] ; then
+		ts=20
 		_torstop
 	fi
-	_arena
-	_coliseum
-	i=2400
- 	_torstop
+	_play
 done
 exit

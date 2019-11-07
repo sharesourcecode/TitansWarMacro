@@ -1,16 +1,16 @@
 # //start tor/kill script- - - - - - - - - - - - - - - - - - - - - - - - - - -
 _torstop () {
 	pkill -9 tor
-	if [[ $i -le 30 ]] ; then
+	if [[ $ts -le 30 ]] ; then
 		ALERT="Starting Tor VPN, wait to"
 		tor &
 	else
 		ALERT="Wait to"
 	fi
-        until [[ $i -le 1 ]] ; do
+        until [[ $ts -le 1 ]] ; do
 		clear
-		echo -e "$ALERT ("$i"s)...\nOr press ENTER for stop.\n"
-                i=$[$i-1]; read -t1 && kill -9 $$
+		echo -e "$ALERT ("$ts"s)...\nOr press ENTER for stop.\n"
+                ts=$[$ts-1]; read -t1 && kill -9 $$
         done
 	reset
 }
