@@ -1,7 +1,7 @@
 _play () {
 # //game time
 	_crono
-	if [[ $HOUR -le 8 || $HOUR -eq 9 && $MIN -le 55 || $HOUR -eq 23 ]] ; then
+	if [[ $HOUR -le 8 && $HOUR -ge 0 || $HOUR -eq 9 && $MIN -le 55 || $HOUR -ne 20 || $HOUR -eq 23 ]] ; then
 		_arena
 #		_career
 #		_clandungeon

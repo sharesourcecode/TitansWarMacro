@@ -9,7 +9,7 @@ _torstop () {
 	fi
         until [[ $ts -le 1 ]] ; do
 		clear
-		echo -e "$ALERT ("$ts"s)...\nOr press ENTER for stop.\n"
+		echo -e "\n$ALERT ("$ts"s)...\nOr press ENTER for stop.\n"
                 ts=$[$ts-1]; read -t1 && kill -9 $$
         done
 	reset
