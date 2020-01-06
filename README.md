@@ -10,7 +10,7 @@ Script macros for Titans war mobile game on all servers.
 
 2. Type these two commands for download twm
 
-cd $HOME
+**cd $HOME**
 
 **git clone https://github.com/sharesourcecode/twm.git**
 
