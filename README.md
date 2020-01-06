@@ -13,7 +13,7 @@ cd $HOME
 git clone https://github.com/sharesourcecode/twm.git
 
 
-3. Tô execute tem:
+3. Tô execute twm:
 
 bash $HOME/twm/PLAY.sh
 
