@@ -6,7 +6,7 @@ Script macros for Titans war mobile game on all servers.
 apt install git -y
 
 
-2. Type these two com manda for download twm
+2. Type these two commands for download twm
 
 cd $HOME
 
