@@ -1,10 +1,11 @@
 # twm(Titans War Macro)
-***JUST ARENA AND COLISEUM WORKING***
+***NOT ALL WORKING***
+
 Script macros for Titans war mobile game on all servers.
 
 1. Open Termux app Android and type:
 
-apt install git -y
+*apt install git -y*
 
 
 2. Type these two commands for download twm
