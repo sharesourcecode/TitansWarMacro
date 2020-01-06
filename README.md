@@ -1,4 +1,5 @@
 # twm(Titans War Macro)
+***JUST ARENA AND COLISEUM WORKING***
 Script macros for Titans war mobile game on all servers.
 
 1. Open Termux app Android and type:
