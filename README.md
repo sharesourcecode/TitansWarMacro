@@ -1,5 +1,5 @@
 # twm(Titans War Macro)
-***NOT ALL WORKING***
+***-NOT ALL WORKING-***
 
 Script macros for Titans war mobile game on all servers.
 
