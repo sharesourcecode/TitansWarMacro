@@ -1,14 +1,15 @@
 _play () {
-	_all () {
+	#_all () {
 		_arena
 #		_career
 #		_clandungeon
-#		_campaign
+		_campaign
 #		_trade
 		_coliseum
-		_torstop
+#		_torstop
 		_crono
 	}
+_all () {
 # //game time
 	_crono
 	if [[ $HOUR -eq 0 || $HOUR -eq 1 || $HOUR -eq 2 || $HOUR -eq 3 || $HOUR -eq 4 || $HOUR -eq 5 || $HOUR -eq 6 || $HOUR -eq 7 || $HOUR -eq 8 || $HOUR -eq 23 ]] ; then
