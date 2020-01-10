@@ -1,6 +1,6 @@
 # twm(Titans War Macro)
 ***-NOT ALL WORKING-***
-
+**Need level 16+ and training**
 Script macros for Titans war mobile game on all servers.
 
 1. Open Termux app Android and type:
