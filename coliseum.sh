@@ -1,6 +1,9 @@
 _coliseum () {
 # //enterFight
 	PAGE=coliseum
+	HPER=35 # //heal on 34% - defaut
+	RPER=12 # //random if enemy have +12% hp - default
+	ITVL=2.4 # //time for attacks (2.1 ~ 5.O)
 	CLSM=( 'coliseum/atk' 'coliseum/atkrnd' 'coliseum/dodge' 'coliseum/heal' 'coliseum/leaveFight' 'coliseum/enterFight' )
 	echo -e "\n$PAGE"
 	echo $URL
@@ -22,8 +25,6 @@ _coliseum () {
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "$PAGE" | head -n1 | cut -d\' -f2)
 		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[4]}" | head -n1 | cut -d\' -f2)
 	done
-	HPER=35 # //heal on 34% - defaut
-	RPER=12 # //random if enemy have +12% hp - default
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[2]}" | head -n1 | cut -d\' -f2)
 	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
 	WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
@@ -46,7 +47,7 @@ _coliseum () {
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
-			sleep 2.2
+			sleep $ITVL
 		}
 # //function dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		_dodge () {
@@ -58,7 +59,7 @@ _coliseum () {
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
-			sleep 2.2
+			sleep $ITVL
 		}
 # //heal - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #	    if [[ $WDRED == dred && $HP1 -lt $HEAL ]] ; then
@@ -72,7 +73,7 @@ _coliseum () {
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			HP1=$HPFULL
-			sleep 2.2
+			sleep $ITVL
 			_dodge
 			_random
 # //random - - - - - - - - - - - - - - - - - - - - - - - - - - -
