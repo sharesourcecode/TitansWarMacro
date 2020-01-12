@@ -14,6 +14,7 @@ _loginlogoff () {
 # //logoff2x
 			$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
 			$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
+#			$(lynx -cfg=cfg1 "$URL/?exit" -useragent="$(shuf -n1 .ua)") 2&>-
 			unset username; unset password
 			echo -e "\nIn case of error will repeat"
 			echo -n 'Username: '
@@ -42,8 +43,9 @@ _loginlogoff () {
 			done
 			echo -e "\n	Please wait..."
 			echo -e "login=$username&pass=$password" >$HOME/.tmp/login.txt
-			unset username; unset password
 # //login2x
+#			$(echo -e "login=$username&pass=$password" | lynx -cfg=cfg1 -post_data "$URL/?sign_in=1" -useragent="$(shuf -n1 .ua)") 2&>-
+			unset username; unset password
 			$(w3m -cookie -debug -post $HOME/.tmp/login.txt -o accept_encoding=='*;q=0' "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
 			$(w3m -cookie -debug -post $HOME/.tmp/login.txt -o accept_encoding=='*;q=0' "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
 			rm $HOME/.tmp/login.txt
