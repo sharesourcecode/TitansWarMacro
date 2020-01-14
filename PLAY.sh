@@ -3,8 +3,8 @@
 cd ~/twm
 . torstop.sh ; . requeriments.sh ; . loginlogoff.sh
 . clanid.sh ; . crono.sh ; . arena.sh ; . coliseum.sh
-. campaign.sh ; . play.sh ; . ua.sh ; . altars.sh
-. clanfight.sh ; . clancoliseum.sh ; . king.sh ; . undying.sh
+. campaign.sh ; . play.sh ; . altars.sh ; . clanfight.sh
+. clancoliseum.sh ; . king.sh ; . undying.sh
 # //fuctions - - - - - - - - - - - - - - - - - - - -
 rpt=0
 _requeriments
