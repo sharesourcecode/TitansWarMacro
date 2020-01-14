@@ -1,5 +1,5 @@
 # twm(Titans War Macro)
-***NOT ALL WORKING -***
+***BETA TEST***
 **Need level 16+ and training**
 
 Script macros for Titans war mobile game on all servers.
