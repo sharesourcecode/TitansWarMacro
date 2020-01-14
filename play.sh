@@ -53,10 +53,12 @@ _play () {
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom" -o user_agent="$(shuf -n1 .ua)")
 			ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
 			SND1="Enviar"
-			echo -e "s=$ACCESS&text="`cat << EOF
-			TC Ok
-			EOF`"&send_message=$SND1" >chat.txt
-			SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan" -o user_agent="$(shuf -n1 .ua)")
+#//
+echo -e "s=$ACCESS&text="`cat << EOF
+TC Ok
+EOF`"&send_message=$SND1" >chat.txt
+#\\
+			SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom" -o user_agent="$(shuf -n1 .ua)")
 			_clanfight
 		fi
 		_crono
@@ -79,12 +81,14 @@ _play () {
 			_crono
 		done
 		if [[ $MIN -ge 55 ]] ; then
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom" -o user_agent="$(shuf -n1 .ua)")
 			ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
 			SND1="Enviar"
-			echo -e "s=$ACCESS&text="`cat << EOF
-			Altar Ok
-			EOF`"&send_message=$SND1" >chat.txt
+#//
+echo -e "s=$ACCESS&text="`cat << EOF
+Altar Ok
+EOF`"&send_message=$SND1" >chat.txt
+#\\
 			SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan" -o user_agent="$(shuf -n1 .ua)")
 			_altars
 		fi
