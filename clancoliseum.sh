@@ -16,7 +16,7 @@ _clancoliseum () {
         EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
 	while [[ -z $EXIT ]] ; do
 		echo -e " 💤	...\n$ACCESS"
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/enterFight -o user_agent="$(shuf -n1 .ua)")
 #		SRC=$(lynx -cfg=~/twm/cfg=1 -source $URL/$PAGE -useragent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "$PAGE" | head -n1 | cut -d\' -f2)
 		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
