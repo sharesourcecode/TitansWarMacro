@@ -16,7 +16,7 @@ _play () {
 		sleep 987
 		_crono
 # //Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
-	elif [[ $HOUR -eq 9 || $HOUR -eq 15 || $HOUR -eq 21 ]] ; then
+	elif [[ $HOUR -eq 9 && $MIN -ge 50 || $HOUR -eq 15 && $MIN -ge 50 || $HOUR -eq 21 && $MIN -ge 50 ]] ; then
 		while [[ $MIN -ge 45 && $MIN -le 59 ]] ; do
 			echo 'Valley of the Immortals will be started...'
 			sleep 30
@@ -35,7 +35,7 @@ _play () {
 	elif [[ $HOUR -eq 10 && $MIN -gt 15 && $MIN -lt 31 || $HOUR -eq 14 && $MIN -gt 45 ]] ; then
 		while [[ $MIN -ge 15 && $MIN -le 27 || $MIN -ge 45 && $MIN -le 57 ]] ; do
 			echo 'Clan coliseum will be started...'
-			sleep 57
+			sleep 30
 			_crono
 		done
 		if [[ $MIN -ge 28 || $MIN -ge 58 ]] ; then
@@ -46,7 +46,7 @@ _play () {
 	elif [[ $HOUR -eq 10 && $MIN -gt 50 || $HOUR -eq 18 && $MIN -gt 50 ]] ; then
 		while [[ $MIN -ge 45 && $MIN -le 58 ]] ; do
 			echo 'Clan tournament will be started...'
-			sleep 57
+			sleep 30
 			_crono
 		done
 		if [[ $MIN -ge 58 ]] ; then
@@ -57,7 +57,7 @@ _play () {
 	elif [[ $HOUR -eq 12 && $MIN -gt 15 && $MIN -lt 31 || $HOUR -eq 16 && $MIN -gt 20 && $MIN -lt 31 || $HOUR -eq 22 && $MIN -gt 15 && $MIN -lt 31 ]] ; then
 		while [[ $MIN -ge 15 && $MIN -le 27 || $MIN -ge 45 && $MIN -le 57 ]] ; do
 			echo 'King of the Immortals will be started...'
-			sleep 57
+			sleep 30
 			_crono
 		done
 		if [[ $MIN -ge 28 ]] ; then
@@ -68,7 +68,7 @@ _play () {
 	elif [[ $HOUR -eq 13 && $MIN -gt 50 || $HOUR -eq 20 && $MIN -gt 50 ]] ; then
 		while [[ $MIN -ge 45 && $MIN -le 58 ]] ; do
 			echo 'Ancient Altars will be started...'
-			sleep 57
+			sleep 30
 			_crono
 		done
 		if [[ $MIN -ge 58 ]] ; then
