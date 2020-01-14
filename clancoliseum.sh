@@ -3,7 +3,7 @@ _clancoliseum () {
 	PAGE=clancoliseum
 	HPER=35 # //heal on 34% - defaut
 	RPER=12 # //random if enemy have +12% hp - default
-	ITVL=2.1 # //time for attacks (2.1 ~ 5.O)
+	ITVL=2.4 # //time for attacks (2.1 ~ 5.O)
 	CLSM=( 'clancoliseum/attack' 'clancoliseum/attackrandom' 'clancoliseum/dodge' 'clancoliseum/heal' 'clancoliseum/leaveFight' 'clancoliseum/enterFight' )
 	echo -e "\n$PAGE"
 	echo $URL
@@ -66,7 +66,7 @@ _clancoliseum () {
 			echo $URL
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[3]}" | head -n1 | cut -d\' -f2)
 			_show
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
+#			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			HP1=$HPFULL
 			sleep $ITVL

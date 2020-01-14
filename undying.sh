@@ -12,12 +12,14 @@ _undying () {
 # //wait
 	echo " 😴 Waiting..."
         EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[1]}" | head -n1 | cut -d\' -f2)
-	while [[ -z $EXIT ]] ; do
+	while [[ -z $EXIT && -z $ACCESS ]] ; do
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/${CLSM[1]} -o user_agent="$(shuf -n1 .ua)")
 #		SRC=$(lynx -cfg=~/twm/cfg=1 -source $URL/${CLSM[1]} -useragent="$(shuf -n1 .ua)")
-		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "$PAGE" | head -n1 | cut -d\' -f2)
+		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[1]}" | head -n1 | cut -d\' -f2)
 		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
+	        SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/enterGame -o user_agent="$(shuf -n1 .ua)")
+		sleep $ITVL
 	done
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
 	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)

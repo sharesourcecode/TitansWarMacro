@@ -1,12 +1,13 @@
 _clanfight () {
 # //enterFight
 	PAGE=clanfight
-	HPER=35 # //heal on 34% - defaut
-	RPER=12 # //random if enemy have +12% hp - default
+	HPER=34 # //heal on 34% - defaut
+	RPER=10 # //random if enemy have +12% hp - default
 	ITVL=2.1 # //time for attacks (2.1 ~ 5.O)
 	CLSM=( 'clanfight/attack' 'clanfight/attackrandom' 'clanfight/dodge' 'clanfight/heal' 'clanfight/leaveFight' 'clanfight/enterFight' )
 	echo -e "\n$PAGE"
 	echo $URL
+	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/?close=reward -o user_agent="$(shuf -n1 .ua)")
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/enterFight -o user_agent="$(shuf -n1 .ua)")
 #	SRC=$(lynx -cfg=~/twm/cfg1 -source $URL/$PAGE -useragent="$(shuf -n1 .ua)")
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[5]}" | head -n1 | cut -d\' -f2)
