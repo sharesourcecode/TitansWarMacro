@@ -19,6 +19,5 @@ while true ; do
 #		_torstop
 	fi
 	_play
-	sleep 120
 done
 exit
