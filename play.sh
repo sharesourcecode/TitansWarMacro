@@ -16,13 +16,15 @@ _play () {
 		sleep 987
 		_crono
 # //Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
-	elif [[ $HOUR -eq 9 && $MIN -gt 45 || $HOUR -eq 15 && $MIN -gt 45 || $HOUR -eq 21 && $MIN -gt 45 ]] ; then
-		echo 'Valley of the Immortals will be started...'
-		while [[ $MIN -ge 45 && $MIN -le 58 ]] ; do
-			sleep 57
+	elif [[ $HOUR -eq 9 || $HOUR -eq 15 || $HOUR -eq 21 ]] ; then
+		while [[ $MIN -ge 45 && $MIN -le 59 ]] ; do
+			echo 'Valley of the Immortals will be started...'
+			sleep 30
 			_crono
 		done
+		if [[ $MIN -ge 58 ]] ; then
 		_undying
+		fi
 		_crono
 # //Battle of banners 10:15:00 - 16:15:00
 #	elif [[ $HOUR -eq 10 && $MIN -gt 10 && $MIN -lt 16 || $HOUR -eq 16 && $MIN -gt 10 && $MIN -lt 16 ]] ; then
@@ -31,39 +33,47 @@ _play () {
 #		_crono
 # //Clan coliseum 10:30:00 - 15:00:00
 	elif [[ $HOUR -eq 10 && $MIN -gt 15 && $MIN -lt 31 || $HOUR -eq 14 && $MIN -gt 45 ]] ; then
-		echo 'Clan coliseum will be started...'
-		while [[ $MIN -ge 15 $MIN -le 27 || $MIN -ge 45 && $MIN -le 57 ]] ; do
+		while [[ $MIN -ge 15 && $MIN -le 27 || $MIN -ge 45 && $MIN -le 57 ]] ; do
+			echo 'Clan coliseum will be started...'
 			sleep 57
 			_crono
 		done
+		if [[ $MIN -ge 28 || $MIN -ge 58 ]] ; then
 		_clancoliseum
+		fi
 		_crono
 # //Clan tournament 11:00:00 - 19:00:00
 	elif [[ $HOUR -eq 10 && $MIN -gt 50 || $HOUR -eq 18 && $MIN -gt 50 ]] ; then
-		echo 'Clan tournament will be started...'
 		while [[ $MIN -ge 45 && $MIN -le 58 ]] ; do
+			echo 'Clan tournament will be started...'
 			sleep 57
 			_crono
 		done
+		if [[ $MIN -ge 58 ]] ; then
 		_clanfight
+		fi
 		_crono
 # //King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
 	elif [[ $HOUR -eq 12 && $MIN -gt 15 && $MIN -lt 31 || $HOUR -eq 16 && $MIN -gt 20 && $MIN -lt 31 || $HOUR -eq 22 && $MIN -gt 15 && $MIN -lt 31 ]] ; then
-		echo 'King of the Immortals will be started...'
-		while [[ $MIN -ge 15 $MIN -le 27 || $MIN -ge 45 && $MIN -le 57 ]] ; do
+		while [[ $MIN -ge 15 && $MIN -le 27 || $MIN -ge 45 && $MIN -le 57 ]] ; do
+			echo 'King of the Immortals will be started...'
 			sleep 57
 			_crono
 		done
+		if [[ $MIN -ge 28 ]] ; then
 		_king
+		fi
 		_crono
 # //Ancient Altars 14:00:00 - 21:00:00
 	elif [[ $HOUR -eq 13 && $MIN -gt 50 || $HOUR -eq 20 && $MIN -gt 50 ]] ; then
-		echo 'Ancient Altars will be started...'
 		while [[ $MIN -ge 45 && $MIN -le 58 ]] ; do
+			echo 'Ancient Altars will be started...'
 			sleep 57
 			_crono
 		done
+		if [[ $MIN -ge 58 ]] ; then
 		_altars
+		fi
 		_crono
 	else
 		_all
