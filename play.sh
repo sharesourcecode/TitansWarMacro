@@ -44,13 +44,20 @@ _play () {
 		_crono
 # //Clan tournament 11:00:00 - 19:00:00
 	elif [[ $HOUR -eq 10 && $MIN -gt 50 || $HOUR -eq 18 && $MIN -gt 50 ]] ; then
-		while [[ $MIN -ge 45 && $MIN -le 58 ]] ; do
+		while [[ $MIN -ge 50 && $MIN -le 55 ]] ; do
 			echo 'Clan tournament will be started...'
 			sleep 30
 			_crono
 		done
-		if [[ $MIN -ge 58 ]] ; then
-		_clanfight
+		if [[ $MIN -ge 55 ]] ; then
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom" -o user_agent="$(shuf -n1 .ua)")
+			ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
+			SND1="Enviar"
+			echo -e "s=$ACCESS&text="$(cat << EOF
+			TC Ok
+			EOF)"&send_message=$SND1" >chat.txt
+			SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan" -o user_agent="$(shuf -n1 .ua)")
+			_clanfight
 		fi
 		_crono
 # //King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
@@ -72,7 +79,14 @@ _play () {
 			_crono
 		done
 		if [[ $MIN -ge 58 ]] ; then
-		_altars
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom" -o user_agent="$(shuf -n1 .ua)")
+			ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
+			SND1="Enviar"
+			echo -e "s=$ACCESS&text="$(cat << EOF
+			Altar Ok
+			EOF)"&send_message=$SND1" >chat.txt
+			SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan" -o user_agent="$(shuf -n1 .ua)")
+			_altars
 		fi
 		_crono
 	else
