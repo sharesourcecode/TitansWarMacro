@@ -73,12 +73,12 @@ _play () {
 		_crono
 # //Ancient Altars 14:00:00 - 21:00:00
 	elif [[ $HOUR -eq 13 && $MIN -gt 50 || $HOUR -eq 20 && $MIN -gt 50 ]] ; then
-		while [[ $MIN -ge 45 && $MIN -le 58 ]] ; do
+		while [[ $MIN -ge 50 && $MIN -le 55 ]] ; do
 			echo 'Ancient Altars will be started...'
 			sleep 30
 			_crono
 		done
-		if [[ $MIN -ge 58 ]] ; then
+		if [[ $MIN -ge 55 ]] ; then
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom" -o user_agent="$(shuf -n1 .ua)")
 			ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
 			SND1="Enviar"
