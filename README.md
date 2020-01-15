@@ -23,4 +23,4 @@ Script macros for Titans war mobile game on all servers.
 Or:
 **bash ~/twm/PLAY.sh**
 
-**To stop (CTRL c) ir force stop Termux app**
+**To stop (CTRL c) or force stop Termux app**
