@@ -1,7 +1,7 @@
 _undying () {
 # //enterFight
 	PAGE=undying
-	ITVL=5.5 # //time for hits
+	ITVL=2.5 # //time for hits
 	CLSM=( 'undying/hit' 'undying/mana' )
 	echo -e "\n$PAGE"
 	echo $URL
