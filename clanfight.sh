@@ -7,8 +7,8 @@ _clanfight () {
 	CLSM=( 'clanfight/attack' 'clanfight/attackrandom' 'clanfight/dodge' 'clanfight/heal' 'clanfight/leaveFight' 'clanfight/enterFight' )
 	echo -e "\n$PAGE"
 	echo $URL
-	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/?close=reward -o user_agent="$(shuf -n1 .ua)")
-	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/enterFight -o user_agent="$(shuf -n1 .ua)")
+	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/clanfight/?close=reward -o user_agent="$(shuf -n1 .ua)")
+	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/clanfight/enterFight -o user_agent="$(shuf -n1 .ua)")
 #	SRC=$(lynx -cfg=~/twm/cfg1 -source $URL/$PAGE -useragent="$(shuf -n1 .ua)")
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[5]}" | head -n1 | cut -d\' -f2)
 	echo -e " 👣 Entering...\n$ACCESS"
