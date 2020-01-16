@@ -4,8 +4,8 @@ _play () {
 		_campaign
 		_coliseum
 #		_career
-#		_clandungeon
-#		_trade
+		_clandungeon
+		_trade
 #		_torstop
 	}
 _crono
@@ -43,7 +43,7 @@ _crono
 			SND1="Enviar"
 #//
 echo -e "s=$ACCESS&text="`cat << EOF
-Clan coliseum 🆗
+CDC ok
 EOF`"&send_message=$SND1" >chat.txt
 #\\
 			SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
@@ -64,7 +64,7 @@ EOF`"&send_message=$SND1" >chat.txt
 				SND1="Enviar"
 #//
 echo -e "s=$ACCESS&text="`cat << EOF
-Clan tournament 🆗
+TC ok
 EOF`"&send_message=$SND1" >chat.txt
 #\\
 				SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
@@ -73,15 +73,15 @@ EOF`"&send_message=$SND1" >chat.txt
 		done
 		_crono
 # //King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
-#	elif [[ $HOUR -eq 12 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 16 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 22 && $MIN -ge 20 && $MIN -le 30 ]] ; then
-#		while [[ $MIN -ge 20 && $MIN -le 30 ]] ; do
-#			echo 'King of the Immortals will be started...'
-#			_sleep
-#			if [[ $MIN -ge 29 ]] ; then
-#				_king
-#			fi
-#		done
-#		_crono
+	elif [[ $HOUR -eq 12 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 16 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 22 && $MIN -ge 20 && $MIN -le 30 ]] ; then
+		while [[ $MIN -ge 20 && $MIN -le 30 ]] ; do
+			echo 'King of the Immortals will be started...'
+			_sleep
+			if [[ $MIN -ge 29 ]] ; then
+				_king
+			fi
+		done
+		_crono
 # //Ancient Altars 14:00:00 - 21:00:00
 	elif [[ $HOUR -eq 13 && $MIN -gt 50 || $HOUR -eq 20 && $MIN -gt 50 ]] ; then
 		while [[ $MIN -ge 50 && $MIN -le 55 ]] ; do
@@ -96,7 +96,7 @@ EOF`"&send_message=$SND1" >chat.txt
 			SND1="Enviar"
 #//
 echo -e "s=$ACCESS&text="`cat << EOF
-Ancient Altars 🆗
+Altar ok
 EOF`"&send_message=$SND1" >chat.txt
 #\\
 			SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")

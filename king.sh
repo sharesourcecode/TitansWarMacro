@@ -1,7 +1,7 @@
 _king () {
 # //enterFight
 	PAGE=king
-	HPER=50 # //heal on 50% - defaut
+	HPER=45 # //heal on 50% - defaut
 	RPER=10 # //random if enemy have +12% hp - default
 	ITVL=2.1 # //time for attacks (2.1 ~ 5.O)
 	CLSM=( 'king/attack' 'king/attackrandom' 'king/dodge' 'king/heal' 'king/kingatk' 'king/enterGame' )
@@ -13,16 +13,16 @@ _king () {
 	echo -e " 👣 Entering...\n$ACCESS"
 # //wait
 	echo " 😴 Waiting..."
-        EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/attack' | head -n1 | cut -d\' -f2)
+        EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/kingatk/' | head -n1 | cut -d\' -f2)
 	while [[ -z $EXIT ]] ; do
 		echo -e " 💤	...\n$ACCESS"
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/enterGame -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/king -o user_agent="$(shuf -n1 .ua)")
 #		SRC=$(lynx -cfg=~/twm/cfg=1 -source $URL/$PAGE/enterGame -useragent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/king' | head -n1 | cut -d\' -f2)
-		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/attack' | head -n1 | cut -d\' -f2)
+		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/kingatk/' | head -n1 | cut -d\' -f2)
 	done
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/atk' | head -n1 | cut -d\' -f2)
-	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/attack' | head -n1 | cut -d\' -f2)
+	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/attack/' | head -n1 | cut -d\' -f2)
 	WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	HEAL=$(expr $FULL \* $HPER \/ 100)
@@ -36,21 +36,21 @@ _king () {
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 #	SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 	echo $URL
-	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/atk' | head -n1 | cut -d\' -f2)
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/at' | head -n1 | cut -d\' -f2)
 	_show
-	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/attack' | head -n1 | cut -d\' -f2)
+	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/attack/' | head -n1 | cut -d\' -f2)
 	WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 	sleep $ITVL
-	while [[ -n $EXIT && -n $ACCESS ]] ; do
+	while [[ -n $EXIT ]] ; do
 # //function random - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		_random () {
 			echo '🔁'
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 #			SRC=$(lynx -cfg=~/twm/cfg1 -source -o "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 			echo $URL
-			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/attackrandom' | head -n1 | cut -d\' -f2)
+			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/attackrandom/' | head -n1 | cut -d\' -f2)
 			_show
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/attack' | head -n1 | cut -d\' -f2)
+			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/at' | head -n1 | cut -d\' -f2)
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			sleep $ITVL
 		}
@@ -60,14 +60,13 @@ _king () {
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 #			SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 			echo $URL
-			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/dodge' | head -n1 | cut -d\' -f2)
+			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/dodge/' | head -n1 | cut -d\' -f2)
 			_show
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/attack' | head -n1 | cut -d\' -f2)
+			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/at' | head -n1 | cut -d\' -f2)
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			sleep $ITVL
 		}
 # //heal - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#	    if [[ $WDRED == dred && $HP1 -lt $HEAL ]] ; then
 		if [[ $HP1 -lt $HEAL ]] ; then
 			echo "🆘 HP < $HPER%"
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
@@ -75,7 +74,7 @@ _king () {
 			echo $URL
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/heal' | head -n1 | cut -d\' -f2)
 			_show
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/attack' | head -n1 | cut -d\' -f2)
+			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/at/' | head -n1 | cut -d\' -f2)
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			HP1=$HPFULL
 			sleep $ITVL
