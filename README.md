@@ -23,7 +23,7 @@ Script macros para Titans war mobile game em todos servidores.
 Ou:
 **bash ~/twm/PLAY.sh**
 
-Leia a LICENSA clicando (ENTER) até ultrapassar 100% e iniciando o script.
+Leia a LICENSA clicando (ENTER) até ultrapassar 100% iniciando o script.
 
 **Para interroper (CTRL c) or force a parada do app Termux**
 
