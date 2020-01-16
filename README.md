@@ -27,4 +27,4 @@ Leia a LICENSA clicando (ENTER) até ultrapassar 100% e iniciando o script.
 
 **Para interroper (CTRL c) or force a parada do app Termux**
 
-Faço atualizações e correções periodicamente, caso queira manter tudo atualizado execute as inscrições acima a partir da segunda etapa. 
+Faço atualizações e correções periodicamente, caso queira manter tudo atualizado execute as instruções acima a partir da segunda etapa. 
