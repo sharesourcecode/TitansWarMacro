@@ -2,10 +2,10 @@ _play () {
 	_all () {
 		_arena
 		_campaign
-		_coliseum
-#		_career
+		_career
 		_clandungeon
 		_trade
+#		_coliseum
 #		_torstop
 	}
 _crono
@@ -74,11 +74,11 @@ EOF`"&send_message=$SND1" >chat.txt
 		_crono
 # //King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
 	elif [[ $HOUR -eq 12 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 16 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 22 && $MIN -ge 20 && $MIN -le 30 ]] ; then
-		while [[ $MIN -ge 20 && $MIN -le 30 ]] ; do
+		while [[ $MIN -ge 20 && $MIN -lt 30 ]] ; do
 			echo 'King of the Immortals will be started...'
 			_sleep
 			if [[ $MIN -ge 29 ]] ; then
-				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/king/enterGame/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
+				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/king/enterGame" -o user_agent="$(shuf -n1 .ua)")
 				_king
 			fi
 		done

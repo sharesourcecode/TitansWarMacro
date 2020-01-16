@@ -5,11 +5,11 @@ cd ~/twm
 . clanid.sh ; . crono.sh ; . arena.sh ; . coliseum.sh
 . campaign.sh ; . play.sh ; . altars.sh ; . clanfight.sh
 . clancoliseum.sh ; . king.sh ; . undying.sh ; . clandungeon.sh
-. trade.sh
+. trade.sh ; . career.sh
 # //fuctions - - - - - - - - - - - - - - - - - - - -
 rpt=0
 _requeriments
-more ~/twm/LICENSE
+#more ~/twm/LICENSE
 ts=20
 #_torstop
 _loginlogoff
