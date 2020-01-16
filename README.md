@@ -1,26 +1,26 @@
 # twm(Titans War Macro)
-***BETA TEST***
-**Need level 16+ and training**
+***TESTE BETA***
+**Nescessário level 16+ e +50 pontos de treinamento**
 
-Script macros for Titans war mobile game on all servers.
+Script macros para Titans war mobile game em todos servidores.
 
-1. Open Termux app Android and type:
+1. Abra Termux app Android e digite:
 
 **apt install git -y**
 
 
-2. Type these two commands for download twm:
+2. Digite estes dois comandos para baixar o twm:
 
 **cd $HOME**
 
 **git clone https://github.com/sharesourcecode/twm.git**
 
 
-3. Tô execute twm:
+3. Para executar o twm:
 
 **bash $HOME/twm/PLAY.sh**
 
-Or:
+Ou:
 **bash ~/twm/PLAY.sh**
 
-**To stop (CTRL c) or force stop Termux app**
+**Para interroper (CTRL c) or force a parada do app Termux**
