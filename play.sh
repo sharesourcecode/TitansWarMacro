@@ -5,7 +5,7 @@ _play () {
 		_career
 		_clandungeon
 		_trade
-#		_coliseum
+		_coliseum
 #		_torstop
 	}
 _crono
