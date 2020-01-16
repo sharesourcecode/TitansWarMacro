@@ -1,5 +1,5 @@
 # //clandungeon - - - - - - - - - - - - - - - - - - - - - - -
-function _clandungeon () {
+_clandungeon () {
 	_clanid
 	if [[ -n $CLD ]]; then
 		echo "Checking Clan Dungeon..."
