@@ -20,6 +20,7 @@ _loginlogoff () {
 			echo -e "\nIn case of error will repeat"
 			echo -n 'Username: '
 			read username
+			echo -e "\n"
 			prompt="Password: "
 			charcount=0
 			while IFS= read -p "$prompt" -r -s -n 1 char; do
