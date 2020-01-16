@@ -1,6 +1,5 @@
 _play () {
 	_all () {
-#		ts=60
 		_arena
 		_campaign
 		_coliseum
@@ -9,42 +8,6 @@ _play () {
 #		_trade
 #		_torstop
 	}
-	_sleep () {
-		SLEEP=840
-		_crono
-		[[ $MIN = 15 ]] && SLEEP=780
-		[[ $MIN = 16 ]] && SLEEP=720
-		[[ $MIN = 17 ]] && SLEEP=660
-		[[ $MIN = 18 ]] && SLEEP=600
-		[[ $MIN = 19 ]] && SLEEP=540
-		[[ $MIN = 20 ]] && SLEEP=480
-		[[ $MIN = 21 ]] && SLEEP=420
-		[[ $MIN = 22 ]] && SLEEP=360
-		[[ $MIN = 23 ]] && SLEEP=300
-		[[ $MIN = 24 ]] && SLEEP=240
-		[[ $MIN = 25 ]] && SLEEP=180
-		[[ $MIN = 26 ]] && SLEEP=120
-		[[ $MIN = 27 ]] && SLEEP=60
-		[[ $MIN = 28 ]] && SLEEP=50
-		[[ $MIN = 29 ]] && SLEEP=25
-
-		[[ $MIN = 45 ]] && SLEEP=780
-		[[ $MIN = 46 ]] && SLEEP=720
-		[[ $MIN = 47 ]] && SLEEP=660
-		[[ $MIN = 48 ]] && SLEEP=600
-		[[ $MIN = 49 ]] && SLEEP=540
-		[[ $MIN = 50 ]] && SLEEP=480
-		[[ $MIN = 51 ]] && SLEEP=420
-		[[ $MIN = 52 ]] && SLEEP=360
-		[[ $MIN = 53 ]] && SLEEP=300
-		[[ $MIN = 54 ]] && SLEEP=240
-		[[ $MIN = 55 ]] && SLEEP=180
-		[[ $MIN = 56 ]] && SLEEP=120
-		[[ $MIN = 57 ]] && SLEEP=60
-		[[ $MIN = 58 ]] && SLEEP=50
-		[[ $MIN = 59 ]] && SLEEP=25
-		sleep $SLEEP
-	}
 _crono
 # //game time
 	if [[ $HOUR -lt 8 || $HOUR -eq 23 ]] ; then
@@ -52,15 +15,15 @@ _crono
 		_sleep
 		_crono
 # //Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
-	elif [[ $HOUR -eq 9 && $MIN -ge 45 || $HOUR -eq 15 && $MIN -ge 45 || $HOUR -eq 21 && $MIN -ge 45 ]] ; then
-		while [[ $MIN -ge 50 && $MIN -le 59 ]] ; do
-			echo 'Valley of the Immortals will be started...'
+#	elif [[ $HOUR -eq 9 && $MIN -ge 45 || $HOUR -eq 15 && $MIN -ge 45 || $HOUR -eq 21 && $MIN -ge 45 ]] ; then
+#		while [[ $MIN -ge 50 && $MIN -le 59 ]] ; do
+#			echo 'Valley of the Immortals will be started...'
 #			if [[ $MIN -ge 59 ]] ; then
-				_sleep
-				_undying
+#				_sleep
+#				_undying
 #			fi
-		done
-		_crono
+#		done
+#		_crono
 # //Battle of banners 10:15:00 - 16:15:00
 #	elif [[ $HOUR -eq 10 && $MIN -gt 10 && $MIN -lt 16 || $HOUR -eq 16 && $MIN -gt 10 && $MIN -lt 16 ]] ; then
 #		ts=300
@@ -110,15 +73,15 @@ EOF`"&send_message=$SND1" >chat.txt
 		done
 		_crono
 # //King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
-	elif [[ $HOUR -eq 12 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 16 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 22 && $MIN -ge 20 && $MIN -le 30 ]] ; then
-		while [[ $MIN -ge 20 && $MIN -le 30 ]] ; do
-			echo 'King of the Immortals will be started...'
-			_sleep
+#	elif [[ $HOUR -eq 12 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 16 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 22 && $MIN -ge 20 && $MIN -le 30 ]] ; then
+#		while [[ $MIN -ge 20 && $MIN -le 30 ]] ; do
+#			echo 'King of the Immortals will be started...'
+#			_sleep
 #			if [[ $MIN -ge 29 ]] ; then
-				_king
+#				_king
 #			fi
-		done
-		_crono
+#		done
+#		_crono
 # //Ancient Altars 14:00:00 - 21:00:00
 	elif [[ $HOUR -eq 13 && $MIN -gt 50 || $HOUR -eq 20 && $MIN -gt 50 ]] ; then
 		while [[ $MIN -ge 50 && $MIN -le 55 ]] ; do

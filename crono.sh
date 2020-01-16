@@ -26,3 +26,39 @@ _crono () {
 	[[ $MIN = 09 ]] && MIN=9
 	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
 }
+_sleep () {
+	SLEEP=840
+	_crono
+	[[ $MIN = 15 ]] && SLEEP=780
+	[[ $MIN = 16 ]] && SLEEP=720
+	[[ $MIN = 17 ]] && SLEEP=660
+	[[ $MIN = 18 ]] && SLEEP=600
+	[[ $MIN = 19 ]] && SLEEP=540
+	[[ $MIN = 20 ]] && SLEEP=480
+	[[ $MIN = 21 ]] && SLEEP=420
+	[[ $MIN = 22 ]] && SLEEP=360
+	[[ $MIN = 23 ]] && SLEEP=300
+	[[ $MIN = 24 ]] && SLEEP=240
+	[[ $MIN = 25 ]] && SLEEP=180
+	[[ $MIN = 26 ]] && SLEEP=120
+	[[ $MIN = 27 ]] && SLEEP=60
+	[[ $MIN = 28 ]] && SLEEP=50
+	[[ $MIN = 29 ]] && SLEEP=25
+
+	[[ $MIN = 45 ]] && SLEEP=780
+	[[ $MIN = 46 ]] && SLEEP=720
+	[[ $MIN = 47 ]] && SLEEP=660
+	[[ $MIN = 48 ]] && SLEEP=600
+	[[ $MIN = 49 ]] && SLEEP=540
+	[[ $MIN = 50 ]] && SLEEP=480
+	[[ $MIN = 51 ]] && SLEEP=420
+	[[ $MIN = 52 ]] && SLEEP=360
+	[[ $MIN = 53 ]] && SLEEP=300
+	[[ $MIN = 54 ]] && SLEEP=240
+	[[ $MIN = 55 ]] && SLEEP=180
+	[[ $MIN = 56 ]] && SLEEP=120
+	[[ $MIN = 57 ]] && SLEEP=60
+	[[ $MIN = 58 ]] && SLEEP=50
+	[[ $MIN = 59 ]] && SLEEP=25
+	sleep $SLEEP
+}

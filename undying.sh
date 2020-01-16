@@ -1,51 +1,35 @@
-_undying () {
-# //enterFight
+# //undying - -- - - - - - - - - - - - - - - - - - - - - - - - -
+function _undying () {
+#	ARENA="$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/arena/quit -o user_agent="$(shuf -n1 .ua)" | sed "s/href='/\n/g" | grep "attack/1" | head -n1 | cut -d\/ -f5 | tr -cd "[[:digit:]]")" && w3m -debug -o accept_encoding=='*;q=0' "$URL/arena/attack/1/$ARENA/?fullmana=true" -o user_agent="$(shuf -n1 .ua)" | grep "\[1"
+# //enterGame
 	PAGE=undying
-	ITVL=2.5 # //time for hits
-	CLSM=( 'undying/hit' 'undying/mana' )
-	echo -e "\n$PAGE"
-	echo $URL
-	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/?close=reward -o user_agent="$(shuf -n1 .ua)")
-#	SRC=$(lynx -cfg=~/twm/cfg1 -source $URL/$PAGE -useragent="$(shuf -n1 .ua)")
-	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[1]}" | head -n1 | cut -d\' -f2)
-	echo -e " 👣 Entering...\n$ACCESS"
+	echo "$PAGE"
+	w3m -debug -o accept_encoding=='*;q=0' $URL/$PAGE/enterGame -o user_agent="UA" | head -n10 | tail -n6 | sed "/\[2hit/d;/\[str/d;/combat/d"
+	sleep 5
+# //
+	echo " 👣 Entering..."
+	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
 # //wait
 	echo " 😴 Waiting..."
-        EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
-	while [[ -z $EXIT ]] ; do
-		echo -e " 💤	...\n$ACCESS"
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/enterGame -o user_agent="$(shuf -n1 .ua)")
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/${CLSM[1]}/$ACCESS -o user_agent="$(shuf -n1 .ua)")
-#		SRC=$(lynx -cfg=~/twm/cfg=1 -source $URL/${CLSM[1]} -useragent="$(shuf -n1 .ua)")
-		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[1]}" | head -n1 | cut -d\' -f2)
-		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
-		sleep $ITVL
+	EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep '\/mana\/' | cut -d\/ -f2`
+	while [[ -z $EXIST && $MIN = 00 ]]; do
+		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
+		EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep '\/mana\/' | cut -d\/ -f2`
+		echo -e " 💤 	..."
 	done
-	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
-	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
-	_show () {
-		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
-		echo -e "HP: $HP1\n$ACCESS"
-	}
-	_show
-	while [[ -n $EXIT ]] ; do
-# //function hit - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		_hit () {
-			echo '🛡️'
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
-#			SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
-			echo $URL
-			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
-			_show
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
-			sleep $ITVL
-		}
-# //hit - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		_hit
+# //
+	ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "mana\/" | cut -d\/ -f3`
+	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/mana/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
+	sleep 3
+	ARENA="$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/arena/quit -o user_agent="$(shuf -n1 .ua)" | sed "s/href='/\n/g" | grep "attack/1" | head -n1 | cut -d\/ -f5 | tr -cd "[[:digit:]]")" && w3m -debug -o accept_encoding=='*;q=0' "$URL/arena/attack/1/$ARENA/?fullmana=true&heal=true" -o user_agent="$(shuf -n1 .ua)" | grep "\[1"
+	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
+	ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "hit\/" | cut -d\/ -f3`
+	EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep '\/hit\/' | cut -d\/ -f2`
+	while [[ $EXIST == hit ]]; do
+		echo -e " 🎲 hiting..."
+		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/hit/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
+		ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "hit\/" | cut -d\/ -f3`
+		EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "hit\/" | cut -d\/ -f2`
+		sleep 2.7
 	done
-# //view - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	echo ""
-	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d"
-#	lynx -cfg=~/twm/cfg1 $URL/$PAGE -useragent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
-	echo "$PAGE (✔)"
 }
