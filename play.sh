@@ -78,6 +78,7 @@ EOF`"&send_message=$SND1" >chat.txt
 			echo 'King of the Immortals will be started...'
 			_sleep
 			if [[ $MIN -ge 29 ]] ; then
+				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/king/enterGame/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 				_king
 			fi
 		done
