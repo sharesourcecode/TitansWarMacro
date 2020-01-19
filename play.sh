@@ -83,8 +83,8 @@ EOF`"&send_message=$SND1" >chat.txt
 		done
 		_crono
 # //Ancient Altars 14:00:00 - 21:00:00
-	elif [[ $HOUR -eq 13 && $MIN -ge 50 || $HOUR -eq 20 && $MIN -ge 50 ]] ; then
-		while [[ $MIN -ge 50 && $MIN -le 55 ]] ; do
+	elif [[ $HOUR -eq 13 && $MIN -ge 45 || $HOUR -eq 20 && $MIN -ge 45 ]] ; then
+		while [[ $MIN -ge 45 && $MIN -le 55 ]] ; do
 			echo 'Ancient Altars will be started...'
 			sleep 30
 			_crono
