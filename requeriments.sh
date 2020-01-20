@@ -25,8 +25,8 @@ _requeriments () {
 	curl https://github.com/sharesourcecode/twm/raw/master/play.sh -O -L &
 	curl https://github.com/sharesourcecode/twm/raw/master/requeriments.sh -O -L &
 	curl https://github.com/sharesourcecode/twm/raw/master/torstop.sh -O -L &
-	curl https://github.com/sharesourcecode/twm/raw/master/trade.sh -O -L &
-	curl https://github.com/sharesourcecode/twm/raw/master/undying.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/trade.sh -O -L;
+	curl https://github.com/sharesourcecode/twm/raw/master/undying.sh -O -L;
 	sleep 5 && reset; clear
 	echo -e "Successful updates!"
 	cd $HOME/.tmp
