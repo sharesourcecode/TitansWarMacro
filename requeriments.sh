@@ -28,7 +28,7 @@ _requeriments () {
 	curl https://github.com/sharesourcecode/twm/raw/master/torstop.sh -O -L &
 	curl https://github.com/sharesourcecode/twm/raw/master/trade.sh -O -L &
 	curl https://github.com/sharesourcecode/twm/raw/master/undying.sh -O -L &
-	sleep 10 && reset; clear
+	sleep 5 && reset; clear
 	echo -e "Successful updates!"
 	cd $HOME/.tmp
 # //user agents to $HOME/.tmp/.ua - - - - - - - - - - - - - -
