@@ -1,8 +1,8 @@
 _clanfight () {
 # //enterFight
-	HPER=48 # //heal on 34% - defaut
+	HPER=49 # //heal on 34% - defaut
 	RPER=12 # //random if enemy have +12% hp - default
-	ITVL=1.69 # //time for attacks (2.1 ~ 5.O)
+	ITVL=1.8 # //time for attacks
 	echo -e "\nClan fight"
 	echo $URL
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/clanfight/?close=reward -o user_agent="$(shuf -n1 .ua)")
@@ -83,5 +83,4 @@ _clanfight () {
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/clanfight -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 #	lynx -cfg=~/twm/cfg1 $URL/clanfight -useragent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo "Clan fight(✔)"
-	sleep 60
 }

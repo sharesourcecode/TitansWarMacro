@@ -1,8 +1,8 @@
 _altars () {
 # //enterFight
-	HPER=48 # //heal on 34% - defaut
+	HPER=49 # //heal on 34% - defaut
 	RPER=12 # //random if enemy have +12% hp - default
-	ITVL=1.69 # //time for attacks (2.1 ~ 5.O)
+	ITVL=1.8 # //time for attacks
 #	CLSM=( 'altars/attack' 'altars/attackrandom' 'altars/dodge' 'altars/heal' 'altars/leaveFight' 'altars/enterFight' )
 	echo -e "\nAltars"
 	echo $URL
@@ -86,5 +86,4 @@ _altars () {
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/altars -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 #	lynx -cfg=~/twm/cfg1 $URL/altars -useragent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo -e "Altars (✔)"
-	sleep 60
 }

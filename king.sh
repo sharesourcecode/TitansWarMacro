@@ -1,8 +1,8 @@
 _king () {
 # //enterFight
-	HPER=48 # //heal on 50% - defaut
-	RPER=12 # //random if enemy have +12% hp - default
-	ITVL=1.69 # //time for attacks (2.1 ~ 5.O)
+	HPER=50 # //heal on 50% - defaut
+	RPER=11 # //random if enemy have +12% hp - default
+	ITVL=1.8 # //time for attacks (2.1 ~ 5.O)
 #	CLSM=( 'king/attack' 'king/attackrandom' 'king/dodge' 'king/heal' 'king/kingatk' 'king/enterGame' )
 	echo -e "\nKing"
 	echo $URL
@@ -21,7 +21,7 @@ _king () {
 		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'king/kingatk/')
 	done
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/kingatk/' | head -n1 | cut -d\' -f2)
-	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'king/attack/')
+	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'out_gate')
 	WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	HEAL=$(expr $FULL \* $HPER \/ 100)
@@ -35,7 +35,7 @@ _king () {
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 	echo $URL
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/dodge' | head -n1 | cut -d\' -f2)
-	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'king/attack/')
+	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'out_gate')
 	WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 	_show
 	sleep $ITVL
@@ -47,7 +47,7 @@ _king () {
 #			SRC=$(lynx -cfg=~/twm/cfg1 -source -o "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 			echo $URL
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/attackrandom/' | head -n1 | cut -d\' -f2)
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'king/attack/')
+			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'out_gate')
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			_show
 			sleep $ITVL
@@ -59,7 +59,7 @@ _king () {
 #			SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 			echo $URL
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/dodge/' | head -n1 | cut -d\' -f2)
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'king/attack/')
+			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'out_gate')
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			_show
 			sleep $ITVL
@@ -71,7 +71,7 @@ _king () {
 #			SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 			echo $URL
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/heal' | head -n1 | cut -d\' -f2)
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'king/attack/')
+			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'out_gate')
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			HP1=$HPFULL
 			_show
@@ -92,5 +92,4 @@ _king () {
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/king -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 #	lynx -cfg=~/twm/cfg1 $URL/king -useragent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo -e "King (✔)"
-	sleep 600
 }

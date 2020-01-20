@@ -3,7 +3,7 @@ _coliseum () {
 	PAGE=coliseum
 	HPER=41 # //heal on 34% - defaut
 	RPER=12 # //random if enemy have +12% hp - default
-	ITVL=0.845 # //time for attacks (0.1 ~ 0.7)
+	ITVL=1.8
 	CLSM=( 'coliseum/atk' 'coliseum/atkrnd' 'coliseum/dodge' 'coliseum/heal' 'coliseum/leaveFight' 'coliseum/enterFight' )
 	echo -e "\n$PAGE"
 	echo $URL
@@ -46,7 +46,6 @@ _coliseum () {
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[1]}" | head -n1 | cut -d\' -f2)
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
-#			ITVL=0.3 #1.69
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			sleep $ITVL
 		}
@@ -60,7 +59,6 @@ _coliseum () {
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
-#			ITVL=1.69 #1.69
 			sleep $ITVL
 		}
 # //heal - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -75,7 +73,6 @@ _coliseum () {
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			HP1=$HPFULL
-			ITVL=1.69 #1.69
 			sleep $ITVL
 			_dodge
 			_random

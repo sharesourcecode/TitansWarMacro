@@ -48,6 +48,7 @@ EOF`"&send_message=$SND1" >chat.txt
 #\\
 				SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 				_clancoliseum
+				sleep 350
 			fi
 		done
 		_crono
@@ -69,16 +70,18 @@ EOF`"&send_message=$SND1" >chat.txt
 #\\
 				SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 				_clanfight
+				sleep 350
 			fi
 		done
 		_crono
 # //King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
 	elif [[ $HOUR -eq 12 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 16 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 22 && $MIN -ge 20 && $MIN -le 30 ]] ; then
-		while [[ $MIN -ge 20 && $MIN -lt 31 ]] ; do
+		while [[ $MIN -ge 20 && $MIN -le 30 ]] ; do
 			echo 'King of the Immortals will be started...'
 			_sleep
-			if [[ $MIN -ge 29 ]] ; then
+			if [[ $MIN -ge 29 && $MIN -le 30 ]] ; then
 				_king
+				sleep 650
 			fi
 		done
 		_crono
@@ -101,6 +104,7 @@ EOF`"&send_message=$SND1" >chat.txt
 #\\
 			SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 			_altars
+			sleep 350
 		fi
 		_crono
 	else
