@@ -7,27 +7,27 @@ _requeriments () {
 # //update script and dependences - - - - - - - - - - - - - -
 	echo -e "\nUpgrading..."
 	apt install w3m lynx tor torsocks curl -y || apt-cyg install w3m lynx tor torsocks -y
-	curl https://github.com/sharesourcecode/twm/raw/master/LICENSE -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/PLAY.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/README.md -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/altars.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/arena.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/campaign.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/career.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/cfg1 -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/clancoliseum.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/clandungeon.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/clanfight.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/clanid.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/coliseum.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/crono.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/king.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/loginlogoff.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/play.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/requeriments.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/torstop.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/trade.sh -O -L
-	curl https://github.com/sharesourcecode/twm/raw/master/undying.sh -O -L
+	curl https://github.com/sharesourcecode/twm/raw/master/LICENSE -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/PLAY.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/README.md -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/altars.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/arena.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/campaign.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/career.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/cfg1 -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/clancoliseum.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/clandungeon.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/clanfight.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/clanid.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/coliseum.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/crono.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/king.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/loginlogoff.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/play.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/requeriments.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/torstop.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/trade.sh -O -L &
+	curl https://github.com/sharesourcecode/twm/raw/master/undying.sh -O -L &
 #	echo -e "Successful updates!"
 	cd $HOME/.tmp
 # //user agents to $HOME/.tmp/.ua - - - - - - - - - - - - - -

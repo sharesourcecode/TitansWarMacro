@@ -9,7 +9,7 @@ cd ~/twm
 # //fuctions - - - - - - - - - - - - - - - - - - - -
 rpt=0
 _requeriments
-more ~/twm/LICENSE
+#more ~/twm/LICENSE
 ts=20
 #_torstop
 _loginlogoff
