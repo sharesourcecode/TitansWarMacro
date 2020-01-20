@@ -5,7 +5,6 @@ _requeriments () {
 	mkdir -p $HOME/.tmp
 	cd $HOME/twm
 # //update script and dependences - - - - - - - - - - - - - -
-	echo -e "\nUpgrading..."
 	apt install w3m lynx tor torsocks curl -y || apt-cyg install w3m lynx tor torsocks -y
 	curl https://github.com/sharesourcecode/twm/raw/master/LICENSE -O -L &
 	curl https://github.com/sharesourcecode/twm/raw/master/PLAY.sh -O -L &
