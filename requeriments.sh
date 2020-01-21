@@ -8,6 +8,7 @@ _requeriments () {
 	echo -e "\nUpgrading..."
 	apt install w3m lynx tor torsocks curl -y || apt-cyg install w3m lynx tor torsocks -y
 	echo -e "👉 Please wait...☕👴"
+_sync () {
 	curl https://github.com/sharesourcecode/twm/raw/master/LICENSE -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/PLAY.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/README.md -O -L &> /dev/null &
@@ -29,6 +30,8 @@ _requeriments () {
 	curl https://github.com/sharesourcecode/twm/raw/master/torstop.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/trade.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/undying.sh -O -L &> /dev/null &
+}
+_sync
 	sleep 5 && reset; clear
 	echo -e "Successful updates!\n"
 	cd $HOME/.tmp
