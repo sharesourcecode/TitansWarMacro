@@ -2,7 +2,7 @@ _clanfight () {
 # //enterFight
 	HPER=49 # //heal on 34% - defaut
 	RPER=12 # //random if enemy have +12% hp - default
-	ITVL=1.8 # //time for attacks
+	ITVL=1.9 # //time for attacks
 	echo -e "\nClan fight"
 	echo $URL
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/clanfight/?close=reward -o user_agent="$(shuf -n1 .ua)")

@@ -3,7 +3,7 @@ _coliseum () {
 	PAGE=coliseum
 	HPER=41 # //heal on 34% - defaut
 	RPER=12 # //random if enemy have +12% hp - default
-	ITVL=1.8
+	ITVL=1.9
 	CLSM=( 'coliseum/atk' 'coliseum/atkrnd' 'coliseum/dodge' 'coliseum/heal' 'coliseum/leaveFight' 'coliseum/enterFight' )
 	echo -e "\n$PAGE"
 	echo $URL
