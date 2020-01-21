@@ -11,24 +11,24 @@ _requeriments () {
 	curl https://github.com/sharesourcecode/twm/raw/master/LICENSE -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/PLAY.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/README.md -O -L &> /dev/null &
-#	curl https://github.com/sharesourcecode/twm/raw/master/altars.sh -O -L &> /dev/null &
+	curl https://github.com/sharesourcecode/twm/raw/master/altars.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/arena.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/campaign.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/career.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/cfg1 -O -L &> /dev/null &
-#	curl https://github.com/sharesourcecode/twm/raw/master/clancoliseum.sh -O -L &> /dev/null &
+	curl https://github.com/sharesourcecode/twm/raw/master/clancoliseum.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/clandungeon.sh -O -L &> /dev/null &
-#	curl https://github.com/sharesourcecode/twm/raw/master/clanfight.sh -O -L &> /dev/null &
+	curl https://github.com/sharesourcecode/twm/raw/master/clanfight.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/clanid.sh -O -L &> /dev/null &
-#	curl https://github.com/sharesourcecode/twm/raw/master/coliseum.sh -O -L &> /dev/null &
+	curl https://github.com/sharesourcecode/twm/raw/master/coliseum.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/crono.sh -O -L &> /dev/null &
-#	curl https://github.com/sharesourcecode/twm/raw/master/king.sh -O -L &> /dev/null &
+	curl https://github.com/sharesourcecode/twm/raw/master/king.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/loginlogoff.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/play.sh -O -L &> /dev/null &
-#	curl https://github.com/sharesourcecode/twm/raw/master/requeriments.sh -O -L &> /dev/null &
+	curl https://github.com/sharesourcecode/twm/raw/master/requeriments.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/torstop.sh -O -L &> /dev/null &
 	curl https://github.com/sharesourcecode/twm/raw/master/trade.sh -O -L &> /dev/null &
-#	curl https://github.com/sharesourcecode/twm/raw/master/undying.sh -O -L &> /dev/null &
+	curl https://github.com/sharesourcecode/twm/raw/master/undying.sh -O -L &> /dev/null &
 	sleep 5 && reset; clear
 	echo -e "Successful updates!\n"
 	cd $HOME/.tmp
