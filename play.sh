@@ -35,7 +35,7 @@ _crono
 			echo 'Clan coliseum will be started...'
 			sleep 30
 			_crono
-			[[ $MIN -ge 31 || $MIN -ge 1 ]] && break
+			[[ $MIN -ge 32 || $MIN -ge 2 ]] && break
 			if [[ $MIN -ge 29 || $MIN -ge 59 ]] ; then
 				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clancoliseum/?close=reward" -o user_agent="$(shuf -n1 .ua)")
 				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clancoliseum/enterFight" -o user_agent="$(shuf -n1 .ua)")
@@ -59,7 +59,7 @@ EOF`"&send_message=$SND1" >chat.txt
 			echo 'Clan tournament will be started...'
 			sleep 30
 			_crono
-			[[ $MIN -ge 1 ]] && break
+			[[ $MIN -ge 2 ]] && break
 			if [[ $MIN -ge 55 ]] ; then
 				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clanfight/enterFight/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
@@ -81,7 +81,7 @@ EOF`"&send_message=$SND1" >chat.txt
 		while [[ $MIN -ge 20 && $MIN -le 30 ]] ; do
 			echo 'King of the Immortals will be started...'
 			_sleep
-			[[ $MIN -ge 31 ]] && break
+			[[ $MIN -ge 32 ]] && break
 			if [[ $MIN -ge 29 && $MIN -le 30 ]] ; then
 				_king
 				sleep 650
