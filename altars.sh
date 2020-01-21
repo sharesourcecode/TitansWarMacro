@@ -39,10 +39,14 @@ _altars () {
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 #			SRC=$(lynx -cfg=~/twm/cfg1 -source -o "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 			echo $URL
-			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'altars/attackrandom' | head -n1 | cut -d\' -f2)
+			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'altars/grass/' | head -n1 | cut -d\' -f2)
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'altars/attack/')
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'altars/stone/' | head -n1 | cut -d\' -f2)
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'altars/attackrandom' | head -n1 | cut -d\' -f2)
 			sleep $ITVL
 		}
 # //function dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
