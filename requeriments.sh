@@ -7,7 +7,7 @@ _requeriments () {
 # //update script and dependences - - - - - - - - - - - - - -
 	echo -e "\nUpgrading..."
 	apt install w3m lynx tor torsocks curl -y || apt-cyg install w3m lynx tor torsocks -y
-	echo -e "👉Please wait...☕👴"
+	echo -e "👉 Please wait...☕👴"
 	curl https://github.com/sharesourcecode/twm/raw/master/LICENSE -O -L &> /dev/null
 	curl https://github.com/sharesourcecode/twm/raw/master/PLAY.sh -O -L &> /dev/null
 	curl https://github.com/sharesourcecode/twm/raw/master/README.md -O -L &> /dev/null
