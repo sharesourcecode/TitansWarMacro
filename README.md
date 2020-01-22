@@ -26,4 +26,7 @@ Ou:
 
 **Para interroper (CTRL c) ou force a parada do app Termux**
 
-*Faço atualizações e correções periodicas, caso queira manter os scripts atualizados em seu dispositivo reexecute as instruções acima a partir da segunda etapa.* 
+*Faço atualizações e correções periodicas, caso queira manter os scripts atualizados em seu dispositivo reexecute as instruções acima a partir da segunda etapa.
+
+As atualizações são exibidas nesta página: https://github.com/sharesourcecode/twm/commits/master
+Clique em um dos códigos ao lado direito para saber o que foi alterado.* 
