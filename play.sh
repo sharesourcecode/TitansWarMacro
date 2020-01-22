@@ -15,18 +15,18 @@ _crono
 		_sleep
 		_crono
 # //Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
-	elif [[ $HOUR -eq 9 && $MIN -ge 45 || $HOUR -eq 15 && $MIN -ge 45 || $HOUR -eq 21 && $MIN -ge 45 ]] ; then
-		START=`date +%M`
-		while [[ $MIN -ge 50 && $MIN -le 59 ]] ; do
-        	        END=$(expr `date +%M` \- $START)
-	                [[ $END -gt 15 ]] && break
-			echo 'Valley of the Immortals will be started...'
-			if [[ $MIN -ge 59 ]] ; then
-				_sleep
-				_undying
-			fi
-		done
-		_crono
+#	elif [[ $HOUR -eq 9 && $MIN -ge 45 || $HOUR -eq 15 && $MIN -ge 45 || $HOUR -eq 21 && $MIN -ge 45 ]] ; then
+#		START=`date +%M`
+#		while [[ $MIN -ge 50 && $MIN -le 59 ]] ; do
+#        	        END=$(expr `date +%M` \- $START)
+#	                [[ $END -gt 15 ]] && break
+#			echo 'Valley of the Immortals will be started...'
+#			if [[ $MIN -ge 59 ]] ; then
+#				_sleep
+#				_undying
+#			fi
+#		done
+#		_crono
 # //Battle of banners 10:15:00 - 16:15:00
 #	elif [[ $HOUR -eq 10 && $MIN -gt 10 && $MIN -lt 16 || $HOUR -eq 16 && $MIN -gt 10 && $MIN -lt 16 ]] ; then
 #		ts=300
