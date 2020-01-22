@@ -2,7 +2,7 @@ _king () {
 # //enterFight
 	HPER=50 # //heal on 50% - defaut
 	RPER=11 # //random if enemy have +12% hp - default
-	ITVL=1.8 # //time for attacks (2.1 ~ 5.O)
+	ITVL=2.5 # //time for attacks (2.1 ~ 5.O)
 #	CLSM=( 'king/attack' 'king/attackrandom' 'king/dodge' 'king/heal' 'king/kingatk' 'king/enterGame' )
 	echo -e "\nKing"
 	echo $URL

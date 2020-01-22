@@ -79,7 +79,7 @@ _coliseum () {
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			HP1=$HPFULL
-			ITVL=2.4
+			ITVL=2.5
 			sleep $ITVL
 			_dodge
 			_random

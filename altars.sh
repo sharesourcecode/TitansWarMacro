@@ -2,7 +2,7 @@ _altars () {
 # //enterFight
 	HPER=49 # //heal on 34% - defaut
 	RPER=12 # //random if enemy have +12% hp - default
-	ITVL=1.9 # //time for attacks
+	ITVL=2.5 # //time for attacks
 #	CLSM=( 'altars/attack' 'altars/attackrandom' 'altars/dodge' 'altars/heal' 'altars/leaveFight' 'altars/enterFight' )
 	echo -e "\nAltars"
 	echo $URL
