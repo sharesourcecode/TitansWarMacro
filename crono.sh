@@ -12,8 +12,9 @@ _crono () {
 	[[ $HOUR = 07 ]] && HOUR=7
 	[[ $HOUR = 08 ]] && HOUR=8
 	[[ $HOUR = 09 ]] && HOUR=9
-	MIN=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL" -o user_agent="$(shuf -n1 .ua)" | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f2 | tr -cd '[:digit:]')
+#	MIN=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL" -o user_agent="$(shuf -n1 .ua)" | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f2 | tr -cd '[:digit:]')
 #	MIN=$(lynx -cfg=~/twm/cfg1 -source "$URL" -useragent="$(shuf -n1 .ua)" | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f2 | tr -cd '[:digit:]')
+	MIN=`date +%M`
 	[[ $MIN = 00 ]] && MIN=0
 	[[ $MIN = 01 ]] && MIN=1
 	[[ $MIN = 02 ]] && MIN=2
@@ -27,9 +28,9 @@ _crono () {
 	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
 }
 _sleep () {
-	SLEEP=840
+	SLEEP=849
 	_crono
-	[[ $MIN = 15 ]] && SLEEP=780
+	[[ $MIN = 15 ]] && SLEEP=779
 	[[ $MIN = 16 ]] && SLEEP=720
 	[[ $MIN = 17 ]] && SLEEP=660
 	[[ $MIN = 18 ]] && SLEEP=600

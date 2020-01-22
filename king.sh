@@ -13,7 +13,10 @@ _king () {
 # //wait
 	echo " 😴 Waiting..."
         EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'king/kingatk/')
+	START=`date +%M`
 	while [[ -z $EXIT ]] ; do
+		END=$(expr `date +%M` \- $START)
+		[[ $END -gt 15 ]] && break
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 #		SRC=$(lynx -cfg=~/twm/cfg=1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
@@ -39,7 +42,10 @@ _king () {
 	WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 	_show
 	sleep $ITVL
+	START=`date +%M`
 	until [[ -z $EXIT ]] ; do
+		END=$(expr `date +%M` \- $START)
+		[[ $END -gt 9 ]] && break
 # //function random - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		_random () {
 			echo '🔁'

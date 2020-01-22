@@ -15,15 +15,18 @@ _crono
 		_sleep
 		_crono
 # //Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
-#	elif [[ $HOUR -eq 9 && $MIN -ge 45 || $HOUR -eq 15 && $MIN -ge 45 || $HOUR -eq 21 && $MIN -ge 45 ]] ; then
-#		while [[ $MIN -ge 50 && $MIN -le 59 ]] ; do
-#			echo 'Valley of the Immortals will be started...'
-#			if [[ $MIN -ge 59 ]] ; then
-#				_sleep
-#				_undying
-#			fi
-#		done
-#		_crono
+	elif [[ $HOUR -eq 9 && $MIN -ge 45 || $HOUR -eq 15 && $MIN -ge 45 || $HOUR -eq 21 && $MIN -ge 45 ]] ; then
+		START=`date +%M`
+		while [[ $MIN -ge 50 && $MIN -le 59 ]] ; do
+        	        END=$(expr `date +%M` \- $START)
+	                [[ $END -gt 15 ]] && break
+			echo 'Valley of the Immortals will be started...'
+			if [[ $MIN -ge 59 ]] ; then
+				_sleep
+				_undying
+			fi
+		done
+		_crono
 # //Battle of banners 10:15:00 - 16:15:00
 #	elif [[ $HOUR -eq 10 && $MIN -gt 10 && $MIN -lt 16 || $HOUR -eq 16 && $MIN -gt 10 && $MIN -lt 16 ]] ; then
 #		ts=300
@@ -31,7 +34,10 @@ _crono
 #		_crono
 # //Clan coliseum 10:30:00 - 15:00:00
 	elif [[ $HOUR -eq 10 && $MIN -ge 20 && $MIN -lt 31 || $HOUR -eq 14 && $MIN -ge 50 ]] ; then
+		START=`date +%M`
 		while [[ $MIN -ge 20 && $MIN -le 30 || $MIN -ge 50 && $MIN -le 59 ]] ; do
+	                END=$(expr `date +%M` \- $START)
+        	        [[ $END -gt 20 ]] && break
 			echo 'Clan coliseum will be started...'
 			sleep 30
 			_crono
@@ -55,11 +61,14 @@ EOF`"&send_message=$SND1" >chat.txt
 		_crono
 # //Clan tournament 11:00:00 - 19:00:00
 	elif [[ $HOUR -eq 10 && $MIN -ge 50 || $HOUR -eq 18 && $MIN -ge 50 ]] ; then
+		START=`date +%M`
 		while [[ $MIN -ge 50 && $MIN -le 59 ]] ; do
+        	        END=$(expr `date +%M` \- $START)
+	                [[ $END -gt 10 ]] && break
 			echo 'Clan tournament will be started...'
 			sleep 30
 			_crono
-			[[ $MIN -ge 2 ]] && break
+			[[ $MIN -ge 2 && $MIN -lt 4 ]] && break
 			if [[ $MIN -ge 55 ]] ; then
 				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clanfight/enterFight/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
@@ -78,7 +87,10 @@ EOF`"&send_message=$SND1" >chat.txt
 		_crono
 # //King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
 	elif [[ $HOUR -eq 12 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 16 && $MIN -ge 20 && $MIN -le 30 || $HOUR -eq 22 && $MIN -ge 20 && $MIN -le 30 ]] ; then
+		START=`date +%M`
 		while [[ $MIN -ge 20 && $MIN -le 30 ]] ; do
+        	        END=$(expr `date +%M` \- $START)
+	                [[ $END -gt 10 ]] && break
 			echo 'King of the Immortals will be started...'
 			_sleep
 			[[ $MIN -ge 32 ]] && break
@@ -90,7 +102,10 @@ EOF`"&send_message=$SND1" >chat.txt
 		_crono
 # //Ancient Altars 14:00:00 - 21:00:00
 	elif [[ $HOUR -eq 13 && $MIN -ge 45 || $HOUR -eq 20 && $MIN -ge 45 ]] ; then
+		START=`date +%M`
 		while [[ $MIN -ge 45 && $MIN -le 55 ]] ; do
+        	        END=$(expr `date +%M` \- $START)
+	                [[ $END -gt 15 ]] && break
 			echo 'Ancient Altars will be started...'
 			sleep 30
 			_crono

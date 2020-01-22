@@ -3,7 +3,7 @@ _coliseum () {
 	PAGE=coliseum
 	HPER=41 # //heal on 34% - defaut
 	RPER=12 # //random if enemy have +12% hp - default
-	ITVL=1.9
+	ITVL=0.9
 	CLSM=( 'coliseum/atk' 'coliseum/atkrnd' 'coliseum/dodge' 'coliseum/heal' 'coliseum/leaveFight' 'coliseum/enterFight' )
 	echo -e "\n$PAGE"
 	echo $URL
@@ -18,7 +18,10 @@ _coliseum () {
 # //wait
 	echo " 😴 Waiting..."
         EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[4]}" | head -n1 | cut -d\' -f2)
+	START=`date +%M`
 	while [[ -n $EXIT ]] ; do
+                END=$(expr `date +%M` \- $START)
+                [[ $END -gt 4 ]] && break
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)")
 #		SRC=$(lynx -cfg=~/twm/cfg=1 -source $URL/$PAGE -useragent="$(shuf -n1 .ua)")
@@ -36,8 +39,11 @@ _coliseum () {
 		echo -e "You: $HP1 - $HP2 :enemy\n$ACCESS"
 	}
 	_show
+	START=`date +%M`
 	while [[ -n $EXIT && -n $ACCESS ]] ; do
 # //function random - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                END=$(expr `date +%M` \- $START)
+                [[ $END -gt 4 ]] && break
 		_random () {
 			echo '🔁'
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
@@ -73,6 +79,7 @@ _coliseum () {
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			HP1=$HPFULL
+			ITVL=2.4
 			sleep $ITVL
 			_dodge
 			_random

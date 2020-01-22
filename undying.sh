@@ -12,7 +12,10 @@ function _undying () {
 # //wait
 	echo " 😴 Waiting..."
 	EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep '\/mana\/' | cut -d\/ -f2`
+	START=`date +%M`
 	while [[ -z $EXIST && $MIN = 00 ]]; do
+                END=$(expr `date +%M` \- $START)
+                [[ $END -gt 15 ]] && break
 		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
 		EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep '\/mana\/' | cut -d\/ -f2`
 		echo -e " 💤 	..."
@@ -25,7 +28,10 @@ function _undying () {
 	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
 	ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "hit\/" | cut -d\/ -f3`
 	EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep '\/hit\/' | cut -d\/ -f2`
+	START=`date +%M`
 	while [[ $EXIST == hit ]]; do
+                END=$(expr `date +%M` \- $START)
+                [[ $END -gt 5 ]] && break
 		echo -e " 🎲 hiting..."
 		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/hit/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
 		ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "hit\/" | cut -d\/ -f3`
