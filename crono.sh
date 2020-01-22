@@ -28,7 +28,7 @@ _crono () {
 	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
 }
 _sleep () {
-	SLEEP=849
+	SLEEP=839
 	_crono
 	[[ $MIN = 15 ]] && SLEEP=779
 	[[ $MIN = 16 ]] && SLEEP=720
