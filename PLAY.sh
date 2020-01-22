@@ -22,6 +22,5 @@ while true ; do
 	fi
 	_play
 done
-pkill w3m
 kill -9 $$
 exit
