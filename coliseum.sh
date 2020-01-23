@@ -51,6 +51,7 @@ _coliseum () {
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 #			SRC=$(lynx -cfg=~/twm/cfg1 -source -o "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 			echo $URL
+			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[1]}" | head -n1 | cut -d\' -f2)
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
@@ -63,6 +64,7 @@ _coliseum () {
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 #			SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 			echo $URL
+			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[2]}" | head -n1 | cut -d\' -f2)
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
@@ -76,6 +78,7 @@ _coliseum () {
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 #			SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 			echo $URL
+			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[3]}" | head -n1 | cut -d\' -f2)
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
