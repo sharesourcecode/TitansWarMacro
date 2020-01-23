@@ -34,6 +34,7 @@ _coliseum () {
 	WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	HEAL=$(expr $FULL \* $HPER \/ 100)
+	PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 	_show () {
 		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
@@ -85,7 +86,7 @@ _coliseum () {
 			_dodge
 			_random
 # //random - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		elif [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
+		elif [[ -n $PRTCT || $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
 			_random
 			_dodge
 # //dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
