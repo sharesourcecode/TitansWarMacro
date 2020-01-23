@@ -32,7 +32,7 @@ _sync () {
 	curl https://github.com/sharesourcecode/twm/raw/master/undying.sh -O -L &> /dev/null &
 }
 _sync
-	sleep 5 && reset; clear
+	sleep 3 && reset; clear
 	echo -e "Successful updates!\n"
 	cd $HOME/.tmp
 # //user agents to $HOME/.tmp/.ua - - - - - - - - - - - - - -
