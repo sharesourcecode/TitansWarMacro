@@ -1,5 +1,6 @@
 _king () {
 # //enterFight
+	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER=50 # //heal on 50% - defaut
 	RPER=11 # //random if enemy have +12% hp - default
 	ITVL=2.5 # //time for attacks (2.1 ~ 5.O)
@@ -98,4 +99,5 @@ _king () {
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/king -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 #	lynx -cfg=~/twm/cfg1 $URL/king -useragent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo -e "King (✔)"
+	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 }

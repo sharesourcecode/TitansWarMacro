@@ -1,5 +1,6 @@
 _altars () {
 # //enterFight
+	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER=49 # //heal on 34% - defaut
 	RPER=12 # //random if enemy have +12% hp - default
 	ITVL=2.5 # //time for attacks
@@ -96,4 +97,5 @@ _altars () {
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/altars -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 #	lynx -cfg=~/twm/cfg1 $URL/altars -useragent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo -e "Altars (✔)"
+	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
 }

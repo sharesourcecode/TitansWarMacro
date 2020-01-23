@@ -1,5 +1,6 @@
 _coliseum () {
 # //enterFight
+	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	PAGE=coliseum
 	HPER=41 # //heal on 34% - defaut
 	RPER=12 # //random if enemy have +12% hp - default
@@ -97,5 +98,6 @@ _coliseum () {
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 #	lynx -cfg=~/twm/cfg1 $URL/$PAGE -useragent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo "$PAGE (✔)"
+	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
 }
 
