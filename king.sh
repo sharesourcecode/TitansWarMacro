@@ -3,7 +3,7 @@ _king () {
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER=50 # //heal on 50% - defaut
 	RPER=11 # //random if enemy have +12% hp - default
-	ITVL=0.9 # //time for attacks (2.1 ~ 5.O)
+	ITVL=2.5 # //time for attacks (2.1 ~ 5.O)
 #	CLSM=( 'king/attack' 'king/attackrandom' 'king/dodge' 'king/heal' 'king/kingatk' 'king/enterGame' )
 	echo -e "\nKing"
 	echo $URL
