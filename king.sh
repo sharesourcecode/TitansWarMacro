@@ -3,7 +3,7 @@ _king () {
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER=50 # //heal on 50% - defaut
 	RPER=11 # //random if enemy have +12% hp - default
-	ITVL=2.5 # //time for attacks (2.1 ~ 5.O)
+	ITVL=0.9 # //time for attacks (2.1 ~ 5.O)
 #	CLSM=( 'king/attack' 'king/attackrandom' 'king/dodge' 'king/heal' 'king/kingatk' 'king/enterGame' )
 	echo -e "\nKing"
 	echo $URL
@@ -41,6 +41,7 @@ _king () {
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/dodge' | head -n1 | cut -d\' -f2)
 	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'out_gate')
 	WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
+	PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 	_show
 	sleep $ITVL
 	START=`date +%M`
@@ -56,6 +57,7 @@ _king () {
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/attackrandom/' | head -n1 | cut -d\' -f2)
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'out_gate')
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
+			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 			_show
 			sleep $ITVL
 		}
@@ -68,6 +70,7 @@ _king () {
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/dodge/' | head -n1 | cut -d\' -f2)
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'out_gate')
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
+			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 			_show
 			sleep $ITVL
 		}
@@ -80,13 +83,14 @@ _king () {
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/heal' | head -n1 | cut -d\' -f2)
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'out_gate')
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
+			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 			HP1=$HPFULL
 			_show
 			sleep $ITVL
 			_dodge
 			_random
 # //random - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		elif [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
+		elif [[ -n $PRTCT || $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
 			_random
 			_dodge
 # //dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -

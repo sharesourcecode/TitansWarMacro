@@ -26,6 +26,7 @@ _clanfight () {
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/dodge/' | head -n1 | cut -d\' -f2)
 	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'clanfight/attack/')
 	WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
+	PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	HEAL=$(expr $FULL \* $HPER \/ 100)
 	_show () {
@@ -48,6 +49,7 @@ _clanfight () {
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'clanfight/attack/')
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
+			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 			sleep $ITVL
 		}
 # //function dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -60,6 +62,7 @@ _clanfight () {
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'clanfight/attack/')
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
+			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 			sleep $ITVL
 		}
 # //heal - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -72,12 +75,13 @@ _clanfight () {
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'clanfight/attack/')
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
+			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 			HP1=$HPFULL
 			sleep $ITVL
 			_dodge
 			_random
 # //random - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		elif [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
+		elif [[ -n $PRTCT || $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
 			_random
 			_dodge
 # //dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -

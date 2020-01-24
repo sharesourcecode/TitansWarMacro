@@ -28,6 +28,7 @@ _altars () {
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'altars/dodge' | head -n1 | cut -d\' -f2)
 	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'altars/attack/')
 	WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
+	PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	HEAL=$(expr $FULL \* $HPER \/ 100)
 	_show () {
@@ -49,6 +50,7 @@ _altars () {
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'altars/grass/' | head -n1 | cut -d\' -f2)
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'altars/attack/')
+			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'altars/stone/' | head -n1 | cut -d\' -f2)
@@ -66,6 +68,7 @@ _altars () {
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'altars/attack/')
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
+			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 			sleep $ITVL
 		}
 # //heal - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -79,12 +82,13 @@ _altars () {
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'altars/attack/')
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
+			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 			HP1=$HPFULL
 			sleep $ITVL
 			_dodge
 			_random
 # //random - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		elif [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
+		elif [[ -n $PRTCT || $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
 			_random
 			_dodge
 # //dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
