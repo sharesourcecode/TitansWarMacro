@@ -1,41 +1,39 @@
-# //undying - -- - - - - - - - - - - - - - - - - - - - - - - - -
-function _undying () {
-#	ARENA="$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/arena/quit -o user_agent="$(shuf -n1 .ua)" | sed "s/href='/\n/g" | grep "attack/1" | head -n1 | cut -d\/ -f5 | tr -cd "[[:digit:]]")" && w3m -debug -o accept_encoding=='*;q=0' "$URL/arena/attack/1/$ARENA/?fullmana=true" -o user_agent="$(shuf -n1 .ua)" | grep "\[1"
+_undying () {
 # //enterGame
-	PAGE=undying
-	echo "$PAGE"
-	w3m -debug -o accept_encoding=='*;q=0' $URL/$PAGE/enterGame -o user_agent="UA" | head -n10 | tail -n6 | sed "/\[2hit/d;/\[str/d;/combat/d"
-	sleep 5
+	echo "Undying"
+	w3m -debug -o accept_encoding=='*;q=0' $URL/undying/enterGame -o user_agent="$(shuf -n1 .ua)" | head -n5
+	sleep 2
 # //
 	echo " 👣 Entering..."
-	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
+	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/undying -o user_agent="$(shuf -n1 .ua)")
 # //wait
 	echo " 😴 Waiting..."
-	EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep '\/mana\/' | cut -d\/ -f2`
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/undying/' | cut -d\' -f2 | head -n1)
+	EXIST=$(echo $SRC | grep -o 'undying/mana')
 	START=`date +%M`
-	while [[ -z $EXIST && $MIN = 00 ]]; do
-                END=$(expr `date +%M` \- $START)
-                [[ $END -gt 15 ]] && break
-		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
-		EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep '\/mana\/' | cut -d\/ -f2`
+	sleep 2
+#
+	while [[ -z $EXIST ]] ; do
+		END=$(expr `date +%M` \- $START)
+		[[ $END -gt 15 ]] && break
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+		ACCESS=$(echo $SRC | sed "s/href=/\n/g" | grep '/undying/' | cut -d\' -f2 | head -n1)
+		EXIST=$(echo $SRC | grep -o 'undying/mana/')
 		echo -e " 💤 	..."
 	done
-# //
-	ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "mana\/" | cut -d\/ -f3`
-	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/mana/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
-	sleep 3
-	ARENA="$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/arena/quit -o user_agent="$(shuf -n1 .ua)" | sed "s/href='/\n/g" | grep "attack/1" | head -n1 | cut -d\/ -f5 | tr -cd "[[:digit:]]")" && w3m -debug -o accept_encoding=='*;q=0' "$URL/arena/attack/1/$ARENA/?fullmana=true&heal=true" -o user_agent="$(shuf -n1 .ua)" | grep "\[1"
-	SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)"`
-	ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "hit\/" | cut -d\/ -f3`
-	EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep '\/hit\/' | cut -d\/ -f2`
+#
+	sleep 2
+	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/undying -o user_agent="$(shuf -n1 .ua)")
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g'  | grep 'undying/hit/' | cut -d\' -f2)
+	EXIST=$(echo $SRC | grep -o 'out_gate')
 	START=`date +%M`
-	while [[ $EXIST == hit ]]; do
-                END=$(expr `date +%M` \- $START)
-                [[ $END -gt 5 ]] && break
+	while [[ -n $EXIST ]] ; do
+		END=$(expr `date +%M` \- $START)
+		[[ $END -gt 5 ]] && break
 		echo -e " 🎲 hiting..."
-		SRC=`w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE/hit/$ACCESS -o user_agent="$(shuf -n1 .ua)"`
-		ACCESS=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "hit\/" | cut -d\/ -f3`
-		EXIST=`echo $SRC | sed "s/\/$PAGE/\\n/g" | grep "hit\/" | cut -d\/ -f2`
-		sleep 2.7
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'undying/hit/' | cut -d\' -f2)
+		EXIST=$(echo $SRC | grep -o 'out_gate')
+		sleep 5
 	done
 }
