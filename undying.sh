@@ -18,22 +18,24 @@ _undying () {
 		[[ $END -gt 15 ]] && break
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed "s/href=/\n/g" | grep '/undying/' | cut -d\' -f2 | head -n1)
-		EXIST=$(echo $SRC | grep -o 'undying/mana/')
+		EXIT=$(echo $SRC | grep -o 'undying/mana/')
 		echo -e " 💤 	..."
 	done
 #
-	sleep 2
-	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/undying -o user_agent="$(shuf -n1 .ua)")
-	ACCESS=$(echo $SRC | sed 's/href=/\n/g'  | grep 'undying/hit/' | cut -d\' -f2)
-	EXIST=$(echo $SRC | grep -o 'out_gate')
+	sleep 1
+	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+#	ACCESS=$(echo $SRC | sed 's/href=/\n/g'  | grep 'undying/mana/' | head -n1 | cut -d\' -f2)
+#	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g'  | grep 'undying/hit/' | head -n1 | cut -d\' -f2)
+	EXIT=$(echo $SRC | grep -o 'hit/out_gate')
 	START=`date +%M`
-	while [[ -n $EXIST ]] ; do
+	while [[ -n $EXIT ]] ; do
 		END=$(expr `date +%M` \- $START)
 		[[ $END -gt 5 ]] && break
 		echo -e " 🎲 hiting..."
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
-		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'undying/hit/' | cut -d\' -f2)
-		EXIST=$(echo $SRC | grep -o 'out_gate')
+		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'undying/hit/' | head -n1 | cut -d\' -f2)
+		EXIT=$(echo $SRC | grep -o 'hit/out_gate')
 		sleep 5
 	done
 }
