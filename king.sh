@@ -1,8 +1,8 @@
 _king () {
-# //enterFight
+# /enterFight
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
-	HPER=49 # //heal on 50% - defaut
-	RPER=1 # //random if enemy have +12% hp - default
+	HPER=49 # /heal on 50% - defaut
+	RPER=1 # /random if enemy have +12% hp - default
 	ITVL=0.9
 #	CLSM=( 'king/attack' 'king/attackrandom' 'king/dodge' 'king/heal' 'king/kingatk' 'king/enterGame' )
 	echo -e "\nKing"
@@ -11,7 +11,7 @@ _king () {
 #	SRC=$(lynx -cfg=~/twm/cfg1 -source $URL/king/enterGame -useragent="$(shuf -n1 .ua)")
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/king/' | head -n1 | cut -d\' -f2)
 	echo -e " 👣 Entering...\n$ACCESS"
-# //wait
+# /wait
 	echo " 😴 Waiting..."
         EXIT=$(echo $SRC | grep -o 'king/kingatk/')
 	START=`date +%M`
@@ -35,7 +35,7 @@ _king () {
 		echo -e "You: $HP1 - $HP2 :enemy\n$ACCESS"
 	}
 	_show
-# //kingatk - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /kingatk
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 	echo $URL
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/dodge' | head -n1 | cut -d\' -f2)
@@ -48,7 +48,7 @@ _king () {
 	until [[ -z $EXIT ]] ; do
 		END=$(expr `date +%M` \- $START)
 		[[ $END -gt 9 ]] && break
-# //function random - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /function random
 		_random () {
 			echo '🔁'
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
@@ -67,7 +67,7 @@ _king () {
 			_show
 			sleep $ITVL
 		}
-# //function dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /function dodge
 		_dodge () {
 			echo '🛡️'
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
@@ -86,7 +86,7 @@ _king () {
 			_show
 			sleep $ITVL
 		}
-# //heal - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /heal
 		if [[ $HP1 -lt $HEAL ]] ; then
 			echo "🆘 HP < $HPER%"
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
@@ -107,16 +107,16 @@ _king () {
 			sleep $ITVL
 			_dodge
 			_random
-# //random - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /random
 		elif [[ -n $PRTCT || $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
 			_random
 			_dodge
-# //dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /dodge
 		else
 			_dodge
 		fi
 	done
-# //view - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /view
 	echo ""
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/king -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 #	lynx -cfg=~/twm/cfg1 $URL/king -useragent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
