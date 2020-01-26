@@ -2,7 +2,7 @@ _clancoliseum () {
 # /enterFight
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='49'
-	RPER='12'
+	RPER='5'
 	ITVL='2.5'
 	echo -e "\nClan coliseum"
 	echo $URL
@@ -72,10 +72,9 @@ _clancoliseum () {
 			_dodge
 		fi
 	done
-# //view - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /view
 	echo ""
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/clancoliseum -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
-#	lynx -cfg=~/twm/cfg1 $URL/clancoliseum -useragent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo "Clan coliseum (✔)"
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 }
