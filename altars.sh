@@ -2,7 +2,7 @@ _altars () {
 # /enterFight
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='49'
-	RPER='12'
+	RPER='5'
 	ITVL='2.5'
 	echo -e "\nAltars"
 	echo $URL
