@@ -16,6 +16,8 @@ _show () {
 	_access () {
 		ENTERFIGHT=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterFight/' | head -n1 | cut -d\' -f2)
 		ENTERGAME=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterGame/' | head -n1 | cut -d\' -f2)
+		HIT=$(echo $SRC | sed 's/href=/\n/g' | grep '/hit/' | head -n1 | cut -d\' -f2)
+		MANA=$(echo $SRC | sed 's/href=/\n/g' | grep '/mana/' | head -n1 | cut -d\' -f2)
 		ATK=$(echo $SRC | sed 's/href=/\n/g' | grep '/atk/' | head -n1 | cut -d\' -f2)
 		ATTACK=$(echo $SRC | sed 's/href=/\n/g' | grep '/attack/' | head -n1 | cut -d\' -f2)
 		ATKRND=$(echo $SRC | sed 's/href=/\n/g' | grep '/atkrnd/' | head -n1 | cut -d\' -f2)
