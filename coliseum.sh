@@ -13,6 +13,7 @@ _coliseum () {
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' ""$URL$ACCESS"?end_fight=true" -o user_agent="$(shuf -n1 .ua)")
 # /wait
 	echo " 😴 Waiting..."
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/coliseum/' | head -n1 | cut -d\' -f2)
         EXIT=$(echo $SRC | grep -o '/leaveFight/' | head -n1)
 	START=`date +%M`
 	while [[ -n $EXIT ]] ; do
