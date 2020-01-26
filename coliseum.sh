@@ -1,10 +1,9 @@
 _coliseum () {
 # /enterFight
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
-	HPER=41 # //heal on 34% - defaut
-	RPER=5 # //random if enemy have +12% hp - default
-	ITVL=0.9
-	CLSM=( 'coliseum/atk' 'coliseum/atkrnd' 'coliseum/dodge' 'coliseum/heal' 'coliseum/leaveFight' 'coliseum/enterFight' )
+	HPER='41'
+	RPER='5'
+	ITVL='0.9'
 	echo -e "\nColiseum"
 	echo $URL
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/coliseum/?end_fight=true -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
