@@ -1,12 +1,12 @@
 _undying () {
-# //enterGame
+# /enterGame
 	echo "Undying"
 	w3m -debug -o accept_encoding=='*;q=0' $URL/undying/enterGame -o user_agent="$(shuf -n1 .ua)" | head -n5
 	sleep 2
-# //
+#
 	echo " 👣 Entering..."
 	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/undying -o user_agent="$(shuf -n1 .ua)")
-# //wait
+# /wait
 	echo " 😴 Waiting..."
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/undying/' | head -n1 | cut -d\' -f2)
 	EXIT=$(echo $SRC | grep -o 'undying/mana')
