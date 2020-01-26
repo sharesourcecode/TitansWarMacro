@@ -21,7 +21,9 @@ _crono
         	        END=$(expr `date +%M` \- $START)
 	                [[ $END -gt 15 ]] && break
 			echo 'Valley of the Immortals will be started...'
-			if [[ $MIN -ge 59 ]] ; then
+			sleep 30
+			_crono
+			if [[ $MIN -ge 58 ]] ; then
 				_sleep
 				_undying
 				sleep 300
