@@ -1,4 +1,4 @@
-# //start tor/kill script- - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /start tor/kill script
 _torstop () {
 	pkill -9 tor
 	if [[ $ts -le 30 ]] ; then
