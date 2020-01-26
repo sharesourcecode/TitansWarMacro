@@ -14,8 +14,8 @@ _clanfight () {
         EXIT=$(echo $SRC | grep -o 'clanfight/attack/')
 	START=`date +%M`
 	while [[ -z $EXIT ]] ; do
-                END=$(expr `date +%M` \- $START)
-                [[ $END -gt 15 ]] && break
+		END=$(expr `date +%M` \- $START)
+		[[ $END -gt 6 ]] && break
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/clanfight/' | head -n1 | cut -d\' -f2)
@@ -25,8 +25,8 @@ _clanfight () {
 	_access
 	START=`date +%M`
 	until [[ -z $OUTGATE ]] ; do
-                END=$(expr `date +%M` \- $START)
-                [[ $END -gt 5 ]] && break
+		END=$(expr `date +%M` \- $START)
+		[[ $END -gt 5 ]] && break
 # /function random
 		_random () {
 			sleep $ITVL
