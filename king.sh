@@ -4,11 +4,9 @@ _king () {
 	HPER=49 # /heal on 50% - defaut
 	RPER=1 # /random if enemy have +12% hp - default
 	ITVL=0.9
-#	CLSM=( 'king/attack' 'king/attackrandom' 'king/dodge' 'king/heal' 'king/kingatk' 'king/enterGame' )
 	echo -e "\nKing"
 	echo $URL
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/king/enterGame -o user_agent="$(shuf -n1 .ua)")
-#	SRC=$(lynx -cfg=~/twm/cfg1 -source $URL/king/enterGame -useragent="$(shuf -n1 .ua)")
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/king/' | head -n1 | cut -d\' -f2)
 	echo -e " 👣 Entering...\n$ACCESS"
 # /wait
