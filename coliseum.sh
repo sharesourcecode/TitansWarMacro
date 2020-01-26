@@ -2,7 +2,7 @@ _coliseum () {
 # /enterFight
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='41'
-	RPER='5'
+	RPER='9'
 	ITVL='0.9'
 	echo -e "\nColiseum"
 	echo $URL
