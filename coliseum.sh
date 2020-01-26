@@ -27,7 +27,7 @@ _coliseum () {
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	_access
 	START=`date +%M`
-	while [[ -n $OUTGATE && -n $ATK ]] ; do
+	while [[ -n $OUTGATE ]] ; do
 # /function random
                 END=$(expr `date +%M` \- $START)
                 [[ $END -gt 4 ]] && break
