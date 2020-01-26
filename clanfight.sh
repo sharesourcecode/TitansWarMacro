@@ -32,34 +32,34 @@ _clanfight () {
 		_random () {
 			sleep $ITVL
 			echo '🔁'
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)")
 #			SRC=$(lynx -cfg=~/twm/cfg1 -source -o "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 			_access
 			sleep $ITVL
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRSS" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
 			_access
 			sleep $ITVL
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STN" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STONE" -o user_agent="$(shuf -n1 .ua)")
 			_access
 		}
 # /function dodge
 		_dodge () {
 			sleep $ITVL
 			echo '🛡️'
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DDG" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
 #			SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 			_access
 			sleep $ITVL
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRSS" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
 			_access
 			sleep $ITVL
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STN" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STONE" -o user_agent="$(shuf -n1 .ua)")
 			_access
 		}
 # /heal
 		if [[ $HP1 -lt $HLHP ]] ; then
 			echo "🆘 HP < $HPER%"
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HL" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
 			_access
 			HP1=$HPFULL
 			ITVL='2.5'
