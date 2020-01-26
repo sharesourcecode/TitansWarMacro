@@ -3,7 +3,7 @@ _clanfight () {
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER=49 # //heal on 34% - defaut
 	RPER=12 # //random if enemy have +12% hp - default
-	ITVL=2.5 # //time for attacks
+	ITVL=0.9
 	echo -e "\nClan fight"
 	echo $URL
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/clanfight/?close=reward -o user_agent="$(shuf -n1 .ua)")
@@ -12,7 +12,7 @@ _clanfight () {
 	echo -e " 👣 Entering...\n$ACCESS"
 # //wait
 	echo " 😴 Waiting..."
-        EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'clanfight/attack/')
+        EXIT=$(echo $SRC | grep -o 'clanfight/attack/')
 	START=`date +%M`
 	while [[ -z $EXIT ]] ; do
                 END=$(expr `date +%M` \- $START)
@@ -21,62 +21,69 @@ _clanfight () {
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 #		SRC=$(lynx -cfg=~/twm/cfg=1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/clanfight/' | head -n1 | cut -d\' -f2)
-		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'clanfight/attack/')
+		EXIT=$(echo $SRC | grep -o 'clanfight/attack/')
 	done
-	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/dodge/' | head -n1 | cut -d\' -f2)
-	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'clanfight/attack/')
-	WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
-	PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
-	HEAL=$(expr $FULL \* $HPER \/ 100)
 	_show () {
 		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
-		echo -e "You: $HP1 - $HP2 :enemy\n$ACCESS"
+		echo $URL
+		echo -e "You: $HP1 - $HP2 :enemy\n"
 	}
-	_show
+	_cfaccess () {
+		ATK=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/attack/' | head -n1 | cut -d\' -f2)
+		ATKRND=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/attackrandom/' | head -n1 | cut -d\' -f2)
+		DDG=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/dodge/' | head -n1 | cut -d\' -f2)
+		HL=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/heal/' | head -n1 | cut -d\' -f2)
+		STN=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/stone/' | head -n1 | cut -d\' -f2)
+		GRSS=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/grass/' | head -n1 | cut -d\' -f2)
+		EXIT=$(echo $SRC | grep -o 'clanfight/attack/')
+		WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
+		PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
+		HEAL=$(expr $FULL \* $HPER \/ 100)
+		_show
+	}
+	_cfaccess
 	START=`date +%M`
 	until [[ -z $EXIT ]] ; do
                 END=$(expr `date +%M` \- $START)
                 [[ $END -gt 5 ]] && break
-# //function random - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# //function random
 		_random () {
+			sleep $ITVL
 			echo '🔁'
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)")
 #			SRC=$(lynx -cfg=~/twm/cfg1 -source -o "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
-			echo $URL
-			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/attackrandom/' | head -n1 | cut -d\' -f2)
-			_show
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'clanfight/attack/')
-			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
-			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
+			_cfaccess
 			sleep $ITVL
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRSS" -o user_agent="$(shuf -n1 .ua)")
+			_cfaccess
+			sleep $ITVL
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STN" -o user_agent="$(shuf -n1 .ua)")
+			_cfaccess
 		}
-# //function dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# //function dodge
 		_dodge () {
-			echo '🛡️'
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
-#			SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
-			echo $URL
-			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/dodge/' | head -n1 | cut -d\' -f2)
-			_show
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'clanfight/attack/')
-			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
-			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 			sleep $ITVL
+			echo '🛡️'
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DDG" -o user_agent="$(shuf -n1 .ua)")
+#			SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
+			_cfaccess
+			sleep $ITVL
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRSS" -o user_agent="$(shuf -n1 .ua)")
+			_cfaccess
+			sleep $ITVL
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STN" -o user_agent="$(shuf -n1 .ua)")
+			_cfaccess
 		}
 # //heal - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		if [[ $HP1 -lt $HEAL ]] ; then
 			echo "🆘 HP < $HPER%"
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HL" -o user_agent="$(shuf -n1 .ua)")
 #			SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
-			echo $URL
-			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/heal/' | head -n1 | cut -d\' -f2)
-			_show
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'clanfight/attack/')
-			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
-			PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
+			_cfaccess
 			HP1=$HPFULL
+			ITVL=2.5
 			sleep $ITVL
 			_dodge
 			_random
