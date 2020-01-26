@@ -21,10 +21,8 @@ _crono
         	        END=$(expr `date +%M` \- $START)
 	                [[ $END -gt 15 ]] && break
 			echo 'Valley of the Immortals will be started...'
-			sleep 30
-			_crono
+			_sleep
 			if [[ $MIN -ge 58 ]] ; then
-				_sleep
 				_undying
 				sleep 300
 			fi
@@ -91,10 +89,10 @@ EOF`"&send_message=$SND1" >chat.txt
 		START=`date +%M`
 		while [[ $MIN -ge 15 && $MIN -le 30 ]] ; do
         	        END=$(expr `date +%M` \- $START)
-	                [[ $END -gt 16 ]] && break
+	                [[ $END -gt 15 ]] && break
 			echo 'King of the Immortals will be started...'
 			_sleep
-			if [[ $MIN -ge 29 && $MIN -le 30 ]] ; then
+			if [[ $MIN -ge 28 && $MIN -le 30 ]] ; then
 				_king
 				sleep 600
 			fi
