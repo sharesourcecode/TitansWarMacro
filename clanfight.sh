@@ -1,8 +1,8 @@
 _clanfight () {
 # /enterFight
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
-	HPER='49' # /heal on 34% - defaut
-	RPER='12' # /random if enemy have +12% hp - default
+	HPER='49'
+	RPER='12'
 	ITVL='0.9'
 	echo -e "\nClan fight"
 	echo $URL
@@ -18,7 +18,6 @@ _clanfight () {
                 [[ $END -gt 15 ]] && break
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
-#		SRC=$(lynx -cfg=~/twm/cfg=1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/clanfight/' | head -n1 | cut -d\' -f2)
 		EXIT=$(echo $SRC | grep -o 'clanfight/attack/')
 	done
@@ -33,7 +32,6 @@ _clanfight () {
 			sleep $ITVL
 			echo '🔁'
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)")
-#			SRC=$(lynx -cfg=~/twm/cfg1 -source -o "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 			_access
 			sleep $ITVL
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
@@ -47,7 +45,6 @@ _clanfight () {
 			sleep $ITVL
 			echo '🛡️'
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
-#			SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
 			_access
 			sleep $ITVL
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
