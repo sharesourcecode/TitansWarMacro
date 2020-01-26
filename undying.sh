@@ -8,12 +8,12 @@ _undying () {
 	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/undying -o user_agent="$(shuf -n1 .ua)")
 # //wait
 	echo " 😴 Waiting..."
-	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/undying/' | cut -d\' -f2 | head -n1)
-	EXIST=$(echo $SRC | grep -o 'undying/mana')
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/undying/' | head -n1 | cut -d\' -f2)
+	EXIT=$(echo $SRC | grep -o 'undying/mana')
 	START=`date +%M`
 	sleep 2
 #
-	while [[ -z $EXIST ]] ; do
+	while [[ -z $EXIT ]] ; do
 		END=$(expr `date +%M` \- $START)
 		[[ $END -gt 15 ]] && break
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
