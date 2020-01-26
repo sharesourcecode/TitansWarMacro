@@ -1,5 +1,5 @@
-# //career- - - - - - - - - - - - - - - - - - - - - - - - - -
-# // /career/attack/?r=8781779
+# /career
+# /career/attack/?r=8781779
 _career () {
 	echo "Checking career..."
 	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/career" -o user_agent="$(shuf -n1 .ua)")
