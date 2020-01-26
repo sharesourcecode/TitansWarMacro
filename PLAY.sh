@@ -25,7 +25,7 @@ _show () {
 		HEAL=$(echo $SRC | sed 's/href=/\n/g' | grep '/heal/' | head -n1 | cut -d\' -f2)
 		STONE=$(echo $SRC | sed 's/href=/\n/g' | grep '/stone/' | head -n1 | cut -d\' -f2)
 		GRASS=$(echo $SRC | sed 's/href=/\n/g' | grep '/grass/' | head -n1 | cut -d\' -f2)
-		EXIT=$(echo $SRC | grep -o '/out_gate')
+		OUTGATE=$(echo $SRC | grep -o '/out_gate')
 		LEAVEFIGHT=$(echo $SRC | sed 's/href=/\n/g' | grep '/leaveFight/' | head -n1 | cut -d\' -f2)
 		WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
 		PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
