@@ -1,4 +1,4 @@
-# //time - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /time
 _crono () {
 	HOUR=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL" -o user_agent="$(shuf -n1 .ua)" | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f1 | tr -cd '[:digit:]')
 #	HOUR=$(lynx -cfg=~/twm/cfg1 -source "$URL" -useragent="$(shuf -n1 .ua)" | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f1 | tr -cd '[:digit:]')
