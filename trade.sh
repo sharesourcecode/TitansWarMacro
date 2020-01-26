@@ -1,4 +1,4 @@
-# //trade- - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /trade
 function _trade () {
 	echo "Checking for gold exchange..."
 	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/trade/exchange" -o user_agent="$(shuf -n1 .ua)")
