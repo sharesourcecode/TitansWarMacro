@@ -73,7 +73,7 @@ _altars () {
 			_dodge
 		fi
 	done
-# //view - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# //view
 	echo ""
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/altars -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo -e "Altars (✔)"
