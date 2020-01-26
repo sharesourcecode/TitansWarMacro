@@ -1,5 +1,5 @@
 _loginlogoff () {
-# //login/logoff - - - - - - - - - - - - - - - - - - - - - - -
+# /login/logoff
 	ACC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
 #	ACC=$(lynx -cfg=~/twm/cfg1 "$URL/user" -useragent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
 	[[ -n $ACC ]] && i=10 && \
@@ -12,7 +12,7 @@ _loginlogoff () {
 	clear
 	while [[ -z $ACC ]]; do
 		function _login () {
-# //logoff2x
+# /logoff2x
 			$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
 			$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
 #			$(lynx -cfg=~/twm/cfg1 "$URL/?exit" -useragent="$(shuf -n1 .ua)") 2&>-
@@ -24,11 +24,11 @@ _loginlogoff () {
 			prompt="Password: "
 			charcount=0
 			while IFS= read -p "$prompt" -r -s -n 1 char; do
-# //Enter - accept password
+# /Enter - accept password
 			if [[ $char == $'\0' ]]; then
 				break
 			fi
-# //Backspace
+# /Backspace
 			if [[  $char  == $'\177' ]]; then
 				if [ $charcount -gt 0 ]; then
 					charcount=$((charcount - 1))
@@ -45,7 +45,7 @@ _loginlogoff () {
 			done
 			echo -e "\n	Please wait..."
 			echo -e "login=$username&pass=$password" >$HOME/.tmp/login.txt
-# //login2x
+# /login2x
 #			$(echo -e "login=$username&pass=$password" | lynx -cfg=~/twm/cfg1 -post_data "$URL/?sign_in=1" -useragent="$(shuf -n1 .ua)") 2&>-
 			unset username; unset password
 			$(w3m -cookie -debug -post $HOME/.tmp/login.txt -o accept_encoding=='*;q=0' "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
