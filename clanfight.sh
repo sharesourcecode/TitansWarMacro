@@ -1,8 +1,8 @@
 _clanfight () {
-# //enterFight
+# /enterFight
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
-	HPER=49 # //heal on 34% - defaut
-	RPER=12 # //random if enemy have +12% hp - default
+	HPER=49 # /heal on 34% - defaut
+	RPER=12 # /random if enemy have +12% hp - default
 	ITVL=0.9
 	echo -e "\nClan fight"
 	echo $URL
@@ -10,7 +10,7 @@ _clanfight () {
 #	SRC=$(lynx -cfg=~/twm/cfg1 -source $URL/clanfight -useragent="$(shuf -n1 .ua)")
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/enterFight' | head -n1 | cut -d\' -f2)
 	echo -e " 👣 Entering...\n$ACCESS"
-# //wait
+# /wait
 	echo " 😴 Waiting..."
         EXIT=$(echo $SRC | grep -o 'clanfight/attack/')
 	START=`date +%M`
@@ -48,7 +48,7 @@ _clanfight () {
 	until [[ -z $EXIT ]] ; do
                 END=$(expr `date +%M` \- $START)
                 [[ $END -gt 5 ]] && break
-# //function random
+# /function random
 		_random () {
 			sleep $ITVL
 			echo '🔁'
@@ -62,7 +62,7 @@ _clanfight () {
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STN" -o user_agent="$(shuf -n1 .ua)")
 			_cfaccess
 		}
-# //function dodge
+# /function dodge
 		_dodge () {
 			sleep $ITVL
 			echo '🛡️'
@@ -76,7 +76,7 @@ _clanfight () {
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STN" -o user_agent="$(shuf -n1 .ua)")
 			_cfaccess
 		}
-# //heal - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /heal
 		if [[ $HP1 -lt $HEAL ]] ; then
 			echo "🆘 HP < $HPER%"
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HL" -o user_agent="$(shuf -n1 .ua)")
@@ -87,16 +87,16 @@ _clanfight () {
 			sleep $ITVL
 			_dodge
 			_random
-# //random - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /random
 		elif [[ -n $PRTCT || $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
 			_random
 			_dodge
-# //dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /dodge
 		else
 			_dodge
 		fi
 	done
-# //view - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /view
 	echo ""
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/clanfight -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 #	lynx -cfg=~/twm/cfg1 $URL/clanfight -useragent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
