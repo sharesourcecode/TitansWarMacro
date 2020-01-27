@@ -29,7 +29,7 @@ _undying () {
 		_access
 		sleep 2.6
 	done
-# //view
+# /view
 	echo ""
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/undying -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo -e "Undying (✔)"
