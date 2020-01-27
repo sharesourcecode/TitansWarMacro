@@ -33,12 +33,6 @@ _clancoliseum () {
 			echo '🔁'
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)")
 			_access
-			sleep $ITVL
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
-			_access
-			sleep $ITVL
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STONE" -o user_agent="$(shuf -n1 .ua)")
-			_access
 		}
 # /function dodge
 		_dodge () {
@@ -62,7 +56,6 @@ _clancoliseum () {
 			ITVL='2.5'
 			sleep $ITVL
 			_dodge
-			_random
 # /random
 		elif [[ -n $PRTCT || $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
 			_random

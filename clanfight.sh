@@ -3,7 +3,7 @@ _clanfight () {
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='49'
 	RPER='9'
-	ITVL='1'
+	ITVL='1.6'
 	echo -e "\nClan fight"
 	echo $URL
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/clanfight/?close=reward -o user_agent="$(shuf -n1 .ua)")
@@ -33,12 +33,6 @@ _clanfight () {
 			echo '🔁'
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)")
 			_access
-			sleep $ITVL
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
-			_access
-			sleep $ITVL
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STONE" -o user_agent="$(shuf -n1 .ua)")
-			_access
 		}
 # /function dodge
 		_dodge () {
@@ -62,7 +56,6 @@ _clanfight () {
 			ITVL='2.5'
 			sleep $ITVL
 			_dodge
-			_random
 # /random
 		elif [[ -n $PRTCT || $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
 			_random
