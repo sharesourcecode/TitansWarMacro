@@ -3,7 +3,7 @@ _coliseum () {
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='41'
 	RPER='9'
-	ITVL='1'
+	ITVL='1.6'
 	echo -e "\nColiseum"
 	echo $URL
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/coliseum/?end_fight=true -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
@@ -53,10 +53,10 @@ _coliseum () {
 			ITVL='2.5'
 			sleep $ITVL
 			_dodge
-			HP1=$HPFULL
-#			_random
+#			HP1=$HPFULL
 # /random
 		elif [[ -n $PRTCT || $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
+#		elif [[ -n $PRTCT || `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
 			_random
 			_dodge
 # /dodge
