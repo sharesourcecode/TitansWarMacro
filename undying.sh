@@ -13,10 +13,10 @@ _undying () {
 	until [[ -n $MANA ]] ; do
 		END=$(expr `date +%M` \- $START)
 		[[ $END -gt 3 ]] && break
-	echo -e " 💤 	..."
-	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
-	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/undying/' | head -n1 | cut -d\' -f2)
-	_access
+		echo -e " 💤 	..."
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/undying/' | head -n1 | cut -d\' -f2)
+		_access
 	done
 	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 	_access
