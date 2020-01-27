@@ -18,7 +18,7 @@ _coliseum () {
 	START=`date +%M`
 	while [[ -n $EXIT ]] ; do
                 END=$(expr `date +%M` \- $START)
-                [[ $END -gt 4 ]] && break
+                [[ $END -gt 6 ]] && break
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/coliseum -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/coliseum/' | head -n1 | cut -d\' -f2)
@@ -30,7 +30,7 @@ _coliseum () {
 	until [[ -z $OUTGATE && -z $ATK ]] ; do
 # /function random
                 END=$(expr `date +%M` \- $START)
-                [[ $END -gt 5 ]] && break
+                [[ $END -gt 6 ]] && break
 		_random () {
 			echo '🔁'
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)")
