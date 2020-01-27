@@ -31,7 +31,7 @@ _king () {
 	START=`date +%M`
 	until [[ -z $OUTGATE ]] ; do
 		END=$(expr `date +%M` \- $START)
-		[[ $END -gt 5 ]] && break
+		[[ $END -gt 10 ]] && break
 # /function random
 		_random () {
 			sleep $ITVL
