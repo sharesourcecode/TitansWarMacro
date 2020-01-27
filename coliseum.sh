@@ -26,12 +26,12 @@ _coliseum () {
 	done
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	_access
-	START=`date +%M`
-#	until [[ -z $OUTGATE && -z $ATK ]] ; do
-	END=$(expr `date +%M` \- $START)
-	until [[ $END -ge 5 ]] ; do
+#	START=`date +%M`
+	until [[ -z $ATK ]] ; do
+#	END=$(expr `date +%M` \- $START)
+#	until [[ $END -ge 5 ]] ; do
 # /function random
-		END=$(expr `date +%M` \- $START)
+#		END=$(expr `date +%M` \- $START)
 #                [[ $END -gt 7 ]] && break
 		_random () {
 			echo '🔁'
