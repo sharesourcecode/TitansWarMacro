@@ -24,7 +24,7 @@ _crono
 			_sleep
 			if [[ $MIN -ge 58 ]] ; then
 				_undying
-				break
+				sleep 300
 			fi
 		done
 		_crono
@@ -55,7 +55,7 @@ EOF`"&send_message=$SND1" >chat.txt
 #\
 				SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 				_clancoliseum
-				break
+				sleep 300
 			fi
 		done
 		_crono
@@ -80,7 +80,7 @@ EOF`"&send_message=$SND1" >chat.txt
 #\
 				SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 				_clanfight
-				break
+				sleep 300
 			fi
 		done
 		_crono
@@ -94,7 +94,7 @@ EOF`"&send_message=$SND1" >chat.txt
 			_sleep
 			if [[ $MIN -ge 28 && $MIN -le 30 ]] ; then
 				_king
-				break
+				sleep 600
 			fi
 		done
 		_crono
@@ -120,7 +120,7 @@ EOF`"&send_message=$SND1" >chat.txt
 #\
 			SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 			_altars
-			break
+			sleep 300
 		fi
 		_crono
 	else

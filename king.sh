@@ -3,7 +3,7 @@ _king () {
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='49'
 	RPER='1'
-	ITVL='0.9'
+	ITVL='1'
 	echo -e "\nKing"
 	echo $URL
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/king/enterGame -o user_agent="$(shuf -n1 .ua)")
@@ -83,4 +83,5 @@ _king () {
 #	lynx -cfg=~/twm/cfg1 $URL/king -useragent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo -e "King (✔)"
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
+	sleep 120
 }

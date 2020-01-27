@@ -27,6 +27,7 @@ _undying () {
 		echo -e " 🎲 hiting..."
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HIT" -o user_agent="$(shuf -n1 .ua)")
 		_access
-		sleep 5
+		sleep 2.6
 	done
+	sleep 60
 }

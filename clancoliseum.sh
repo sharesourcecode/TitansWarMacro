@@ -3,7 +3,7 @@ _clancoliseum () {
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='49'
 	RPER='9'
-	ITVL='2.5'
+	ITVL='1.6'
 	echo -e "\nClan coliseum"
 	echo $URL
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/clancoliseum/?close=reward -o user_agent="$(shuf -n1 .ua)")
@@ -77,4 +77,5 @@ _clancoliseum () {
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/clancoliseum -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo "Clan coliseum (✔)"
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
+	sleep 120
 }
