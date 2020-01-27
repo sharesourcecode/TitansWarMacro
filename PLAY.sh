@@ -18,9 +18,9 @@ _show () {
 		ENTERGAME=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterGame/' | head -n1 | cut -d\' -f2)
 		HIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'undying/hit/' | head -n1 | cut -d\' -f2)
 		MANA=$(echo $SRC | grep -o 'undying/mana/' | head -n1)
-		ATK=$(echo $SRC | sed 's/href=/\n/g' | grep 'coliseum/atk/' | head -n1 | cut -d\' -f2)
+		ATK=$(echo $SRC | sed 's/href=/\n/g' | grep '/atk/' | head -n1 | cut -d\' -f2)
 		ATTACK=$(echo $SRC | sed 's/href=/\n/g' | grep '/attack/' | head -n1 | cut -d\' -f2)
-		ATKRND=$(echo $SRC | sed 's/href=/\n/g' | grep 'coliseum/atkrnd' | head -n1 | cut -d\' -f2)
+		ATKRND=$(echo $SRC | sed 's/href=/\n/g' | grep '/atkrnd/' | head -n1 | cut -d\' -f2)
 		ATTACKRANDOM=$(echo $SRC | sed 's/href=/\n/g' | grep '/attackrandom/' | head -n1 | cut -d\' -f2)
 		KINGATK=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/kingatk/' | head -n1 | cut -d\' -f2)
 		DODGE=$(echo $SRC | sed 's/href=/\n/g' | grep '/dodge/' | head -n1 | cut -d\' -f2)
@@ -48,6 +48,7 @@ while true ; do
 #		_torstop
 	fi
 	_play
+	_sync
 done
 kill -9 $$
 exit
