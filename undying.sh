@@ -23,7 +23,7 @@ _undying () {
 	START=`date +%M`
 	while [[ -n $OUTGATE ]] ; do
 		END=$(expr `date +%M` \- $START)
-		[[ $END -gt 5 ]] && break
+		[[ $END -gt 6 ]] && break
 		echo -e " 🎲 hiting..."
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HIT" -o user_agent="$(shuf -n1 .ua)")
 		_access
