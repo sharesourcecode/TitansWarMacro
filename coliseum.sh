@@ -50,11 +50,11 @@ _coliseum () {
 			echo "🆘 HP < $HPER%"
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
 			_access
-			HP1=$HPFULL
 			ITVL='2.5'
 			sleep $ITVL
 			_dodge
-			_random
+			HP1=$HPFULL
+#			_random
 # /random
 		elif [[ -n $PRTCT || $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
 			_random
