@@ -30,7 +30,7 @@ _coliseum () {
 	until [[ -z $OUTGATE && -z $ATK ]] ; do
 # /function random
                 END=$(expr `date +%M` \- $START)
-                [[ $END -gt 4 ]] && break
+                [[ $END -gt 5 ]] && break
 		_random () {
 			echo '🔁'
 			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)")
