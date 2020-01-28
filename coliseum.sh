@@ -3,7 +3,7 @@ _coliseum () {
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER=41 # //heal on 34% - defaut
 	RPER=12 # //random if enemy have +12% hp - default
-	ITVL=0.9
+	ITVL=1.6
 	CLSM=( 'coliseum/atk' 'coliseum/atkrnd' 'coliseum/dodge' 'coliseum/heal' 'coliseum/leaveFight' 'coliseum/enterFight' )
 	echo -e "\nColiseum"
 	echo $URL
@@ -78,7 +78,7 @@ _coliseum () {
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
 			HP1=$HPFULL
-			ITVL=2.5
+			ITVL=2.6
 			sleep $ITVL
 			_dodge
 			_random
