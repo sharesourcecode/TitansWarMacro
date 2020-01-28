@@ -1,101 +1,54 @@
 _coliseum () {
-# //enterFight
+# /enterFight
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
-	PAGE=coliseum
-	HPER='41' # //heal on 34% - defaut
-	RPER='12' # //random if enemy have +12% hp - default
-	ITVL='1.6'
-	CLSM=( 'coliseum/atk' 'coliseum/atkrnd' 'coliseum/dodge' 'coliseum/heal' 'coliseum/leaveFight' 'coliseum/enterFight' )
-	echo -e "\n$PAGE"
+	HPER='48'
+	RPER='12'
+	ITVL='1.7'
+	echo -e "\nColiseum"
 	echo $URL
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/coliseum/?end_fight=true -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
-#	lynx -cfg=~/twm/cfg1 -debug $URL/coliseum/?end_fight=true -useragent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
-	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)")
-#	SRC=$(lynx -cfg=~/twm/cfg1 -source $URL/$PAGE -useragent="$(shuf -n1 .ua)")
-	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[5]}" | head -n1 | cut -d\' -f2)
+	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/coliseum -o user_agent="$(shuf -n1 .ua)")
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterFight/' | head -n1 | cut -d\' -f2)
 	echo -e " 👣 Entering...\n$ACCESS"
 	SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' ""$URL$ACCESS"?end_fight=true" -o user_agent="$(shuf -n1 .ua)")
-#	SRC=$(lynx -cfg=~/twm/cfg1 -source ""$URL$ACCESS"?end_fight=true" -useragent="$(shuf -n1 .ua)")
-# //wait
+# /wait
 	echo " 😴 Waiting..."
-        EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[4]}" | head -n1 | cut -d\' -f2)
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/coliseum/' | head -n1 | cut -d\' -f2)
+        EXIT=$(echo $SRC | grep -o '/leaveFight/' | head -n1)
 	START=`date +%M`
 	while [[ -n $EXIT ]] ; do
                 END=$(expr `date +%M` \- $START)
-                [[ $END -gt 4 ]] && break
+                [[ $END -gt 7 ]] && break
 		echo -e " 💤	...\n$ACCESS"
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)")
-#		SRC=$(lynx -cfg=~/twm/cfg=1 -source $URL/$PAGE -useragent="$(shuf -n1 .ua)")
-		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "$PAGE" | head -n1 | cut -d\' -f2)
-		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[4]}" | head -n1 | cut -d\' -f2)
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URL/coliseum -o user_agent="$(shuf -n1 .ua)")
+		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/coliseum/' | head -n1 | cut -d\' -f2)
+		EXIT=$(echo $SRC | grep -o '/leaveFight/' | head -n1)
 	done
-	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[2]}" | head -n1 | cut -d\' -f2)
-	EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
-	WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
-	HEAL=$(expr $FULL \* $HPER \/ 100)
-	_show () {
-		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
-		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
-		echo -e "You: $HP1 - $HP2 :enemy\n$ACCESS"
-	}
-	_show
-	START=`date +%M`
-	while [[ -n $EXIT && -n $ACCESS ]] ; do
-# //function random - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                END=$(expr `date +%M` \- $START)
-                [[ $END -gt 5 ]] && break
-		_random () {
-			sleep $ITVL
-			echo '🔁'
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
-#			SRC=$(lynx -cfg=~/twm/cfg1 -source -o "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
-			echo $URL
-			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[1]}" | head -n1 | cut -d\' -f2)
-			_show
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
-			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
-		}
-# //function dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		_dodge () {
-			echo '🛡️'
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
-#			SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
-			echo $URL
-			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[2]}" | head -n1 | cut -d\' -f2)
-			_show
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
-			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
-			sleep $ITVL
-		}
-# //heal - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#	    if [[ $WDRED == dred && $HP1 -lt $HEAL ]] ; then
-		if [[ $HP1 -lt $HEAL ]] ; then
-			echo "🆘 HP < $HPER%"
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
-#			SRC=$(lynx -cfg=~/twm/cfg1 -source "$URL$ACCESS" -useragent="$(shuf -n1 .ua)")
-			echo $URL
-			ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[3]}" | head -n1 | cut -d\' -f2)
-			_show
-			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
-			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
-			ITVL='2.5'
-			sleep $ITVL
-			HP1=$HPFULL
-# //random - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		elif [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
-			_random
-			_dodge
-# //dodge - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		else
-			_dodge
-		fi
+	_access
+	until [[ -n $BEXIT ]] ; do
+# /atk
+		echo '🎯' && HP3=$HP1 && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATK" -o user_agent="$(shuf -n1 .ua)")
+		_access
+# /heal
+		[[ $HP1 -le $HLHP ]] && ITVL='2.5' && echo "🆘 HP < $HPER%" && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)") ; \
+		_access
+# /random
+		[[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] && sleep $ITVL && echo '🔁' && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)") ; \
+		_access
+# /dodge
+		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
+		_access
+		sleep $ITVL
 	done
-# //view - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# /view
 	echo ""
-	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/$PAGE -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
-#	lynx -cfg=~/twm/cfg1 $URL/$PAGE -useragent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
-	echo "$PAGE (✔)"
+	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/coliseum -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d"
+	echo "Coliseum (✔)"
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
 }
 

@@ -6,10 +6,10 @@ cd ~/twm
 . campaign.sh ; . play.sh ; . altars.sh ; . clanfight.sh
 . clancoliseum.sh ; . king.sh ; . undying.sh ; . clandungeon.sh
 . trade.sh ; . career.sh
-# /fuctions
+# /functions
 _show () {
 		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
-		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n3 | tail -1 | cut -d\< -f1 |cut -d\; -f2 | tr -cd '[[:digit:]]')
+		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep "hp" | head -n3 | tail -n1 | cut -d\< -f1 | cut -d\; -f2 | tr -cd "[[:digit:]]")
 		echo $URL
 		echo -e "You: $HP1 - $HP2 :enemy\n"
 	}
@@ -27,6 +27,7 @@ _show () {
 		HEAL=$(echo $SRC | sed 's/href=/\n/g' | grep '/heal/' | head -n1 | cut -d\' -f2)
 		STONE=$(echo $SRC | sed 's/href=/\n/g' | grep '/stone/' | head -n1 | cut -d\' -f2)
 		GRASS=$(echo $SRC | sed 's/href=/\n/g' | grep '/grass/' | head -n1 | cut -d\' -f2)
+		BEXIT=$(echo $SRC | grep -o 'user.png')
 		OUTGATE=$(echo $SRC | grep -o 'out_gate')
 		LEAVEFIGHT=$(echo $SRC | sed 's/href=/\n/g' | grep '/leaveFight/' | head -n1 | cut -d\' -f2)
 		WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
@@ -47,7 +48,7 @@ while true ; do
 #		_torstop
 	fi
 	_play
-	_sync
+#	_sync
 done
 kill -9 $$
 exit
