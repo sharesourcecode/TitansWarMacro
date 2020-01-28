@@ -36,7 +36,6 @@ _show () {
 	}
 rpt=0
 _requeriments
-#more ~/twm/LICENSE
 ts=20
 #_torstop
 _loginlogoff
