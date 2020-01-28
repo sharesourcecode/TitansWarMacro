@@ -79,10 +79,9 @@ _coliseum () {
 			_show
 			EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${CLSM[0]}" | head -n1 | cut -d\' -f2)
 			WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white
-			HP1=$HPFULL
 			ITVL='2.5'
 			sleep $ITVL
-			_dodge
+			HP1=$HPFULL
 # //random - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		elif [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] ; then
 			_random
