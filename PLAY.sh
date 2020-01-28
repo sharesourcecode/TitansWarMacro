@@ -48,7 +48,7 @@ while true ; do
 #		_torstop
 	fi
 	_play
-#	_sync
+	_sync
 done
 kill -9 $$
 exit
