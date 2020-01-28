@@ -6,7 +6,7 @@ _requeriments () {
 	cd $HOME/twm
 # //update script and dependences - - - - - - - - - - - - - -
 	echo -e "\nUpgrading..."
-	apt install w3m lynx tor torsocks curl -y || apt-cyg install w3m lynx tor torsocks -y
+	apt install w3m dos2unix lynx tor torsocks curl -y || sudo apt install w3m dos2unix -y
 	echo -e "👉 Please wait...☕👴"
 _sync () {
 	curl https://github.com/sharesourcecode/twm/raw/master/LICENSE -O -L &> /dev/null &
