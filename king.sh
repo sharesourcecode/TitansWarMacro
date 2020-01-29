@@ -33,7 +33,7 @@ _king () {
 		END=$(expr `date +%M` \- $START)
 		[[ $END -gt 10 ]] && break
 # /kingatk
-		[[ -n $KINGATK ]] && echo '🎯' && HP3=$HP1 && \
+		[[ -n $KINGATK ]] && echo '👑' && HP3=$HP1 && \
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$KINGATK" -o user_agent="$(shuf -n1 .ua)") && \
 		_access
 # /attack
