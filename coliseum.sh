@@ -2,7 +2,7 @@ _coliseum () {
 # /enterFight
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='48'
-	RPER='12'
+	RPER='10'
 	ITVL='1.7'
 	echo -e "\nColiseum"
 	echo $URL
@@ -36,7 +36,7 @@ _coliseum () {
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)") ; \
 		_access
 # /random
-		[[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -lt $HP2 ]] && sleep $ITVL && echo '🔁' && \
+		[[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 ]] && sleep $ITVL && echo '🔁' && \
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)") ; \
 		_access
 # /dodge

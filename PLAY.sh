@@ -11,7 +11,7 @@ _show () {
 		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep "hp" | head -n3 | tail -n1 | cut -d\< -f1 | cut -d\; -f2 | tr -cd "[[:digit:]]")
 		echo $URL
-		echo -e "You: $HP1 - $HP2 :enemy\n"
+		[[ -n $HP2 ]] && echo -e "You: $HP1 - $HP2 :enemy\n"
 	}
 	_access () {
 		ENTERFIGHT=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterFight/' | head -n1 | cut -d\' -f2)
@@ -48,7 +48,7 @@ while true ; do
 #		_torstop
 	fi
 	_play
-	_sync
+#	_sync
 done
 kill -9 $$
 exit
