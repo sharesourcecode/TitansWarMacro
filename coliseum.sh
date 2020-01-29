@@ -26,7 +26,7 @@ _coliseum () {
 	done
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	_access
-	until [[ -n $BEXIT ]] ; do
+	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 # /atk
 		echo '🎯' && HP3=$HP1 && \
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATK" -o user_agent="$(shuf -n1 .ua)")

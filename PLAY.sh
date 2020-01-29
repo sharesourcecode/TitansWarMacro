@@ -10,8 +10,8 @@ cd ~/twm
 _show () {
 		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep "hp" | head -n3 | tail -n1 | cut -d\< -f1 | cut -d\; -f2 | tr -cd "[[:digit:]]")
-		echo $URL
-		[[ -n $HP2 ]] && echo -e "You: $HP1 - $HP2 :enemy\n"
+		[[ -n $HP1 && -n $HP2 ]] && echo -e "$URL\nYou: $HP1 - $HP2 :enemy\n"
+		[[ -z $HP1 && -n $HP2 ]] && echo -e "$URL\nYou: 💀 - $HP2 :enemy\n"
 	}
 	_access () {
 		ENTERFIGHT=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterFight/' | head -n1 | cut -d\' -f2)
