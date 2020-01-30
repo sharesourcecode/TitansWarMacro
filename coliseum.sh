@@ -26,22 +26,23 @@ _coliseum () {
 	done
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	_access
+	HP3=$HP1
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 # /atk
-		echo '🎯' && HP3=$HP1 && \
+		echo '🎯' && \
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATK" -o user_agent="$(shuf -n1 .ua)")
 		_access
 # /heal
-		[[ $HP1 -le $HLHP ]] && ITVL='2.5' && echo "🆘 HP < $HPER%" && \
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)") ; \
-		_access
-# /random
-		[[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 ]] && sleep $ITVL && echo '🔁' && \
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)") ; \
+		[[ $HP1 -le $HLHP ]] && ITVL='2.6' && echo "🆘 HP < $HPER%" && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)") && \
 		_access
 # /dodge
-		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
+		[[ $HP3 -ne $HP1 ]] && echo '🛡️' && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
+		HP3=$HP1 && _access
+# /random
+		[[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 ]] && sleep $ITVL && echo '🔁' && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)") && \
 		_access
 		sleep $ITVL
 	done

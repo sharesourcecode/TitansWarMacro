@@ -23,13 +23,20 @@ _clancoliseum () {
 	done
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	_access
+	HP3=$HP1
 	START=`date +%M`
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		END=$(expr `date +%M` \- $START)
 		[[ $END -gt 6 ]] && break
+# /dodge
+		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
+		_access && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)") && \
+		_access
 # /attack
-		echo '🎯' && HP3=$HP1 && \
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATTACK" -o user_agent="$(shuf -n1 .ua)")
+		echo '🎯' && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATTACK" -o user_agent="$(shuf -n1 .ua)") &&
 		_access
 # /heal
 		[[ $HP1 -le $HLHP ]] && ITVL='2.6' && echo "🆘 HP < $HPER%" && \
@@ -38,12 +45,6 @@ _clancoliseum () {
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)") && \
 		_access && \
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STONE" -o user_agent="$(shuf -n1 .ua)") && \
-		_access
-# /dodge
-		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
-		_access && \
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)") && \
 		_access
 # /random
 		[[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 ]] && sleep $ITVL && echo '🔁' && \

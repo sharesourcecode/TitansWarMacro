@@ -36,11 +36,13 @@ _king () {
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)") && \
 		_access
 # /kingatk
-		[[ -n $KINGATK ]] && echo '🎯' && HP3=$HP1 && \
+		[[ -n $KINGATK ]] && echo '🎯' && \
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$KINGATK" -o user_agent="$(shuf -n1 .ua)") && \
+		_access && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STONE" -o user_agent="$(shuf -n1 .ua)") && \
 		_access
 # /attack
-		[[ -z $KINGATK ]] && echo '🎯' && HP3=$HP1 && \
+		[[ -z $KINGATK ]] && echo '🎯' && \
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATTACK" -o user_agent="$(shuf -n1 .ua)")
 		_access
 # /heal

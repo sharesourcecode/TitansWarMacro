@@ -23,10 +23,17 @@ _clanfight () {
 	done
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	_access
+	HP3=$HP1
 	START=`date +%M`
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		END=$(expr `date +%M` \- $START)
-		[[ $END -gt 7 ]] && break
+		[[ $END -gt 6 ]] && break
+# /dodge
+		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
+		_access && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)") && \
+		_access
 # /attack
 		echo '🎯' && HP3=$HP1 && \
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATTACK" -o user_agent="$(shuf -n1 .ua)")
@@ -44,12 +51,6 @@ _clanfight () {
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)") && \
 		_access && \
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STONE" -o user_agent="$(shuf -n1 .ua)") && \
-		_access
-# /dodge
-		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
-		_access && \
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)") && \
 		_access
 		sleep $ITVL
 	done
