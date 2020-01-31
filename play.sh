@@ -11,6 +11,7 @@ _crono
 # /game time
 	if [[ $HOUR -lt 8 || $HOUR -eq 23 ]] ; then
 		_all
+		_coliseum
 		_sleep
 		_crono
 # /Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
@@ -124,7 +125,6 @@ EOF`"&send_message=$SND1" >chat.txt
 		_crono
 	else
 		_all
-		_coliseum
 		_sleep
 		_crono
 	fi
