@@ -5,7 +5,6 @@ _play () {
 		_career
 		_clandungeon
 		_trade
-		_coliseum
 #		_torstop
 	}
 _crono
@@ -125,6 +124,7 @@ EOF`"&send_message=$SND1" >chat.txt
 		_crono
 	else
 		_all
+		_coliseum
 		_sleep
 		_crono
 	fi
