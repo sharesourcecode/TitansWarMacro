@@ -29,6 +29,10 @@ _altars () {
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		END=$(expr `date +%M` \- $START)
 		[[ $END -gt 10 ]] && break
+# /dodge
+		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
+		_access
 # /attack
 		echo '🎯' && \
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATTACK" -o user_agent="$(shuf -n1 .ua)")
@@ -37,10 +41,6 @@ _altars () {
 		[[ $HP1 -le $HLHP ]] && ITVL='2.6' && echo "🆘 HP < $HPER%" && \
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)") && \
 		_access
-# /dodge
-		[[ $HP3 -ne $HP1 ]] && echo '🛡️' && \
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
-		_access && HP3=$HP1
 # /grass
 		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP3 ]] && echo '🙌' && \
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)") && \
