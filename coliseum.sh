@@ -3,7 +3,7 @@ _coliseum () {
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='48'
 	RPER='10'
-	ITVL='1.7'
+	ITVL='1.8'
 	echo -e "\nColiseum"
 	echo $URL
 	w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/coliseum/?end_fight=true -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
