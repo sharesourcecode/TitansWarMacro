@@ -34,7 +34,7 @@ _crono
 #		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URLhttp/flagfight/enterFight -o user_agent="$(shuf -n1 .ua)")
 #		_crono
 # /Clan coliseum 10:30:00 - 15:00:00
-	elif [[ $HOUR -eq 10 && $MIN -ge 15 && $MIN -le 30 || $HOUR -eq 14 && $MIN -ge 45 ]] ; then
+	elif [[ -n $CLD && $HOUR -eq 10 && $MIN -ge 15 && $MIN -le 30 || -n $CLD && $HOUR -eq 14 && $MIN -ge 45 ]] ; then
 		START=`date +%M`
 		while [[ $MIN -ge 15 && $MIN -le 30 || $MIN -ge 45 && $MIN -le 59 ]] ; do
 	                END=$(expr `date +%M` \- $START)
@@ -60,7 +60,7 @@ EOF`"&send_message=$SND1" >chat.txt
 		done
 		_crono
 # /Clan tournament 11:00:00 - 19:00:00
-	elif [[ $HOUR -eq 10 && $MIN -ge 45 || $HOUR -eq 18 && $MIN -ge 45 ]] ; then
+	elif [[ -n $CLD && $HOUR -eq 10 && $MIN -ge 45 || -n $CLD && $HOUR -eq 18 && $MIN -ge 45 ]] ; then
 		START=`date +%M`
 		while [[ $MIN -ge 45 && $MIN -le 59 ]] ; do
         	        END=$(expr `date +%M` \- $START)
@@ -99,7 +99,7 @@ EOF`"&send_message=$SND1" >chat.txt
 		done
 		_crono
 # /Ancient Altars 14:00:00 - 21:00:00
-	elif [[ $HOUR -eq 13 && $MIN -ge 45 || $HOUR -eq 20 && $MIN -ge 45 ]] ; then
+	elif [[ -n $CLD && $HOUR -eq 13 && $MIN -ge 45 || -n $CLD && $HOUR -eq 20 && $MIN -ge 45 ]] ; then
 		START=`date +%M`
 		while [[ $MIN -ge 45 && $MIN -le 55 ]] ; do
         	        END=$(expr `date +%M` \- $START)
