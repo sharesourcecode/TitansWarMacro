@@ -4,7 +4,7 @@
 
 Script macros para Titans war mobile game em todos servidores.
 
-1. Abra Termux app Android e digite ou cole:
+1. Abra o Termux app no Android e digite ou cole confirmando com a tecla ENTER:
 
 **apt install git -y**
 
