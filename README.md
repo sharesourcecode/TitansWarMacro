@@ -9,14 +9,14 @@ Script macros para Titans war mobile game em todos servidores.
 **apt install git -y**
 
 
-2. Digite ou cole estes dois comandos, um por vez para baixar o twm, confirme-os com ENTER. O link faz parte do segundo comando:
+2. Digite ou cole estes dois comandos, um por vez para baixar o twm, confirme-os com ENTER(O link faz parte do segundo comando):
 
 **cd $HOME**
 
 **git clone https://github.com/sharesourcecode/twm.git**
 
 
-3. Para executar o twm:
+3. Para executar o twm(ENTER para confirmar):
 
 **bash $HOME/twm/PLAY.sh**
 
