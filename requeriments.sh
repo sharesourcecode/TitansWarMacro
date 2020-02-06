@@ -32,7 +32,7 @@ _sync () {
 	curl https://github.com/sharesourcecode/twm/raw/master/undying.sh -O -L &> /dev/null && \
 	dos2unix *.sh &> /dev/null
 }
-#_sync
+_sync
 	sleep 1 && reset; clear
 	echo -e "Successful updates!\n"
 # /user agents to $HOME/.tmp/.ua
