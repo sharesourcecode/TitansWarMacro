@@ -1,7 +1,9 @@
 # /arena
 function _arena () {
 	PAC=( 'arena/attack' 'lab/wizard' ) #Page:Action:Condition
+	_clanid
 	if [[ -n $CLD ]]; then
+		echo "Clan ID: $CLD"
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/take/3" -o user_agent="$(shuf -n1 .ua)")
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/help/3" -o user_agent="$(shuf -n1 .ua)")
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/take/4" -o user_agent="$(shuf -n1 .ua)")

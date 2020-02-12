@@ -2,7 +2,9 @@
 # /career/attack/?r=8781779
 _career () {
 	echo "Checking career..."
+	_clanid
 	if [[ -n $CLD ]]; then
+		echo "Clan ID: $CLD"
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/take/6" -o user_agent="$(shuf -n1 .ua)")
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/help/6" -o user_agent="$(shuf -n1 .ua)")
 	fi
