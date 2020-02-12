@@ -1,7 +1,7 @@
 # /arena
 function _arena () {
 	PAC=( 'arena/attack' 'lab/wizard' ) #Page:Action:Condition
-	if [[ -z $CLD ]] ; then
+	if [[ -n $CLD ]]; then
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/take/3" -o user_agent="$(shuf -n1 .ua)")
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/help/3" -o user_agent="$(shuf -n1 .ua)")
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/take/4" -o user_agent="$(shuf -n1 .ua)")
@@ -16,7 +16,7 @@ function _arena () {
 		echo "$ACCESS"
 		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep "${PAC[1]}" | head -n1 | cut -d\' -f2) #/lab/wizard/potion/1234567*/?ref=/arena/
 	done
-	if [[ -z $CLD ]] ; then
+	if [[ -n $CLD ]]; then
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/end/3" -o user_agent="$(shuf -n1 .ua)")
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/deleteHelp/3" -o user_agent="$(shuf -n1 .ua)")
 		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/end/4" -o user_agent="$(shuf -n1 .ua)")
