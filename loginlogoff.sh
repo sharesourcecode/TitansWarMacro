@@ -2,7 +2,7 @@ _loginlogoff () {
 # /login/logoff
 	ACC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
 #	ACC=$(lynx -cfg=~/twm/cfg1 "$URL/user" -useragent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
-	[[ -n $ACC ]] && i=10 && \
+	[[ -n $ACC ]] && i=5 && \
           until [[ $i -lt 1 ]]; do
 		clear
 		echo -e "[Wait to $ACC... ("$i"s) - ENTER to other account] \n"
