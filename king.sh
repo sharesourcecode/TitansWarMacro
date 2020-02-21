@@ -65,7 +65,7 @@ _king () {
 	echo "King (✔)"
 	SRC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
 	sleep 30
-	_coliseum
+	_all
 }
 
 
