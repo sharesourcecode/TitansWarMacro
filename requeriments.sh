@@ -42,8 +42,11 @@ _requeriments () {
 	dos2unix ~/twm/.ua &> /dev/null
 	cp ~/twm/.ua ~/.tmp/.ua &> /dev/null
 # /servers
-	echo -e " 1) 🇬🇧 English, Global: Titan's War online\n 2) 🇷🇺 Русский: Битва Титанов онлайн\n 3) 🇵🇱 Polski: Wojna Tytanów online\n 4) 🇩🇪 Deutsch: Krieg der Titanen online\n 5) 🇪🇸 Español: Guerra de Titanes online\n 6) 🇧🇷 Brazil, 🇵🇹 Português: Furia de Titãs online\n 7) 🇮🇹 Italiano: Guerra di Titani online\n 8) 🇫🇷 Français: Combat des Titans online\n 9) 🇷🇴 Română: Războiul Titanilor online\n10) 🇷🇸 Srpski: Rat Titana online\n11) 🇨🇳 中文, Chinese: 泰坦之战\n12) 🇮🇩 Indonesian: Titan's War Indonesia\n13) 🇮🇳 India, English: Titan's War India\n0) ❌ Cancel\n"
-	read -p "Select number Server[1 to 13]: " -e -n 2 OP
+	_server () {
+		echo -e " 1) 🇬🇧 English, Global: Titan's War online\n 2) 🇷🇺 Русский: Битва Титанов онлайн\n 3) 🇵🇱 Polski: Wojna Tytanów online\n 4) 🇩🇪 Deutsch: Krieg der Titanen online\n 5) 🇪🇸 Español: Guerra de Titanes online\n 6) 🇧🇷 Brazil, 🇵🇹 Português: Furia de Titãs online\n 7) 🇮🇹 Italiano: Guerra di Titani online\n 8) 🇫🇷 Français: Combat des Titans online\n 9) 🇷🇴 Română: Războiul Titanilor online\n10) 🇷🇸 Srpski: Rat Titana online\n11) 🇨🇳 中文, Chinese: 泰坦之战\n12) 🇮🇩 Indonesian: Titan's War Indonesia\n13) 🇮🇳 India, English: Titan's War India\n0) ❌ Cancel\n"
+		read -p "Select number Server[1 to 13]: " -e -n 2 OP
+	}
+	_server
 	case $OP in
 		(1) URL='tiwar.net' ;;
 
@@ -73,7 +76,7 @@ _requeriments () {
 
 		(0) kill -9 $$ ;;
 
-		(*) echo -e "nInvalid optionn"; exit 0 ;;
+		(*) clear; echo -e "Invalid option: $(echo $OP)"; _server ;;
 	esac
 	clear
 }
