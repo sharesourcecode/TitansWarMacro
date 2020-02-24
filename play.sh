@@ -1,5 +1,6 @@
 _play () {
 	_all () {
+		_cave
 		_arena
 		_campaign
 		_career
