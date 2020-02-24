@@ -9,6 +9,7 @@ _requeriments () {
 	apt install w3m curl -y || sudo apt install w3m curl -y
 	echo -e "👉 Please wait...☕👴"
 	_sync () {
+		curl https://github.com/sharesourcecode/twm/raw/master/cave.sh -O -L &> /dev/null &
 		curl https://github.com/sharesourcecode/twm/raw/master/LICENSE -O -L &> /dev/null &
 		curl https://github.com/sharesourcecode/twm/raw/master/PLAY.sh -O -L &> /dev/null &
 		curl https://github.com/sharesourcecode/twm/raw/master/README.md -O -L &> /dev/null &
