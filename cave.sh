@@ -24,28 +24,35 @@ function _cave () {
 	until [[ $num -eq 8 ]]; do
 		if [[ -n CGTHR ]]; then
 			SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$AGTHR" -o user_agent="$(shuf -n1 .ua)")
+			echo $AGTHR
 			_condition
 			_action
 		elif [[ -n CSPDP ]]; then
 			SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ASPDP" -o user_agent="$(shuf -n1 .ua)")
+			echo $ASPDP
 			_condition
 			_action
 		elif [[ -n CDWN ]]; then
 			SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ADWN" -o user_agent="$(shuf -n1 .ua)")
+			echo $ADWN
 			_condition
 			_action
 			num=$[$num+1]
+			echo $num
 		elif [[ -n CTTCK ]]; then
 			SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ATTCK" -o user_agent="$(shuf -n1 .ua)")
+			echo $ATTCK
 			_condition
 			_action
 			SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL/cave/runaway" -o user_agent="$(shuf -n1 .ua)")
 			_condition
 			_action
 			SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ADWN" -o user_agent="$(shuf -n1 .ua)")
+			echo $ADWN
 			_condition
 			_action
 			num=$[$num-1]
+			echo $num
 		fi
 	done
 	if [[ -n $CLD ]]; then
