@@ -13,8 +13,8 @@ function _cave () {
 		ACTION=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | cut -d\' -f2 | tr -cd "[[:alpha:]]")
 	}
 	_condition
-	num=0
-	until [[ $num -eq 9 ]]; do
+	num=8
+	until [[ $num -eq 0 ]]; do
 		echo $num
 		SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL/cave/" -o user_agent="$(shuf -n1 .ua)")
 		_condition
@@ -24,9 +24,9 @@ function _cave () {
 			(cavespeedUpr)
 			SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS2" -o user_agent="$(shuf -n1 .ua)") ;;
 			(cavedownr|cavedownrclanbuiltprivateUpgradetruerrefcave)
-			num=$[$num+1] ; SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$DOWN" -o user_agent="$(shuf -n1 .ua)") ;;
+			num=$[$num-1] ; SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$DOWN" -o user_agent="$(shuf -n1 .ua)") ;;
 			(caveattackrcaverunawayr)
-			num=$[$num+1] ; SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS1" -o user_agent="$(shuf -n1 .ua)") ; SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL/cave/runaway" -o user_agent="$(shuf -n1 .ua)") ;;
+			num=$[$num-1] ; SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS1" -o user_agent="$(shuf -n1 .ua)") ; SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL/cave/runaway" -o user_agent="$(shuf -n1 .ua)") ;;
 		esac
 		echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n2 | tail -n1 | cut -d\' -f2
 	done
