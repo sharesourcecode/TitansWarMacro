@@ -15,18 +15,20 @@ function _cave () {
 	_condition
 	num=8
 	until [[ $num -eq 0 ]]; do
-		echo $num
 		SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL/cave/" -o user_agent="$(shuf -n1 .ua)")
 		_condition
 		case $ACTION in
-			(cavechancercavegatherrcavedownr)
-			SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS2" -o user_agent="$(shuf -n1 .ua)") ;;
-			(cavespeedUpr)
+			(cavechancercavegatherrcavedownr|cavespeedUpr)
 			SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS2" -o user_agent="$(shuf -n1 .ua)") ;;
 			(cavedownr|cavedownrclanbuiltprivateUpgradetruerrefcave)
-			num=$[$num-1] ; SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$DOWN" -o user_agent="$(shuf -n1 .ua)") ;;
+			num=$[$num-1] ;
+			SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$DOWN" -o user_agent="$(shuf -n1 .ua)") ;
+			echo $num ;;
 			(caveattackrcaverunawayr)
-			num=$[$num-1] ; SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS1" -o user_agent="$(shuf -n1 .ua)") ; SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL/cave/runaway" -o user_agent="$(shuf -n1 .ua)") ;;
+			num=$[$num-1] ;
+			SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS1" -o user_agent="$(shuf -n1 .ua)") ;
+			SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL/cave/runaway" -o user_agent="$(shuf -n1 .ua)") ;
+			echo $num ;;
 		esac
 		echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n2 | tail -n1 | cut -d\' -f2
 	done
