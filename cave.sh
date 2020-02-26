@@ -15,7 +15,7 @@ function _cave () {
 		w3m -cookie "$URL/clan/$CLD/quest/help/5" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
 	fi
 	_condition
-	num=8
+	num=9
 	until [[ $num -eq 0 || -z $MEGA ]]; do
 		_condition
 		case $ACTION in
