@@ -1,21 +1,22 @@
 # /cave
 function _cave () {
 	_clanid
-	if [[ -n $CLD ]]; then
-		w3m -cookie "$URL/clan/$CLD/quest/take/5" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
-		w3m -cookie "$URL/clan/$CLD/quest/help/5" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
-	fi
-	SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL/cave/" -o user_agent="$(shuf -n1 .ua)")
 	_condition () {
+		SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL/cave/" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS1=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n1 | cut -d\' -f2)
 		DOWN=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/down' | cut -d\' -f2)
 		ACCESS2=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n2 | tail -n1 | cut -d\' -f2)
 		ACTION=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | cut -d\' -f2 | tr -cd "[[:alpha:]]")
+		MEGA=$(echo $SRC | sed 's/src=/\n/g' | grep '/images/icon/silver.png' | grep "'s'" | tail -n1 | grep -o 'M')
 	}
 	_condition
+	if [[ -n $MEGA && -n $CLD ]]; then
+		w3m -cookie "$URL/clan/$CLD/quest/take/5" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
+		w3m -cookie "$URL/clan/$CLD/quest/help/5" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
+	fi
+	_condition
 	num=8
-	until [[ $num -eq 0 ]]; do
-		SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL/cave/" -o user_agent="$(shuf -n1 .ua)")
+	until [[ $num -eq 0 || -z $MEGA ]]; do
 		_condition
 		case $ACTION in
 			(cavechancercavegatherrcavedownr|cavespeedUpr)
@@ -38,3 +39,4 @@ function _cave () {
 	fi
 	echo -e "cave (✔)\n"
 }
+
