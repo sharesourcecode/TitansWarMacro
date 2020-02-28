@@ -14,7 +14,7 @@ _play () {
 		SND1="Enviar"
 #/
 echo -e "r=$ACCESS&text="`cat << EOF
-I'm use macro bot tinyurl.com/ta6wzxf
+I use macro bot tinyurl.com/ta6wzxf
 EOF`"&send_message=$SND1" >mail.txt
 		[[ -n $mail ]] && SRC=$(w3m -cookie -debug -post mail.txt -dump_source -o accept_encoding=='*;q=0' "$URL/mail/$USID" -o user_agent="$(shuf -n1 .ua)")
 #\
