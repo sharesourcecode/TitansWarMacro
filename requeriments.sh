@@ -56,7 +56,7 @@ _requeriments () {
 
 		(5) URL='guerradetitanes.net' ;;
 
-		(6|fu) URL='furiadetitas.net' ;;
+		(6|fu) URL='furiadetitas.net' ; mail=1 ;;
 
 		(7) URL='guerradititani.net' ;;
 
