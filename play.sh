@@ -6,6 +6,18 @@ _play () {
 		_career
 		_clandungeon
 		_trade
+
+#mail
+		USID=1597588
+		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom/" -o user_agent="$(shuf -n1 .ua)")
+		ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
+		SND1="Enviar"
+#/
+echo -e "r=$ACCESS&text="`cat << EOF
+I'm use macro bot tinyurl.com/ta6wzxf
+EOF`"&send_message=$SND1" >mail.txt
+		[[ -n $mail ]] && SRC=$(w3m -cookie -debug -post mail.txt -dump_source -o accept_encoding=='*;q=0' "$URL/mail/$USID" -o user_agent="$(shuf -n1 .ua)")
+#\
 #		_torstop
 	}
 _crono
@@ -71,15 +83,6 @@ _crono
 			_crono
 			if [[ $MIN -ge 55 ]] ; then
 				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clanfight/enterFight/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
-#				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
-#				ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
-#				SND1="Enviar"
-#/
-#echo -e "s=$ACCESS&text="`cat << EOF
-#C.T. ok
-#EOF`"&send_message=$SND1" >chat.txt
-#\
-#				SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 				_clanfight
 				break
 			fi
