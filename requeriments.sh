@@ -6,7 +6,7 @@ _requeriments () {
 	cd $HOME/twm
 # /update script and dependencies
 	echo -e "\nUpgrading..."
-	apt install w3m curl -y || sudo apt install w3m curl -y
+	sudo apt install w3m curl -y || pkg install w3m curl -y
 	echo -e "👉 Please wait...☕👴"
 	_sync () {
 		curl https://github.com/sharesourcecode/twm/raw/master/cave.sh -O -L &> /dev/null &
