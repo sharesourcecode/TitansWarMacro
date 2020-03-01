@@ -12,12 +12,11 @@ function _cave () {
 		MEGA=$(echo $SRC | sed 's/src=/\n/g' | grep '/images/icon/silver.png' | grep "'s'" | tail -n1 | grep -o 'M')
 	}
 	_condition
-	num=9
+	num=2
 	until [[ $num -eq 0 ]]; do
 		_condition
 		case $ACTION in
 			(cavechancercavegatherrcavedownr|cavespeedUpr)
-#				[[ -z $MEGA ]] && num=0
 				SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS2" -o user_agent="$(shuf -n1 .ua)") ;
 				num=$[$num-1] ;
 				echo $num ;;
@@ -25,13 +24,11 @@ function _cave () {
 				num=$[$num-1] ;
 				SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$DOWN" -o user_agent="$(shuf -n1 .ua)") ;
 				echo $num ;;
-#				[[ -z $MEGA ]] && num=0 ;;
 			(caveattackrcaverunawayr)
 				num=$[$num-1] ;
 				SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS1" -o user_agent="$(shuf -n1 .ua)") ;
 				SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL/cave/runaway" -o user_agent="$(shuf -n1 .ua)") ;
 				echo $num ;;
-#				[[ -z $MEGA ]] && num=0 ;;
 			(*) num=0 ;;
 		esac
 		echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n2 | tail -n1 | cut -d\' -f2
