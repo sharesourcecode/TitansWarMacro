@@ -18,7 +18,7 @@ EOF`"&send_message=$SND1" >mail.txt
 		_career
 		_clandungeon
 		_trade
-		[[ -n $mail ]] && _mail
+#		[[ -n $mail ]] && _mail
 #		_torstop
 	}
 _crono
