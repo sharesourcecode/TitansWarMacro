@@ -1,10 +1,12 @@
 # /cave
 function _cave () {
 	_clanid
-#	w3m -cookie "$URL/clan/$CLD/quest/take/5" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
-#	w3m -cookie "$URL/clan/$CLD/quest/help/5" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
+	if [[ -n $CLD ]]; then
+		w3m -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/take/5" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
+		w3m -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/help/5" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
+	fi
 	_condition () {
-		SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL/cave/" -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -dump_source -o accept_encoding=='*;q=0' "$URL/cave/" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS1=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n1 | cut -d\' -f2)
 		DOWN=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/down' | cut -d\' -f2)
 		ACCESS2=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n2 | tail -n1 | cut -d\' -f2)
@@ -17,25 +19,25 @@ function _cave () {
 		_condition
 		case $ACTION in
 			(cavechancercavegatherrcavedownr|cavespeedUpr)
-				SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS2" -o user_agent="$(shuf -n1 .ua)") ;
+				SRC=$(w3m -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS2" -o user_agent="$(shuf -n1 .ua)") ;
 				num=$[$num-1] ;
 				echo $num ;;
 			(cavedownr|cavedownrclanbuiltprivateUpgradetruerrefcave)
 				num=$[$num-1] ;
-				SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$DOWN" -o user_agent="$(shuf -n1 .ua)") ;
+				SRC=$(w3m -dump_source -o accept_encoding=='*;q=0' "$URL$DOWN" -o user_agent="$(shuf -n1 .ua)") ;
 				echo $num ;;
 			(caveattackrcaverunawayr)
 				num=$[$num-1] ;
-				SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS1" -o user_agent="$(shuf -n1 .ua)") ;
-				SRC=$(w3m -cookie -dump_source -o accept_encoding=='*;q=0' "$URL/cave/runaway" -o user_agent="$(shuf -n1 .ua)") ;
+				SRC=$(w3m -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS1" -o user_agent="$(shuf -n1 .ua)") ;
+				SRC=$(w3m -dump_source -o accept_encoding=='*;q=0' "$URL/cave/runaway" -o user_agent="$(shuf -n1 .ua)") ;
 				echo $num ;;
 			(*) num=0 ;;
 		esac
 		echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n2 | tail -n1 | cut -d\' -f2
 	done
-#	if [[ -n $CLD ]]; then
-#		w3m -cookie "$URL/clan/$CLD/quest/end/5" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
-#		w3m -cookie "$URL/clan/$CLD/quest/deleteHelp/5" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
-#	fi
+	if [[ -n $CLD ]]; then
+		w3m -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/end/5" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
+		w3m -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/deleteHelp/5" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
+	fi
 	echo -e "cave (✔)\n"
 }

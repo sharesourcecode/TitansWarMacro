@@ -1,7 +1,7 @@
 _play () {
 	_mail () {
 		USID=1597588
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom/" -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom/" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
 		SND1="Enviar"
 #/
@@ -9,7 +9,7 @@ echo -e "r=$ACCESS&text="`cat << EOF
 I'm use macro bot tinyurl.com/ta6wzxf
 EOF`"&send_message=$SND1" >mail.txt
 #\
-		SRC=$(w3m -cookie -debug -post mail.txt -dump_source -o accept_encoding=='*;q=0' "$URL/mail/$USID" -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -debug -post mail.txt -dump_source -o accept_encoding=='*;q=0' "$URL/mail/$USID" -o user_agent="$(shuf -n1 .ua)")
 	}
 	_all () {
 		_cave
@@ -45,7 +45,7 @@ _crono
 # /Battle of banners 10:15:00 - 16:15:00
 #	elif [[ $HOUR -eq 10 && $MIN -gt 10 && $MIN -lt 16 || $HOUR -eq 16 && $MIN -gt 10 && $MIN -lt 16 ]] ; then
 #		ts=300
-#		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' $URLhttp/flagfight/enterFight -o user_agent="$(shuf -n1 .ua)")
+#		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URLhttp/flagfight/enterFight -o user_agent="$(shuf -n1 .ua)")
 #		_crono
 # /Clan coliseum 10:30:00 - 15:00:00
 	elif [[ -n $CLD && $HOUR -eq 10 && $MIN -ge 15 && $MIN -le 30 || -n $CLD && $HOUR -eq 14 && $MIN -ge 45 ]] ; then
@@ -57,9 +57,9 @@ _crono
 			sleep 30
 			_crono
 			if [[ $MIN -ge 29 || $MIN -ge 59 ]] ; then
-				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clancoliseum/?close=reward" -o user_agent="$(shuf -n1 .ua)")
-				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clancoliseum/enterFight" -o user_agent="$(shuf -n1 .ua)")
-#				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
+				SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clancoliseum/?close=reward" -o user_agent="$(shuf -n1 .ua)")
+				SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clancoliseum/enterFight" -o user_agent="$(shuf -n1 .ua)")
+#				SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 #				ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
 #				SND1="Enviar"
 #/
@@ -67,7 +67,7 @@ _crono
 #C.C. ok
 #EOF`"&send_message=$SND1" >chat.txt
 #\
-#				SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
+#				SRC=$(w3m -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 				_clancoliseum
 				break
 			fi
@@ -83,7 +83,7 @@ _crono
 			sleep 30
 			_crono
 			if [[ $MIN -ge 55 ]] ; then
-				SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clanfight/enterFight/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
+				SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clanfight/enterFight/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 				_clanfight
 				break
 			fi
@@ -114,8 +114,8 @@ _crono
 			_crono
 		done
 		if [[ $MIN -ge 55 ]] ; then
-			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/altars/enterFight/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
-#			SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/altars/enterFight/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
+#			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 #			ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
 #			SND1="Enviar"
 #/
@@ -123,7 +123,7 @@ _crono
 #A.A. ok
 #EOF`"&send_message=$SND1" >chat.txt
 #\
-#			SRC=$(w3m -cookie -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
+#			SRC=$(w3m -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
 			_altars
 			break
 		fi

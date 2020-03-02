@@ -1,6 +1,6 @@
 _loginlogoff () {
 # /login/logoff
-	ACC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
+	ACC=$(w3m -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
 #	ACC=$(lynx -cfg=~/twm/cfg1 "$URL/user" -useragent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
 	[[ -n $ACC ]] && i=5 && \
           until [[ $i -lt 1 ]]; do
@@ -13,8 +13,8 @@ _loginlogoff () {
 	while [[ -z $ACC ]]; do
 		function _login () {
 # /logoff2x
-			$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
-			$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
+			$(w3m -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
+			$(w3m -debug -o accept_encoding=='*;q=0' "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
 #			$(lynx -cfg=~/twm/cfg1 "$URL/?exit" -useragent="$(shuf -n1 .ua)") 2&>-
 			unset username; unset password
 			echo -e "\nIn case of error will repeat"
@@ -48,12 +48,12 @@ _loginlogoff () {
 # /login2x
 #			$(echo -e "login=$username&pass=$password" | lynx -cfg=~/twm/cfg1 -post_data "$URL/?sign_in=1" -useragent="$(shuf -n1 .ua)") 2&>-
 			unset username; unset password
-			$(w3m -cookie -debug -post $HOME/.tmp/login.txt -o accept_encoding=='*;q=0' "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
-			$(w3m -cookie -debug -post $HOME/.tmp/login.txt -o accept_encoding=='*;q=0' "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
+			$(w3m -debug -post $HOME/.tmp/login.txt -o accept_encoding=='*;q=0' "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
+			$(w3m -debug -post $HOME/.tmp/login.txt -o accept_encoding=='*;q=0' "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
 			rm $HOME/.tmp/login.txt
 		}
 		_login
 		clear
-		ACC=$(w3m -cookie -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[user")
+		ACC=$(w3m -debug -o accept_encoding=='*;q=0' "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[user")
 	done
 }
