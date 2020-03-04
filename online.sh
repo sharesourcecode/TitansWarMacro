@@ -45,6 +45,7 @@ _online () {
 	ACTIVE1=`cat y | grep "\[1]" | wc -l`
 	echo -e "[br]Bóreas ativos: $ACTIVE1 - Bóreas inativos: $STOPED1" >>send.txt
 	echo -e "[br][hr]Guerreiros: `cat k | grep ' Guerreiro' | wc -l`" >>send.txt
+	echo -e "[br]Coliseu: `cat k | grep ' Coliseu' | wc -l`" >>send.txt
 	echo -e "[br]Configuração: `cat k | grep ' Configura' | wc -l`" >>send.txt
 	echo -e "[br]Fóruns: `cat k | grep 'Fórum' | wc -l`" >>send.txt
 	echo -e "[br]Chats: `cat y | grep '~Conversar' | wc -l`" >>send.txt
@@ -61,6 +62,6 @@ _online () {
 	ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
 	TID=99347
 	SND2="Mudar"
-	echo -e "error=$ACCESS&name="O que estão fazendo?"&text="$(cat send.txt)"&send_message=$SND2" >edit.txt
+	echo -e "error=$ACCESS&name="Online $(date +%H:%M:%S) $(date +%d-%m-%Y)"&text="$(cat send.txt)"&send_message=$SND2" >edit.txt
 	SRC=$(w3m -debug -post edit.txt -dump_source -o accept_encoding=='*;q=0' "$URL/forum/topic/$TID/red" -o user_agent="$(shuf -n1 .ua)")
 }
