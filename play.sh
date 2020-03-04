@@ -26,8 +26,8 @@ _crono
 	if [[ $HOUR -lt 8 || $HOUR -eq 23 ]] ; then
 		_all
 		_coliseum
-		[[ $URL = 'furiadetitas.net' ]] && \
-		_online
+#		[[ $URL = 'furiadetitas.net' ]] && \
+#		_online
 		_sleep
 		_crono
 # /Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
@@ -131,8 +131,8 @@ _crono
 		_crono
 	else
 		_all
-		[[ $URL = 'furiadetitas.net' ]] && \
-		_online
+#		[[ $URL = 'furiadetitas.net' ]] && \
+#		_online
 		_sleep
 		_crono
 	fi
