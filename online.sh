@@ -33,14 +33,14 @@ cat all.txt | sed "s, ,~,g" | sed "s,',_,g"  >w
 cat w >y; sed -i "/_/d" y
 
 echo -e "[br]$DATE1 -> `date +%H:%M:%S` `date +%d\/%m\/%Y`" >send.txt
-echo -e "[br][hr]$NPG Páginas Online" >>send.txt
+echo -e "[br][hr]$NPG páginas Online" >>send.txt
 echo -e "[br]Total Online: `cat w | grep '~-~' | wc -l`" >>send.txt
 STOPED=`cat w | grep "_~" | wc -l`
 ACTIVE=`cat y | wc -l`
 echo -e "[br]Ativos: $ACTIVE - Inativos: $STOPED" >>send.txt
 STOPED0=`cat w | grep "\[0]" | grep "_~" | wc -l`
 ACTIVE0=`cat y | grep "\[0]" | wc -l`
-echo -e "[br][hr]Asuras activos: $ACTIVE0 - Asuras inativos: $STOPED0" >>send.txt
+echo -e "[br][hr]Asuras ativos: $ACTIVE0 - Asuras inativos: $STOPED0" >>send.txt
 STOPED1=`cat w | grep "\[1]" | grep "_~" | wc -l`
 ACTIVE1=`cat y | grep "\[1]" | wc -l`
 echo -e "[br]Bóreas ativos: $ACTIVE1 - Bóreas inativos: $STOPED1" >>send.txt
@@ -48,7 +48,8 @@ echo -e "[br][hr]Guerreiros: `cat k | grep ' Guerreiro' | wc -l`" >>send.txt
 echo -e "[br]Configuração: `cat k | grep ' Configura' | wc -l`" >>send.txt
 echo -e "[br]Fóruns: `cat k | grep 'Fórum' | wc -l`" >>send.txt
 echo -e "[br]Chats: `cat y | grep '~Conversar' | wc -l`" >>send.txt
-echo -e "[br]Mail↓[br]\n `cat all.txt | grep ' de correio'`\n" >>send.txt
+echo -e "[br]Caixa de correio↓[br]\n `cat all.txt | grep ' de correio' | sed "s,correio,correio[br],g"`\n" >>send.txt
+
 echo -e "[br][hr]adm: `cat all.txt | grep 'Omsupport'`" >>send.txt
 echo -e "[br]mod: `cat all.txt | grep 'OMEGA SUPREME'`" >>send.txt
 echo -e "[br]mod: `cat all.txt | grep 'King Atila'`" >>send.txt
