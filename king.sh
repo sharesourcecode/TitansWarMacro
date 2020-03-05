@@ -15,7 +15,7 @@ _king () {
 	START=`date +%M`
 	while [[ -z $EXIT ]] ; do
 		END=$(expr `date +%M` \- $START)
-		[[ $END -gt 6 ]] && break
+		[[ $END -gt 11 ]] && break
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/king/' | head -n1 | cut -d\' -f2)
@@ -28,7 +28,7 @@ _king () {
 	START=`date +%M`
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		END=$(expr `date +%M` \- $START)
-		[[ $END -gt 11 ]] && break
+		[[ $END -gt 10 ]] && break
 # /dodge
 		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
@@ -67,5 +67,3 @@ _king () {
 	sleep 30
 	_all
 }
-
-
