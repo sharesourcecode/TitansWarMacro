@@ -1,6 +1,6 @@
 _clanfight () {
 # /enterFight
-	SRC=$(w3m -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
+#	SRC=$(w3m -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='49'
 	RPER='9'
 	ITVL='1.8'
@@ -12,22 +12,18 @@ _clanfight () {
 # /wait
 	echo " 😴 Waiting..."
         EXIT=$(echo $SRC | grep -o 'clanfight/attack/')
-	START=`date +%M`
 	while [[ -z $EXIT ]] ; do
-		END=$(expr `date +%M` \- $START)
-		[[ $END -gt 6 ]] && break
+		[[ $(date +%M:%S) = 00:15 ]] && break
 		echo -e " 💤	...\n$ACCESS"
-		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clanfight" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/clanfight/' | head -n1 | cut -d\' -f2)
 		EXIT=$(echo $SRC | grep -o 'clanfight/attack/')
 	done
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	_access
 	HP3=$HP1
-	START=`date +%M`
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
-		END=$(expr `date +%M` \- $START)
-		[[ $END -gt 6 ]] && break
+		[[ $(date +%M) = 05 ]] && break
 # /dodge
 		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
@@ -41,13 +37,13 @@ _clanfight () {
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)") && \
 		_access
 # /grass
-		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP3 ]] && echo '🙌' && \
-		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)") && \
-		_access
+#		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP3 ]] && echo '🙌' && \
+#		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)") && \
+#		_access
 # /stone
-		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP2 ]] && echo '💪' && \
-		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STONE" -o user_agent="$(shuf -n1 .ua)") && \
-		_access
+#		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP2 ]] && echo '💪' && \
+#		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$STONE" -o user_agent="$(shuf -n1 .ua)") && \
+#		_access
 # /random
 		[[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 ]] && echo '🔁' && \
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)") && \
@@ -60,5 +56,4 @@ _clanfight () {
 	echo "ClanFight(✔)"
 	SRC=$(w3m -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
 	sleep 30
-	_all
 }
