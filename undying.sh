@@ -18,12 +18,16 @@ _undying () {
 	done
 	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 	_access
+	_arena
+	_AdeleteEnd
+	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/undying" -o user_agent="$(shuf -n1 .ua)")
+	_access
 	while [[ -n $OUTGATE ]] ; do
 		[[ $(date +%M) = 05 ]] && break
 		echo -e " 🎲 hiting..."
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HIT" -o user_agent="$(shuf -n1 .ua)")
 		_access
-		sleep 1.5
+		sleep 1.4
 	done
 # /view
 	echo ""

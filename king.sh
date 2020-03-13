@@ -59,6 +59,13 @@ _king () {
 	echo ""
 	w3m -debug -o accept_encoding=='*;q=0' $URL/king -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d"
 	echo "King (✔)"
-	SRC=$(w3m -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
-	sleep 30
+#	SRC=$(w3m -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
+	until [[ $(date +%M) = 4[01] ]] ; do
+		echo 'Waiting time to go arena...'
+		sleep 30
+	done
+	_AtakeHelp
+	_arena
+	_AdeleteEnd
+
 }

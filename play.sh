@@ -1,19 +1,21 @@
 _play () {
 	_mail () {
-		USID=1261283
+		USID=1597588
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom/" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
 		SND1="Enviar"
 #/
-echo -e "r=$ACCESS&text="$(cat << EOF
-I am use macro bot
-EOF)"&send_message=$SND1" >mail.txt && \
+echo -e "r=$ACCESS&text="`cat << EOF
+I'm use macro bot tinyurl.com/ta6wzxf
+EOF`"&send_message=$SND1" >mail.txt
 #\
 		SRC=$(w3m -debug -post mail.txt -dump_source -o accept_encoding=='*;q=0' "$URL/mail/$USID" -o user_agent="$(shuf -n1 .ua)")
 	}
 	_all () {
-		_cave
+		_AtakeHelp
 		_arena
+		_AdeleteEnd
+		_cave
 		_campaign
 		_career
 		_clandungeon
@@ -21,119 +23,78 @@ EOF)"&send_message=$SND1" >mail.txt && \
 #		[[ -n $mail ]] && _mail
 #		_torstop
 	}
-_crono
 # /game time
-	if [[ $HOUR -lt 8 || $HOUR -eq 23 ]] ; then
-		_all
-		_coliseum
-		[[ $URL = 'furiadetitas.net' ]] && \
-		_online
-		_sleep
-		_crono
+	case $(date +%H:%M) in
 # /Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
-	elif [[ $HOUR -eq 9 && $MIN -ge 45 || $HOUR -eq 15 && $MIN -ge 45 || $HOUR -eq 21 && $MIN -ge 45 ]] ; then
-		START=`date +%M`
-		while [[ $MIN -ge 45 && $MIN -le 59 ]] ; do
-        	        END=$(expr `date +%M` \- $START)
-	                [[ $END -gt 15 ]] && break
-			echo 'Valley of the Immortals will be started...'
-			_sleep
-			if [[ $MIN -ge 58 ]] ; then
-				_undying
-				break
-			fi
-		done
-		_crono
+		(09:56|15:56|21:56)
+			_AtakeHelp
+			_arena
+			until [[ $(date +%M:%S) = 59:5* ]] ; do
+				echo 'Valley of the Immortals will be started...'
+				sleep 1
+			done
+			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/undying/enterGame" -o user_agent="$(shuf -n1 .ua)")
+			_undying
+			_crono ;;
 # /Battle of banners 10:15:00 - 16:15:00
-#	elif [[ $HOUR -eq 10 && $MIN -gt 10 && $MIN -lt 16 || $HOUR -eq 16 && $MIN -gt 10 && $MIN -lt 16 ]] ; then
-#		ts=300
-#		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URLhttp/flagfight/enterFight -o user_agent="$(shuf -n1 .ua)")
+#		(10:14|16:14)
+#			until [[ $(date +%M:%S) = 14:5* ]] ; do
+#				echo 'Battle of banners will be started...'
+#				sleep 1
+#			done
+#		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/flagfight/enterFight -o user_agent="$(shuf -n1 .ua)")
 #		_crono
 # /Clan coliseum 10:30:00 - 15:00:00
-	elif [[ -n $CLD && $HOUR -eq 10 && $MIN -ge 15 && $MIN -le 30 || -n $CLD && $HOUR -eq 14 && $MIN -ge 45 ]] ; then
-		START=`date +%M`
-		while [[ $MIN -ge 15 && $MIN -le 30 || $MIN -ge 45 && $MIN -le 59 ]] ; do
-	                END=$(expr `date +%M` \- $START)
-        	        [[ $END -gt 16 ]] && break
-			echo 'Clan coliseum will be started...'
-			sleep 30
-			_crono
-			if [[ $MIN -ge 29 || $MIN -ge 59 ]] ; then
-				SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clancoliseum/?close=reward" -o user_agent="$(shuf -n1 .ua)")
-				SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clancoliseum/enterFight" -o user_agent="$(shuf -n1 .ua)")
-#				SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
-#				ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
-#				SND1="Enviar"
-#/
-#echo -e "s=$ACCESS&text="`cat << EOF
-#C.C. ok
-#EOF`"&send_message=$SND1" >chat.txt
-#\
-#				SRC=$(w3m -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
-				_clancoliseum
-				break
-			fi
-		done
-		_crono
+		(10:29|14:59)
+			until [[ $(date +%M:%S) = *9:5* ]] ; do
+				echo 'Clan coliseum will be started...'
+				sleep 1
+			done
+			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clancoliseum/?close=reward" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clancoliseum/enterFight" -o user_agent="$(shuf -n1 .ua)")
+			_clancoliseum
+			_crono ;;
 # /Clan tournament 11:00:00 - 19:00:00
-	elif [[ -n $CLD && $HOUR -eq 10 && $MIN -ge 45 || -n $CLD && $HOUR -eq 18 && $MIN -ge 45 ]] ; then
-		START=`date +%M`
-		while [[ $MIN -ge 45 && $MIN -le 59 ]] ; do
-        	        END=$(expr `date +%M` \- $START)
-	                [[ $END -gt 16 ]] && break
-			echo 'Clan tournament will be started...'
-			sleep 30
-			_crono
-			if [[ $MIN -ge 55 ]] ; then
-				SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clanfight/enterFight/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
-				_clanfight
-				break
-			fi
-		done
-		_crono
+		(10:59|18:59)
+			until [[ $(date +%M:%S) = 59:[45]* ]] ; do
+				echo 'Clan tournament will be started...'
+				sleep 1
+			done
+			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clanfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
+			_clanfight
+			_crono ;;
 # /King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
-	elif [[ $HOUR -eq 12 && $MIN -ge 15 && $MIN -le 30 || $HOUR -eq 16 && $MIN -ge 15 && $MIN -le 30 || $HOUR -eq 22 && $MIN -ge 15 && $MIN -le 30 ]] ; then
-		START=`date +%M`
-		while [[ $MIN -ge 15 && $MIN -le 30 ]] ; do
-        	        END=$(expr `date +%M` \- $START)
-	                [[ $END -gt 15 ]] && break
-			echo 'King of the Immortals will be started...'
-			_sleep
-			if [[ $MIN -ge 28 && $MIN -le 30 ]] ; then
-				_king
-			fi
-		done
-		_crono
+		(12:29|16:29|22:29)
+			until [[ $(date +%M:%S) = 29:5* ]] ; do
+				echo 'King of the Immortals will be started...'
+				sleep 1
+			done
+			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/king/enterGame" -o user_agent="$(shuf -n1 .ua)")
+			_king
+			_crono ;;
 # /Ancient Altars 14:00:00 - 21:00:00
-	elif [[ -n $CLD && $HOUR -eq 13 && $MIN -ge 45 || -n $CLD && $HOUR -eq 20 && $MIN -ge 45 ]] ; then
-		START=`date +%M`
-		while [[ $MIN -ge 45 && $MIN -le 55 ]] ; do
-        	        END=$(expr `date +%M` \- $START)
-	                [[ $END -gt 15 ]] && break
-			echo 'Ancient Altars will be started...'
-			sleep 30
-			_crono
-		done
-		if [[ $MIN -ge 55 ]] ; then
-			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/altars/enterFight/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
-#			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
-#			ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
-#			SND1="Enviar"
-#/
-#echo -e "s=$ACCESS&text="`cat << EOF
-#A.A. ok
-#EOF`"&send_message=$SND1" >chat.txt
-#\
-#			SRC=$(w3m -debug -post chat.txt -dump_source -o accept_encoding=='*;q=0' "$URL/chat/clan/changeRoom/?close_clan_msg=true" -o user_agent="$(shuf -n1 .ua)")
+		(13:56|20:59)
+			if [[ $(date +%H) = 13 ]] ; then
+				_AtakeHelp
+				_arena
+				_AdeleteEnd
+			fi
+			until [[ $(date +%M:%S) = 59:5* ]] ; do
+				echo 'Ancient Altars will be started...'
+				sleep 1
+			done
+			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/altars/enterFight" -o user_agent="$(shuf -n1 .ua)")
 			_altars
-			break
-		fi
-		_crono
-	else
-		_all
-		[[ $URL = 'furiadetitas.net' ]] && \
-		_online
-		_sleep
-		_crono
-	fi
+			_crono ;;
+		(0[02468]:[04]0|0[13579]:20|1[048]:40|20:[04]0|1[13579]:20|2[13]:20|1[28]:00)
+			_all ;
+			_coliseum ;
+#			[[ $URL = 'furiadetitas.net' ]] && \
+#			_online
+			_crono ;;
+		(*)
+		echo 'No battles now, waiting +30s...' ;
+		sleep 30 ;
+		_crono ;;
+	esac
 }

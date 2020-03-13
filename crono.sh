@@ -1,6 +1,7 @@
 # /time
 _crono () {
-	HOUR=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL" -o user_agent="$(shuf -n1 .ua)" | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f1 | tr -cd '[:digit:]')
+	HOUR=`date +%H`
+#	HOUR=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL" -o user_agent="$(shuf -n1 .ua)" | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f1 | tr -cd '[:digit:]')
 #	HOUR=$(lynx -cfg=~/twm/cfg1 -source "$URL" -useragent="$(shuf -n1 .ua)" | sed 's/--/\n/g' | grep '/online/' | cut -d\: -f1 | tr -cd '[:digit:]')
 	[[ $HOUR = 00 ]] && HOUR=0
 	[[ $HOUR = 01 ]] && HOUR=1
