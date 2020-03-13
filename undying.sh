@@ -23,7 +23,7 @@ _undying () {
 	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/undying" -o user_agent="$(shuf -n1 .ua)")
 	_access
 	while [[ -n $OUTGATE ]] ; do
-		[[ $(date +%M) = 05 ]] && break
+		[[ $(date +%M) = 06 ]] && break
 		echo -e " 🎲 hiting..."
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HIT" -o user_agent="$(shuf -n1 .ua)")
 		_access

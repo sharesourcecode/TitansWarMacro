@@ -23,7 +23,7 @@ _clancoliseum () {
 	_access
 	HP3=$HP1
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
-		[[ $(date +%M) = *5 ]] && break
+		[[ $(date +%M) = *6 ]] && break
 # /dodge
 		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
 		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
