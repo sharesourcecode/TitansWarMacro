@@ -5,7 +5,7 @@ cd ~/twm
 . clanid.sh ; . crono.sh ; . arena.sh ; . coliseum.sh
 . campaign.sh ; . play.sh ; . altars.sh ; . clanfight.sh
 . clancoliseum.sh ; . king.sh ; . undying.sh ; . clandungeon.sh
-. trade.sh ; . career.sh ; . cave.sh
+. trade.sh ; . career.sh ; . cave.sh ; . online.sh
 # /functions
 _show () {
 		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
@@ -48,7 +48,7 @@ while true ; do
 #		_torstop
 	fi
 	_play
-	_sync
+#	_sync
 done
 kill -9 $$
 exit
