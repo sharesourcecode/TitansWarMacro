@@ -26,9 +26,10 @@ EOF`"&send_message=$SND1" >mail.txt
 # /game time
 	case $(date +%H:%M) in
 # /Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
-		(09:56|15:56|21:56)
+		(09:58|15:58|21:58)
 			_AtakeHelp
-			_arena
+			_fullmana
+			_AdeleteEnd
 			until [[ $(date +%M:%S) = 59:5* ]] ; do
 				echo 'Valley of the Immortals will be started...'
 				sleep 1
@@ -73,10 +74,10 @@ EOF`"&send_message=$SND1" >mail.txt
 			_king
 			_crono ;;
 # /Ancient Altars 14:00:00 - 21:00:00
-		(13:56|20:59)
+		(13:58|20:59)
 			if [[ $(date +%H) = 13 ]] ; then
 				_AtakeHelp
-				_arena
+				_fullmana
 				_AdeleteEnd
 			fi
 			until [[ $(date +%M:%S) = 59:5* ]] ; do

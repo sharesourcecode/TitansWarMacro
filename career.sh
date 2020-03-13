@@ -17,10 +17,10 @@ _career () {
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/career/attack/' | head -n1 | cut -d\' -f2)
 		echo " ⚔ $ACCESS"
 	done
-	if [[ -n $CLD ]]; then
-		w3m -debug -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/deleteHelp/6" -o user_agent="$(shuf -n1 .ua)" | head -n15 &
+#	if [[ -n $CLD ]]; then
+		w3m -debug -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/deleteHelp/6" -o user_agent="$(shuf -n1 .ua)" | head -n15
 		w3m -debug -o accept_encoding=='*;q=0' "$URL/clan/$CLD/quest/end/6" -o user_agent="$(shuf -n1 .ua)" | head -n15
-	fi
+#	fi
 	echo -e "career (✔)\n"
 }
 

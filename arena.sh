@@ -35,3 +35,10 @@ _arena () {
 	done
 	echo -e "arena (✔)\n"
 }
+_fullmana () {
+	ARENA=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/arena/quit -o user_agent="$(shuf -n1 .ua)" | sed "s/href='/\n/g" | grep "attack/1" | head -n1 | cut -d\/ -f5 | tr -cd "[[:digit:]]")
+	echo " ⚔ - 1 Attack..."
+	ATK1=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/arena/attack/1/?r=$ARENA" -o user_agent="$(shuf -n1 .ua)" | sed "s/href='/\n/g" | grep --color "arena/lastPlayer" | head -n1 | cut -d\' -f1 | tr -cd "[[:digit:]]")
+	echo " ⚔ - Full Attack..."
+	w3m -debug -dump "$URL/arena/lastPlayer/?r=$ATK1&fullmana=true" -o user_agent="$(shuf -n1 .ua)"
+}

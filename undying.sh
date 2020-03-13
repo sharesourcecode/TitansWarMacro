@@ -18,7 +18,8 @@ _undying () {
 	done
 	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 	_access
-	_arena
+	_AtakeHelp
+	_fullmana
 	_AdeleteEnd
 	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/undying" -o user_agent="$(shuf -n1 .ua)")
 	_access
@@ -34,5 +35,4 @@ _undying () {
 	w3m -debug -o accept_encoding=='*;q=0' $URL/undying -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo -e "Undying (✔)"
 	SRC=$(w3m -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
-	sleep 30
 }
