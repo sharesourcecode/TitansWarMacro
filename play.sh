@@ -93,8 +93,8 @@ EOF`"&send_message=$SND1" >mail.txt
 #			_online
 			_crono ;;
 		(*)
-		echo 'No battles now, waiting +30s...' ;
-		sleep 30 ;
-		_crono ;;
+			echo 'No battles now, waiting +30s...' ;
+			sleep 30 ;
+			_crono ;;
 	esac
 }
