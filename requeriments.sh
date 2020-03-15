@@ -89,7 +89,7 @@ _requeriments () {
 		cp -R ~/.termux/boot/*  ~/.shortcuts/
 		reset; clear
 		echo -e "Successful updates!\n"
-		echo 'For Android on TV please also install APPS: Temux Boot, Termux API and Temux Widget.'
+		echo -e " For Android on TV please also install APPS:\n Temux Boot, Termux API and Temux Widget."
 	else
 		sudo apt install w3m curl -y
 		reset; clear
