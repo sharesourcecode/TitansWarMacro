@@ -24,6 +24,7 @@ EOF`"&send_message=$SND1" >mail.txt
 #		_torstop
 	}
 # /game time
+	L=$(echo {0..4} | sed 's, ,\n,g' | shuf -n1)
 	case $(date +%H:%M) in
 # /Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
 		(09:58|15:58|21:58)
@@ -87,7 +88,7 @@ EOF`"&send_message=$SND1" >mail.txt
 			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/altars/enterFight" -o user_agent="$(shuf -n1 .ua)")
 			_altars
 			_crono ;;
-		(0[02468]:[04]0|0[13579]:20|1[048]:40|20:[04]0|1[13579]:20|2[13]:20|1[28]:00)
+		(0[02468]:[04]$L|0[13579]:2$L|1[048]:4$L|20:[04]$L|1[13579]:2$L|2[13]:2$L|1[28]:0$L)
 			_all ;
 			_coliseum ;
 #			[[ $URL = 'furiadetitas.net' ]] && \
