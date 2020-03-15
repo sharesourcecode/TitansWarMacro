@@ -52,7 +52,7 @@ _requeriments () {
 		echo -e "\n Upgrading 22/22"
 		dos2unix *.sh &> /dev/null
 	}
-	_sync
+#	_sync
 # /termux on android
 	termux-wake-lock &> /dev/null
 	if [[ $? = 0 ]] ; then
@@ -89,7 +89,7 @@ _requeriments () {
 		cp -R ~/.termux/boot/*  ~/.shortcuts/
 		reset; clear
 		echo -e "Successful updates!\n"
-		echo -e " For Android on TV please also install APPS:\n Temux Boot, Termux API and Temux Widget."
+		echo -e " For Android on TV please also install APPS:\n Temux Boot, Termux API and Temux Widget.\n"
 	else
 		sudo apt install w3m curl -y
 		reset; clear
