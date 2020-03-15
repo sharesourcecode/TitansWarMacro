@@ -1,4 +1,5 @@
 #!/bin/bash
+OP=""
 # /sources
 cd ~/twm
 . torstop.sh ; . requeriments.sh ; . loginlogoff.sh
