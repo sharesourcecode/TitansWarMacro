@@ -62,17 +62,17 @@ _requeriments () {
 		rm -rf ~/.termux/boot/*.*
 		rm -rf ~/.shortcuts/*.*
 		cd ~/.termux/boot
-		echo -e "#!/bin/bash\nOP=1" > tiwar.net
-		echo -e "#!/bin/bash\nOP=2" > tiwar.ru
-		echo -e "#!/bin/bash\nOP=4" > tiwar.pl
-		echo -e "#!/bin/bash\nOP=4" > titanen.mobi
-		echo -e "#!/bin/bash\nOP=5" > guerradetitanes.net
-		echo -e "#!/bin/bash\nOP=6" > furiadetitas.net
-		echo -e "#!/bin/bash\nOP=7" > guerradititani.net
-		echo -e "#!/bin/bash\nOP=8" > tiwar.fr
-		echo -e "#!/bin/bash\nOP=9" > tiwar.ro
-		echo -e "#!/bin/bash\nOP=10" > cn.tiwar.net
-		echo -e "#!/bin/bash\nOP=11" > bahasa.tiwar.net
+		echo -e "#!/bin/bash\nURL='tiwar.net'" > tiwar.net
+		echo -e "#!/bin/bash\nURL='tiwar.ru'" > tiwar.ru
+		echo -e "#!/bin/bash\nURL='tiwar.pl'" > tiwar.pl
+		echo -e "#!/bin/bash\nURL='titanen.mobi'" > titanen.mobi
+		echo -e "#!/bin/bash\nURL='guerradetitanes.net'" > guerradetitanes.net
+		echo -e "#!/bin/bash\nURL='furiadetitas.net'" > furiadetitas.net
+		echo -e "#!/bin/bash\nURL='guerradititani.net'" > guerradititani.net
+		echo -e "#!/bin/bash\nURL='tiwar.fr'" > tiwar.fr
+		echo -e "#!/bin/bash\nURL='tiwar.ro'" > tiwar.ro
+		echo -e "#!/bin/bash\nURL='cn.tiwar.net'" > cn.tiwar.net
+		echo -e "#!/bin/bash\nURL='bahasa.tiwar.net'" > bahasa.tiwar.net
 
 		cat ~/twm/PLAY.sh | tail -n 53 >> tiwar.net
 		cat ~/twm/PLAY.sh | tail -n 53 >> tiwar.ru
@@ -105,7 +105,7 @@ _requeriments () {
 # /servers
 	if [[ -z $URL ]] ; then
 		echo -e " 1) 🇬🇧 English, Global: Titan's War online\n 2) 🇷🇺 Русский: Битва Титанов онлайн\n 3) 🇵🇱 Polski: Wojna Tytanów online\n 4) 🇩🇪 Deutsch: Krieg der Titanen online\n 5) 🇪🇸 Español: Guerra de Titanes online\n 6) 🇧🇷 Brazil, 🇵🇹 Português: Furia de Titãs online\n 7) 🇮🇹 Italiano: Guerra di Titani online\n 8) 🇫🇷 Français: Combat des Titans online\n 9) 🇷🇴 Română: Războiul Titanilor online\n10) 🇨🇳 中文, Chinese: 泰坦之战\n11) 🇮🇩 Indonesian: Titan's War Indonesia\n0) ❌ Cancel\n"
-		read -p "Select number Server[1 to 11]: " -t 60 -e -n 2 OP
+		read -p "Select number Server[1 to 11]: " -t 30 -e -n 2 OP
 		case $OP in
 			(1) URL='tiwar.net' ; export TZ=America/Danmarkshavn ;;
 
@@ -135,5 +135,5 @@ _requeriments () {
 		esac
 	fi
 	clear
-	[[ -z $OP ]] && exit
+	[[ -z $URL ]] && exit
 }
