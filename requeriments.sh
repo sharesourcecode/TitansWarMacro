@@ -62,17 +62,17 @@ _requeriments () {
 		rm -rf ~/.termux/boot/*.*
 		rm -rf ~/.shortcuts/*.*
 		cd ~/.termux/boot
-		echo -e "#!/bin/bash\n\$OP=1" > tiwar.net
-		echo -e "#!/bin/bash\n\$OP=2" > tiwar.ru
-		echo -e "#!/bin/bash\n\$OP=4" > tiwar.pl
-		echo -e "#!/bin/bash\n\$OP=4" > titanen.mobi
-		echo -e "#!/bin/bash\n\$OP=5" > guerradetitanes.net
-		echo -e "#!/bin/bash\n\$OP=6" > furiadetitas.net
-		echo -e "#!/bin/bash\n\$OP=7" > guerradititani.net
-		echo -e "#!/bin/bash\n\$OP=8" > tiwar.fr
-		echo -e "#!/bin/bash\n\$OP=9" > tiwar.ro
-		echo -e "#!/bin/bash\n\$OP=10" > cn.tiwar.net
-		echo -e "#!/bin/bash\n\$OP=11" > bahasa.tiwar.net
+		echo -e "#!/bin/bash\nOP=1" > tiwar.net
+		echo -e "#!/bin/bash\nOP=2" > tiwar.ru
+		echo -e "#!/bin/bash\nOP=4" > tiwar.pl
+		echo -e "#!/bin/bash\nOP=4" > titanen.mobi
+		echo -e "#!/bin/bash\nOP=5" > guerradetitanes.net
+		echo -e "#!/bin/bash\nOP=6" > furiadetitas.net
+		echo -e "#!/bin/bash\nOP=7" > guerradititani.net
+		echo -e "#!/bin/bash\nOP=8" > tiwar.fr
+		echo -e "#!/bin/bash\nOP=9" > tiwar.ro
+		echo -e "#!/bin/bash\nOP=10" > cn.tiwar.net
+		echo -e "#!/bin/bash\nOP=11" > bahasa.tiwar.net
 
 		cat ~/twm/PLAY.sh | tail -n 53 >> tiwar.net
 		cat ~/twm/PLAY.sh | tail -n 53 >> tiwar.ru
