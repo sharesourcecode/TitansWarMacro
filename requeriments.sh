@@ -61,7 +61,7 @@ _requeriments () {
 		mkdir -p ~/.shortcuts
 		rm -rf ~/.termux/boot/*.*
 		rm -rf ~/.shortcuts/*.*
-		cd ~/.termux/boot
+		cd ~/.shortcuts
 		echo -e "#!/bin/bash\nURL='tiwar.net'" > tiwar.net
 		echo -e "#!/bin/bash\nURL='tiwar.ru'" > tiwar.ru
 		echo -e "#!/bin/bash\nURL='tiwar.pl'" > tiwar.pl
@@ -86,7 +86,7 @@ _requeriments () {
 		cat ~/twm/PLAY.sh | tail -n 53 >> cn.tiwar.net
 		cat ~/twm/PLAY.sh | tail -n 53 >> bahasa.tiwar.net
 
-		cp -R ~/.termux/boot/*  ~/.shortcuts/
+#		cp -R ~/.shortcuts/* ~/.termux/boot
 		reset; clear
 		echo -e "Successful updates!\n"
 		echo -e " For Android on TV please also install APPS:\n Termux API and Temux Widget.\n"
@@ -105,7 +105,7 @@ _requeriments () {
 # /servers
 	if [[ -z $URL ]] ; then
 		echo -e " 1) 🇬🇧 English, Global: Titan's War online\n 2) 🇷🇺 Русский: Битва Титанов онлайн\n 3) 🇵🇱 Polski: Wojna Tytanów online\n 4) 🇩🇪 Deutsch: Krieg der Titanen online\n 5) 🇪🇸 Español: Guerra de Titanes online\n 6) 🇧🇷 Brazil, 🇵🇹 Português: Furia de Titãs online\n 7) 🇮🇹 Italiano: Guerra di Titani online\n 8) 🇫🇷 Français: Combat des Titans online\n 9) 🇷🇴 Română: Războiul Titanilor online\n10) 🇨🇳 中文, Chinese: 泰坦之战\n11) 🇮🇩 Indonesian: Titan's War Indonesia\n0) ❌ Cancel\n"
-		read -p "Select number Server[1 to 11]: " -t 60 -e -n 2 OP
+		read -p "Select number Server[1 to 11]: " -t 30 -e -n 2 OP
 		case $OP in
 			(1) URL='tiwar.net' ; export TZ=America/Danmarkshavn ;;
 

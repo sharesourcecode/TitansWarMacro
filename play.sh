@@ -15,11 +15,14 @@ EOF`"&send_message=$SND1" >mail.txt
 		_AtakeHelp
 		_arena
 		_AdeleteEnd
-		_cave
+#		_cave
 		_campaign
 		_career
 		_clandungeon
 		_trade
+		_money
+		[[ $URL = 'furiadetitas.net' ]] && \
+		_built
 #		[[ -n $mail ]] && _mail
 #		_torstop
 	}
@@ -58,11 +61,11 @@ EOF`"&send_message=$SND1" >mail.txt
 			_crono ;;
 # /Clan tournament 11:00:00 - 19:00:00
 		(10:59|18:59)
-			until [[ $(date +%M:%S) = 59:[45]* ]] ; do
+			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clanfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
+			until [[ $(date +%M:%S) = 59:50 ]] ; do
 				echo 'Clan tournament will be started...'
 				sleep 1
 			done
-			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clanfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
 			_clanfight
 			_crono ;;
 # /King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
@@ -91,8 +94,6 @@ EOF`"&send_message=$SND1" >mail.txt
 		(0[02468]:[04]$L|0[13579]:2$L|1[048]:4$L|20:[04]$L|1[13579]:2$L|2[13]:2$L|1[28]:0$L)
 			_all ;
 			_coliseum ;
-#			[[ $URL = 'furiadetitas.net' ]] && \
-#			_online
 			_crono ;;
 		(*)
 			echo 'No battles now, waiting +30s...' ;
