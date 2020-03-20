@@ -38,9 +38,12 @@ _king () {
 		SRC=$(w3m -debug -dump_source $ENC "$URL$ATTACK" -o user_agent="$(shuf -n1 .ua)")
 		_access
 # /heal
-		[[ $HP1 -le $HLHP ]] && ITVL='2.6' && echo "🆘 HP < $HPER%" && \
-		SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)") && \
-		_access
+		if [[ $HP1 -le $HLHP ]] ; then
+			ITVL='2.6'
+			echo "🆘 HP < $HPER%"
+			SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
+			_access
+		fi
 # /grass
 #		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP2 || `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP3 ]] && echo '🙌' && \
 #		SRC=$(w3m -debug -dump_source $ENC "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)") && \
