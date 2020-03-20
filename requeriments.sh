@@ -57,6 +57,7 @@ _requeriments () {
 	termux-wake-lock &> /dev/null
 	if [[ $? = 0 ]] ; then
 		pkg install termux-api w3m curl -y
+		ENC='-o accept_encoding=='*;q=0''
 		mkdir -p ~/.termux/boot
 		mkdir -p ~/.shortcuts
 		rm -rf ~/.termux/boot/*.*
@@ -64,27 +65,27 @@ _requeriments () {
 		cd ~/.shortcuts
 		echo -e "#!/bin/bash\nURL='tiwar.net'" > tiwar.net
 		echo -e "#!/bin/bash\nURL='tiwar.ru'" > tiwar.ru
-		echo -e "#!/bin/bash\nURL='tiwar.pl'" > tiwar.pl
-		echo -e "#!/bin/bash\nURL='titanen.mobi'" > titanen.mobi
-		echo -e "#!/bin/bash\nURL='guerradetitanes.net'" > guerradetitanes.net
+#		echo -e "#!/bin/bash\nURL='tiwar.pl'" > tiwar.pl
+#		echo -e "#!/bin/bash\nURL='titanen.mobi'" > titanen.mobi
+#		echo -e "#!/bin/bash\nURL='guerradetitanes.net'" > guerradetitanes.net
 		echo -e "#!/bin/bash\nURL='furiadetitas.net'" > furiadetitas.net
-		echo -e "#!/bin/bash\nURL='guerradititani.net'" > guerradititani.net
-		echo -e "#!/bin/bash\nURL='tiwar.fr'" > tiwar.fr
-		echo -e "#!/bin/bash\nURL='tiwar.ro'" > tiwar.ro
+#		echo -e "#!/bin/bash\nURL='guerradititani.net'" > guerradititani.net
+#		echo -e "#!/bin/bash\nURL='tiwar.fr'" > tiwar.fr
+#		echo -e "#!/bin/bash\nURL='tiwar.ro'" > tiwar.ro
 		echo -e "#!/bin/bash\nURL='cn.tiwar.net'" > cn.tiwar.net
-		echo -e "#!/bin/bash\nURL='bahasa.tiwar.net'" > bahasa.tiwar.net
+#		echo -e "#!/bin/bash\nURL='bahasa.tiwar.net'" > bahasa.tiwar.net
 
 		cat ~/twm/PLAY.sh | tail -n 53 >> tiwar.net
 		cat ~/twm/PLAY.sh | tail -n 53 >> tiwar.ru
-		cat ~/twm/PLAY.sh | tail -n 53 >> tiwar.pl
-		cat ~/twm/PLAY.sh | tail -n 53 >> titanen.mobi
-		cat ~/twm/PLAY.sh | tail -n 53 >> guerradetitanes.net
+#		cat ~/twm/PLAY.sh | tail -n 53 >> tiwar.pl
+#		cat ~/twm/PLAY.sh | tail -n 53 >> titanen.mobi
+#		cat ~/twm/PLAY.sh | tail -n 53 >> guerradetitanes.net
 		cat ~/twm/PLAY.sh | tail -n 53 >> furiadetitas.net
-		cat ~/twm/PLAY.sh | tail -n 53 >> guerradititani.net
-		cat ~/twm/PLAY.sh | tail -n 53 >> tiwar.fr
-		cat ~/twm/PLAY.sh | tail -n 53 >> tiwar.ro
+#		cat ~/twm/PLAY.sh | tail -n 53 >> guerradititani.net
+#		cat ~/twm/PLAY.sh | tail -n 53 >> tiwar.fr
+#		cat ~/twm/PLAY.sh | tail -n 53 >> tiwar.ro
 		cat ~/twm/PLAY.sh | tail -n 53 >> cn.tiwar.net
-		cat ~/twm/PLAY.sh | tail -n 53 >> bahasa.tiwar.net
+#		cat ~/twm/PLAY.sh | tail -n 53 >> bahasa.tiwar.net
 
 #		cp -R ~/.shortcuts/* ~/.termux/boot
 		reset; clear

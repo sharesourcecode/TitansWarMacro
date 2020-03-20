@@ -1,7 +1,7 @@
 _play () {
 	_mail () {
 		USID=1597588
-		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom/" -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -debug -dump_source $ENC "$URL/chat/titans/changeRoom/" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
 		SND1="Enviar"
 #/
@@ -9,7 +9,7 @@ echo -e "r=$ACCESS&text="`cat << EOF
 I'm use macro bot tinyurl.com/ta6wzxf
 EOF`"&send_message=$SND1" >mail.txt
 #\
-		SRC=$(w3m -debug -post mail.txt -dump_source -o accept_encoding=='*;q=0' "$URL/mail/$USID" -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -debug -post mail.txt -dump_source $ENC "$URL/mail/$USID" -o user_agent="$(shuf -n1 .ua)")
 	}
 	_all () {
 		_AtakeHelp
@@ -37,8 +37,9 @@ EOF`"&send_message=$SND1" >mail.txt
 			until [[ $(date +%M:%S) = 59:5* ]] ; do
 				echo 'Valley of the Immortals will be started...'
 				sleep 1
+				[[ $(date +%M:%S) = 00:05 ]] && break
 			done
-			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/undying/enterGame" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source $ENC "$URL/undying/enterGame" -o user_agent="$(shuf -n1 .ua)")
 			_undying
 			_crono ;;
 # /Battle of banners 10:15:00 - 16:15:00
@@ -47,24 +48,26 @@ EOF`"&send_message=$SND1" >mail.txt
 #				echo 'Battle of banners will be started...'
 #				sleep 1
 #			done
-#		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/flagfight/enterFight -o user_agent="$(shuf -n1 .ua)")
+#		SRC=$(w3m -debug -dump_source $ENC $URL/flagfight/enterFight -o user_agent="$(shuf -n1 .ua)")
 #		_crono
 # /Clan coliseum 10:30:00 - 15:00:00
 		(10:29|14:59)
 			until [[ $(date +%M:%S) = *9:5* ]] ; do
 				echo 'Clan coliseum will be started...'
 				sleep 1
+				[[ $(date +%M:%S) = 30:10 ]] && break
 			done
-			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clancoliseum/?close=reward" -o user_agent="$(shuf -n1 .ua)")
-			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clancoliseum/enterFight" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source $ENC "$URL/clancoliseum/?close=reward" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source $ENC "$URL/clancoliseum/enterFight" -o user_agent="$(shuf -n1 .ua)")
 			_clancoliseum
 			_crono ;;
 # /Clan tournament 11:00:00 - 19:00:00
 		(10:59|18:59)
-			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/clanfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source $ENC "$URL/clanfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
 			until [[ $(date +%M:%S) = 59:50 ]] ; do
 				echo 'Clan tournament will be started...'
 				sleep 1
+				[[ $(date +%M:%S) = 00:10 ]] && break
 			done
 			_clanfight
 			_crono ;;
@@ -73,8 +76,9 @@ EOF`"&send_message=$SND1" >mail.txt
 			until [[ $(date +%M:%S) = 29:5* ]] ; do
 				echo 'King of the Immortals will be started...'
 				sleep 1
+				[[ $(date +%M:%S) = 30:10 ]] && break
 			done
-			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/king/enterGame" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source $ENC "$URL/king/enterGame" -o user_agent="$(shuf -n1 .ua)")
 			_king
 			_crono ;;
 # /Ancient Altars 14:00:00 - 21:00:00
@@ -87,8 +91,9 @@ EOF`"&send_message=$SND1" >mail.txt
 			until [[ $(date +%M:%S) = 59:5* ]] ; do
 				echo 'Ancient Altars will be started...'
 				sleep 1
+				[[ $(date +%M:%S) = 00:10 ]] && break
 			done
-			SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/altars/enterFight" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source $ENC "$URL/altars/enterFight" -o user_agent="$(shuf -n1 .ua)")
 			_altars
 			_crono ;;
 		(0[02468]:[04]$L|0[13579]:2$L|1[048]:4$L|20:[04]$L|1[13579]:2$L|2[13]:2$L|1[28]:0$L)

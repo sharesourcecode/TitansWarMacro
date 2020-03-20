@@ -1,5 +1,5 @@
 _online () {
-	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL/online" -o user_agent="$(shuf -n1 .ua)")
+	SRC=$(w3m -debug -dump_source $ENC "$URL/online" -o user_agent="$(shuf -n1 .ua)")
 	NPG=$(echo $SRC | sed 's/href=/\n/g' | grep 'online/all/' | head -n6 | tail -n1 | cut -d\' -f2 | cut -d\/ -f4)
 	echo "Searching on $NPG Pages"
 	DATE1=`date +%H:%M:%S`
@@ -58,11 +58,11 @@ _online () {
 	echo -e "[br]mod: `cat all.txt | grep 'White Star'`" >>send.txt
 #edit
 	_edit () {
-		SRC=$(w3m -cookie -debug -dump_source -o accept_encoding=='*;q=0' "$URL/chat/titans/changeRoom" -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -cookie -debug -dump_source $ENC "$URL/chat/titans/changeRoom" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
 		SND2="Mudar"
 		echo -e "error=$ACCESS&name="$name"&text="$(cat send.txt)"&send_message=$SND2" >edit.txt
-		SRC=$(w3m -debug -post edit.txt -dump_source -o accept_encoding=='*;q=0' "$URL/forum/topic/$TID/red" -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -debug -post edit.txt -dump_source $ENC "$URL/forum/topic/$TID/red" -o user_agent="$(shuf -n1 .ua)")
 	}
 	TID=99347
 	name="Resumo $(date +%H:%M:%S) $(date +%d-%m-%Y)"

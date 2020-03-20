@@ -1,16 +1,16 @@
 _coliseum () {
 # /enterFight
-#	SRC=$(w3m -debug -o accept_encoding=='*;q=0' $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
+#	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='49'
 	RPER='9'
 	ITVL='1.8'
 	echo -e "\nColiseum"
 	echo $URL
-	w3m -debug -o accept_encoding=='*;q=0' $URL/coliseum/ -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
-	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/coliseum -o user_agent="$(shuf -n1 .ua)")
+	w3m -debug $ENC $URL/coliseum/ -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
+	SRC=$(w3m -debug -dump_source $ENC $URL/coliseum -o user_agent="$(shuf -n1 .ua)")
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterFight/' | head -n1 | cut -d\' -f2)
 	echo -e " 👣 Entering...\n$ACCESS"
-	SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+	SRC=$(w3m -debug -dump_source $ENC "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 # /wait
 	echo " 😴 Waiting..."
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/coliseum/' | head -n1 | cut -d\' -f2)
@@ -20,7 +20,7 @@ _coliseum () {
                 END=$(expr `date +%M` \- $START)
                 [[ $END -gt 7 ]] && break
 		echo -e " 💤	...\n$ACCESS"
-		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' $URL/coliseum -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -debug -dump_source $ENC $URL/coliseum -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/coliseum/' | head -n1 | cut -d\' -f2)
 		EXIT=$(echo $SRC | grep -o '/leaveFight/' | head -n1)
 	done
@@ -30,25 +30,25 @@ _coliseum () {
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 # /dodge
 		[[ $HP3 -ne $HP1 ]] && echo '🛡️' && \
-		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
+		SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
 		HP3=$HP1 && _access
 # /atk
 		echo '🎯' && \
-		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATK" -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -debug -dump_source $ENC "$URL$ATK" -o user_agent="$(shuf -n1 .ua)")
 		_access
 # /heal
 		[[ $HP1 -le $HLHP ]] && ITVL='2.6' && echo "🆘 HP < $HPER%" && \
-		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)") && \
+		SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)") && \
 		_access
 # /random
 		[[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 ]] && echo '🔁' && \
-		SRC=$(w3m -debug -dump_source -o accept_encoding=='*;q=0' "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)") && \
+		SRC=$(w3m -debug -dump_source $ENC "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)") && \
 		_access
 		sleep $ITVL
 	done
 # /view
 	echo ""
-	w3m -debug -o accept_encoding=='*;q=0' $URL/coliseum -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d"
+	w3m -debug $ENC $URL/coliseum -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d"
 	echo "Coliseum (✔)"
 }
 
