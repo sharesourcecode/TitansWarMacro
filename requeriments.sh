@@ -87,7 +87,7 @@ _requeriments () {
 		cat ~/twm/PLAY.sh | tail -n 53 >> cn.tiwar.net
 #		cat ~/twm/PLAY.sh | tail -n 53 >> bahasa.tiwar.net
 
-#		cp -R ~/.shortcuts/* ~/.termux/boot
+		cp ~/twm/config ~/.w3m/config
 		reset; clear
 		echo -e "Successful updates!\n"
 		echo -e " For Android on TV please also install APPS:\n Termux API and Temux Widget.\n"
