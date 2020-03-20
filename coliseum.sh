@@ -48,7 +48,7 @@ _coliseum () {
 	done
 # /view
 	echo ""
-	w3m -debug $ENC $URL/coliseum -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d"
-	echo "Coliseum (✔)"
+	w3m -debug $ENC $URL/coliseum -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed ",\[user\],d;,\[arrow\],d;/l,\ \[,d"
+	echo 'Coliseum (✔)'
 }
 
