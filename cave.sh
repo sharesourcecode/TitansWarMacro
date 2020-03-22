@@ -14,8 +14,8 @@ function _cave () {
 		MEGA=$(echo $SRC | sed 's/src=/\n/g' | grep '/images/icon/silver.png' | grep "'s'" | tail -n1 | grep -o 'M')
 	}
 	_condition
-	num=1
-	until [[ $num -eq 2 ]]; do
+	num=2
+	until [[ $num -eq 0 ]]; do
 		_condition
 		case $ACTION in
 			(cavechancercavegatherrcavedownr)
