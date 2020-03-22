@@ -15,7 +15,7 @@ EOF`"&send_message=$SND1" >mail.txt
 		_AtakeHelp
 		_arena
 		_AdeleteEnd
-#		_cave
+		_cave
 		_campaign
 		_career
 		_clandungeon

@@ -15,11 +15,15 @@ function _cave () {
 	}
 	_condition
 	num=1
-	until [[ $num -eq 0 ]]; do
+	until [[ $num -eq 2 ]]; do
 		_condition
 		case $ACTION in
-			(cavechancercavegatherrcavedownr|cavespeedUpr)
+			(cavechancercavegatherrcavedownr)
 				SRC=$(w3m -debug -dump_source $ENC "$URL$ACCESS2" -o user_agent="$(shuf -n1 .ua)") ;
+				num=$[$num-1] ;
+				echo $num ;;
+			(cavespeedUpr)
+#				SRC=$(w3m -debug -dump_source $ENC "$URL$ACCESS2" -o user_agent="$(shuf -n1 .ua)") ;
 				num=$[$num-1] ;
 				echo $num ;;
 			(cavedownr|cavedownrclanbuiltprivateUpgradetruerrefcave)
