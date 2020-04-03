@@ -3,7 +3,7 @@ _king () {
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='49'
 	RPER='1'
-	ITVL='1.8'
+	ITVL='0.9'
 	echo -e "\nKing"
 	echo $URL
 	SRC=$(w3m -debug -dump_source $ENC $URL/king/enterGame -o user_agent="$(shuf -n1 .ua)")
@@ -39,7 +39,7 @@ _king () {
 		_access
 # /heal
 		if [[ $HP1 -le $HLHP ]] ; then
-			ITVL='2.6'
+			ITVL='1.4'
 			echo "🆘 HP < $HPER%"
 			SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
 			_access

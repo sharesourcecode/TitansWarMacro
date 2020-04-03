@@ -1,4 +1,4 @@
-_play () {
+	_play () {
 	_mail () {
 		USID=1597588
 		SRC=$(w3m -debug -dump_source $ENC "$URL/chat/titans/changeRoom/" -o user_agent="$(shuf -n1 .ua)")
@@ -27,10 +27,10 @@ EOF`"&send_message=$SND1" >mail.txt
 #		_torstop
 	}
 # /game time
-	L=$(echo {0..4} | sed 's, ,\n,g' | shuf -n1)
+	L=$(echo {0..3} | sed 's, ,\n,g' | shuf -n1)
 	case $(date +%H:%M) in
 # /Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
-		(09:58|15:58|21:58)
+		(09:59|15:59|21:59)
 			_AtakeHelp
 			_fullmana
 			_AdeleteEnd
@@ -64,7 +64,7 @@ EOF`"&send_message=$SND1" >mail.txt
 # /Clan tournament 11:00:00 - 19:00:00
 		(10:59|18:59)
 			SRC=$(w3m -debug -dump_source $ENC "$URL/clanfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
-			until [[ $(date +%M:%S) = 59:50 ]] ; do
+			until [[ $(date +%M:%S) = 59:40 ]] ; do
 				echo 'Clan tournament will be started...'
 				sleep 1
 				[[ $(date +%M:%S) = 00:10 ]] && break
@@ -82,7 +82,7 @@ EOF`"&send_message=$SND1" >mail.txt
 			_king
 			_crono ;;
 # /Ancient Altars 14:00:00 - 21:00:00
-		(13:58|20:59)
+		(13:59|20:59)
 			if [[ $(date +%H) = 13 ]] ; then
 				_AtakeHelp
 				_fullmana
@@ -101,8 +101,7 @@ EOF`"&send_message=$SND1" >mail.txt
 			_coliseum ;
 			_crono ;;
 		(*)
-			echo 'No battles now, waiting +30s...' ;
-			sleep 30 ;
+			_sleep ;
 			_crono ;;
 	esac
 }

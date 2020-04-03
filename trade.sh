@@ -15,7 +15,7 @@ _trade () {
 _money () {
 	if [[ -n $CLD ]] ; then
 		CODE=$(w3m -debug -dump_source $ENC $URL/arena/quit -o user_agent="$(shuf -n1 .ua)" | sed "s/href='/\n/g" | grep "attack/1" | head -n1 | cut -d\/ -f5 | tr -cd "[[:digit:]]")
-		echo -e "/clan/$CLD/money/?r=$CODE&silver=1000&gold=4&confirm=true&type=limit"
+		echo -e "/clan/$CLD/money/?r=$CODE&silver=1000&gold=2&confirm=true&type=limit"
 		w3m -debug -dump $ENC "$URL/clan/$CLD/money/?r=$CODE&silver=1000&gold=1&confirm=true&type=limit" -o user_agent="$(shuf -n1 .ua)"
 		CODE=$(w3m -debug -dump_source $ENC $URL/arena/quit -o user_agent="$(shuf -n1 .ua)" | sed "s/href='/\n/g" | grep "attack/1" | head -n1 | cut -d\/ -f5 | tr -cd "[[:digit:]]")
 		echo -e "/clan/$CLD/money/?r=$CODE&silver=0&gold=1&confirm=true&type=limit"

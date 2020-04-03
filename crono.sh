@@ -24,3 +24,19 @@ _crono () {
 	[[ $MIN = 09 ]] && MIN=9
 	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
 }
+_sleep () {
+	if [[ $(date +%M) = [25][89] ]] ; then
+		echo ' No battles now, waiting 15s' && sleep 15
+	elif [[ $(date +%M) = [012345]7 ]] ; then
+		echo ' No battles now, waiting 1m' && sleep 1m
+	elif [[ $(date +%M) = [012345]6 ]] ; then
+		echo ' No battles now, waiting 2m' && sleep 2m
+	elif [[ $(date +%M) = [012345]5 ]] ; then
+		echo ' No battles now, waiting 3m' && sleep 3m
+	elif [[ $(date +%M) = [012345]4 ]] ; then
+		echo ' No battles now, waiting 4m' && sleep 4m
+	else
+		echo ' No battles now, waiting 30s' && sleep 29
+	fi
+}
+

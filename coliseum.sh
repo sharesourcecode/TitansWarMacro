@@ -3,7 +3,7 @@ _coliseum () {
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='49'
 	RPER='9'
-	ITVL='1.8'
+	ITVL=0
 	echo -e "\nColiseum"
 	echo $URL
 	w3m -debug $ENC $URL/coliseum/ -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
@@ -29,28 +29,37 @@ _coliseum () {
 	HP3=$HP1
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 # /dodge
-		[[ $HP3 -ne $HP1 ]] && echo '🛡️' && \
-		SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
-		HP3=$HP1 && _access
+		if [[ $HP3 -ne $HP1 ]] ; then
+			echo '🛡️'
+			SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
+			HP3=$HP1
+			_access
+			sleep $ITVL
+		fi
 # /atk
 		echo '🎯' && \
 		SRC=$(w3m -debug -dump_source $ENC "$URL$ATK" -o user_agent="$(shuf -n1 .ua)")
 		_access
+		sleep $ITVL
 # /heal
 		if [[ $HP1 -le $HLHP ]] ; then
-			ITVL='2.6' && echo "🆘 HP < $HPER%"
+			ITVL=1 && echo "🆘 HP < $HPER%"
 			SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
 			_access
+			sleep 1
 		fi
 # /random
-		[[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 ]] && echo '🔁' && \
-		SRC=$(w3m -debug -dump_source $ENC "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)") && \
-		_access
-		sleep $ITVL
+		if [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 ]] ; then
+			echo '🔁'
+			SRC=$(w3m -debug -dump_source $ENC "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)")
+			_access
+			sleep $ITVL
+		fi
 	done
 # /view
 	echo ""
-	w3m -debug $ENC $URL/coliseum -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed ",\[user\],d;,\[arrow\],d;/l,\ \[,d"
+	w3m -debug $ENC $URL/coliseum -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | grep --color $ACC
 	echo 'Coliseum (✔)'
+	sleep 5
 }
 

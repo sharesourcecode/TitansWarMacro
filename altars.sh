@@ -3,7 +3,7 @@ _altars () {
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='48'
 	RPER='9'
-	ITVL='1.8'
+	ITVL='0.9'
 	echo -e "\nAltars"
 	echo $URL
 	SRC=$(w3m -debug -dump_source $ENC $URL/altars/enterFight -o user_agent="$(shuf -n1 .ua)")
@@ -35,7 +35,7 @@ _altars () {
 		_access
 # /heal
 		if [[ $HP1 -le $HLHP ]] ; then
-			ITVL='2.6'
+			ITVL='1.4'
 			echo "🆘 HP < $HPER%"
 			SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
 			_access
