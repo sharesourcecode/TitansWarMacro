@@ -1,9 +1,9 @@
 _coliseum () {
 # /enterFight
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
-	HPER='49'
-	RPER='9'
-	ITVL=0
+	HPER='26'
+	RPER='6'
+	ITVL='1.32'
 	echo -e "\nColiseum"
 	echo $URL
 	w3m -debug $ENC $URL/coliseum/ -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
@@ -30,36 +30,50 @@ _coliseum () {
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 # /dodge
 		if [[ $HP3 -ne $HP1 ]] ; then
+			sleep $ITVL
 			echo '🛡️'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
 			HP3=$HP1
 			_access
-			sleep $ITVL
 		fi
 # /atk
+		sleep $ITVL && \
 		echo '🎯' && \
 		SRC=$(w3m -debug -dump_source $ENC "$URL$ATK" -o user_agent="$(shuf -n1 .ua)")
 		_access
-		sleep $ITVL
 # /heal
 		if [[ $HP1 -le $HLHP ]] ; then
-			ITVL=1 && echo "🆘 HP < $HPER%"
+			sleep $ITVL
+			HPER='27'
+			RPER='7'
+			ITVL='1.32' && echo "🆘 HP < $HPER%"
 			SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
 			_access
-			sleep 1
 		fi
 # /random
 		if [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 ]] ; then
+			sleep $ITVL
 			echo '🔁'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)")
 			_access
+		fi
+# /grass
+		if [[ `expr $HP1 + $HP1 \* 40 \/ 100` -le $HP2 ]] ; then
 			sleep $ITVL
+			echo '🙌'
+			SRC=$(w3m -debug -dump_source $ENC "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
+			_access
+# /stone
+#		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP2 ]]
+			echo '💪'
+			SRC=$(w3m -debug -dump_source $ENC "$URL$STONE" -o user_agent="$(shuf -n1 .ua)")
+			_access
 		fi
 	done
 # /view
 	echo ""
 	w3m -debug $ENC $URL/coliseum -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | grep --color $ACC
 	echo 'Coliseum (✔)'
-	sleep 5
+	sleep 10
 }
 
