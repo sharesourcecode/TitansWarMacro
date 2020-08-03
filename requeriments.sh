@@ -52,7 +52,7 @@ _requeriments () {
 		echo -e "\n Upgrading 22/22"
 		dos2unix *.sh &> /dev/null
 	}
-#	_sync
+	_sync
 # /termux on android
 	termux-wake-lock &> /dev/null
 	if [[ $? = 0 ]] ; then
