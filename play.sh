@@ -37,7 +37,7 @@ EOF`"&send_message=$SND1" >mail.txt
 			until [[ $(date +%M:%S) = 59:5* ]] ; do
 				echo 'Valley of the Immortals will be started...'
 				sleep 1
-				[[ $(date +%M:%S) = 00:05 ]] && break
+				[[ $(date +%M) > 00 ]] && break
 			done
 			SRC=$(w3m -debug -dump_source $ENC "$URL/undying/enterGame" -o user_agent="$(shuf -n1 .ua)")
 			_undying
@@ -48,7 +48,7 @@ EOF`"&send_message=$SND1" >mail.txt
 			until [[ $(date +%M:%S) = 14:5* ]] ; do
 				echo 'Battle of banners will be started...'
 				sleep 1
-				[[ $(date +%M:%S) = 15:15 ]] && break
+				[[ $(date +%M) > 15 ]] && break
 			done
 			SRC=$(w3m -debug -dump_source $ENC "$URL/flagfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
 			_flagfight
@@ -58,7 +58,7 @@ EOF`"&send_message=$SND1" >mail.txt
 			until [[ $(date +%M:%S) = *9:5* ]] ; do
 				echo 'Clan coliseum will be started...'
 				sleep 1
-				[[ $(date +%M:%S) = 30:10 ]] && break
+				[[ $(date +%M) = 00 ]] && break
 			done
 			SRC=$(w3m -debug -dump_source $ENC "$URL/clancoliseum/?close=reward" -o user_agent="$(shuf -n1 .ua)")
 			SRC=$(w3m -debug -dump_source $ENC "$URL/clancoliseum/enterFight" -o user_agent="$(shuf -n1 .ua)")
@@ -70,7 +70,7 @@ EOF`"&send_message=$SND1" >mail.txt
 			until [[ $(date +%M:%S) = 59:40 ]] ; do
 				echo 'Clan tournament will be started...'
 				sleep 1
-				[[ $(date +%M:%S) = 00:15 ]] && break
+				[[ $(date +%M) = 00 ]] && break
 			done
 			_clanfight
 			_crono ;;
@@ -79,7 +79,7 @@ EOF`"&send_message=$SND1" >mail.txt
 			until [[ $(date +%M:%S) = 29:5* ]] ; do
 				echo 'King of the Immortals will be started...'
 				sleep 1
-				[[ $(date +%M:%S) = 30:10 ]] && break
+				[[ $(date +%M) > 30 ]] && break
 			done
 			SRC=$(w3m -debug -dump_source $ENC "$URL/king/enterGame" -o user_agent="$(shuf -n1 .ua)")
 			_king
@@ -94,7 +94,7 @@ EOF`"&send_message=$SND1" >mail.txt
 			until [[ $(date +%M:%S) = 59:5* ]] ; do
 				echo 'Ancient Altars will be started...'
 				sleep 1
-				[[ $(date +%M:%S) = 00:10 ]] && break
+				[[ $(date +%M) = 00 ]] && break
 			done
 			SRC=$(w3m -debug -dump_source $ENC "$URL/altars/enterFight" -o user_agent="$(shuf -n1 .ua)")
 			_altars
