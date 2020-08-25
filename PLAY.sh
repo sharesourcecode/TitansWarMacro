@@ -3,7 +3,7 @@ OP=""
 # /sources
 cd ~/twm
 . torstop.sh ; . requeriments.sh ; . loginlogoff.sh
-. clanid.sh ; . crono.sh ; . arena.sh ; . coliseum.sh
+. flagfight ; . clanid.sh ; . crono.sh ; . arena.sh ; . coliseum.sh
 . campaign.sh ; . play.sh ; . altars.sh ; . clanfight.sh
 . clancoliseum.sh ; . king.sh ; . undying.sh ; . clandungeon.sh
 . trade.sh ; . career.sh ; . cave.sh ; . online.sh
