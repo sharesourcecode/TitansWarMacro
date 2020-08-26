@@ -2,7 +2,7 @@
 ***TESTE BETA***
 **BETA TEST Level 16+ required and +50 training points**
 
-Script macros para Titans war mobile game em todos servidores.
+Script macros for Titans war mobile game on all servers.
 
 1. Abra o Termux app no Android e digite ou cole confirmando com a tecla ENTER:
 
