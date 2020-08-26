@@ -26,7 +26,5 @@ Or:
 
 **To interrupt (CTRL c) or force the Termux app to stop**
 
-*Faço atualizações e correções periodicas, caso queira manter os scripts atualizados em seu dispositivo reexecute as instruções acima a partir da segunda etapa.
-
-As atualizações são exibidas nesta página: https://github.com/sharesourcecode/twm/commits/master
+*I make periodic updates and corrections, if you want to keep the scripts updated on your device, rerun the above instructions from the second step. Updates are displayed on this page: https://github.com/sharesourcecode/twm/commits/master
 Clique em um dos códigos ao lado direito para saber o que foi alterado.* 
