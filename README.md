@@ -27,4 +27,4 @@ Or:
 **To interrupt (CTRL c) or force the Termux app to stop**
 
 *I make periodic updates and corrections, if you want to keep the scripts updated on your device, rerun the above instructions from the second step. Updates are displayed on this page: https://github.com/sharesourcecode/twm/commits/master
-Clique em um dos códigos ao lado direito para saber o que foi alterado.* 
+Click on one of the codes on the right to see what has changed.* 
