@@ -4,23 +4,23 @@
 
 Script macros for Titans war mobile game on all servers.
 
-1. Abra o Termux app no Android e digite ou cole confirmando com a tecla ENTER:
+1. Open the Termux app on Android and type or paste confirming with the ENTER key:
 
 **apt install git -y**
 
 
-2. Digite ou cole estes dois comandos, um por vez para baixar o twm, confirme-os com ENTER(O link faz parte do segundo comando):
+2. Type or paste these two commands, one at a time to download the twm, confirm them with ENTER (The link is part of the second command):
 
 **cd $HOME**
 
 **git clone https://github.com/sharesourcecode/twm.git**
 
 
-3. Para executar o twm(ENTER para confirmar):
+3. To run twm (ENTER to confirm):
 
 **bash $HOME/twm/PLAY.sh**
 
-Ou:
+Or:
 **bash ~/twm/PLAY.sh**
 
 
