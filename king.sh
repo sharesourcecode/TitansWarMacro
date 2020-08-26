@@ -13,7 +13,7 @@ _king () {
 	echo " 😴 Waiting..."
         EXIT=$(echo $SRC | grep -o 'king/kingatk/')
 	while [[ -z $EXIT ]] ; do
-		[[ $(date +%M:%S) = 30:15 ]] && break
+		[[ $(date +%M) = 30 && $(date +%S) > 19 ]] && break
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -dump_source $ENC "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/king/' | head -n1 | cut -d\' -f2)
@@ -24,7 +24,7 @@ _king () {
 	_access
 	HP3=$HP1
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
-		[[ $(date +%M) = 40 ]] && break
+		[[ $(date +%M) > 39 ]] && break
 # /dodge
 		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
 		SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \

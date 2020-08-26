@@ -13,7 +13,7 @@ _clancoliseum () {
 	echo " 😴 Waiting..."
         EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'clancoliseum/attack/')
 	while [[ -z $EXIT ]] ; do
-		[[ $(date +%M:%S) = *0:15 ]] && break
+		[[ $(date +%M) = *0 && $(date +%S) > 19 ]] && break
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -debug -dump_source $ENC "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/clancoliseum/' | head -n1 | cut -d\' -f2)
@@ -23,7 +23,7 @@ _clancoliseum () {
 	_access
 	HP3=$HP1
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
-		[[ $(date +%M) = *6 ]] && break
+		[[ $(date +%M) = *7 ]] && break
 # /dodge
 		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
 		SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \

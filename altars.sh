@@ -13,7 +13,7 @@ _altars () {
 	echo " 😴 Waiting..."
         EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'altars/attack/')
 	while [[ -z $EXIT ]] ; do
-                [[ $(date +%M:%S) = 00:15 ]] && break
+                [[ $(date +%M) =  00 && $(date +%S) > 19 ]] && break
 		echo -e "$URL\n 💤	...\n$ACCESS"
 		SRC=$(w3m -debug -dump_source $ENC $URL/altars/?close=reward -o user_agent="$(shuf -n1 .ua)")
 		SRC=$(w3m -debug -dump_source $ENC $URL/altars/enterFight -o user_agent="$(shuf -n1 .ua)")
@@ -24,7 +24,7 @@ _altars () {
 	_access
 	HP3=$HP1
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
-                [[ $(date +%M) = 07 ]] && break
+                [[ $(date +%M) = 08 ]] && break
 # /dodge
 		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
 		SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \

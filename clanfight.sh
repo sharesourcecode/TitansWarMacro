@@ -13,7 +13,7 @@ _clanfight () {
 	echo " 😴 Waiting..."
         EXIT=$(echo $SRC | grep -o 'clanfight/attack/')
 	while [[ -z $EXIT ]] ; do
-		[[ $(date +%M:%S) = 00:15 ]] && break
+		[[ $(date +%M) = 00 && $(date +%S) > 19 ]] && break
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -debug -dump_source $ENC "$URL/clanfight" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/clanfight/' | head -n1 | cut -d\' -f2)
@@ -23,7 +23,7 @@ _clanfight () {
 	_access
 	HP3=$HP1
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
-		[[ $(date +%M) = 06 ]] && break
+		[[ $(date +%M) = 07 ]] && break
 # /dodge
 		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
 		SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
@@ -34,7 +34,7 @@ _clanfight () {
 		_access
 # /heal
 		if [[ $HP1 -le $HLHP ]] ; then
-			ITVL='1.5'
+			ITVL='1.4'
 			echo "🆘 HP < $HPER%"
 			SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
 			_access

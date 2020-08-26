@@ -10,7 +10,7 @@ _undying () {
 # /wait
 	echo " 😴 Waiting..."
 	until [[ -n $MANA ]] ; do
-		[[ $(date +%M:%S) = 00:20 ]] && break
+		[[ $(date +%M) = 00 && $(date +%S) > 19 ]] && break
 		echo -e " 💤 	..."
 		SRC=$(w3m -debug -dump_source $ENC "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/undying/' | head -n1 | cut -d\' -f2)
@@ -24,10 +24,10 @@ _undying () {
 	SRC=$(w3m -debug -dump_source $ENC "$URL/undying" -o user_agent="$(shuf -n1 .ua)")
 	_access
 	while [[ -n $OUTGATE ]] ; do
-		[[ $(date +%M) = 06 ]] && break
-		echo -e " 🎲 hiting..."
+		[[ $(date +%M) = 07 ]] && break
 		SRC=$(w3m -debug -dump_source $ENC "$URL$HIT" -o user_agent="$(shuf -n1 .ua)")
 		_access
+		echo -e " 🎲 $HIT"
 		sleep 1.4
 	done
 # /view
