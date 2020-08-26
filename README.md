@@ -1,6 +1,6 @@
 # twm(Titans War Macro)
-***TESTE BETA***
-**BETA TEST Level 16+ required and +50 training points**
+**BETA TEST***
+**Level 16+ required and +50 training points**
 
 Script macros for Titans war mobile game on all servers.
 
