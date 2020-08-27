@@ -58,5 +58,7 @@ _flagfight () {
 	w3m -debug $ENC $URL/flagfight -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d"
 	echo "Flag Fight (✔)"
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
-	sleep 30
+	_AtakeHelp
+	_fullmana
+	_AdeleteEnd
 }
