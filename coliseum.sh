@@ -3,7 +3,7 @@ _coliseum () {
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='25'
 	RPER='5'
-	ITVL='1.31' #1.38, 1.32
+	ITVL='0.9' #1.38, 1.32
 	echo -e "\nColiseum"
 	echo $URL
 	w3m -debug $ENC $URL/coliseum/ -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
@@ -50,6 +50,7 @@ _coliseum () {
 		_access
 # /heal
 		if [[ $HP1 -le $HLHP ]] ; then
+			ITVL='1.4'
 			sleep $ITVL
 			RPER='7'
 			echo "🆘 HP < $HPER%"
