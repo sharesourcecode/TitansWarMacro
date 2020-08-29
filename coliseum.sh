@@ -4,7 +4,7 @@ _coliseum () {
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='27'
 	RPER='5'
-	ITVL='2.8'
+	ITVL='2.9'
 	echo -e "\nColiseum"
 	echo $URL
 	w3m -debug $ENC $URL/coliseum/ -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
@@ -32,17 +32,8 @@ _coliseum () {
 	grss=12
 	hl=18
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
-# /random
-		if [[ `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 && $ddg -ne 4 && $hl -lt 18 ]] ; then
-			echo '🔁'
-			SRC=$(w3m -debug -dump_source $ENC "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)")
-			_access
-			sleep $ITVL
-			ddg=$[$ddg+1]
-			hl=$[$hl+1]
-			grss=$[$grss+1]
 # /dodge
-		elif [[ $ddg -ge 4 && $HP3 -ne $HP1 ]] ; then
+		if [[ $ddg -ge 4 && $HP3 -ne $HP1 ]] ; then
 			echo '🛡️'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
 			ddg=0
@@ -65,7 +56,7 @@ _coliseum () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /grass
-		elif [[ $grss -ge 12 && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
+		elif [[ $grss -ge 12 && $ddg -ne 3 && $hl -ne 17 && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
 			HPER='30'
 			RPER='13'
 			echo '🙌'
@@ -85,6 +76,16 @@ _coliseum () {
 			ddg=$[$ddg+1]
 			hl=$[$hl+1]
 			grss=$[$grss+1]
+# /random
+		elif [[ `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 && $ddg -ne 4 && $hl -lt 18 ]] ; then
+			echo '🔁'
+			SRC=$(w3m -debug -dump_source $ENC "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)")
+			_access
+			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
+
 # /atk
 		else
 #		if [[ $ddg -ne 4 || $hl -ne 18 ]] ; then
