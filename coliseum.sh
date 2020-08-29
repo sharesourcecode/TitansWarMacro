@@ -1,9 +1,9 @@
 _coliseum () {
 # /enterFight
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
-	HPER='25'
+	HPER='27'
 	RPER='5'
-	ITVL='0.9' #1.38, 1.32
+	ITVL='2.8' #1.8, 1.9
 	echo -e "\nColiseum"
 	echo $URL
 	w3m -debug $ENC $URL/coliseum/ -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
@@ -27,50 +27,73 @@ _coliseum () {
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	_access
 	HP3=$HP1
+	ddg=4
+	grss=12
+	hl=18
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 # /random
-		if [[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 ]] ; then
-			sleep $ITVL
+		if [[ `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 && $ddg -ne 4 && $hl -lt 18 ]] ; then
 			echo '🔁'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)")
 			_access
-		fi
-# /dodge
-		if [[ $HP3 -ne $HP1 ]] ; then
 			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
+# /dodge
+		elif [[ $ddg -ge 4 && $HP3 -ne $HP1 ]] ; then
 			echo '🛡️'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
+			ddg=0
 			HP3=$HP1
 			_access
-		fi
-# /atk
-		sleep $ITVL && \
-		echo '🎯' && \
-		SRC=$(w3m -debug -dump_source $ENC "$URL$ATK" -o user_agent="$(shuf -n1 .ua)")
-		_access
-# /heal
-		if [[ $HP1 -le $HLHP ]] ; then
-			ITVL='1.4'
 			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
+# /heal
+		elif [[ $hl -ge 18 && $HP1 -le $HLHP ]] ; then
+#			ITVL='1.4'
 			RPER='7'
 			echo "🆘 HP < $HPER%"
 			SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
 			_access
-		fi
+			hl=0
+			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
 # /grass
-		if [[ `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
+		elif [[ $grss -ge 12 && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
 			HPER='30'
 			RPER='13'
-			sleep $ITVL
 			echo '🙌'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
 			_access
+			grss=0
+			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
 # /stone
 #		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP2 ]]
-			sleep $ITVL
 			echo '💪'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$STONE" -o user_agent="$(shuf -n1 .ua)")
 			_access
+			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
+# /atk
+		else
+#		if [[ $ddg -ne 4 || $hl -ne 18 ]] ; then
+			echo '🎯'
+			SRC=$(w3m -debug -dump_source $ENC "$URL$ATK" -o user_agent="$(shuf -n1 .ua)")
+			_access
+			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
 		fi
 	done
 # /view
