@@ -25,38 +25,79 @@ _king () {
 	HP3=$HP1
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		[[ $(date +%M) = 40 ]] && break
-# /dodge
-		[[ $HP3 -ne $HP1 ]] && HP3=$HP1 && echo '🛡️' && \
-		SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)") && \
-		_access
 # /kingatk
-		[[ -n $KINGATK ]] && echo '👑' && \
-		SRC=$(w3m -debug -dump_source $ENC "$URL$KINGATK" -o user_agent="$(shuf -n1 .ua)") && \
-		_access
-# /attack
-		[[ -z $KINGATK ]] && echo '🎯' && \
-		SRC=$(w3m -debug -dump_source $ENC "$URL$ATTACK" -o user_agent="$(shuf -n1 .ua)")
-		_access
+		if [[ -n $KINGATK && $ddg -ne 4 ]] ; then
+			echo '👑'
+			SRC=$(w3m -debug -dump_source $ENC "$URL$KINGATK" -o user_agent="$(shuf -n1 .ua)")
+			_access
+			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
+# /dodge
+		elif [[ $ddg -ge 4 && $HP3 -ne $HP1 ]] ; then
+			echo '🛡️'
+			SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
+			ddg=0
+			HP3=$HP1
+			_access
+			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
 # /heal
-		if [[ $HP1 -le $HLHP ]] ; then
-			ITVL='1.4'
+		elif [[ $hl -ge 18 && $HP1 -le $HLHP ]] ; then
+#			ITVL='1.4'
+			RPER='7'
 			echo "🆘 HP < $HPER%"
 			SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
 			_access
-		fi
+			hl=0
+			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
 # /grass
-#		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP2 || `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP3 ]] && echo '🙌' && \
-#		SRC=$(w3m -debug -dump_source $ENC "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)") && \
-#		_access
+		elif [[ $grss -ge 12 && $ddg -ne 3 && $hl -ne 17 && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
+			HPER='30'
+			RPER='13'
+			echo '🙌'
+			SRC=$(w3m -debug -dump_source $ENC "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
+			_access
+			grss=0
+			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
 # /stone
-#		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP2 || $HP2 -le 15 ]] && echo '💪' && \
-#		SRC=$(w3m -debug -dump_source $ENC "$URL$STONE" -o user_agent="$(shuf -n1 .ua)") && \
-#		_access
+#		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP2 ]]
+			echo '💪'
+			SRC=$(w3m -debug -dump_source $ENC "$URL$STONE" -o user_agent="$(shuf -n1 .ua)")
+			_access
+			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
 # /random
-		[[ $WDRED == white && `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 ]] && echo '🔁' && \
-		SRC=$(w3m -debug -dump_source $ENC "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)") && \
-		_access
-		sleep $ITVL
+		elif [[ `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 && $ddg -ne 4 && $hl -lt 18 ]] ; then
+			echo '🔁'
+			SRC=$(w3m -debug -dump_source $ENC "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)")
+			_access
+			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
+
+# /atk
+		else
+			echo '🎯'
+			SRC=$(w3m -debug -dump_source $ENC "$URL$ATTACK" -o user_agent="$(shuf -n1 .ua)")
+			_access
+			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
+		fi
 	done
 # /view
 	echo ""
