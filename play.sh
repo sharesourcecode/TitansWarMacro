@@ -1,4 +1,5 @@
 	_play () {
+#_coliseum
 	_mail () {
 		USID=1597588
 		SRC=$(w3m -debug -dump_source $ENC "$URL/chat/titans/changeRoom/" -o user_agent="$(shuf -n1 .ua)")
@@ -43,27 +44,27 @@ EOF`"&send_message=$SND1" >mail.txt
 			_undying
 			_crono ;;
 # /Battle of banners 10:15:00 - 16:15:00
-		(10:14|16:14)
-			SRC=$(w3m -debug -dump_source $ENC "$URL/flagfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
-			until [[ $(date +%M:%S) = 14:5* ]] ; do
-				echo 'Battle of banners will be started...'
-				sleep 1
+#		(10:14|16:14)
+#			SRC=$(w3m -debug -dump_source $ENC "$URL/flagfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
+#			until [[ $(date +%M:%S) = 14:5* ]] ; do
+#				echo 'Battle of banners will be started...'
+#				sleep 1
 				[[ $(date +%M) > 15 ]] && break
-			done
-			SRC=$(w3m -debug -dump_source $ENC "$URL/flagfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
-			_flagfight
-			_crono ;;
+#			done
+#			SRC=$(w3m -debug -dump_source $ENC "$URL/flagfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
+#			_flagfight
+#			_crono ;;
 # /Clan coliseum 10:30:00 - 15:00:00
-		(10:29|14:59)
-			until [[ $(date +%M:%S) = *9:5* ]] ; do
-				echo 'Clan coliseum will be started...'
-				sleep 1
-				[[ $(date +%M) = 00 ]] && break
-			done
-			SRC=$(w3m -debug -dump_source $ENC "$URL/clancoliseum/?close=reward" -o user_agent="$(shuf -n1 .ua)")
-			SRC=$(w3m -debug -dump_source $ENC "$URL/clancoliseum/enterFight" -o user_agent="$(shuf -n1 .ua)")
-			_clancoliseum
-			_crono ;;
+#		(10:29|14:59)
+#			until [[ $(date +%M:%S) = *9:5* ]] ; do
+#				echo 'Clan coliseum will be started...'
+#				sleep 1
+#				[[ $(date +%M) = 00 ]] && break
+#			done
+#			SRC=$(w3m -debug -dump_source $ENC "$URL/clancoliseum/?close=reward" -o user_agent="$(shuf -n1 .ua)")
+#			SRC=$(w3m -debug -dump_source $ENC "$URL/clancoliseum/enterFight" -o user_agent="$(shuf -n1 .ua)")
+#			_clancoliseum
+#			_crono ;;
 # /Clan tournament 11:00:00 - 19:00:00
 		(10:59|18:59)
 			SRC=$(w3m -debug -dump_source $ENC "$URL/clanfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
