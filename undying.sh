@@ -6,7 +6,7 @@ _undying () {
 	echo " 👣 Entering..."
 	SRC=$(w3m -debug -dump_source $ENC $URL/undying -o user_agent="$(shuf -n1 .ua)")
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/undying/' | head -n1 | cut -d\' -f2)
-	_access
+	MANA=$(echo $SRC | grep -o 'undying/mana/' | head -n1)
 # /wait
 	echo " 😴 Waiting..."
 	until [[ -n $MANA ]] ; do
@@ -14,19 +14,23 @@ _undying () {
 		echo -e " 💤 	..."
 		SRC=$(w3m -debug -dump_source $ENC "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/undying/' | head -n1 | cut -d\' -f2)
-		_access
+		MANA=$(echo $SRC | grep -o 'undying/mana/' | head -n1)
 	done
 	SRC=$(w3m -debug -dump_source $ENC "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
-	_access
+	MANA=$(echo $SRC | grep -o 'undying/mana/' | head -n1)
+	HIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'undying/hit/' | head -n1 | cut -d\' -f2)
 	_AtakeHelp
 	_fullmana
 	_AdeleteEnd
 	SRC=$(w3m -debug -dump_source $ENC "$URL/undying" -o user_agent="$(shuf -n1 .ua)")
-	_access
+	MANA=$(echo $SRC | grep -o 'undying/mana/' | head -n1)
+	HIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'undying/hit/' | head -n1 | cut -d\' -f2)
+	OUTGATE=$(echo $SRC | grep -o 'out_gate')
 	while [[ -n $OUTGATE ]] ; do
 		[[ $(date +%M) = 07 ]] && break
 		SRC=$(w3m -debug -dump_source $ENC "$URL$HIT" -o user_agent="$(shuf -n1 .ua)")
-		_access
+		HIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'undying/hit/' | head -n1 | cut -d\' -f2)
+		OUTGATE=$(echo $SRC | grep -o 'out_gate')
 		echo -e " 🎲 $HIT"
 		sleep 1.4
 	done
@@ -34,5 +38,4 @@ _undying () {
 	echo ""
 	w3m -debug $ENC $URL/undying -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color "$ACC"
 	echo -e "Undying (✔)"
-#	SRC=$(w3m -debug $ENC $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
 }

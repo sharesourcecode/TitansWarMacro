@@ -17,8 +17,6 @@ _show () {
 	_access () {
 		ENTERFIGHT=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterFight/' | head -n1 | cut -d\' -f2)
 		ENTERGAME=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterGame/' | head -n1 | cut -d\' -f2)
-		HIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'undying/hit/' | head -n1 | cut -d\' -f2)
-		MANA=$(echo $SRC | grep -o 'undying/mana/' | head -n1)
 		ATK=$(echo $SRC | sed 's/href=/\n/g' | grep '/atk/' | head -n1 | cut -d\' -f2)
 		ATTACK=$(echo $SRC | sed 's/href=/\n/g' | grep '/attack/' | head -n1 | cut -d\' -f2)
 		ATKRND=$(echo $SRC | sed 's/href=/\n/g' | grep '/atkrnd/' | head -n1 | cut -d\' -f2)
@@ -34,7 +32,7 @@ _show () {
 		WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
 		PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 		HLHP=$(expr $FULL \* $HPER \/ 100)
-		[[ -z $HIT ]] && _show
+		_show
 	}
 rpt=0
 _requeriments
