@@ -11,7 +11,7 @@
 		_trade
 		_money
 		[[ $URL = 'furiadetitas.net' ]] && \
-		_built
+#		_built
 	}
 # /game time
 	L=$(echo {0..3} | sed 's, ,\n,g' | shuf -n1)

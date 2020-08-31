@@ -1,10 +1,10 @@
 # /cave
 function _cave () {
 	_clanid
-	if [[ -n $CLD ]]; then
-		w3m -debug $ENC "$URL/clan/$CLD/quest/take/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
-		w3m -debug $ENC "$URL/clan/$CLD/quest/help/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
-	fi
+#	if [[ -n $CLD ]]; then
+#		w3m -debug $ENC "$URL/clan/$CLD/quest/take/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
+#		w3m -debug $ENC "$URL/clan/$CLD/quest/help/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
+#	fi
 	_condition () {
 		SRC=$(w3m -debug -dump_source $ENC "$URL/cave/" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS1=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n1 | cut -d\' -f2)
