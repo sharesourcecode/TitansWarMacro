@@ -50,6 +50,7 @@ _requeriments () {
 	termux-wake-lock &> /dev/null
 	if [[ $? = 0 ]] ; then
 		pkg install termux-api w3m curl -y
+		_sync
 		ENC='-o accept_encoding=='*;q=0''
 		mkdir -p ~/.termux/boot
 		mkdir -p ~/.shortcuts
@@ -86,7 +87,7 @@ _requeriments () {
 		echo -e "Successful updates!\n"
 	else
 		sudo apt install w3m curl -y
-#		_sync
+		_sync
 		reset; clear
 	fi
 	cd $HOME/twm
