@@ -49,7 +49,7 @@ EOF`"&send_message=$SND1" >mail.txt
 #			until [[ $(date +%M:%S) = 14:5* ]] ; do
 #				echo 'Battle of banners will be started...'
 #				sleep 1
-				[[ $(date +%M) > 15 ]] && break
+#				[[ $(date +%M) > 15 ]] && break
 #			done
 #			SRC=$(w3m -debug -dump_source $ENC "$URL/flagfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
 #			_flagfight

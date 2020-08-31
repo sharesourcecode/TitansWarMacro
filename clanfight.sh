@@ -3,7 +3,7 @@ _clanfight () {
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='49'
 	RPER='9'
-	ITVL='2.9'
+	ITVL='2.92'
 	echo -e "\nClan fight"
 	echo $URL
 	SRC=$(w3m -debug -dump_source $ENC $URL/clanfight/?close=reward -o user_agent="$(shuf -n1 .ua)")

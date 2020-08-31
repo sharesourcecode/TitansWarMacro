@@ -3,7 +3,7 @@ _king () {
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='49'
 	RPER='1'
-	ITVL='2.9'
+	ITVL='2.92'
 	echo -e "\nKing"
 	echo $URL
 	SRC=$(w3m -debug -dump_source $ENC $URL/king/enterGame -o user_agent="$(shuf -n1 .ua)")
@@ -26,7 +26,7 @@ _king () {
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		[[ $(date +%M) = 40 ]] && break
 # /kingatk
-		if [[ -n $KINGATK && $ddg -ne 4 ]] ; then
+		if [[ -n $KINGATK && $ddg -ne 4 && $HP2 -ge 10 ]] ; then
 			echo '👑'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$KINGATK" -o user_agent="$(shuf -n1 .ua)")
 			_access
@@ -58,7 +58,7 @@ _king () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /grass
-		elif [[ $grss -ge 12 && $ddg -ne 3 && $hl -ne 17 && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
+		elif [[ $HP2 -lt 10 || -z $KINGATK ]] ; then
 			HPER='30'
 			RPER='13'
 			echo '🙌'
