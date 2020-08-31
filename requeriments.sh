@@ -46,7 +46,6 @@ _requeriments () {
 		echo -e "\n Upgrading 19/19"
 		dos2unix *.sh &> /dev/null
 	}
-	_sync
 # /termux on android
 	termux-wake-lock &> /dev/null
 	if [[ $? = 0 ]] ; then
@@ -87,7 +86,7 @@ _requeriments () {
 		echo -e "Successful updates!\n"
 	else
 		sudo apt install w3m curl -y
-		_sync
+#		_sync
 		reset; clear
 	fi
 	cd $HOME/twm
