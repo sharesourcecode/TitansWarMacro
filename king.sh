@@ -58,7 +58,7 @@ _king () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /grass
-		elif [[ $HP2 -lt 10 || -z $KINGATK ]] ; then
+		elif [[ $HP2 -lt 15 || -z $KINGATK && $hl -lt 17 ]] ; then
 			HPER='30'
 			RPER='13'
 			echo '🙌'

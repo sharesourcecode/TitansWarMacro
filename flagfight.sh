@@ -48,7 +48,7 @@ _flagfight () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /grass
-		elif [[ $grss -ge 12 && $ddg -ne 3 && $hl -ne 17 && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
+		elif [[ $grss -ge 12 && $ddg -ne 3 && $hl -lt 17 && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
 			HPER='30'
 			RPER='13'
 			echo '🙌'

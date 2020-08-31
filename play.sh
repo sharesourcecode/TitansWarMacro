@@ -1,17 +1,5 @@
 	_play () {
 #_coliseum
-	_mail () {
-		USID=1597588
-		SRC=$(w3m -debug -dump_source $ENC "$URL/chat/titans/changeRoom/" -o user_agent="$(shuf -n1 .ua)")
-		ACCESS=$(echo $SRC | sed "s/value\=/value\=\n/g" | grep '\<table' | cut -d\" -f2 | head -n1)
-		SND1="Enviar"
-#/
-echo -e "r=$ACCESS&text="`cat << EOF
-I'm use macro bot tinyurl.com/ta6wzxf
-EOF`"&send_message=$SND1" >mail.txt
-#\
-		SRC=$(w3m -debug -post mail.txt -dump_source $ENC "$URL/mail/$USID" -o user_agent="$(shuf -n1 .ua)")
-	}
 	_all () {
 		_AtakeHelp
 		_arena
@@ -24,8 +12,6 @@ EOF`"&send_message=$SND1" >mail.txt
 		_money
 		[[ $URL = 'furiadetitas.net' ]] && \
 		_built
-#		[[ -n $mail ]] && _mail
-#		_torstop
 	}
 # /game time
 	L=$(echo {0..3} | sed 's, ,\n,g' | shuf -n1)
