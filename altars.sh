@@ -1,7 +1,7 @@
 _altars () {
 # /enterFight
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
-	HPER='48'
+	HPER='50'
 	RPER='9'
 	ITVL='2.92'
 	echo -e "\nAltars"
