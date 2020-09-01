@@ -25,7 +25,7 @@ _clancoliseum () {
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		[[ $(date +%M) = *7 ]] && break
 # /dodge
-		if [[ $ddg -ge 4 && $HP3 -ne $HP1 ]] ; then
+		if [[ $hl -ne 18 && $ddg -ge 4 && $HP3 -ne $HP1 ]] ; then
 			echo '🛡️'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
 			ddg=0
@@ -36,7 +36,7 @@ _clancoliseum () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /heal
-		elif [[ $hl -ge 18 && $HP1 -le $HLHP ]] ; then
+		elif [[ $hl -eq 18 && $HP1 -le $HLHP ]] ; then
 #			ITVL='1.4'
 			RPER='7'
 			echo "🆘 HP < $HPER%"
@@ -48,7 +48,7 @@ _clancoliseum () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /grass
-		elif [[ $grss -ge 12 && $ddg -ne 3 && $hl -lt 17 && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
+		elif [[ $grss -ge 12 && $ddg -ne "3|4" && $hl -ne "17|18" && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
 			HPER='30'
 			RPER='13'
 			echo '🙌'
@@ -69,7 +69,7 @@ _clancoliseum () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /random
-		elif [[ `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 && $ddg -ne 4 && $hl -lt 18 ]] ; then
+		elif [[ `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 && $ddg -ne 4 && $hl -ne 18 ]] ; then
 			echo '🔁'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)")
 			_access
