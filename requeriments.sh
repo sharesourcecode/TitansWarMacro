@@ -49,7 +49,7 @@ _requeriments () {
 # /termux on android
 	termux-wake-lock &> /dev/null
 	if [[ $? = 0 ]] ; then
-		pkg install termux-api w3m curl -y
+		[[ ! -e executed.txt ]] && pkg install termux-api w3m curl -y && >executed.txt
 		[[ $(date +%H) -lt 10 || $(date +%H) -gt 22 ]] && _sync
 		ENC='-o accept_encoding=='*;q=0''
 		mkdir -p ~/.termux/boot
@@ -99,7 +99,7 @@ _requeriments () {
 # /servers
 	if [[ -z $URL ]] ; then
 		echo -e " 1) 🇬🇧 English, Global: Titan's War online\n 2) 🇷🇺 Русский: Битва Титанов онлайн\n 3) 🇵🇱 Polski: Wojna Tytanów online\n 4) 🇩🇪 Deutsch: Krieg der Titanen online\n 5) 🇪🇸 Español: Guerra de Titanes online\n 6) 🇧🇷 Brazil, 🇵🇹 Português: Furia de Titãs online\n 7) 🇮🇹 Italiano: Guerra di Titani online\n 8) 🇫🇷 Français: Combat des Titans online\n 9) 🇷🇴 Română: Războiul Titanilor online\n10) 🇨🇳 中文, Chinese: 泰坦之战\n11) 🇮🇩 Indonesian: Titan's War Indonesia\n0) ❌ Cancel\n"
-		read -p "Select number Server[1 to 11]: " -t 60 -e -n 2 OP
+		read -p "Select number Server[1 to 11]: " -t 300 -e -n 2 OP
 		case $OP in
 			(1) URL='tiwar.net' ; export TZ=Europe/London ;;
 
