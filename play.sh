@@ -1,9 +1,9 @@
 	_play () {
 #_coliseum #for test
 	_all () {
-		_AtakeHelp
+#		_AtakeHelp
 		_arena
-		_AdeleteEnd
+#		_AdeleteEnd
 		_cave
 		_campaign
 		_career
@@ -18,9 +18,9 @@
 	case $(date +%H:%M) in
 # /Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
 		(09:59|15:59|21:59)
-			_AtakeHelp
+#			_AtakeHelp
 			_fullmana
-			_AdeleteEnd
+#			_AdeleteEnd
 			until [[ $(date +%M:%S) = 59:5* ]] ; do
 				echo 'Valley of the Immortals will be started...'
 				sleep 1
@@ -70,13 +70,14 @@
 			done
 			SRC=$(w3m -debug -dump_source $ENC "$URL/king/enterGame" -o user_agent="$(shuf -n1 .ua)")
 			_king
+			_arena
 			_crono ;;
 # /Ancient Altars 14:00:00 - 21:00:00
 		(13:59|20:59)
 			if [[ $(date +%H) = 13 ]] ; then
-				_AtakeHelp
+#				_AtakeHelp
 				_fullmana
-				_AdeleteEnd
+#				_AdeleteEnd
 			fi
 			until [[ $(date +%M:%S) = 59:5* ]] ; do
 				echo 'Ancient Altars will be started...'

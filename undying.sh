@@ -19,9 +19,9 @@ _undying () {
 	SRC=$(w3m -debug -dump_source $ENC "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 	MANA=$(echo $SRC | grep -o 'undying/mana/' | head -n1)
 	HIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'undying/hit/' | head -n1 | cut -d\' -f2)
-	_AtakeHelp
+#	_AtakeHelp
 	_fullmana
-	_AdeleteEnd
+#	_AdeleteEnd
 	SRC=$(w3m -debug -dump_source $ENC "$URL/undying" -o user_agent="$(shuf -n1 .ua)")
 	MANA=$(echo $SRC | grep -o 'undying/mana/' | head -n1)
 	HIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'undying/hit/' | head -n1 | cut -d\' -f2)

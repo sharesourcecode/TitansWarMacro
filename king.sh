@@ -107,8 +107,4 @@ _king () {
 		echo 'Waiting time to go arena...'
 		sleep 30
 	done
-	_AtakeHelp
-	_arena
-	_AdeleteEnd
-
 }

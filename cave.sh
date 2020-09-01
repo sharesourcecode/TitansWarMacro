@@ -40,8 +40,8 @@ function _cave () {
 		echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n2 | tail -n1 | cut -d\' -f2
 	done
 #	if [[ -n $CLD ]]; then
-		w3m -debug $ENC "$URL/clan/$CLD/quest/end/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
-		w3m -debug $ENC "$URL/clan/$CLD/quest/deleteHelp/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
+#		w3m -debug $ENC "$URL/clan/$CLD/quest/end/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
+#		w3m -debug $ENC "$URL/clan/$CLD/quest/deleteHelp/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
 #	fi
 	echo -e "cave (✔)\n"
 }
