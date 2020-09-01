@@ -1,5 +1,5 @@
 	_play () {
-#_coliseum
+#_coliseum #for test
 	_all () {
 		_AtakeHelp
 		_arena

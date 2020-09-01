@@ -33,7 +33,7 @@ _coliseum () {
 	hl=18
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 # /dodge
-		if [[ $ddg -ge 4 && $HP3 -ne $HP1 ]] ; then
+		if [[ $ddg -ge 4 && $hl -ne 18 && $HP3 -ne $HP1 ]] ; then
 			echo '🛡️'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
 			ddg=0
@@ -45,7 +45,6 @@ _coliseum () {
 			grss=$[$grss+1]
 # /heal
 		elif [[ $hl -ge 18 && $HP1 -le $HLHP ]] ; then
-#			ITVL='1.4'
 			RPER='7'
 			echo "🆘 HP < $HPER%"
 			SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
@@ -56,17 +55,17 @@ _coliseum () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /grass
-#		elif [[ $grss -ge 12 && $ddg -ne 3 && $hl -ne 17 && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
-#			HPER='30'
-#			RPER='13'
-#			echo '🙌'
-#			SRC=$(w3m -debug -dump_source $ENC "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
-#			_access
-#			grss=0
-#			sleep $ITVL
-#			ddg=$[$ddg+1]
-#			hl=$[$hl+1]
-#			grss=$[$grss+1]
+		elif [[ $grss -ge 12 && $ddg -ne "3|4" && $hl -ne "17|18" && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
+			HPER='30'
+			RPER='13'
+			echo '🙌'
+			SRC=$(w3m -debug -dump_source $ENC "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
+			_access
+			grss=0
+			sleep $ITVL
+			ddg=$[$ddg+1]
+			hl=$[$hl+1]
+			grss=$[$grss+1]
 # /stone
 #		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP2 ]]
 #			echo '💪'
@@ -77,7 +76,7 @@ _coliseum () {
 #			hl=$[$hl+1]
 #			grss=$[$grss+1]
 # /random
-		elif [[ `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 && $ddg -ne 4 && $hl -lt 18 ]] ; then
+		elif [[ `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 && $ddg -ne 4 && $hl -ne 18 && $grss -ne 12 ]] ; then
 			echo '🔁'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)")
 			_access
@@ -88,7 +87,6 @@ _coliseum () {
 
 # /atk
 		else
-#		if [[ $ddg -ne 4 || $hl -ne 18 ]] ; then
 			echo '🎯'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$ATK" -o user_agent="$(shuf -n1 .ua)")
 			_access

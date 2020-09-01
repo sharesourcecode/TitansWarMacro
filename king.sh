@@ -26,7 +26,7 @@ _king () {
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		[[ $(date +%M) = 40 ]] && break
 # /kingatk
-		if [[ -n $KINGATK && $ddg -ne 4 && $HP2 -ge 10 ]] ; then
+		if [[ -n $KINGATK && $ddg -ne 4 && $hl -ne 18 && $HP2 -gt 15 ]] ; then
 			echo '👑'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$KINGATK" -o user_agent="$(shuf -n1 .ua)")
 			_access
@@ -35,7 +35,7 @@ _king () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /dodge
-		elif [[ $ddg -ge 4 && $HP3 -ne $HP1 ]] ; then
+		elif [[ $ddg -ge 4 && $hl -ne 18 && $HP3 -ne $HP1 ]] ; then
 			echo '🛡️'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
 			ddg=0
@@ -47,7 +47,6 @@ _king () {
 			grss=$[$grss+1]
 # /heal
 		elif [[ $hl -ge 18 && $HP1 -le $HLHP ]] ; then
-#			ITVL='1.4'
 			RPER='7'
 			echo "🆘 HP < $HPER%"
 			SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
@@ -58,7 +57,7 @@ _king () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /grass
-		elif [[ $HP2 -lt 15 || -z $KINGATK && $hl -lt 17 ]] ; then
+		elif [[ $HP2 -le 15 || -z $KINGATK && $ddg -ne "3|4" && $hl -ne "17|18" ]] ; then
 			HPER='30'
 			RPER='13'
 			echo '🙌'
@@ -79,7 +78,7 @@ _king () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /random
-		elif [[ `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 && $ddg -ne 4 && $hl -lt 18 ]] ; then
+		elif [[ `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 && $ddg -ne 4 && $hl -ne 18 && $grss -ne 12 ]] ; then
 			echo '🔁'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)")
 			_access

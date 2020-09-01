@@ -48,7 +48,7 @@ _requeriments () {
 	}
 # /termux on android
 	termux-wake-lock &> /dev/null
-	ENC='-o accept_encoding=='*;q=0''
+	ENC='-o accept_encoding=='*;q=0.1''
 	if [[ $? = 0 ]] ; then
 		[[ ! -e executed.txt ]] && pkg install termux-api w3m curl -y && >executed.txt
 		[[ $(date +%H) -lt 10 || $(date +%H) -gt 22 ]] && _sync
