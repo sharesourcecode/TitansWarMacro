@@ -24,7 +24,7 @@ _altars () {
 	_access
 	HP3=$HP1
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
-                [[ $(date +%M) = {09..10} ]] && break
+                [[ $(date +%M) = 0[98]} ]] && break
 # /dodge
 		if [[ $ddg -ge 4 && $hl -ne 18 && $HP3 -ne $HP1 ]] ; then
 			echo '🛡️'

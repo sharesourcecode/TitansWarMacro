@@ -18,8 +18,6 @@ _coliseum () {
         EXIT=$(echo $SRC | grep -o '/leaveFight/' | head -n1)
 #	START=`date +%M`
 	while [[ -n $EXIT ]] ; do
-#                END=$(expr `date +%M` \- $START)
-#                [[ $END -gt 7 ]] && break
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -debug -dump_source $ENC $URL/coliseum -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/coliseum/' | head -n1 | cut -d\' -f2)
@@ -55,17 +53,17 @@ _coliseum () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /grass
-		elif [[ $grss -ge 12 && $ddg -ne "3|4" && $hl -ne "17|18" && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
-			HPER='30'
-			RPER='13'
-			echo '🙌'
-			SRC=$(w3m -debug -dump_source $ENC "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
-			_access
-			grss=0
-			sleep $ITVL
-			ddg=$[$ddg+1]
-			hl=$[$hl+1]
-			grss=$[$grss+1]
+#		elif [[ $grss -ge 12 && $ddg -ne "3|4" && $hl -ne "17|18" && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
+#			HPER='30'
+#			RPER='13'
+#			echo '🙌'
+#			SRC=$(w3m -debug -dump_source $ENC "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
+#			_access
+#			grss=0
+#			sleep $ITVL
+#			ddg=$[$ddg+1]
+#			hl=$[$hl+1]
+#			grss=$[$grss+1]
 # /stone
 #		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP2 ]]
 #			echo '💪'
