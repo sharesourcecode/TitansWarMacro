@@ -2,7 +2,8 @@ _play () {
 #_coliseum #for test
 	_msgs () {
 		w3m -debug $ENC $URL/ -o user_agent="$(shuf -n1 .ua)" | head -n3 | sed "/\[/d;/\|/d" >msgs.txt
-		w3m -debug $ENC $URL/mail -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14>>msgs.txt
+		w3m -debug $ENC $URL/mail -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 >> msgs.txt
+		echo -e "\n" >> msgs.txt
 	}
 	_msgs
 	_all () {
