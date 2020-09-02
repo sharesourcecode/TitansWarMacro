@@ -25,6 +25,11 @@ _crono () {
 	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
 }
 _sleep () {
+	if [[ ($date +%d) = 01 && ($date +%H) = 0[012345678] ]] ; then
+		_arena
+		_coliseum
+		sleep 900
+	fi
 	if [[ $(date +%M) = [25][89] ]] ; then
 		echo ' No battles now, waiting 15s' && sleep 15
 	elif [[ $(date +%M) = [012345]7 ]] ; then
