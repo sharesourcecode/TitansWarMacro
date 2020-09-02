@@ -22,6 +22,9 @@ _clancoliseum () {
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	_access
 	HP3=$HP1
+	ddg=4
+	hl=18
+	grss=12
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		[[ $(date +%M) = *7 ]] && break
 # /dodge
@@ -36,7 +39,7 @@ _clancoliseum () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /heal
-		elif [[ $hl -eq 18 && $HP1 -le $HLHP ]] ; then
+		elif [[ $hl -ge 18 && $HP1 -le $HLHP ]] ; then
 #			ITVL='1.4'
 			RPER='7'
 			echo "🆘 HP < $HPER%"

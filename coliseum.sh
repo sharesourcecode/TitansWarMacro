@@ -99,6 +99,5 @@ _coliseum () {
 #	w3m -debug $ENC $URL/coliseum -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | grep --color $ACC
 	w3m -debug $ENC $URL/coliseum/ -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
 	echo 'Coliseum (✔)'
-	$(w3m -debug $ENC $URL/mail -o user_agent="$(shuf -n1 .ua)")
 	sleep 10
 }

@@ -22,6 +22,9 @@ _flagfight () {
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	_access
 	HP3=$HP1
+	ddg=4
+	hl=18
+	grss=12
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		[[ $(date +%M) = 2[67] ]] && break
 # /dodge

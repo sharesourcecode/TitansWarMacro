@@ -1,7 +1,7 @@
 _clanfight () {
 # /enterFight
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
-	HPER='50'
+	HPER='52'
 	RPER='9'
 	ITVL='2.92'
 	echo -e "\nClan fight"
@@ -22,6 +22,9 @@ _clanfight () {
 	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
 	_access
 	HP3=$HP1
+	ddg=4
+	hl=18
+	grss=12
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		[[ $(date +%M) = 0[78] ]] && break
 # /dodge
@@ -36,7 +39,7 @@ _clanfight () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /heal
-		elif [[ $hl -eq 18 && $HP1 -le $HLHP ]] ; then
+		elif [[ $hl -ge 18 && $HP1 -le $HLHP ]] ; then
 			RPER='7'
 			echo "🆘 HP < $HPER%"
 			SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
