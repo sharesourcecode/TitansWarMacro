@@ -29,8 +29,7 @@ _sleep () {
 		_arena
 		_coliseum
 		sleep 900
-	fi
-	if [[ $(date +%M) = [25][89] ]] ; then
+	elif [[ $(date +%M) = [25][89] ]] ; then
 		echo ' No battles now, waiting 15s' && sleep 15
 	elif [[ $(date +%M) = [012345]7 ]] ; then
 		echo ' No battles now, waiting 1m' && sleep 1m
