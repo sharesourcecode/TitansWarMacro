@@ -25,7 +25,7 @@ _crono () {
 	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
 }
 _sleep () {
-	if [[ ($date +%d) = 01 && ($date +%H) = 0[012345678] ]] ; then
+	if [[ $(date +%d) = 01 && $(date +%H) = 0[012345678] ]] ; then
 		_arena
 		_coliseum
 		sleep 900
