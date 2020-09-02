@@ -103,8 +103,5 @@ _king () {
 	w3m -debug $ENC $URL/king -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d"
 	echo "King (✔)"
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
-	until [[ $(date +%M) = 4[01] ]] ; do
-		echo 'Waiting time to go arena...'
-		sleep 30
-	done
+	sleep 30
 }
