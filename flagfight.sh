@@ -23,7 +23,7 @@ _flagfight () {
 	_access
 	HP3=$HP1
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
-		[[ $(date +%M) = 25 ]] && break
+		[[ $(date +%M) = 2[67] ]] && break
 # /dodge
 		if [[ $ddg -ge 4 && $hl -ne 18 && $HP3 -ne $HP1 ]] ; then
 			echo '🛡️'
@@ -47,7 +47,7 @@ _flagfight () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /grass
-#		elif [[ $grss -ge 12 && $ddg -ne "3|4" && $hl -lt "17|18" && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
+#		elif [[ $grss -ge 12 && $ddg != [34] && $hl != 1[78] && `expr $HP1 + $HP1 \* 90 \/ 100` -le $HP2 ]] ; then
 #			HPER='30'
 #			RPER='13'
 #			echo '🙌'

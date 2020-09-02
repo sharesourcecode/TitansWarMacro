@@ -27,7 +27,7 @@ _undying () {
 	HIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'undying/hit/' | head -n1 | cut -d\' -f2)
 	OUTGATE=$(echo $SRC | grep -o 'out_gate')
 	while [[ -n $OUTGATE ]] ; do
-		[[ $(date +%M) = 07 ]] && break
+		[[ $(date +%M) = 0[78] ]] && break
 		SRC=$(w3m -debug -dump_source $ENC "$URL$HIT" -o user_agent="$(shuf -n1 .ua)")
 		HIT=$(echo $SRC | sed 's/href=/\n/g' | grep 'undying/hit/' | head -n1 | cut -d\' -f2)
 		OUTGATE=$(echo $SRC | grep -o 'out_gate')

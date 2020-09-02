@@ -24,7 +24,7 @@ _king () {
 	_access
 	HP3=$HP1
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
-		[[ $(date +%M) = 40 ]] && break
+		[[ $(date +%M) = 4[01] ]] && break
 # /kingatk
 		if [[ -n $KINGATK && $ddg -ne 4 && $hl -ne 18 && $HP2 -gt 15 ]] ; then
 			echo '👑'
@@ -57,7 +57,7 @@ _king () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /grass
-		elif [[ $HP2 -le 15 || -z $KINGATK && $ddg -ne "3|4" && $hl -ne "17|18" ]] ; then
+		elif [[ $HP2 -le 15 || -z $KINGATK && $ddg != [34] && $hl != 1[78] ]] ; then
 			HPER='30'
 			RPER='13'
 			echo '🙌'

@@ -23,7 +23,7 @@ _clanfight () {
 	_access
 	HP3=$HP1
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
-		[[ $(date +%M) = 07 ]] && break
+		[[ $(date +%M) = 0[78] ]] && break
 # /dodge
 		if [[ $hl -ne 18 && $ddg -ge 4 && $HP3 -ne $HP1 ]] ; then
 			echo '🛡️'
@@ -47,7 +47,7 @@ _clanfight () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /grass
-		elif [[ $grss -ge 12 && $ddg -ne "3|4" && $hl -ne "17|18" ]] ; then
+		elif [[ $grss -ge 12 && $ddg != [34] && $hl != 1[78] ]] ; then
 			HPER='30'
 			RPER='13'
 			echo '🙌'
