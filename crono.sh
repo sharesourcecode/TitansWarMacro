@@ -28,19 +28,25 @@ _sleep () {
 	if [[ $(date +%d) = 01 && $(date +%H) = 0[012345678] ]] ; then
 		_arena
 		_coliseum
+		cat msgs.txt
 		sleep 900
 	elif [[ $(date +%M) = [25][89] ]] ; then
 		echo ' No battles now, waiting 15s' && sleep 15
+		cat msgs.txt
 	elif [[ $(date +%M) = [012345]7 ]] ; then
 		echo ' No battles now, waiting 1m' && sleep 1m
+		cat msgs.txt
 	elif [[ $(date +%M) = [012345]6 ]] ; then
 		echo ' No battles now, waiting 2m' && sleep 2m
+		cat msgs.txt
 	elif [[ $(date +%M) = [012345]5 ]] ; then
 		echo ' No battles now, waiting 3m' && sleep 3m
+		cat msgs.txt
 	elif [[ $(date +%M) = [012345]4 ]] ; then
 		echo ' No battles now, waiting 4m' && sleep 4m
+		cat msgs.txt
 	else
 		echo ' No battles now, waiting 30s' && sleep 29
+		cat msgs.txt
 	fi
 }
-

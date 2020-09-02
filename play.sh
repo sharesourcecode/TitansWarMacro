@@ -1,5 +1,10 @@
-	_play () {
+_play () {
 #_coliseum #for test
+	_msgs () {
+		w3m -debug $ENC $URL/ -o user_agent="$(shuf -n1 .ua)" | head -n3 | sed "/\[/d;/\|/d" >msgs.txt
+		w3m -debug $ENC $URL/mail -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14>>msgs.txt
+	}
+	_msgs
 	_all () {
 #		_AtakeHelp
 		_arena
@@ -28,6 +33,7 @@
 			done
 			SRC=$(w3m -debug -dump_source $ENC "$URL/undying/enterGame" -o user_agent="$(shuf -n1 .ua)")
 			_undying
+			_msgs
 			_crono ;;
 # /Battle of banners 10:15:00 - 16:15:00
 #		(10:14|16:14)
@@ -39,6 +45,7 @@
 #			done
 #			SRC=$(w3m -debug -dump_source $ENC "$URL/flagfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
 #			_flagfight
+#			_msgs
 #			_crono ;;
 # /Clan coliseum 10:30:00 - 15:00:00
 #		(10:29|14:59)
@@ -50,6 +57,7 @@
 #			SRC=$(w3m -debug -dump_source $ENC "$URL/clancoliseum/?close=reward" -o user_agent="$(shuf -n1 .ua)")
 #			SRC=$(w3m -debug -dump_source $ENC "$URL/clancoliseum/enterFight" -o user_agent="$(shuf -n1 .ua)")
 #			_clancoliseum
+#			_msgs
 #			_crono ;;
 # /Clan tournament 11:00:00 - 19:00:00
 		(10:59|18:59)
@@ -60,6 +68,7 @@
 				[[ $(date +%M) = 00 ]] && break
 			done
 			_clanfight
+			_msgs
 			_crono ;;
 # /King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
 		(12:29|16:29|22:29)
@@ -71,6 +80,7 @@
 			SRC=$(w3m -debug -dump_source $ENC "$URL/king/enterGame" -o user_agent="$(shuf -n1 .ua)")
 			_king
 			_arena
+			_msgs
 			_crono ;;
 # /Ancient Altars 14:00:00 - 21:00:00
 		(13:59|20:59)
@@ -86,10 +96,12 @@
 			done
 			SRC=$(w3m -debug -dump_source $ENC "$URL/altars/enterFight" -o user_agent="$(shuf -n1 .ua)")
 			_altars
+			_msgs
 			_crono ;;
 		(0[02468]:[04]$L|0[13579]:2$L|1[048]:4$L|20:[04]$L|1[13579]:2$L|2[13]:2$L|1[28]:0$L)
 			_all ;
 			_coliseum ;
+			_msgs
 			_crono ;;
 		(*)
 			_sleep ;
