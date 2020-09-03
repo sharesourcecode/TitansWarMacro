@@ -4,7 +4,7 @@ _coliseum () {
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='28'
 	RPER='5'
-	ITVL='2.92'
+	ITVL='2.94'
 	echo -e "\nColiseum"
 	echo $URL
 	w3m -debug $ENC $URL/coliseum/ -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"
@@ -31,6 +31,7 @@ _coliseum () {
 	hl=18
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 # /dodge
+#echo $SRC | sed 's/href=/\n/g' | grep '/dodge' | grep 'timer' | cut -d\: -f2 | cut -d\< -f1
 		if [[ $ddg -ge 4 && $hl -ne 18 && $HP3 -ne $HP1 ]] ; then
 			echo '🛡️'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")

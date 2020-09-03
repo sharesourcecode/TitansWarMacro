@@ -3,7 +3,7 @@ _altars () {
 #	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='50'
 	RPER='9'
-	ITVL='2.92'
+	ITVL='2.94'
 	echo -e "\nAltars"
 	echo $URL
 	SRC=$(w3m -debug -dump_source $ENC $URL/altars/enterFight -o user_agent="$(shuf -n1 .ua)")
