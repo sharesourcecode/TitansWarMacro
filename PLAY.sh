@@ -9,27 +9,27 @@ cd ~/twm
 . trade.sh ; . career.sh ; . cave.sh
 # /functions
 _show () {
-		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
-		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep "hp" | head -n3 | tail -n1 | cut -d\< -f1 | cut -d\; -f2 | tr -cd "[[:digit:]]")
-		[[ -n $HP1 && -n $HP2 ]] && echo -e "$URL\nYou: $HP1 - $HP2 :enemy\n"
-		[[ -z $HP1 && -n $HP2 ]] && echo -e "$URL\nYou: 💀 - $HP2 :enemy\n"
+		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | awk -F\< '{ print $2 }' | awk -F\> '{ print $2 }' | tr -cd '[[:digit:]]')
+		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep "hp" | head -n3 | tail -n1 | awk -F\< '{ print $1 }' | awk -F\; '{ print $2 }' | tr -cd "[[:digit:]]")
+		[[ -n $HP1 && -n $HP2 ]] && echo -e "$URL\nYou: $HP1 - $HP2 :Opponent\n"
+		[[ -z $HP1 && -n $HP2 ]] && echo -e "$URL\nYou: 💀 - $HP2 :Opponent\n"
 	}
 	_access () {
-		ENTERFIGHT=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterFight/' | head -n1 | cut -d\' -f2)
-		ENTERGAME=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterGame/' | head -n1 | cut -d\' -f2)
-		ATK=$(echo $SRC | sed 's/href=/\n/g' | grep '/atk/' | head -n1 | cut -d\' -f2)
-		ATTACK=$(echo $SRC | sed 's/href=/\n/g' | grep '/attack/' | head -n1 | cut -d\' -f2)
-		ATKRND=$(echo $SRC | sed 's/href=/\n/g' | grep '/atkrnd/' | head -n1 | cut -d\' -f2)
-		ATTACKRANDOM=$(echo $SRC | sed 's/href=/\n/g' | grep '/attackrandom/' | head -n1 | cut -d\' -f2)
-		KINGATK=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/kingatk/' | head -n1 | cut -d\' -f2)
-		DODGE=$(echo $SRC | sed 's/href=/\n/g' | grep '/dodge/' | head -n1 | cut -d\' -f2)
-		HEAL=$(echo $SRC | sed 's/href=/\n/g' | grep '/heal/' | head -n1 | cut -d\' -f2)
-		STONE=$(echo $SRC | sed 's/href=/\n/g' | grep '/stone/' | head -n1 | cut -d\' -f2)
-		GRASS=$(echo $SRC | sed 's/href=/\n/g' | grep '/grass/' | head -n1 | cut -d\' -f2)
+		ENTERFIGHT=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterFight/' | head -n1 | awk -F\' '{ print $2 }')
+		ENTERGAME=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterGame/' | head -n1 | awk -F\' '{ print $2 }')
+		ATK=$(echo $SRC | sed 's/href=/\n/g' | grep '/atk/' | head -n1 | awk -F\' '{ print $2 }')
+		ATTACK=$(echo $SRC | sed 's/href=/\n/g' | grep '/attack/' | head -n1 | awk -F\' '{ print $2 }')
+		ATKRND=$(echo $SRC | sed 's/href=/\n/g' | grep '/atkrnd/' | head -n1 | awk -F\' '{ print $2 }')
+		ATTACKRANDOM=$(echo $SRC | sed 's/href=/\n/g' | grep '/attackrandom/' | head -n1 | awk -F\' '{ print $2 }')
+		KINGATK=$(echo $SRC | sed 's/href=/\n/g' | grep 'king/kingatk/' | head -n1 | awk -F\' '{ print $2 }')
+		DODGE=$(echo $SRC | sed 's/href=/\n/g' | grep '/dodge/' | head -n1 | awk -F\' '{ print $2 }')
+		HEAL=$(echo $SRC | sed 's/href=/\n/g' | grep '/heal/' | head -n1 | awk -F\' '{ print $2 }')
+		STONE=$(echo $SRC | sed 's/href=/\n/g' | grep '/stone/' | head -n1 | awk -F\' '{ print $2 }')
+		GRASS=$(echo $SRC | sed 's/href=/\n/g' | grep '/grass/' | head -n1 | awk -F\' '{ print $2 }')
 		BEXIT=$(echo $SRC | grep -o 'user.png')
 		OUTGATE=$(echo $SRC | grep -o 'out_gate')
-		LEAVEFIGHT=$(echo $SRC | sed 's/href=/\n/g' | grep '/leaveFight/' | head -n1 | cut -d\' -f2)
-		WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\' -f4) #white/dred
+		LEAVEFIGHT=$(echo $SRC | sed 's/href=/\n/g' | grep '/leaveFight/' | head -n1 | awk -F\' '{ print $2 }')
+		WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | awk -F\' '{ print $4 }') #white/dred
 		PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 		HLHP=$(expr $FULL \* $HPER \/ 100)
 		_show

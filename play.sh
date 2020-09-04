@@ -1,5 +1,5 @@
 _play () {
-#_coliseum #for test
+#	_coliseum #for test
 	_msgs () {
 		echo -e "Latest posts:" >msgs.txt
 		w3m -debug $ENC $URL/ -o user_agent="$(shuf -n1 .ua)" | head -n3 | sed "/\[/d;/\|/d" >> msgs.txt

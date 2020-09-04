@@ -1,7 +1,6 @@
 _loginlogoff () {
 # /login/logoff
 	ACC=$(w3m -debug $ENC "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
-#	ACC=$(lynx -cfg=~/twm/cfg1 "$URL/user" -useragent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
 	[[ -n $ACC && -n $URL ]] && i=5 && \
           until [[ $i -lt 1 ]]; do
 		clear
@@ -15,7 +14,6 @@ _loginlogoff () {
 # /logoff2x
 			$(w3m -debug $ENC "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
 			$(w3m -debug $ENC "$URL/?exit" -o user_agent="$(shuf -n1 .ua)") 2&>-
-#			$(lynx -cfg=~/twm/cfg1 "$URL/?exit" -useragent="$(shuf -n1 .ua)") 2&>-
 			unset username; unset password
 			echo -e "\nIn case of error will repeat"
 			echo -n 'Username: '
@@ -46,13 +44,12 @@ _loginlogoff () {
 			echo -e "\n	Please wait..."
 			echo -e "login=$username&pass=$password" >$HOME/.tmp/login.txt
 # /login2x
-#			$(echo -e "login=$username&pass=$password" | lynx -cfg=~/twm/cfg1 -post_data "$URL/?sign_in=1" -useragent="$(shuf -n1 .ua)") 2&>-
 			unset username; unset password
 			$(w3m -debug -post $HOME/.tmp/login.txt $ENC "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
 			$(w3m -debug -post $HOME/.tmp/login.txt $ENC "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
-			rm $HOME/.tmp/login.txt
 		}
 		_login
+		rm $HOME/.tmp/login.txt
 		clear
 		ACC=$(w3m -debug $ENC "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[user")
 	done
