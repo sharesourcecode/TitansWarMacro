@@ -47,8 +47,8 @@ _requeriments () {
 		dos2unix *.sh &> /dev/null
 	}
 # /termux on android
-	termux-wake-lock &> /dev/null
 	ENC='-o accept_encoding=='*;q=0.1''
+	termux-wake-lock &> /dev/null
 	if [[ $? = 0 ]] ; then
 		[[ ! -e executed.txt ]] && pkg install termux-api w3m curl -y && >executed.txt
 		[[ $(date +%H) -lt 10 || $(date +%H) -gt 22 ]] && _sync
@@ -82,7 +82,6 @@ _requeriments () {
 #		cat ~/twm/PLAY.sh | tail -n 53 >> bahasa.tiwar.net
 
 #		cp -R ~/.shortcuts/* ~/.termux/boot
-		cp ~/twm/config ~/.w3m/config
 		reset; clear
 		echo -e "Successful updates!\n"
 	else
