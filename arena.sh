@@ -1,4 +1,14 @@
 # /arena
+_openChest () {
+	SRC=$(w3m -debug -dump_source $ENC "$URL/quest" -o user_agent="$(shuf -n1 .ua)")
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'quest/openChest' | head -n1 | awk -F\' '{ print $2 }')
+	while [[ -n $ACCESS ]]; do
+		echo $ACCESS
+		SRC=$(w3m -debug -dump_source $ENC "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'quest/openChest' | head -n1 | awk -F\' '{ print $2 }')
+	done
+	echo -e "openChest (✔)\n"
+}
 _colifight () {
 	SRC=$(w3m -debug -dump_source $ENC "$URL/collfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'collfight/take' | head -n1 | awk -F\' '{ print $2 }') #/arena/attack/1/1234567*/

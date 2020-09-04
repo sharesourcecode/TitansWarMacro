@@ -10,6 +10,7 @@ _play () {
 	_all () {
 #		_AtakeHelp
 		_arena
+		_openChest
 #		_AdeleteEnd
 		_cave
 		_campaign
