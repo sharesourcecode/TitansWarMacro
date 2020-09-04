@@ -17,7 +17,6 @@ _play () {
 		_clandungeon
 		_trade
 		_money
-#		[[ $URL = 'furiadetitas.net' ]] && \
 #		_built
 	}
 # /game time

@@ -7,10 +7,10 @@ function _cave () {
 #	fi
 	_condition () {
 		SRC=$(w3m -debug -dump_source $ENC "$URL/cave/" -o user_agent="$(shuf -n1 .ua)")
-		ACCESS1=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n1 | cut -d\' -f2)
-		DOWN=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/down' | cut -d\' -f2)
-		ACCESS2=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n2 | tail -n1 | cut -d\' -f2)
-		ACTION=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | cut -d\' -f2 | tr -cd "[[:alpha:]]")
+		ACCESS1=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n1 | awk -F\' '{ print $2 }')
+		DOWN=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/down' | awk -F\' '{ print $2 }')
+		ACCESS2=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n2 | tail -n1 | awk -F\' '{ print $2 }')
+		ACTION=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | awk -F\' '{ print $2 }' | tr -cd "[[:alpha:]]")
 		MEGA=$(echo $SRC | sed 's/src=/\n/g' | grep '/images/icon/silver.png' | grep "'s'" | tail -n1 | grep -o 'M')
 	}
 	_condition
@@ -37,7 +37,7 @@ function _cave () {
 				echo $num ;;
 			(*) num=0 ;;
 		esac
-		echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n2 | tail -n1 | cut -d\' -f2
+		echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n2 | tail -n1 | awk -F\' '{ print $2 }'
 	done
 #	if [[ -n $CLD ]]; then
 #		w3m -debug $ENC "$URL/clan/$CLD/quest/end/5" -o user_agent="$(shuf -n1 .ua)" | head -n15

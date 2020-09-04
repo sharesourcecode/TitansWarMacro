@@ -1,13 +1,12 @@
 _clanfight () {
 # /enterFight
-#	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='52'
 	RPER='9'
 	ITVL='2.94'
 	echo -e "\nClan fight"
 	echo $URL
 	SRC=$(w3m -debug -dump_source $ENC $URL/clanfight/?close=reward -o user_agent="$(shuf -n1 .ua)")
-	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/enterFight' | head -n1 | cut -d\' -f2)
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'clanfight/enterFight' | head -n1 | awk -F\' '{ print $2 }')
 	echo -e " 👣 Entering...\n$ACCESS"
 # /wait
 	echo " 😴 Waiting..."
@@ -16,10 +15,10 @@ _clanfight () {
 		[[ $(date +%M) = 00 && $(date +%S) > 19 ]] && break
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -debug -dump_source $ENC "$URL/clanfight" -o user_agent="$(shuf -n1 .ua)")
-		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/clanfight/' | head -n1 | cut -d\' -f2)
+		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/clanfight/' | head -n1 | awk -F\' '{ print $2 }')
 		EXIT=$(echo $SRC | grep -o 'clanfight/attack/')
 	done
-	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
+	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | awk -F\< '{ print $2 }' | awk -F\> '{ print $2 }' | tr -cd '[[:digit:]]')
 	_access
 	HP3=$HP1
 	ddg=4
@@ -93,8 +92,7 @@ _clanfight () {
 	done
 # /view
 	echo ""
-	w3m -debug $ENC $URL/clanfight -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d"
+	w3m -debug $ENC $URL/clanfight -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color $ACC
 	echo "ClanFight(✔)"
-#	SRC=$(w3m -debug $ENC $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
 	sleep 30
 }
