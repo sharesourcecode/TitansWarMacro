@@ -1,6 +1,6 @@
 _altars () {
 # /enterFight
-	HPER='50'
+	HPER='55'
 	RPER='9'
 	ITVL='2.94'
 	echo -e "\nAltars"

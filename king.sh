@@ -1,6 +1,6 @@
 _king () {
 # /enterFight
-	HPER='49'
+	HPER='52'
 	RPER='1'
 	ITVL='2.94'
 	echo -e "\nKing"
