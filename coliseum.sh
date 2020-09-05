@@ -3,7 +3,7 @@ _coliseum () {
 	SRC=$(w3m -debug $ENC $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
 	HPER='28'
 	RPER='5'
-	ITVL='2.96'
+	ITVL='3.5'
 	echo -e "\nColiseum"
 	echo $URL
 	w3m -debug $ENC $URL/coliseum/ -o user_agent="$(shuf -n1 .ua)" | head -n11 | tail -n7 | sed "/\[2hit/d;/\[str/d;/combat/d"

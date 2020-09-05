@@ -2,7 +2,7 @@ _flagfight () {
 # /enterFight
 	HPER='49'
 	RPER='9'
-	ITVL='2.96'
+	ITVL='3.5'
 	echo -e "\nFlag Fight"
 	echo $URL
 	SRC=$(w3m -debug -dump_source $ENC $URL/flagfight/?close=reward -o user_agent="$(shuf -n1 .ua)")

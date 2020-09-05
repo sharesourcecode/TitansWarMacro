@@ -2,7 +2,7 @@ _king () {
 # /enterFight
 	HPER='52'
 	RPER='1'
-	ITVL='2.96'
+	ITVL='3.5'
 	echo -e "\nKing"
 	echo $URL
 	SRC=$(w3m -debug -dump_source $ENC $URL/king/enterGame -o user_agent="$(shuf -n1 .ua)")
