@@ -2,7 +2,7 @@ _altars () {
 # /enterFight
 	HPER='55'
 	RPER='9'
-	ITVL='2.94'
+	ITVL='2.96'
 	echo -e "\nAltars"
 	echo $URL
 	SRC=$(w3m -debug -dump_source $ENC $URL/altars/enterFight -o user_agent="$(shuf -n1 .ua)")

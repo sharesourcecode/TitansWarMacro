@@ -2,7 +2,7 @@ _clanfight () {
 # /enterFight
 	HPER='55'
 	RPER='9'
-	ITVL='2.94'
+	ITVL='2.96'
 	echo -e "\nClan fight"
 	echo $URL
 	SRC=$(w3m -debug -dump_source $ENC $URL/clanfight/?close=reward -o user_agent="$(shuf -n1 .ua)")
