@@ -48,7 +48,7 @@ _arena () {
 _fullmana () {
 	ARENA=$(w3m -debug -dump_source $ENC $URL/arena/quit -o user_agent="$(shuf -n1 .ua)" | sed "s/href='/\n/g" | grep "attack/1" | head -n1 | awk -F\/ '{ print $5 }' | tr -cd "[[:digit:]]")
 	echo " ⚔ - 1 Attack..."
-	ATK1=$(w3m -debug -dump_source $ENC "$URL/arena/attack/1/?r=$ARENA" -o user_agent="$(shuf -n1 .ua)" | sed "s/href='/\n/g" | grep --color "arena/lastPlayer" | head -n1 | awk -F\' '{ print $1 }' | tr -cd "[[:digit:]]")
+	ATK1=$(w3m -debug -dump_source $ENC "$URL/arena/attack/1/?r=$ARENA" -o user_agent="$(shuf -n1 .ua)" | sed "s/href='/\n/g" | grep "arena/lastPlayer" | head -n1 | awk -F\' '{ print $1 }' | tr -cd "[[:digit:]]")
 	echo " ⚔ - Full Attack..."
 	w3m -debug -dump $ENC "$URL/arena/lastPlayer/?r=$ATK1&fullmana=true" -o user_agent="$(shuf -n1 .ua)"
 }
