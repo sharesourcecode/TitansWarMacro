@@ -12,7 +12,7 @@ _proxy () {
 #export better proxy
 	proxy=$(sed 's/^.*$/&:80/' bestproxy.txt | shuf -n1)
 	echo $proxy >bestproxy.txt
-	[[ -z $proxy ]] && cat testproxy.txt | head -n1 >bestproxy.txt)
+	[[ -z $proxy ]] && cat testproxy.txt | head -n1 >bestproxy.txt
 	echo -e "Current proxy $proxy"
 #	w3m meuip.com
 }
