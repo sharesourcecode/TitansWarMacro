@@ -52,7 +52,7 @@ _requeriments () {
 	termux-wake-lock &> /dev/null
 	if [[ $? = 0 ]] ; then
 		[[ ! -e executed.txt ]] && pkg install termux-api w3m curl -y && >executed.txt
-		[[ $(date +%H) -lt 10 || $(date +%H) -gt 22 ]] && _sync
+#		[[ $(date +%H) -lt 10 || $(date +%H) -gt 22 ]] && _sync
 		reset; clear
 		echo -e "Successful updates!\n"
 	else
