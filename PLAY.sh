@@ -1,4 +1,5 @@
 #!/bin/bash
+echo -en "\033[7m"
 OP=""
 ENC="-o accept_encoding=='*;q=0.1'"
 # /sources

@@ -25,7 +25,7 @@ _crono () {
 	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
 }
 _cat () {
-	echo -en "\033[36m"
+	echo -en "\033[36m\033[2"
 	cat msgs.txt
 	echo -en "\033[37m\033[40m"
 }
@@ -41,37 +41,31 @@ _sleep () {
 		reset
 		clear
 		_cat
-#		cat msgs.txt
 		echo ' No battles now, waiting 15s' && sleep 15
 	elif [[ $(date +%M) = [012345]7 ]] ; then
 		reset
 		clear
-#		cat msgs.txt
 		_cat
 		echo ' No battles now, waiting 1m' && sleep 1m
 	elif [[ $(date +%M) = [012345]6 ]] ; then
 		reset
 		clear
 		_cat
-#		cat msgs.txt
 		echo ' No battles now, waiting 2m' && sleep 2m
 	elif [[ $(date +%M) = [012345]5 ]] ; then
 		reset
 		clear
 		_cat
-#		cat msgs.txt
 		echo ' No battles now, waiting 3m' && sleep 3m
 	elif [[ $(date +%M) = [012345]4 ]] ; then
 		reset
 		clear
 		_cat
-#		cat msgs.txt
 		echo ' No battles now, waiting 4m' && sleep 4m
 	else
 		reset
 		clear
 		_cat
-#		cat msgs.txt
 		echo ' No battles now, waiting 30s' && sleep 29
 	fi
 }
