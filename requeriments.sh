@@ -7,43 +7,45 @@ _requeriments () {
 	echo -e "👉 Please wait...☕👴"
 	_sync () {
 		curl https://github.com/sharesourcecode/twm/raw/master/cave.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 1/19"
+		echo -e "\n Upgrading 1/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/PLAY.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 2/19"
+		echo -e "\n Upgrading 2/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/altars.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 3/19"
+		echo -e "\n Upgrading 3/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/arena.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 4/19"
+		echo -e "\n Upgrading 4/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/campaign.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 5/19"
+		echo -e "\n Upgrading 5/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/career.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 6/19"
+		echo -e "\n Upgrading 6/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/clancoliseum.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 7/19"
+		echo -e "\n Upgrading 7/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/clandungeon.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 8/19"
+		echo -e "\n Upgrading 8/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/clanfight.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 9/19"
+		echo -e "\n Upgrading 9/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/clanid.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 10/19"
+		echo -e "\n Upgrading 10/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/coliseum.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 11/19"
+		echo -e "\n Upgrading 11/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/crono.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 12/19"
+		echo -e "\n Upgrading 12/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/king.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 13/19"
+		echo -e "\n Upgrading 13/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/loginlogoff.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 14/19"
+		echo -e "\n Upgrading 14/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/play.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 15/19"
+		echo -e "\n Upgrading 15/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/requeriments.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 16/19"
+		echo -e "\n Upgrading 16/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/trade.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 17/19"
+		echo -e "\n Upgrading 17/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/undying.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 18/19"
+		echo -e "\n Upgrading 18/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/flagfight.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 19/19"
+		echo -e "\n Upgrading 19/20"
+		curl https://github.com/sharesourcecode/twm/raw/master/proxy.sh -O -L &> /dev/null ;
+		echo -e "\n Upgrading 20/20"
 		dos2unix *.sh &> /dev/null
 	}
 # /termux on android
