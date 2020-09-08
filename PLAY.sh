@@ -1,5 +1,4 @@
 #!/bin/bash
-echo -en "\033[7m"
 OP=""
 ENC="-o accept_encoding=='*;q=0.1'"
 # /sources
@@ -9,6 +8,13 @@ cd ~/twm
 . campaign.sh ; . play.sh ; . altars.sh ; . clanfight.sh
 . clancoliseum.sh ; . king.sh ; . undying.sh ; . clandungeon.sh
 . trade.sh ; . career.sh ; . cave.sh
+# /theme
+_crono
+[[ $HOUR -lt 6 ||  $HOUR -ge 18 ]] && \
+        echo -ne "\033[0m" && \
+        echo -ne "\033[33m\033[2m" || \
+        echo -ne "\033[7m" && \
+        echo -ne "\033[36m\033[2m"
 # /functions
 _show () {
 		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | awk -F\< '{ print $2 }' | awk -F\> '{ print $2 }' | tr -cd '[[:digit:]]')
