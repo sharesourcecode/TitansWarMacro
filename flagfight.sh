@@ -5,7 +5,7 @@ _flagfight () {
 	ITVL='3.5'
 	echo -e "\nFlag Fight"
 	echo $URL
-	SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC $URL/flagfight/?close=reward -o user_agent="$(shuf -n1 .ua)")
+	SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC $URL/flagfight/?close=reward -o user_agent="$(shuf -n1 .ua)")
 	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'flagfight/enterFight' | head -n1 | awk -F\' '{ print $2 }')
 	echo -e " 👣 Entering...\n$ACCESS"
 # /wait
@@ -14,7 +14,7 @@ _flagfight () {
 	while [[ -z $EXIT ]] ; do
 		[[ $(date +%M) = 15 && $(date +%S) > 19 ]] && break
 		echo -e " 💤	...\n$ACCESS"
-		SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/flagfight/' | head -n1 | awk -F\' '{ print $2 }')
 		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'flagfight/attack/')
 	done
@@ -29,7 +29,7 @@ _flagfight () {
 # /dodge
 		if [[ $ddg -ge 4 && $hl -ne 18 && $HP3 -ne $HP1 ]] ; then
 			echo '🛡️'
-			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL$DODGE" -o user_agent="$(shuf -n1 .ua)")
 			ddg=0
 			HP3=$HP1
 			_access
@@ -41,7 +41,7 @@ _flagfight () {
 		elif [[ $hl -ge 18 && $HP1 -le $HLHP ]] ; then
 			RPER='7'
 			echo "🆘 HP < $HPER%"
-			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
 			_access
 			hl=0
 			sleep $ITVL
@@ -53,7 +53,7 @@ _flagfight () {
 #			HPER='30'
 #			RPER='13'
 #			echo '🙌'
-#			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
+#			SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL$GRASS" -o user_agent="$(shuf -n1 .ua)")
 #			_access
 #			grss=0
 #			sleep $ITVL
@@ -63,7 +63,7 @@ _flagfight () {
 # /stone
 #		[[ `expr $HP1 + $HP1 \* 1 \/ 100` -le $HP2 ]]
 #			echo '💪'
-#			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL$STONE" -o user_agent="$(shuf -n1 .ua)")
+#			SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL$STONE" -o user_agent="$(shuf -n1 .ua)")
 #			_access
 #			sleep $ITVL
 #			ddg=$[$ddg+1]
@@ -72,7 +72,7 @@ _flagfight () {
 # /random
 		elif [[ `expr $HP1 + $HP1 \* $RPER \/ 100` -le $HP2 && $ddg -ne 4 && $hl -lt 18 && $grss -ne 12 ]] ; then
 			echo '🔁'
-			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)")
 			_access
 			sleep $ITVL
 			ddg=$[$ddg+1]
@@ -82,7 +82,7 @@ _flagfight () {
 # /atk
 		else
 			echo '🎯'
-			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL$ATTACK" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL$ATTACK" -o user_agent="$(shuf -n1 .ua)")
 			_access
 			sleep $ITVL
 			ddg=$[$ddg+1]
@@ -92,7 +92,7 @@ _flagfight () {
 	done
 # /view
 	echo ""
-	w3m -debug -o http_proxy="http://$proxy" $ENC $URL/flagfight -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color $ACC
+	w3m -debug -o http_proxy="http://$(cat bestproxy.txt)" $ENC $URL/flagfight -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color $ACC
 	echo "Flag Fight (✔)"
 #	_AtakeHelp
 	_fullmana

@@ -2,11 +2,11 @@
 function _cave () {
 	_clanid
 #	if [[ -n $CLD ]]; then
-#		w3m -debug -o http_proxy="http://$proxy" $ENC "$URL/clan/$CLD/quest/take/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
-#		w3m -debug -o http_proxy="http://$proxy" $ENC "$URL/clan/$CLD/quest/help/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
+#		w3m -debug -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL/clan/$CLD/quest/take/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
+#		w3m -debug -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL/clan/$CLD/quest/help/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
 #	fi
 	_condition () {
-		SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL/cave/" -o user_agent="$(shuf -n1 .ua)")
+		SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL/cave/" -o user_agent="$(shuf -n1 .ua)")
 		ACCESS1=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n1 | awk -F\' '{ print $2 }')
 		DOWN=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/down' | awk -F\' '{ print $2 }')
 		ACCESS2=$(echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n2 | tail -n1 | awk -F\' '{ print $2 }')
@@ -19,29 +19,29 @@ function _cave () {
 		_condition
 		case $ACTION in
 			(cavechancercavegatherrcavedownr)
-				SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL$ACCESS2" -o user_agent="$(shuf -n1 .ua)") ;
+				SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL$ACCESS2" -o user_agent="$(shuf -n1 .ua)") ;
 				num=$[$num-1] ;
 				echo $num ;;
 			(cavespeedUpr)
-#				SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL$ACCESS2" -o user_agent="$(shuf -n1 .ua)") ;
+#				SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL$ACCESS2" -o user_agent="$(shuf -n1 .ua)") ;
 				num=$[$num-1] ;
 				echo $num ;;
 			(cavedownr|cavedownrclanbuiltprivateUpgradetruerrefcave)
 				num=$[$num-1] ;
-				SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL$DOWN" -o user_agent="$(shuf -n1 .ua)") ;
+				SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL$DOWN" -o user_agent="$(shuf -n1 .ua)") ;
 				echo $num ;;
 			(caveattackrcaverunawayr)
 				num=$[$num-1] ;
-				SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL$ACCESS1" -o user_agent="$(shuf -n1 .ua)") ;
-				SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL/cave/runaway" -o user_agent="$(shuf -n1 .ua)") ;
+				SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL$ACCESS1" -o user_agent="$(shuf -n1 .ua)") ;
+				SRC=$(w3m -debug -dump_source -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL/cave/runaway" -o user_agent="$(shuf -n1 .ua)") ;
 				echo $num ;;
 			(*) num=0 ;;
 		esac
 		echo $SRC | sed 's/href=/\n/g' | grep '/cave/' | head -n2 | tail -n1 | awk -F\' '{ print $2 }'
 	done
 #	if [[ -n $CLD ]]; then
-#		w3m -debug -o http_proxy="http://$proxy" $ENC "$URL/clan/$CLD/quest/end/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
-#		w3m -debug -o http_proxy="http://$proxy" $ENC "$URL/clan/$CLD/quest/deleteHelp/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
+#		w3m -debug -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL/clan/$CLD/quest/end/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
+#		w3m -debug -o http_proxy="http://$(cat bestproxy.txt)" $ENC "$URL/clan/$CLD/quest/deleteHelp/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
 #	fi
 	echo -e "cave (✔)\n"
 }
