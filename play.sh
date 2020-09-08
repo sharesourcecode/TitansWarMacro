@@ -24,7 +24,7 @@ _play () {
 	L=$(echo {0..3} | sed 's, ,\n,g' | shuf -n1)
 	case $(date +%H:%M) in
 # /Valley of the Immortals 10:00:00 - 16:00:00 - 22:00:00
-		(09:58|15:58|21:58)
+		(09:59|15:59|21:59)
 #			_AtakeHelp
 			_fullmana
 #			_AdeleteEnd
@@ -38,7 +38,7 @@ _play () {
 			_msgs
 			_crono ;;
 # /Battle of banners 10:15:00 - 16:15:00
-#		(10:13|16:13)
+#		(10:14|16:14)
 #			SRC=$(w3m -debug -dump_source $ENC "$URL/flagfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
 #			until [[ $(date +%M:%S) = 14:5* ]] ; do
 #				echo 'Battle of banners will be started...'
@@ -50,7 +50,7 @@ _play () {
 #			_msgs
 #			_crono ;;
 # /Clan coliseum 10:30:00 - 15:00:00
-#		(10:28|14:58)
+#		(10:29|14:59)
 #			until [[ $(date +%M:%S) = *9:5* ]] ; do
 #				echo 'Clan coliseum will be started...'
 #				sleep 1
@@ -62,7 +62,7 @@ _play () {
 #			_msgs
 #			_crono ;;
 # /Clan tournament 11:00:00 - 19:00:00
-		(10:58|18:58)
+		(10:59|18:59)
 			SRC=$(w3m -debug -dump_source $ENC "$URL/clanfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
 			until [[ $(date +%M:%S) = 59:40 ]] ; do
 				echo 'Clan tournament will be started...'
@@ -73,7 +73,7 @@ _play () {
 			_msgs
 			_crono ;;
 # /King of the Immortals 12:30:00 - 16:30:00 - 22:30:00
-		(12:28|16:28|22:28)
+		(12:29|16:29|22:29)
 			until [[ $(date +%M:%S) = 29:5* ]] ; do
 				echo 'King of the Immortals will be started...'
 				sleep 1
@@ -85,7 +85,7 @@ _play () {
 			_msgs
 			_crono ;;
 # /Ancient Altars 14:00:00 - 21:00:00
-		(13:58|20:58)
+		(13:59|20:59)
 			if [[ $(date +%H) = 13 ]] ; then
 #				_AtakeHelp
 				_fullmana
