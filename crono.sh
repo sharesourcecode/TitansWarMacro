@@ -25,6 +25,8 @@ _crono () {
 	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
 }
 _cat () {
+	_crono
+	[[ $HOUR -lt 6 ||  $HOUR -ge 18 ]] && echo -en "\033[0m" || echo -ne "\033[7m"
 	echo -en "\033[36m\033[2m"
 	cat msgs.txt
 	echo -en "\033[37m\033[40m"
