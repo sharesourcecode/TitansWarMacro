@@ -25,9 +25,9 @@ _crono () {
 	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
 }
 _cat () {
-	echo -en "\033[33m"
+	echo -en "\033[33m\033[41m"
 	cat msgs.txt
-	echo -en "\033[37m"
+	echo -en "\033[37m\033[40m"
 }
 _sleep () {
 	if [[ $(date +%d) = 01 && $(date +%H) = 0[012345678] ]] ; then
