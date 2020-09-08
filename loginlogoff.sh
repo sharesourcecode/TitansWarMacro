@@ -1,4 +1,5 @@
 _loginlogoff () {
+	_proxy
 # /login/logoff
 	ACC=$(w3m -debug $ENC "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
 	[[ -n $ACC && -n $URL ]] && i=5 && \
