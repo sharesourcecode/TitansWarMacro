@@ -3,7 +3,9 @@ _play () {
 	_msgs () {
 		echo -e "Latest posts:" >msgs.txt
 		w3m -debug  $ENC $URL/ -o user_agent="$(shuf -n1 .ua)" | head -n3 | sed "/\[/d;/\|/d" >> msgs.txt
-		w3m -debug  $ENC $URL/mail -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 >> msgs.txt
+		SRC=$(w3m -debug  $ENC $URL/mail -o user_agent="$(shuf -n1 .ua)")
+		echo $SRC | head -n15 | tail -n14 >> msgs.txt
+		echo $SRC | grep -oP '(lvl\s\d+|g\s\d\S+|s\s\d\S+$)' | sed ':a;N;s/\n//g;ta' >> msgs.txt
 		echo -e "\n" >> msgs.txt
 	}
 	_msgs
