@@ -44,8 +44,6 @@ _requeriments () {
 		echo -e "\n Upgrading 18/19"
 		curl https://github.com/sharesourcecode/twm/raw/master/flagfight.sh -O -L &> /dev/null ;
 		echo -e "\n Upgrading 19/19"
-		curl https://github.com/sharesourcecode/twm/raw/master/proxy.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 20/19"
 		dos2unix *.sh &> /dev/null
 	}
 # /termux on android
