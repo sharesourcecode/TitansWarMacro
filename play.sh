@@ -3,8 +3,8 @@ _play () {
 	_msgs () {
 		_proxy
 		echo -e "Latest posts:" >msgs.txt
-		w3m -debug $ENC $URL/ -o user_agent="$(shuf -n1 .ua)" | head -n3 | sed "/\[/d;/\|/d" >> msgs.txt
-		w3m -debug $ENC $URL/mail -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 >> msgs.txt
+		w3m -debug -o http_proxy="http://$proxy" $ENC $URL/ -o user_agent="$(shuf -n1 .ua)" | head -n3 | sed "/\[/d;/\|/d" >> msgs.txt
+		w3m -debug -o http_proxy="http://$proxy" $ENC $URL/mail -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 >> msgs.txt
 		echo -e "\n" >> msgs.txt
 	}
 	_msgs
@@ -36,20 +36,20 @@ _play () {
 				sleep 1
 				[[ $(date +%M) > 00 ]] && break
 			done
-			SRC=$(w3m -debug -dump_source $ENC "$URL/undying/enterGame" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL/undying/enterGame" -o user_agent="$(shuf -n1 .ua)")
 			_undying
 			_msgs
 			_crono ;;
 # /Battle of banners 10:15:00 - 16:15:00
 #		(10:13|16:13)
 #			_proxy
-#			SRC=$(w3m -debug -dump_source $ENC "$URL/flagfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
+#			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL/flagfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
 #			until [[ $(date +%M:%S) = 14:5* ]] ; do
 #				echo 'Battle of banners will be started...'
 #				sleep 1
 #				[[ $(date +%M) > 15 ]] && break
 #			done
-#			SRC=$(w3m -debug -dump_source $ENC "$URL/flagfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
+#			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL/flagfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
 #			_flagfight
 #			_msgs
 #			_crono ;;
@@ -61,15 +61,15 @@ _play () {
 #				sleep 1
 #				[[ $(date +%M) = 00 ]] && break
 #			done
-#			SRC=$(w3m -debug -dump_source $ENC "$URL/clancoliseum/?close=reward" -o user_agent="$(shuf -n1 .ua)")
-#			SRC=$(w3m -debug -dump_source $ENC "$URL/clancoliseum/enterFight" -o user_agent="$(shuf -n1 .ua)")
+#			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL/clancoliseum/?close=reward" -o user_agent="$(shuf -n1 .ua)")
+#			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL/clancoliseum/enterFight" -o user_agent="$(shuf -n1 .ua)")
 #			_clancoliseum
 #			_msgs
 #			_crono ;;
 # /Clan tournament 11:00:00 - 19:00:00
 		(10:58|18:58)
 			_proxy
-			SRC=$(w3m -debug -dump_source $ENC "$URL/clanfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL/clanfight/enterFight" -o user_agent="$(shuf -n1 .ua)")
 			until [[ $(date +%M:%S) = 59:40 ]] ; do
 				echo 'Clan tournament will be started...'
 				sleep 1
@@ -86,7 +86,7 @@ _play () {
 				sleep 1
 				[[ $(date +%M) > 30 ]] && break
 			done
-			SRC=$(w3m -debug -dump_source $ENC "$URL/king/enterGame" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL/king/enterGame" -o user_agent="$(shuf -n1 .ua)")
 			_king
 			_arena
 			_msgs
@@ -104,7 +104,7 @@ _play () {
 				sleep 1
 				[[ $(date +%M) = 00 ]] && break
 			done
-			SRC=$(w3m -debug -dump_source $ENC "$URL/altars/enterFight" -o user_agent="$(shuf -n1 .ua)")
+			SRC=$(w3m -debug -dump_source -o http_proxy="http://$proxy" $ENC "$URL/altars/enterFight" -o user_agent="$(shuf -n1 .ua)")
 			_altars
 			_msgs
 			_crono ;;
