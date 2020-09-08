@@ -12,8 +12,8 @@ _proxy () {
 #export better proxy
 	proxy=$(sed 's/^.*$/&:80/' bestproxy.txt | shuf -n1)
 	[[ -z $proxy ]] && proxy=$(cat testproxy.txt | head -n1)
-	unset http_proxy && \
-	export http_proxy="http://$proxy"
+	unset http_proxy
+#	export http_proxy="http://$proxy"
 	#export https_proxy="http://$proxy"
 	echo -e "Current proxy $http_proxy"
 #	w3m meuip.com

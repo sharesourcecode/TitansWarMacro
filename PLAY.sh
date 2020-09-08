@@ -1,6 +1,5 @@
 #!/bin/bash
 OP=""
-ENC='-o accept_encoding=='*;q=0.1''
 # /sources
 cd ~/twm
 . requeriments.sh ; . loginlogoff.sh
@@ -8,6 +7,7 @@ cd ~/twm
 . campaign.sh ; . play.sh ; . altars.sh ; . clanfight.sh
 . clancoliseum.sh ; . king.sh ; . undying.sh ; . clandungeon.sh
 . trade.sh ; . career.sh ; . cave.sh ; . proxy.sh
+ENC="-o http_proxy=http://$proxy -o accept_encoding=='*;q=0.1'"
 # /functions
 _show () {
 		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | awk -F\< '{ print $2 }' | awk -F\> '{ print $2 }' | tr -cd '[[:digit:]]')
