@@ -60,7 +60,7 @@ _requeriments () {
 	fi
 	cd $HOME/twm
 # /user agents to $HOME/.tmp/.ua
-	echo -e '"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0"' >.ua
+	echo -e '"Opera/9.80 (J2ME/MIDP; Opera Mini/5.1.21214/28.2725; U; ru) Presto/2.8.119 Version/11.10"\n"Mozilla/5.0 (BB10; Kbd) AppleWebKit/537.35+ (KHTML, like Gecko) Version/10.3.3.2205 Mobile Safari/537.35+"' >.ua
 	dos2unix ~/twm/.ua &> /dev/null
 	cp ~/twm/.ua ~/.tmp/.ua &> /dev/null
 # /servers
