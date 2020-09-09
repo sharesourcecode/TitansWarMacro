@@ -27,12 +27,10 @@ _crono () {
 _cat () {
 	_crono
 	[[ $HOUR -lt 6 ||  $HOUR -ge 18 ]] && \
-	echo -ne "\033[0m" && \
-	echo -ne "\033[33m\033[2m" || \
-	echo -ne "\033[7m" && \
-	echo -ne "\033[36m\033[2m"
+	echo -ne "\033[33m\033" || \
+	echo -ne "\033[36m\033"
 	cat msgs.txt
-	echo -ne "\033[37m\033[40m"
+	echo -ne "\033[37m\033"
 }
 _sleep () {
 	if [[ $(date +%d) = 01 && $(date +%H) = 0[012345678] ]] ; then
