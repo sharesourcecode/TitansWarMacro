@@ -10,7 +10,7 @@ cd ~/twm
 . trade.sh ; . career.sh ; . cave.sh
 # /theme
 _crono
-[[ $HOUR -lt 6 ||  $HOUR -ge 18 ]] && \
+[[ $HOUR -lt 9 ||  $HOUR -ge 18 ]] && \
         echo -ne "\033[0m" && \
         echo -ne "\033[33m\033[2m" || \
         echo -ne "\033[7m" && \
