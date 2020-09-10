@@ -47,9 +47,9 @@ _requeriments () {
 		dos2unix *.sh &> /dev/null
 	}
 # /termux on android
+	cd $HOME/.tmp
 	termux-wake-lock &> /dev/null
 	if [[ $? = 0 ]] ; then
-		cd $HOME/.tmp
 		[[ ! -e executed.txt ]] && pkg install termux-api w3m curl -y && >executed.txt
 		[[ $(date +%H) -lt 10 || $(date +%H) -gt 22 ]] && _sync
 		reset; clear
