@@ -1,5 +1,5 @@
-# Friends ID
 _alliesID () {
+# Friends ID
 	SRC=$(w3m -debug -dump_source $ENC "$URL/mail/friends" -o user_agent="$(shuf -n1 .ua)")
 	NPG=$(echo $SRC | sed 's/href=/\n/g' | grep "/mail/friends/[0-9]'>&#62;&#62;" | cut -d\' -f2 | cut -d\/ -f4)
 	>allies.txt; echo -ne "\033[33m"
