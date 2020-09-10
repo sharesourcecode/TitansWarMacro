@@ -49,6 +49,7 @@ _requeriments () {
 # /termux on android
 	termux-wake-lock &> /dev/null
 	if [[ $? = 0 ]] ; then
+		cd $HOME/.tmp
 		[[ ! -e executed.txt ]] && pkg install termux-api w3m curl -y && >executed.txt
 		[[ $(date +%H) -lt 10 || $(date +%H) -gt 22 ]] && _sync
 		reset; clear
@@ -58,17 +59,15 @@ _requeriments () {
 		[[ $(date +%H) -lt 10 || $(date +%H) -gt 22 ]] && _sync
 		reset; clear
 	fi
-	cd $HOME/twm
 # /user agents to $HOME/.tmp/.ua
-	echo -e '"Opera/9.80 (J2ME/MIDP; Opera Mini/5.1.21214/28.2725; U; ru) Presto/2.8.119 Version/11.10"\n"Mozilla/5.0 (BB10; Kbd) AppleWebKit/537.35+ (KHTML, like Gecko) Version/10.3.3.2205 Mobile Safari/537.35+"' >.ua
-	dos2unix ~/twm/.ua &> /dev/null
-	cp ~/twm/.ua ~/.tmp/.ua &> /dev/null
+	echo -e '"Opera/9.80 (J2ME/MIDP; Opera Mini/5.1.21214/28.2725; U; ru) Presto/2.8.119 Version/11.10"\n"Mozilla/5.0 (BB10; Kbd) AppleWebKit/537.35+ (KHTML, like Gecko) Version/10.3.3.2205 Mobile Safari/537.35+"' >$HOME/.tmp/.ua
+	dos2unix ~/.tmp/.ua &> /dev/null
 # /servers
 	if [[ -z $URL ]] ; then
 		echo -e " 1) 🇬🇧 English, Global: Titan's War online\n 2) 🇷🇺 Русский: Битва Титанов онлайн\n 3) 🇵🇱 Polski: Wojna Tytanów online\n 4) 🇩🇪 Deutsch: Krieg der Titanen online\n 5) 🇪🇸 Español: Guerra de Titanes online\n 6) 🇧🇷 Brazil, 🇵🇹 Português: Furia de Titãs online\n 7) 🇮🇹 Italiano: Guerra di Titani online\n 8) 🇫🇷 Français: Combat des Titans online\n 9) 🇷🇴 Română: Războiul Titanilor online\n10) 🇨🇳 中文, Chinese: 泰坦之战\n11) 🇮🇩 Indonesian: Titan's War Indonesia\n0) ❌ Cancel\n"
 		read -p "Select number Server[1 to 11]: " -t 300 -e -n 2 OP
 		case $OP in
-			(1) URL='tiwar.net' ; export TZ=Europe/London ;;
+			(1) URL='tiwar.net' ; export TZ=Europe/London ; allies=on ;;
 
 			(2|ru) URL='tiwar.ru' ; export TZ=Europe/Moscow ;;
 
@@ -76,19 +75,19 @@ _requeriments () {
 
 			(4) URL='titanen.mobi' ; export TZ=Europe/Berlin ;;
 
-			(5) URL='guerradetitanes.net' ; export TZ=America/Cancun ;;
+			(5) URL='guerradetitanes.net' ; export TZ=America/Cancun ; allies=on ;;
 
-			(6|fu) URL='furiadetitas.net' ; export TZ=America/Bahia ;;
+			(6|fu) URL='furiadetitas.net' ; export TZ=America/Bahia ; allies=on ;;
 
-			(7) URL='guerradititani.net' ; export TZ=Europe/Rome ;;
+			(7) URL='guerradititani.net' ; export TZ=Europe/Rome ; allies=on ;;
 
-			(8|fr) URL='tiwar.fr' ; export TZ=Europe/Paris ;;
+			(8|fr) URL='tiwar.fr' ; export TZ=Europe/Paris ; allies=on ;;
 
-			(9|ro) URL='tiwar.ro' ; export TZ=Europe/Bucharest ;;
+			(9|ro) URL='tiwar.ro' ; export TZ=Europe/Bucharest ; allies=on;;
 
 			(10|cn) URL='cn.tiwar.net' ; export TZ=Asia/Shanghai ;;
 
-			(11|ba) URL='bahasa.tiwar.net' ; export TZ=Asia/Barnaul ;;
+			(11|ba) URL='bahasa.tiwar.net' ; export TZ=Asia/Barnaul ; allies=on;;
 
 			(0) kill -9 $$ ;;
 

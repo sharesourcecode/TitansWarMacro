@@ -1,14 +1,16 @@
 _loginlogoff () {
 # /login/logoff
-	ACC=$(w3m -debug $ENC "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[level" | cut -d" " -f2)
+	ACC=$(w3m -debug $ENC "$URL/user" -o user_agent="$(shuf -n1 .ua)" | w3m -o accept_encoding=='*;q=0' http://furiadetitas.net/user | grep -E -o "[\ ][A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,13}[\ ]" | head -n1)
 	[[ -n $ACC && -n $URL ]] && i=5 && \
           until [[ $i -lt 1 ]]; do
 		clear
+		echo "Please wait..."
 		echo -e "[Wait to $ACC... ("$i"s) - ENTER to other account] \n"
                 i=$[$i-1]; read -t1 && \
 		ACC="" && break
         done
 	clear
+	echo "Please wait..."
 	while [[ -z $ACC && -n $URL ]]; do
 		function _login () {
 # /logoff2x
@@ -51,6 +53,8 @@ _loginlogoff () {
 		_login
 		rm $HOME/.tmp/login.txt
 		clear
-		ACC=$(w3m -debug $ENC "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[user")
+		echo "Please wait..."
+#		ACC=$(w3m -debug $ENC "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[user")
+		ACC=$(w3m -debug $ENC "$URL/user" -o user_agent="$(shuf -n1 .ua)" | w3m -o accept_encoding=='*;q=0' http://furiadetitas.net/user | grep -E -o "[\ ][A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,13}[\ ]" | head -n1)
 	done
 }
