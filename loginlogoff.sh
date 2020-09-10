@@ -1,6 +1,6 @@
 _loginlogoff () {
 # /login/logoff
-	ACC=$(w3m -debug $ENC "$URL/user" -o user_agent="$(shuf -n1 .ua)" | w3m -o accept_encoding=='*;q=0' http://furiadetitas.net/user | grep -E -o "[\ ][A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,13}[\ ]" | head -n1)
+	ACC=$(w3m -debug $ENC "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep -E -o "[\ ][A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,13}[\ ]" | head -n1)
 	[[ -n $ACC && -n $URL ]] && i=5 && \
           until [[ $i -lt 1 ]]; do
 		clear
@@ -54,7 +54,6 @@ _loginlogoff () {
 		rm $HOME/.tmp/login.txt
 		clear
 		echo "Please wait..."
-#		ACC=$(w3m -debug $ENC "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep "\[user")
-		ACC=$(w3m -debug $ENC "$URL/user" -o user_agent="$(shuf -n1 .ua)" | w3m -o accept_encoding=='*;q=0' http://furiadetitas.net/user | grep -E -o "[\ ][A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,13}[\ ]" | head -n1)
+		ACC=$(w3m -debug $ENC "$URL/user" -o user_agent="$(shuf -n1 .ua)" | grep -E -o "[\ ][A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,13}[\ ]" | head -n1)
 	done
 }
