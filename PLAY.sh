@@ -33,6 +33,7 @@ _show () {
 		WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | awk -F\' '{ print $4 }') #white/dred
 		PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 		HLHP=$(expr $FULL \* $HPER \/ 100)
+		ALLY=$(echo $SRC | grep -E -o "> [A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,12}\ " | awk -F"> " '{ print $2 }' | head -n2 | tail -n1)
 		_show
 	}
 rpt=0
