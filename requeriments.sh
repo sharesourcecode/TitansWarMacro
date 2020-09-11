@@ -58,7 +58,7 @@ _requeriments () {
 		reset; clear
 		echo -e "Successful updates!\n"
 	else
-		sudo apt install w3m curl -y
+		sudo apt install w3m curl dos2unix -y
 		[[ $(date +%H) -lt 10 || $(date +%H) -gt 22 ]] && _sync
 		reset; clear
 	fi
@@ -79,6 +79,7 @@ _userAgent () {
 
 		(*) clear; [[ -n $UA ]] && echo -e "\n Invalid option: $(echo $UA)" && kill -9 $$ || echo -e "\n Time exceeded!";;
 	esac
+	unset UA
 }
 if [[ ! -e $HOME/.tmp/.ua ]] ; then
 	_userAgent
@@ -93,8 +94,8 @@ dos2unix ~/.tmp/.ua &> /dev/null
 # /servers
 	if [[ -z $URL ]] ; then
 		echo -e " 1) 🇬🇧 English, Global: Titan's War online\n 2) 🇷🇺 Русский: Битва Титанов онлайн\n 3) 🇵🇱 Polski: Wojna Tytanów online\n 4) 🇩🇪 Deutsch: Krieg der Titanen online\n 5) 🇪🇸 Español: Guerra de Titanes online\n 6) 🇧🇷 Brazil, 🇵🇹 Português: Furia de Titãs online\n 7) 🇮🇹 Italiano: Guerra di Titani online\n 8) 🇫🇷 Français: Combat des Titans online\n 9) 🇷🇴 Română: Războiul Titanilor online\n10) 🇨🇳 中文, Chinese: 泰坦之战\n11) 🇮🇩 Indonesian: Titan's War Indonesia\n0) ❌ Cancel\n"
-		read -p "Select number Server[1 to 11]: " -t 300 -e -n 2 OP
-		case $OP in
+		read -p "Select number Server[1 to 11]: " -t 300 -e -n 2 UR
+		case $UR in
 			(1) URL='tiwar.net' ; export TZ=Europe/London ; ALLIES="_WORK" ;;
 
 			(2|ru) URL='tiwar.ru' ; export TZ=Europe/Moscow ;;
@@ -119,9 +120,9 @@ dos2unix ~/.tmp/.ua &> /dev/null
 
 			(0) kill -9 $$ ;;
 
-			(*) clear; [[ -n $OP ]] && echo -e "\n Invalid option: $(echo $OP)" && kill -9 $$ || echo -e "\n Time exceeded!" ;;
+			(*) clear; [[ -n $UR ]] && echo -e "\n Invalid option: $(echo $UR)" && kill -9 $$ || echo -e "\n Time exceeded!" ;;
 		esac
 	fi
-	clear
+	unset UR; clear
 	[[ -z $URL ]] && exit
 }

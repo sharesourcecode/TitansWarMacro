@@ -1,5 +1,4 @@
 #!/bin/bash
-OP=""
 ENC="-o accept_encoding=='*;q=0.1'"
 # /sources
 cd ~/twm
@@ -56,4 +55,5 @@ while true ; do
 	_play
 done
 kill -9 $$
+unset rpt; unset ts
 exit
