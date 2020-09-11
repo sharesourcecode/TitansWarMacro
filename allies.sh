@@ -3,12 +3,11 @@ _alliesID () {
 	SRC=$(w3m -debug -dump_source $ENC "$URL/mail/friends" -o user_agent="$(shuf -n1 .ua)")
 	NPG=$(echo $SRC | sed 's/href=/\n/g' | grep "/mail/friends/[0-9]'>&#62;&#62;" | cut -d\' -f2 | cut -d\/ -f4)
 	>tmp.txt; echo -ne "\033[33m"
-	for num in `seq $NPG -1 1`; do w3m -debug \
-	-dump_source $ENC \
-	"$URL/mail/friends/$num" -o user_agent="$(shuf -n1 .ua)" | \
-	grep -E -o "[0-9]{1,8}/'>[A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,12}</a>," | \
-	grep -v "^$" >>tmp.txt; echo "Looking for allies on friend list page $num..."; \
-	done
+	if [[ -z $NPG ]] ; then
+		w3m -debug -dump_source $ENC "$URL/mail/friends" -o user_agent="$(shuf -n1 .ua)" | grep -E -o "[0-9]{1,8}/'>[A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,13}</a>," >>tmp.txt; echo "Looking for allies on friend list..."
+	else
+		for num in `seq $NPG -1 1`; do w3m -debug -dump_source $ENC "$URL/mail/friends/$num" -o user_agent="$(shuf -n1 .ua)" | grep -E -o "[0-9]{1,8}/'>[A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,13}</a>," >>tmp.txt; echo "Looking for allies on friend list page $num..."; done
+	fi
 	sort -u tmp.txt -o tmp.txt
 # Clan ID by Leader/Deputy on friend list
 	ts=0
@@ -34,7 +33,7 @@ _alliesID () {
 	cat allies.txt
 	echo -ne "\033[37m"
 	echo "Look UP↑ or ENTER to continue."
-	read
+	read -t 300
 }
 _alliesConf () {
 	clear
