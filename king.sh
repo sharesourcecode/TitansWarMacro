@@ -28,7 +28,7 @@ _king () {
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		[[ $(date +%M) = 4[01] ]] && break
 # /kingatk
-		if [[ -n $KINGATK && $ddg -ne 4 && $hl -ne 18 && $HP2 -gt 25 ]] ; then
+		if [[ -n $KINGATK && $ddg -ne 4 && $hl -ne 18 && $HP2 -gt 1 ]] ; then
 			echo '👑'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$KINGATK" -o user_agent="$(shuf -n1 .ua)")
 			_access
@@ -59,7 +59,7 @@ _king () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /grass
-		elif [[ $HP2 -le 15 || -z $KINGATK && $ddg != [34] && $hl != 1[78] && $grss -ge 12 ]] ; then
+		elif [[ $HP2 -le 25 || -z $KINGATK && $ddg != [34] && $hl != 1[78] && $grss -ge 12 ]] ; then
 			HPER='30'
 			RPER='13'
 			echo '🙌'
