@@ -1,11 +1,11 @@
 _requeriments () {
 # /tmp dir
 	mkdir -p $HOME/.tmp
-	cd $HOME/twm
 # /update script and dependencies
 	echo -e "\n Upgrading..."
 	echo -e "👉 Please wait...☕👴"
 	_sync () {
+		cd $HOME/twm
 		curl https://github.com/sharesourcecode/twm/raw/master/cave.sh -O -L &> /dev/null ;
 		echo -e "\n Upgrading 1/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/PLAY.sh -O -L &> /dev/null ;
