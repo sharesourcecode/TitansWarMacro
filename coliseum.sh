@@ -84,6 +84,15 @@ _coliseum () {
 
 # /atk
 		else
+			if [[ "$USER" -eq "$ALLY" ]] ; then
+				echo "🔁 $USER" ;
+				SRC=$(w3m -debug -dump_source $ENC "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)") ;
+				_access ;
+				sleep $ITVL ;
+				ddg=$[$ddg+1] ;
+				hl=$[$hl+1] ;
+				grss=$[$grss+1];
+			fi
 			echo '🎯'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$ATK" -o user_agent="$(shuf -n1 .ua)")
 			_access

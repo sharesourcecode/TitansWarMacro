@@ -36,3 +36,18 @@ _alliesID () {
 	echo "Look UP↑ or ENTER to continue."
 	read
 }
+_alliesConf () {
+	clear
+	echo "The script will consider users on your friends list as allies in the Coliseum and the King of the immortals."
+	echo -e "\n1) Add/Update alliances\n2) Remove alliances\n3) Do nothing\n"
+	read -p "Set up alliances[1 to 3]: " -t 300 -e -n 2 OP
+	case $OP in
+		(1) echo "This will take a long time, be patient."; _alliesID ;;
+
+		(2) [[ -e $HOME/.tmp/allies.txt ]] && >$HOME/.tmp/allies.txt && >$HOME/.tmp/callies.txt; echo "No alliances now." ;;
+
+		(3) echo "Nothing changed." ;;
+
+		(*) clear; [[ -n $OP ]] && echo -e "\n Invalid option: $(echo $OP)" && kill -9 $$ || echo -e "\n Time exceeded!" ;;
+	esac
+}

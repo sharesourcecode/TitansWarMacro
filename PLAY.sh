@@ -7,15 +7,18 @@ cd ~/twm
 . flagfight.sh ; . clanid.sh ; . crono.sh ; . arena.sh ; . coliseum.sh
 . campaign.sh ; . play.sh ; . altars.sh ; . clanfight.sh
 . clancoliseum.sh ; . king.sh ; . undying.sh ; . clandungeon.sh
-. trade.sh ; . career.sh ; . cave.sh
+. trade.sh ; . career.sh ; . cave.sh ; . allies.sh
 # /functions
 _show () {
 		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | awk -F\< '{ print $2 }' | awk -F\> '{ print $2 }' | tr -cd '[[:digit:]]')
 		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep "hp" | head -n3 | tail -n1 | awk -F\< '{ print $1 }' | awk -F\; '{ print $2 }' | tr -cd "[[:digit:]]")
-		[[ -n $HP1 && -n $HP2 ]] && echo -e "$URL\nYou: $HP1 - $HP2 :Opponent\n"
-		[[ -z $HP1 && -n $HP2 ]] && echo -e "$URL\nYou: 💀 - $HP2 :Opponent\n"
+		[[ -n $HP1 && -n $HP2 ]] && echo -e "$URL\n$ACC: $HP1 - $HP2 :$USER\n"
+		[[ -z $HP1 && -n $HP2 ]] && echo -e "$URL\n$ACC: 💀 - $HP2 :$USER\n"
 	}
 	_access () {
+		ACC=$(echo $SRC | grep -E -o "> [A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,12}" | awk -F"> " '{ print $2 }' | head -n1)
+		USER=$(echo $SRC | grep -E -o "> [A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,12}" | awk -F">" '{ print $2 }' | head -n2 | tail -n1 | sed "s,\ ,_,g")
+		ALLY=$(grep -E -o "[\n]{0,}[*]{0,13}$USER" $HOME/.tmp/allies.txt | sed "s,\ ,_,g")
 		ENTERFIGHT=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterFight/' | head -n1 | awk -F\' '{ print $2 }')
 		ENTERGAME=$(echo $SRC | sed 's/href=/\n/g' | grep '/enterGame/' | head -n1 | awk -F\' '{ print $2 }')
 		ATK=$(echo $SRC | sed 's/href=/\n/g' | grep '/atk/' | head -n1 | awk -F\' '{ print $2 }')
@@ -33,13 +36,13 @@ _show () {
 		WDRED=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | awk -F\' '{ print $4 }') #white/dred
 		PRTCT=$(echo $SRC | grep -io '<b>ueliton</b>')
 		HLHP=$(expr $FULL \* $HPER \/ 100)
-		ALLY=$(echo $SRC | grep -E -o "> [A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,12}\ " | awk -F"> " '{ print $2 }' | head -n2 | tail -n1)
 		_show
 	}
 rpt=0
 _requeriments
 ts=20
 _loginlogoff
+[[ -n $ALLIES ]] && _alliesConf
 while true ; do
 	rpt=$[$rpt+1]
 	sleep 1
