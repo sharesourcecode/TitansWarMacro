@@ -9,7 +9,7 @@ _alliesID () {
 		for num in `seq $NPG -1 1`; do w3m -debug -dump_source $ENC "$URL/mail/friends/$num" -o user_agent="$(shuf -n1 .ua)" | grep -E -o "[0-9]{1,8}/'>[A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,13}</a>," >>tmp.txt; echo "Looking for allies on friend list page $num..."; done
 	fi
 	sort -u tmp.txt -o tmp.txt
-	unset SRC; unset NPG
+	unset SRC NPG
 # Clan ID by Leader/Deputy on friend list
 	ts=0
 	>callies.txt; echo -ne "\033[36m"
@@ -28,7 +28,7 @@ _alliesID () {
 			fi
 		fi
 	done < ids.txt
-	unset ts; unset IDN; unset SRC; unset LEADPU; unset alCLAN
+	unset ts IDN SRC LEADPU alCLAN
 # Print info
 	grep -E -o "[A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z\]{0,12}" tmp.txt >allies.txt
 	echo -ne "\033[33m"; echo "Allies for Coliseum and King of the Immortals:"
@@ -51,4 +51,5 @@ _alliesConf () {
 
 		(*) clear; [[ -n $AL ]] && echo -e "\n Invalid option: $(echo $AL)" && kill -9 $$ || echo -e "\n Time exceeded!" ;;
 	esac
+	unset AL
 }

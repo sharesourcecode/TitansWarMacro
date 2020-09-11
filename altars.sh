@@ -91,8 +91,10 @@ _altars () {
 			grss=$[$grss+1]
 		fi
 	done
+	unset HPER RPER ITVL SRC ACCESS EXIT FULL HP3 ddg hl grss
 # /view
 	w3m -debug $ENC $URL/altars -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color $ACC
+	_unset
 	echo "Altars (✔)"
 	sleep 30
 }
