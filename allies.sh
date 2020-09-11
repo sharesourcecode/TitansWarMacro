@@ -16,7 +16,7 @@ _alliesID () {
 	echo "Clan allies by Leader/Deputy on friends list..."
 	while read IDN; do
 		if [[ -n $IDN ]]; then
-			SRC=$(w3m $ENC -dump_source $URL/user/$IDN)
+			SRC=$(w3m $ENC -dump_source "$URL/user/$IDN" -o user_agent="$(shuf -n1 .ua)")
 			LEADER=$(echo $SRC | grep -E -o "[A-Za-z\ ]{2,20}</a>, <span class='green'>[A-Z]|[A-Za-z\ ]{2,20}</a>, <span class='blue'>[A-Z]" | cut -d\< -f1)
 			alCLAN=$(echo $SRC | grep -E -o '/clan/[[:digit:]]{1,3}' | tail -n1)
 			if [[ -n $LEADER ]] ; then
