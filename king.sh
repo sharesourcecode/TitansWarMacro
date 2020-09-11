@@ -28,7 +28,7 @@ _king () {
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		[[ $(date +%M) = 4[01] ]] && break
 # /kingatk
-		if [[ -n $KINGATK && $ddg -ne 4 && $hl -ne 18 && $HP2 -gt 15 ]] ; then
+		if [[ -n $KINGATK && $ddg -ne 4 && $hl -ne 18 && $HP2 -gt 25 ]] ; then
 			echo '👑'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$KINGATK" -o user_agent="$(shuf -n1 .ua)")
 			_access
@@ -91,14 +91,14 @@ _king () {
 
 # /atk
 		else
-			if [[ "$USER" -eq "$ALLY" ]] ; then
-				echo "🔁 $USER" ;
+			if [[ -n $ALLY && $USER -eq $ALLY ]] ; then
+				echo "🔁 $USER"
 				SRC=$(w3m -debug -dump_source $ENC "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)");
-				_access ;
-				sleep $ITVL ;
-				ddg=$[$ddg+1] ;
-				hl=$[$hl+1] ;
-				grss=$[$grss+1];
+				_access
+				sleep $ITVL
+				ddg=$[$ddg+1]
+				hl=$[$hl+1]
+				grss=$[$grss+1]
 			fi
 			echo '🎯'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$ATTACK" -o user_agent="$(shuf -n1 .ua)")
