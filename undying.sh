@@ -34,8 +34,10 @@ _undying () {
 		echo -e " 🎲 $HIT"
 		sleep 1.42
 	done
+	unset SRC ACCESS MANA HIT OUTGATE
 # /view
 	echo ""
 	w3m -debug $ENC $URL/undying -o user_agent="$(shuf -n1 .ua)" | head -n15 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color $ACC
+	unset ACC
 	echo -e "Undying (✔)"
 }
