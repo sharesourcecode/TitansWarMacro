@@ -90,9 +90,11 @@ _clanfight () {
 			grss=$[$grss+1]
 		fi
 	done
+	unset HPER RPER ITVL SRC ACCESS EXIT FULL HP3 ddg hl grss
 # /view
 	echo ""
 	w3m -debug $ENC $URL/clanfight -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color $ACC
+	_unset
 	echo "ClanFight(✔)"
 	sleep 30
 }
