@@ -7,44 +7,46 @@ _requeriments () {
 	echo -e "👉 Please wait...☕👴"
 	_sync () {
 		curl https://github.com/sharesourcecode/twm/raw/master/cave.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 1/19"
+		echo -e "\n Upgrading 1/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/PLAY.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 2/19"
+		echo -e "\n Upgrading 2/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/altars.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 3/19"
+		echo -e "\n Upgrading 3/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/arena.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 4/19"
+		echo -e "\n Upgrading 4/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/campaign.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 5/19"
+		echo -e "\n Upgrading 5/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/career.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 6/19"
+		echo -e "\n Upgrading 6/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/clancoliseum.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 7/19"
+		echo -e "\n Upgrading 7/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/clandungeon.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 8/19"
+		echo -e "\n Upgrading 8/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/clanfight.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 9/19"
+		echo -e "\n Upgrading 9/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/clanid.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 10/19"
+		echo -e "\n Upgrading 10/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/coliseum.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 11/19"
+		echo -e "\n Upgrading 11/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/crono.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 12/19"
+		echo -e "\n Upgrading 12/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/king.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 13/19"
+		echo -e "\n Upgrading 13/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/loginlogoff.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 14/19"
+		echo -e "\n Upgrading 14/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/play.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 15/19"
+		echo -e "\n Upgrading 15/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/requeriments.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 16/19"
+		echo -e "\n Upgrading 16/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/trade.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 17/19"
+		echo -e "\n Upgrading 17/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/undying.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 18/19"
+		echo -e "\n Upgrading 18/20"
 		curl https://github.com/sharesourcecode/twm/raw/master/flagfight.sh -O -L &> /dev/null ;
-		echo -e "\n Upgrading 19/19"
-		dos2unix *.sh &> /dev/null
+		echo -e "\n Upgrading 19/20"
+		curl https://github.com/sharesourcecode/twm/raw/master/allies.sh -O -L &> /dev/null ;
+		echo -e "\n Upgrading 20/20"
+dos2unix *.sh &> /dev/null
 	}
 # /termux on android
 	cd $HOME/.tmp
@@ -61,13 +63,14 @@ _requeriments () {
 	fi
 # /user agents to $HOME/.tmp/.ua
 	echo -e '"Opera/9.80 (J2ME/MIDP; Opera Mini/5.1.21214/28.2725; U; ru) Presto/2.8.119 Version/11.10"\n"Mozilla/5.0 (BB10; Kbd) AppleWebKit/537.35+ (KHTML, like Gecko) Version/10.3.3.2205 Mobile Safari/537.35+"' >$HOME/.tmp/.ua
+#	echo -e '"Mozilla/5.0 (Linux; Android 7.1.2; Moto G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.101 Mobile Safari/537.36"' >$HOME/.tmp/.ua
 	dos2unix ~/.tmp/.ua &> /dev/null
 # /servers
 	if [[ -z $URL ]] ; then
 		echo -e " 1) 🇬🇧 English, Global: Titan's War online\n 2) 🇷🇺 Русский: Битва Титанов онлайн\n 3) 🇵🇱 Polski: Wojna Tytanów online\n 4) 🇩🇪 Deutsch: Krieg der Titanen online\n 5) 🇪🇸 Español: Guerra de Titanes online\n 6) 🇧🇷 Brazil, 🇵🇹 Português: Furia de Titãs online\n 7) 🇮🇹 Italiano: Guerra di Titani online\n 8) 🇫🇷 Français: Combat des Titans online\n 9) 🇷🇴 Română: Războiul Titanilor online\n10) 🇨🇳 中文, Chinese: 泰坦之战\n11) 🇮🇩 Indonesian: Titan's War Indonesia\n0) ❌ Cancel\n"
 		read -p "Select number Server[1 to 11]: " -t 300 -e -n 2 OP
 		case $OP in
-			(1) URL='tiwar.net' ; export TZ=Europe/London ; allies=on ;;
+			(1) URL='tiwar.net' ; export TZ=Europe/London ; ALLIES="_WORK" ;;
 
 			(2|ru) URL='tiwar.ru' ; export TZ=Europe/Moscow ;;
 
@@ -75,19 +78,19 @@ _requeriments () {
 
 			(4) URL='titanen.mobi' ; export TZ=Europe/Berlin ;;
 
-			(5) URL='guerradetitanes.net' ; export TZ=America/Cancun ; allies=on ;;
+			(5) URL='guerradetitanes.net' ; export TZ=America/Cancun ; ALLIES="_WORK" ;;
 
-			(6|fu) URL='furiadetitas.net' ; export TZ=America/Bahia ; allies=on ;;
+			(6|fu) URL='furiadetitas.net' ; export TZ=America/Bahia ; ALLIES="_WORK" ;;
 
-			(7) URL='guerradititani.net' ; export TZ=Europe/Rome ; allies=on ;;
+			(7) URL='guerradititani.net' ; export TZ=Europe/Rome ; ALLIES="_WORK" ;;
 
-			(8|fr) URL='tiwar.fr' ; export TZ=Europe/Paris ; allies=on ;;
+			(8|fr) URL='tiwar.fr' ; export TZ=Europe/Paris ; ALLIES="_WORK" ;;
 
-			(9|ro) URL='tiwar.ro' ; export TZ=Europe/Bucharest ; allies=on;;
+			(9|ro) URL='tiwar.ro' ; export TZ=Europe/Bucharest ; ALLIES="_WORK";;
 
 			(10|cn) URL='cn.tiwar.net' ; export TZ=Asia/Shanghai ;;
 
-			(11|ba) URL='bahasa.tiwar.net' ; export TZ=Asia/Barnaul ; allies=on;;
+			(11|ba) URL='bahasa.tiwar.net' ; export TZ=Asia/Barnaul ; ALLIES="_WORK";;
 
 			(0) kill -9 $$ ;;
 
