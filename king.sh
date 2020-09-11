@@ -1,6 +1,6 @@
 _king () {
 # /enterFight
-	HPER='52'
+	HPER='53'
 	RPER='1'
 	ITVL='3.5'
 	echo -e "\nKing"
@@ -91,8 +91,8 @@ _king () {
 
 # /atk
 		else
-			if [[ -n $ALLY && $USER -eq $ALLY ]] ; then
-				echo "🔁 $USER"
+			if [[ -n $ALLIES && -n $ALLY && $USER -eq $ALLY ]] ; then
+				echo "🔁"
 				SRC=$(w3m -debug -dump_source $ENC "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)");
 				_access
 				sleep $ITVL

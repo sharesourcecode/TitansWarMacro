@@ -12,8 +12,13 @@ cd ~/twm
 _show () {
 		HP1=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | awk -F\< '{ print $2 }' | awk -F\> '{ print $2 }' | tr -cd '[[:digit:]]')
 		HP2=$(echo $SRC | sed "s/alt/\\n/g" | grep "hp" | head -n3 | tail -n1 | awk -F\< '{ print $1 }' | awk -F\; '{ print $2 }' | tr -cd "[[:digit:]]")
-		[[ -n $HP1 && -n $HP2 ]] && echo -e "$URL\n$ACC: $HP1 - $HP2 :$USER\n"
-		[[ -z $HP1 && -n $HP2 ]] && echo -e "$URL\n$ACC: 💀 - $HP2 :$USER\n"
+		if [[ -n $OUTGATE ]] ; then
+			[[ -n $HP1 && -n $HP2 ]] && echo -e "$URL\n$ACC: $HP1 - $HP2 :$USER\n"
+			[[ -z $HP1 && -n $HP2 ]] && echo -e "$URL\n$ACC: 💀 - $HP2 :$USER\n"
+		else
+			[[ -n $HP1 && -n $HP2 ]] && echo -e "$URL\nYou: $HP1 - $HP2 :Opponent\n"
+			[[ -z $HP1 && -n $HP2 ]] && echo -e "$URL\nYou: 💀 - $HP2 :Opponent\n"
+		fi
 	}
 	_access () {
 		ACC=$(echo $SRC | grep -E -o "> [A-Z][a-z]{0,14}[\ ]{0,1}[A-Z]{0,1}[a-z]{0,12}" | awk -F"> " '{ print $2 }' | head -n1)

@@ -1,7 +1,7 @@
 _coliseum () {
 # /enterFight
 	SRC=$(w3m -debug $ENC $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
-	HPER='28'
+	HPER='30'
 	RPER='10'
 	ITVL='3.5'
 	echo -e "\nColiseum"
@@ -84,8 +84,8 @@ _coliseum () {
 
 # /atk
 		else
-			if [[ -n $ALLY && $USER -eq $ALLY ]] ; then
-				echo "🔁 $USER"
+			if [[ -n $ALLIES && -n $ALLY && $USER -eq $ALLY ]] ; then
+				echo "🔁"
 				SRC=$(w3m -debug -dump_source $ENC "$URL$ATKRND" -o user_agent="$(shuf -n1 .ua)") ;
 				_access
 				sleep $ITVL
