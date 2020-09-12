@@ -21,5 +21,6 @@ _career () {
 #		w3m -debug $ENC "$URL/clan/$CLD/quest/deleteHelp/6" -o user_agent="$(shuf -n1 .ua)" | head -n15
 #		w3m -debug $ENC "$URL/clan/$CLD/quest/end/6" -o user_agent="$(shuf -n1 .ua)" | head -n15
 #	fi
+	unset CLD SRC ENTER ACCESS
 	echo -e "career (✔)\n"
 }
