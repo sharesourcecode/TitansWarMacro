@@ -109,4 +109,5 @@ _play () {
 			_sleep ;
 			_crono ;;
 	esac
+	unset L SRC
 }

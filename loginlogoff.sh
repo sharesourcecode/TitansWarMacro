@@ -46,7 +46,7 @@ _loginlogoff () {
 			echo -e "\n	Please wait..."
 			echo -e "login=$username&pass=$password" >$HOME/.tmp/login.txt
 # /login2x
-			unset username; unset password
+			unset username password
 			$(w3m -debug -post $HOME/.tmp/login.txt $ENC "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
 			$(w3m -debug -post $HOME/.tmp/login.txt $ENC "$URL/?sign_in=1" -o user_agent="$(shuf -n1 .ua)") 2&>-
 		}

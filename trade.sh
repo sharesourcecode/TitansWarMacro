@@ -10,7 +10,8 @@ _trade () {
 		EXIST=$(echo $SRC | sed "s/\/trade/\\n/g" | grep 'exchange' | grep 'silver/1' | head -n1 | awk -F\/ '{ print $3 }')
 		echo -e "/trade/exchange/silver/1?r=$ACCESS"
 	done
-		echo -e "Exchange (✔)\n"
+	unset SRC ACCESS EXIST
+	echo -e "Exchange (✔)\n"
 }
 _money () {
 	if [[ -n $CLD ]] ; then
@@ -22,6 +23,8 @@ _money () {
 		w3m -debug -dump $ENC "$URL/clan/$CLD/money/?r=$CODE&silver=1000&gold=1&confirm=true&type=limit" -o user_agent="$(shuf -n1 .ua)"
 		echo -e "Clan Money (✔)\n"
 	fi
+
+	unset CLD CODE
 }
 _built () {
 	if [[ -n $CLD ]] ; then
@@ -33,4 +36,5 @@ _built () {
 		w3m -debug -dump $ENC "$URL/clan/$CLD/built/?silverUpgrade=true&r=$CODE" -o user_agent="$(shuf -n1 .ua)"
 		echo -e "Clan Built upgrade (✔)\n"
 	fi
+	unset CLD CODE
 }
