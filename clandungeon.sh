@@ -14,4 +14,5 @@ function _clandungeon () {
 		done
 		echo -e "Clan Dungeon (✔)\n"
 	fi
+	unset CLD SRC ACCESS EXIST
 }
