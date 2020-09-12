@@ -1,13 +1,12 @@
 _king () {
 # /enterFight
-#	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
-	HPER='49'
+	HPER='53'
 	RPER='1'
-	ITVL='2.92'
+	ITVL='3.5'
 	echo -e "\nKing"
 	echo $URL
 	SRC=$(w3m -debug -dump_source $ENC $URL/king/enterGame -o user_agent="$(shuf -n1 .ua)")
-	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/king/' | head -n1 | cut -d\' -f2)
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/king/' | head -n1 | awk -F\' '{ print $2 }')
 	echo -e " 👣 Entering...\n$ACCESS"
 # /wait
 	echo " 😴 Waiting..."
@@ -16,17 +15,20 @@ _king () {
 		[[ $(date +%M) = 30 && $(date +%S) > 19 ]] && break
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -dump_source $ENC "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
-		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/king/' | head -n1 | cut -d\' -f2)
+		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/king/' | head -n1 | awk -F\' '{ print $2 }')
 		EXIT=$(echo $SRC | grep -o 'king/kingatk/')
 	done
 # /game
-	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep "hp" | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd "[[:digit:]]")
+	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep "hp" | head -n1 | awk -F\< '{ print $2 }' | awk -F\> '{ print $2 }' | tr -cd "[[:digit:]]")
 	_access
 	HP3=$HP1
+	ddg=4
+	hl=18
+	grss=12
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		[[ $(date +%M) = 4[01] ]] && break
 # /kingatk
-		if [[ -n $KINGATK && $ddg -ne 4 && $hl -ne 18 && $HP2 -gt 15 ]] ; then
+		if [[ -n $KINGATK && $ddg -ne 4 && $hl -ne 18 && $HP2 -gt 1 ]] ; then
 			echo '👑'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$KINGATK" -o user_agent="$(shuf -n1 .ua)")
 			_access
@@ -57,7 +59,7 @@ _king () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /grass
-		elif [[ $HP2 -le 15 || -z $KINGATK && $ddg != [34] && $hl != 1[78] && $grss -ge 12 ]] ; then
+		elif [[ $HP2 -le 25 || -z $KINGATK && $ddg != [34] && $hl != 1[78] && $grss -ge 12 ]] ; then
 			HPER='30'
 			RPER='13'
 			echo '🙌'
@@ -89,6 +91,15 @@ _king () {
 
 # /atk
 		else
+			if [[ -n $ALLIES && -n $ALLY && $USER -eq $ALLY ]] ; then
+				echo "🔁"
+				SRC=$(w3m -debug -dump_source $ENC "$URL$ATTACKRANDOM" -o user_agent="$(shuf -n1 .ua)");
+				_access
+				sleep $ITVL
+				ddg=$[$ddg+1]
+				hl=$[$hl+1]
+				grss=$[$grss+1]
+			fi
 			echo '🎯'
 			SRC=$(w3m -debug -dump_source $ENC "$URL$ATTACK" -o user_agent="$(shuf -n1 .ua)")
 			_access
@@ -98,10 +109,11 @@ _king () {
 			grss=$[$grss+1]
 		fi
 	done
+	unset HPER RPER ITVL SRC ACCESS EXIT FULL HP3 ddg hl grss
 # /view
 	echo ""
-	w3m -debug $ENC $URL/king -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d"
+	w3m -debug $ENC $URL/king -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color $ACC
+	_unset
 	echo "King (✔)"
-#	SRC=$(w3m -debug $ENC $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
 	sleep 30
 }
