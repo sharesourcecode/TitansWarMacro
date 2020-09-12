@@ -9,4 +9,5 @@ _campaign () {
 		ACCESS=$(echo $SRC | sed "s/href='/\n/g" | grep "/campaign/" | head -n1 | awk -F\' '{ print $1 }')
 		echo "$ACCESS"
 	done
+	unset SRC ENTER ACCESS
 }
