@@ -43,5 +43,6 @@ function _cave () {
 #		w3m -debug $ENC "$URL/clan/$CLD/quest/end/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
 #		w3m -debug $ENC "$URL/clan/$CLD/quest/deleteHelp/5" -o user_agent="$(shuf -n1 .ua)" | head -n15
 #	fi
+	unset CLD SRC ACCESS1 DOWN ACCESS2 ACTION MEGA num
 	echo -e "cave (✔)\n"
 }
