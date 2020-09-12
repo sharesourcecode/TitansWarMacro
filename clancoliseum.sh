@@ -1,13 +1,12 @@
 _clancoliseum () {
 # /enterFight
-#	SRC=$(w3m -debug $ENC $URL/settings/graphics/1 -o user_agent="$(shuf -n1 .ua)")
 	HPER='49'
 	RPER='9'
-	ITVL='2.92'
+	ITVL='3.5'
 	echo -e "\nClan coliseum"
 	echo $URL
 	SRC=$(w3m -debug -dump_source $ENC $URL/clancoliseum/?close=reward -o user_agent="$(shuf -n1 .ua)")
-	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'clancoliseum/enterFight' | head -n1 | cut -d\' -f2)
+	ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep 'clancoliseum/enterFight' | head -n1 | awk -F\' '{ print $2 }')
 	echo -e " 👣 Entering...\n$ACCESS"
 # /wait
 	echo " 😴 Waiting..."
@@ -16,12 +15,15 @@ _clancoliseum () {
 		[[ $(date +%M) = *0 && $(date +%S) > 19 ]] && break
 		echo -e " 💤	...\n$ACCESS"
 		SRC=$(w3m -debug -dump_source $ENC "$URL$ACCESS" -o user_agent="$(shuf -n1 .ua)")
-		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/clancoliseum/' | head -n1 | cut -d\' -f2)
+		ACCESS=$(echo $SRC | sed 's/href=/\n/g' | grep '/clancoliseum/' | head -n1 | awk -F\' '{ print $2 }')
 		EXIT=$(echo $SRC | sed 's/href=/\n/g' | grep -o 'clancoliseum/attack/')
 	done
-	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | cut -d\< -f2 | cut -d\> -f2 | tr -cd '[[:digit:]]')
+	FULL=$(echo $SRC | sed "s/alt/\\n/g" | grep 'hp' | head -n1 | awk -F\< '{ print $2 }' | awk -F\> '{ print $2 }' | tr -cd '[[:digit:]]')
 	_access
 	HP3=$HP1
+	ddg=4
+	hl=18
+	grss=12
 	until [[ -n $BEXIT && -z $OUTGATE ]] ; do
 		[[ $(date +%M) = *7 ]] && break
 # /dodge
@@ -36,8 +38,7 @@ _clancoliseum () {
 			hl=$[$hl+1]
 			grss=$[$grss+1]
 # /heal
-		elif [[ $hl -eq 18 && $HP1 -le $HLHP ]] ; then
-#			ITVL='1.4'
+		elif [[ $hl -ge 18 && $HP1 -le $HLHP ]] ; then
 			RPER='7'
 			echo "🆘 HP < $HPER%"
 			SRC=$(w3m -debug -dump_source $ENC "$URL$HEAL" -o user_agent="$(shuf -n1 .ua)")
@@ -89,10 +90,11 @@ _clancoliseum () {
 			grss=$[$grss+1]
 		fi
 	done
+	unset HPER RPER ITVL SRC ACCESS EXIT FULL HP3 ddg hl grss
 # /view
 	echo ""
-	w3m -debug $ENC $URL/clancoliseum -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d"
+	w3m -debug $ENC $URL/clancoliseum -o user_agent="$(shuf -n1 .ua)" | head -n15 | tail -n14 | sed "/\[user\]/d;/\[arrow\]/d;/\ \[/d" | grep --color $ACC
+	_unset
 	echo "Clan Coliseum (✔)"
-#	SRC=$(w3m -debug $ENC $URL/settings/graphics/0 -o user_agent="$(shuf -n1 .ua)")
 	sleep 30
 }
