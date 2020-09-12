@@ -24,30 +24,51 @@ _crono () {
 	[[ $MIN = 09 ]] && MIN=9
 	echo -e "\n $URL ⏰ $HOUR:$MIN\n"
 }
+_cat () {
+	_crono
+	[[ $HOUR -lt 6 ||  $HOUR -ge 18 ]] && \
+	echo -ne "\033[33m\033" || \
+	echo -ne "\033[36m\033"
+	cat msgs.txt
+	echo -ne "\033[37m\033"
+}
 _sleep () {
 	if [[ $(date +%d) = 01 && $(date +%H) = 0[012345678] ]] ; then
 		_arena
 		_coliseum
-		cat msgs.txt
+		reset
+		clear
+		_cat
 		sleep 900
 	elif [[ $(date +%M) = [25][89] ]] ; then
-		cat msgs.txt
+		reset
+		clear
+		_cat
 		echo ' No battles now, waiting 15s' && sleep 15
 	elif [[ $(date +%M) = [012345]7 ]] ; then
-		cat msgs.txt
+		reset
+		clear
+		_cat
 		echo ' No battles now, waiting 1m' && sleep 1m
 	elif [[ $(date +%M) = [012345]6 ]] ; then
-		cat msgs.txt
+		reset
+		clear
+		_cat
 		echo ' No battles now, waiting 2m' && sleep 2m
 	elif [[ $(date +%M) = [012345]5 ]] ; then
-		cat msgs.txt
+		reset
+		clear
+		_cat
 		echo ' No battles now, waiting 3m' && sleep 3m
 	elif [[ $(date +%M) = [012345]4 ]] ; then
-		cat msgs.txt
+		reset
+		clear
+		_cat
 		echo ' No battles now, waiting 4m' && sleep 4m
 	else
+		reset
 		clear
-		cat msgs.txt
+		_cat
 		echo ' No battles now, waiting 30s' && sleep 29
 	fi
 }
