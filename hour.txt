@@ -1,0 +1,15 @@
+#!/bin/sh
+# cd /sdcard/Download && curl -s -L https://raw.githubusercontent.com/sharesourcecode/TitansWarMacro/master/hour.txt|sh
+# Obter a hora local
+HOUR=`date +%H:%M:%S`
+
+# Definir a hora de outros países
+HOUR_NY=`TZ=America/New_York date +%H:%M:%S`
+HOUR_LONDON=`TZ=Europe/London date +%H:%M:%S`
+HOUR_TOKYO=`TZ=Asia/Tokyo date +%H:%M:%S`
+
+# Imprimir as horas
+echo "Hora local: $HOUR"
+echo "Hora em Nova York: $HOUR_NY"
+echo "Hora em Londres: $HOUR_LONDON"
+echo "Hora em Tóquio: $HOUR_TOKYO"
