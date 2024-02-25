@@ -239,9 +239,7 @@ bash twm/play.sh -cl
 
 ## **☕ Donates/Doações:**
 
-https://link.mercadopago.com.br/titanswarmacro
-
-**Pix: ueliton@disroot.org** <br>
+**Pix: ueliton+inter@disroot.org** <br>
 
 <img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white" height="33" width="130" /><br>**ueliton@disroot.org** <br>
 
