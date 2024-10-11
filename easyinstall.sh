@@ -163,7 +163,7 @@ sync_func_other () {
  SCRIPTS="requeriments.lib svproxy.lib loginlogoff.lib crono.lib check.lib run.lib clanid.lib allies.lib altars.lib arena.lib campaign.lib career.lib cave.lib clancoliseum.lib clandungeon.lib clanfight.lib coliseum.lib flagfight.lib king.lib league.lib trade.lib undying.lib online.lib"
  curl ${SERVER}play.sh -s -L -O
  curl ${SERVER}info.lib -s -L >twm.sh
- curl ${SERVER}twm.sh -s -L|sed -n '3,33p' >>twm.sh
+ curl ${SERVER}twm.sh -s -L|sed -n '3,37p' >>twm.sh
  NUM_SCRIPTS=$(echo $SCRIPTS|wc -w)
  LEN=0
 
@@ -175,7 +175,7 @@ sync_func_other () {
   printf "\n#\n" >>twm.sh
   sleep 0.1s
  done
- curl ${SERVER}twm.sh -s -L|sed -n '40,120p' >>twm.sh
+ curl ${SERVER}twm.sh -s -L|sed -n '44,123p' >>twm.sh
 
  #DOS to Unix
  find ~/twm -type f -name '*.sh' -print0|xargs -0 sed -i 's/\r$//' 2>/dev/null
