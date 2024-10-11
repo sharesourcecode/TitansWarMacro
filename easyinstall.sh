@@ -2,6 +2,9 @@
 # 👉 Torne-se um expert nesses scripts:
 # 👉 https://notebooklm.google.com/notebook/c55b4c88-4b8d-45cb-8a97-66a1ab44893a
 
+# É possível também estudar comandos, trechos ou scripts inteiros:
+# 👉 https://www.perplexity.ai
+
 #create fold twm if does not exist
 mkdir -p ~/twm
 
